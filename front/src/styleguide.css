@@ -1,0 +1,49 @@
+:root {
+    --m3-elevation-dark-1: 0px 1px 2px 0px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+    --m3-schemes-on-surface: rgba(29, 27, 32, 1);
+  }
+  
+  /*
+  
+  To enable a theme in your HTML, simply add one of the following data attributes to an HTML element, like so:
+  
+  <body data-m3-mode="light">
+      <!-- the rest of your content -->
+  </body>
+  
+  You can apply the theme on any DOM node, not just the `body`
+  
+  */
+  
+  [data-m3-mode="light"] {
+    --m3-schemes-on-surface: rgba(29, 27, 32, 1);
+  }
+  
+  [data-m3-mode="light-high-contrast"] {
+    --m3-schemes-on-surface: rgba(0, 0, 0, 1);
+  }
+  
+  [data-m3-mode="light-medium-contrast"] {
+    --m3-schemes-on-surface: rgba(29, 27, 32, 1);
+  }
+  
+  [data-m3-mode="dark"] {
+    --m3-schemes-on-surface: rgba(230, 224, 233, 1);
+  }
+  
+  [data-m3-mode="dark-high-contrast"] {
+    --m3-schemes-on-surface: rgba(255, 255, 255, 1);
+  }
+  
+  [data-m3-mode="dark-medium-contrast"] {
+    --m3-schemes-on-surface: rgba(255, 249, 255, 1);
+  }
+  
+  [data-m3-mode="monochrome-light"] {
+    --m3-schemes-on-surface: rgba(27, 27, 27, 1);
+  }
+  
+  [data-m3-mode="monochrome-dark"] {
+    --m3-schemes-on-surface: rgba(226, 226, 226, 1);
+  }
+  

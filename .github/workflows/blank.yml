@@ -1,0 +1,40 @@
+name: Deploy to Ubuntu Server using Docker
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install expect
+      run: sudo apt-get install -y expect
+
+    - name: Deploy to Server
+      run: |
+        echo "Starting deployment..."
+        expect << EOF
+        spawn ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_ID }}@${{ secrets.SSH_SERVER_IP }}
+        expect "password:"
+        send "${{ secrets.SSH_PASSWORD }}\r"
+        expect "$ "
+        send "docker pull your_docker_image\r"
+        expect "$ "
+        send "docker stop your_container || true\r"
+        expect "$ "
+        send "docker rm your_container || true\r"
+        expect "$ "
+        send "docker run -d --name your_container your_docker_image\r"
+        expect "$ "
+        send "exit\r"
+        expect eof
+        EOF
+      env:
+        SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
+

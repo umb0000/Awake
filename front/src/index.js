@@ -5,6 +5,7 @@ import './index.css';
 import App from './App';
 import Anxiety from './Anxiety';
 import reportWebVitals from './reportWebVitals';
+import Angry from './angry';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -13,6 +14,7 @@ root.render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/Anxiety" element={<Anxiety />} />
+        <Route path="/Angry" element={<Angry />} />
       </Routes>
     </Router>
   </React.StrictMode>

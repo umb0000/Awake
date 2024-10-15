@@ -4,7 +4,7 @@ import './output.css';
 const Anxiety = () => {
   return (
     <div className="relative w-[100%] h-[800px] bg-[#fff] overflow-hidden">
-      <div className="absolute left-0 top-[30px] w-[100%] h-[680px] flex flex-col items-center justify-start gap-[10px] py-[9px] px-[10px]">
+     {/* <div className="absolute left-0 top-[30px] w-[100%] h-[680px] flex flex-col items-center justify-start gap-[10px] py-[9px] px-[10px]">
         <div className="relative w-[95%] h-[51px] shrink-0 flex flex-col items-start justify-start py-[7px] px-0">
           <div className="absolute left-0 top-[5px] w-[308px] h-[41px] shrink-0 flex flex-row items-center justify-start gap-[11px] overflow-hidden">
             <img width="24" height="22" src={process.env.PUBLIC_URL + "/img/Vector1_233.png"} alt="icon" />
@@ -25,7 +25,8 @@ const Anxiety = () => {
           <div className="w-[60px] shrink-0 flex flex-col items-center justify-start py-[10px] px-0">
             <div className="self-stretch text-[16px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-semibold text-[#000] text-center">MY</div>
           </div>
-        </div>
+        </div>*/}
+        
         <div className="w-[100%] flex flex-col items-center justify-start gap-[8px] bg-[#fff]">
           <div className="self-stretch h-[63px] shrink-0 flex flex-row items-center justify-center bg-[#f5f5f5]">
             <div className="relative w-[337px] h-[73px] shrink-0 flex">
@@ -71,7 +72,6 @@ const Anxiety = () => {
             <div className="absolute left-[203px] top-[6px] w-[124px] text-[50px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-black text-[#fff] opacity-[.3]">AWA</div>
           </div>
         </div>
-      </div>
       
       
     </div>

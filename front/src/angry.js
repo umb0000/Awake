@@ -34,51 +34,20 @@ const Angry = () => {
 
   return (
     <div className="relative w-[100%] h-[800px] bg-[#fff] overflow-hidden">
-      <div className="absolute left-[5.28%] right-[5.56%] top-[826px] h-[893px] bg-[#f7f2fa] rounded-tl-[28px] rounded-tr-[28px] rounded-br-0 rounded-bl-0 overflow-hidden">
-        <div className="absolute left-0 right-0 top-0 flex flex-col items-center justify-start p-[16px]">
-          <div className="w-[32px] h-[4px] shrink-0 bg-[#79747e] rounded-[100px]"></div>
-        </div>
-      </div>
-      <div className="absolute left-0 top-[720px] w-[100%] flex flex-row items-start justify-start gap-[8px] py-0 px-[8px] bg-[#fff] border-[0px] border-solid border-[#d9d9d9] shadow-[0_1px_3px_1px_#00000026]">
-        <div className="flex-1 flex flex-col items-center justify-center gap-[4px] pt-[12px] px-0 pb-[16px]">
-          <div className="flex flex-col items-center justify-center bg-[#eeefef] rounded-[16px] overflow-hidden">
-            <div className="w-[64px] h-[32px] shrink-0 flex flex-row items-center justify-center py-[4px] px-[20px]">
-              <img width="18" height="20" src={process.env.PUBLIC_URL + "/img/Vector1_479.png"} alt="icon" />
-            </div>
-          </div>
-          <div className="self-stretch text-[12px] leading-[16px] tracking-[.01em] font-['Pretendard_Variable'] font-semibold text-[#1d1b20] text-center">홈</div>
-        </div>
-        <div className="flex-1 flex flex-col items-center justify-center gap-[4px] pt-[12px] px-0 pb-[16px]">
-          <div className="w-[32px] flex flex-row items-center justify-center rounded-[16px]">
-            <div className="w-[64px] h-[32px] shrink-0 flex flex-row items-center justify-center py-[4px] px-[20px]">
-              <img width="18" height="20" src={process.env.PUBLIC_URL + "/img/Vector1_484.png"} alt="icon" />
-            </div>
-          </div>
-          <div className="self-stretch text-[12px] leading-[16px] tracking-[.01em] font-['Pretendard_Variable'] font-medium text-[#49454f] text-center">일정</div>
-        </div>
-        <div className="flex-1 flex flex-col items-center justify-center gap-[4px] pt-[12px] px-0 pb-[16px]">
-          <div className="w-[32px] flex flex-row items-center justify-center rounded-[16px]">
-            <div className="w-[64px] h-[32px] shrink-0 flex flex-row items-center justify-center py-[4px] px-[20px]">
-              <img width="28" height="28" src={process.env.PUBLIC_URL + "/img/person1_489.png"} alt="icon" />
-            </div>
-          </div>
-          <div className="self-stretch text-[12px] leading-[16px] tracking-[.01em] font-['Roboto'] font-medium text-[#49454f] text-center">Updates</div>
-        </div>
-      </div>
-      <div className="absolute left-0 top-[30px] w-[100%] h-[680px] flex flex-col items-center justify-start gap-[10px] py-[9px] px-[10px]">
-        <div className="relative w-[328px] h-[51px] shrink-0 flex flex-col items-start justify-start py-[7px] px-0">
+      {/* <div className="absolute left-0 top-[30px] w-[100%] h-[680px] flex flex-col items-center justify-start gap-[10px] py-[9px] px-[10px]">
+        <div className="relative w-[95%] h-[51px] shrink-0 flex flex-col items-start justify-start py-[7px] px-0">
           <div className="absolute left-0 top-[5px] w-[308px] h-[41px] shrink-0 flex flex-row items-center justify-start gap-[11px] overflow-hidden">
-            <img width="24" height="22" src={process.env.PUBLIC_URL + "/img/Vector1_494.png"} alt="icon" />
+            <img width="24" height="22" src={process.env.PUBLIC_URL + "/img/Vector1_233.png"} alt="icon" />
             <div className="text-[24px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-black text-[#237741] text-center whitespace-nowrap">마음숲</div>
           </div>
         </div>
         <div className="self-stretch flex flex-row items-center justify-center gap-[10px] py-0 px-[19px]">
-          <div className="w-[60px] shrink-0 flex flex-col items-center justify-start py-[10px] px-0">
+          <div className="w-[60px] shrink-0 flex flex-col items-center justify-start gap-[2px] py-[10px] px-0">
             <div className="self-stretch text-[16px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-semibold text-[#000] text-center">불안</div>
+            <div className="self-stretch h-[2px] shrink-0 bg-[#ff9800]"></div>
           </div>
-          <div className="w-[60px] h-[48px] shrink-0 flex flex-col items-center justify-start gap-[2px] py-[10px] px-0">
+          <div className="w-[60px] shrink-0 flex flex-col items-center justify-start py-[10px] px-0">
             <div className="self-stretch text-[16px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-semibold text-[#000] text-center">분노</div>
-            <div className="self-stretch h-[2px] shrink-0 bg-[#f44336]"></div>
           </div>
           <div className="w-[60px] shrink-0 flex flex-col items-center justify-start py-[10px] px-0">
             <div className="self-stretch text-[16px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-semibold text-[#000] text-center">우울</div>
@@ -86,7 +55,8 @@ const Angry = () => {
           <div className="w-[60px] shrink-0 flex flex-col items-center justify-start py-[10px] px-0">
             <div className="self-stretch text-[16px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-semibold text-[#000] text-center">MY</div>
           </div>
-        </div>
+        </div>*/}
+
         <div className="w-[100%] flex flex-col items-center justify-start gap-[8px] bg-[#fff]">
           <div className="self-stretch h-[63px] shrink-0 flex flex-row items-center justify-center bg-[#f5f5f5]">
             <div className="relative w-[337px] h-[73px] shrink-0 flex">
@@ -166,7 +136,6 @@ const Angry = () => {
             <div className="absolute left-[203px] top-[6px] w-[124px] text-[50px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-black text-[#fff] opacity-[.3]">AWA</div>
           </div>
         </div>
-      </div>
       
       
     </div>

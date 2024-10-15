@@ -1,34 +1,31 @@
 import React from 'react';
+import './output.css';
 
 const Depression = () => {
   return (
     <div className="relative w-[360px] h-[800px] bg-[#fff] overflow-hidden">
-      <div className="absolute left-0 top-[30px] w-[360px] h-[680px] flex flex-col items-center justify-start gap-[10px] py-[9px] px-[10px]">
-        <div className="relative w-[328px] h-[51px] shrink-0 flex flex-col items-start justify-start py-[7px] px-0">
+     {/* <div className="absolute left-0 top-[30px] w-[100%] h-[680px] flex flex-col items-center justify-start gap-[10px] py-[9px] px-[10px]">
+        <div className="relative w-[95%] h-[51px] shrink-0 flex flex-col items-start justify-start py-[7px] px-0">
           <div className="absolute left-0 top-[5px] w-[308px] h-[41px] shrink-0 flex flex-row items-center justify-start gap-[11px] overflow-hidden">
-            <img width="24" height="22" src={process.env.PUBLIC_URL + "/img/Vector1_320.png"} alt="icon" />
-            <div className="text-[24px] leading-[24px] tracking-[.01em] font-black text-[#237741] text-center whitespace-nowrap">
-              마음숲
-            </div>
+            <img width="24" height="22" src={process.env.PUBLIC_URL + "/img/Vector1_233.png"} alt="icon" />
+            <div className="text-[24px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-black text-[#237741] text-center whitespace-nowrap">마음숲</div>
           </div>
         </div>
-
         <div className="self-stretch flex flex-row items-center justify-center gap-[10px] py-0 px-[19px]">
-          <div className="w-[60px] shrink-0 flex flex-col items-center justify-start py-[10px] px-0">
-            <div className="self-stretch text-[16px] leading-[24px] font-semibold text-[#000] text-center">불안</div>
-          </div>
-          <div className="w-[60px] shrink-0 flex flex-col items-center justify-start py-[10px] px-0">
-            <div className="self-stretch text-[16px] leading-[24px] font-semibold text-[#000] text-center">분노</div>
-          </div>
           <div className="w-[60px] shrink-0 flex flex-col items-center justify-start gap-[2px] py-[10px] px-0">
-            <div className="self-stretch text-[16px] leading-[24px] font-semibold text-[#000] text-center">우울</div>
-            <div className="self-stretch h-[2px] shrink-0 bg-[#5dbcd1]"></div>
+            <div className="self-stretch text-[16px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-semibold text-[#000] text-center">불안</div>
+            <div className="self-stretch h-[2px] shrink-0 bg-[#ff9800]"></div>
           </div>
           <div className="w-[60px] shrink-0 flex flex-col items-center justify-start py-[10px] px-0">
-            <div className="self-stretch text-[16px] leading-[24px] font-semibold text-[#000] text-center">MY</div>
+            <div className="self-stretch text-[16px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-semibold text-[#000] text-center">분노</div>
           </div>
-        </div>
-
+          <div className="w-[60px] shrink-0 flex flex-col items-center justify-start py-[10px] px-0">
+            <div className="self-stretch text-[16px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-semibold text-[#000] text-center">우울</div>
+          </div>
+          <div className="w-[60px] shrink-0 flex flex-col items-center justify-start py-[10px] px-0">
+            <div className="self-stretch text-[16px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-semibold text-[#000] text-center">MY</div>
+          </div>
+        </div>*/}
         <div className="w-[360px] flex flex-col items-center justify-start gap-[8px] bg-[#fff]">
           <div className="self-stretch h-[63px] shrink-0 flex flex-row items-center justify-center bg-[#f5f5f5]">
             <div className="relative w-[337px] h-[73px] shrink-0 flex">
@@ -77,7 +74,6 @@ const Depression = () => {
           </div>
         </div>
       </div>
-    </div>
   );
 };
 

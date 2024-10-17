@@ -15,6 +15,9 @@ import Addtodo from './AddTodo';
 import AnxietyBook2 from './Anxiety/AnxietyBook2';
 import Breath from './Breath';
 import ConflictResolution from './angry/ConflictResolution';
+import ConflictBoard from './angry/ConflictBoard';
+import ConflictBoardadd from './angry/ConflictBoardadd';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -27,6 +30,9 @@ root.render(
         <Route path="/AnxietyBook2" element={<AnxietyBook2 />} />
         <Route path="/Breath" element={<Breath />} />
         <Route path="/ConflictResolution" element={<ConflictResolution />} />
+        <Route path="/ConflictBoard" element={<ConflictBoard />} />
+        <Route path="/ConflictBoardadd" element={<ConflictBoard />} />
+
 
         {/* 네비게이션을 포함한 모든 다른 라우트 */}
         <Route

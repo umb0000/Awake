@@ -1,14 +1,57 @@
-import { useState, EventHandler, ReactNode } from 'react';
+import React, { Suspense, useRef } from 'react';
+import { Canvas, useFrame, useLoader } from '@react-three/fiber';
+import { OrbitControls } from '@react-three/drei';
+import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
+import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
+import './output.css';
+
+const Model = () => {
+  const modelRef = useRef();
+
+  // MTLLoader로 MTL 파일 로드
+  const materials = useLoader(MTLLoader, process.env.PUBLIC_URL + '/img/catuv_purple.mb');
+  
+  // OBJLoader로 OBJ 파일 로드 (MTL과 함께 적용)
+  const obj = useLoader(OBJLoader, process.env.PUBLIC_URL + '/img/test_purple.obj', (loader) => {
+    materials.preload();
+    loader.setMaterials(materials);  // OBJ에 MTL(재질) 적용
+  });
+
+  // 천천히 좌에서 우로 회전
+  useFrame(() => {
+    if (modelRef.current) {
+      modelRef.current.rotation.y += 0.005;  // 천천히 좌에서 우로 회전
+    }
+  });
+
+  return (
+    <primitive object={obj} ref={modelRef} castShadow receiveShadow scale={[2, 2, 2]} />
+  );
+};
 
 const Main = () => {
   return (
     <div className="relative w-[100%] h-[800px] bg-[#fff] overflow-hidden">
       <div className="absolute left-0 top-0 w-[100%] h-[800px] flex flex-col items-center justify-start gap-[10px]">
-        <div className="relative self-stretch h-[312px] shrink-0 flex">
-          <img className="absolute left-0 top-0" width="360" height="312" src={process.env.PUBLIC_URL + "/img/background(임시)1_81.png"} alt="background" />
-          <img className="absolute left-[104px] top-[94px]" width="143" height="178" src={process.env.PUBLIC_URL + "/img/image 171_100.png"} alt="main image" />
-          <img className="absolute left-[33px] top-[223px]" width="292" height="64" src={process.env.PUBLIC_URL + "/img/Group 191_101.png"} alt="group image" />
+        {/* 3D 오브젝트가 들어갈 곳 */}
+        <div className="relative self-stretch h-[40vh] shrink-0 flex justify-center items-center bg-white " style={{ top: '10vh' }}>
+          {/* Three.js Canvas */}
+          <Canvas className="w-full h-full" shadows>
+            <ambientLight intensity={0.5} />
+            <directionalLight position={[0.3, 1, 0.5]} intensity={0.5} castShadow />
+            <Suspense fallback={null}>
+              <Model /> {/* 3D 모델 */}
+            </Suspense>
+            {/* 바닥 추가 */}
+            <mesh receiveShadow rotation={[-Math.PI / 2, 0, 0]} position={[0, -1, 0]}>
+              <planeGeometry args={[500, 100]} />
+              <meshStandardMaterial color="#D7DE8E" />
+            </mesh>
+            <OrbitControls enableZoom={false} /> {/* 좌우 회전 가능 */}
+          </Canvas>
         </div>
+
+        {/* 나머지 UI */}
         <div className="relative w-[95%] h-[478px] shrink-0 flex">
           <div className="absolute left-0 top-[35px] w-[100%] h-[443px] flex flex-col items-start justify-start gap-[7px]">
             <div className="h-[27px] shrink-0 flex flex-row items-start justify-start gap-[7px]">
@@ -16,7 +59,6 @@ const Main = () => {
               <img width="51" height="23" src={process.env.PUBLIC_URL + "/img/todo_cell1_122.png"} alt="todo cell 2" />
               <img width="51" height="23" src={process.env.PUBLIC_URL + "/img/todo_cell1_124.png"} alt="todo cell 3" />
             </div>
-            {/*<img width="100%" height="63" src={process.env.PUBLIC_URL + "/img/todo_cell1_126.png"} alt="todo cell 4" />*/}
             <div className="relative w-[95%] h-[63px] shrink-0 flex">
               <div className="absolute left-0 top-0 w-[100%] h-[63px] bg-[#f4f7f8] rounded-[10px]"></div>
               <div className="absolute -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 w-[100%] h-[63px]"></div>
@@ -31,7 +73,7 @@ const Main = () => {
                   </div>
                 </div>
                 <div className="w-[196px] h-[24px] text-[13px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-bold text-[#79747e] flex flex-col justify-center">메일 확인하기</div>
-                <img width="26" height="26" src={process.env.PUBLIC_URL + "/img/Group 121_157.png"} alt="icon" />
+                <img width="26" height="26" src={process.env.PUBLIC_URL + "/img/check.png"} alt="icon" />
               </div>
             </div>
             <div className="relative w-[95%] h-[63px] shrink-0 flex">
@@ -48,7 +90,7 @@ const Main = () => {
                   </div>
                 </div>
                 <div className="w-[196px] h-[24px] text-[13px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-bold text-[#79747e] flex flex-col justify-center">쓰레기 버리기</div>
-                <img width="26" height="26" src={process.env.PUBLIC_URL + "/img/Group 121_174.png"} alt="icon" />
+                <img width="26" height="26" src={process.env.PUBLIC_URL + "/img/check.png"} alt="icon" />
               </div>
             </div>
           </div>
@@ -58,7 +100,6 @@ const Main = () => {
           </div>
         </div>
       </div>
-      
       
     </div>
   );

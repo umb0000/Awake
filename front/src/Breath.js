@@ -22,7 +22,7 @@ const Breath = () => {
             <div className="w-[100%] flex flex-row items-center justify-center py-0 px-[16px]">
               <div className="text-[24px] font-bold text-[#000]">숨 고르기</div>
             </div>
-            <div className="w-[100%] flex flex-row items-center justify-center py-0 px-[16px]">
+            <div className="w-[100%] flex flex-row items-center font-['Pretendard_Variable'] justify-center py-0 px-[16px]">
               <div className="text-[11px] font-light text-[#000] text-center">
                 화가 가득한 마음을 잠시 가라앉히는 시간을 가져보세요.
               </div>

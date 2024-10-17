@@ -1,5 +1,5 @@
 import { useState, ReactNode, useRef } from 'react';
-import './output.css';
+import '../output.css';
 
 const Angry = () => {
     const containerRef = useRef(null);

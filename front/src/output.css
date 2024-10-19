@@ -586,12 +586,12 @@ video {
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr); /* 한 줄에 7개의 칸 */
-  gap: 3px;
+  gap: 6px;
 }
 
 .calendar-day {
-  width: 30px;
-  height: 45px;
+  width: 42px;
+  height: 56px;
   flex-shrink: 0;
   border-radius: 10px;
   display: flex;
@@ -603,7 +603,18 @@ video {
 }
 
 .empty-day {
-  visibility: hidden; /* 빈 칸 숨기기 */
+  /*visibility: hidden;*/ /* 빈 칸 숨기기 */
+  width: 42px;
+  height: 56px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  display: flex;
+  align-items: flex-start; /* 날짜가 박스 위쪽에 배치됨 */
+  justify-content: center;
+  color: #79747E;
+  font-size: 10px; /* 날짜 폰트 크기를 줄임 */
+  padding-top: 5px;
+  background-color: #fff; 
 }
 
 .today {

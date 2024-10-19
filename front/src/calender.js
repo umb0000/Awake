@@ -52,7 +52,7 @@ const getBackgroundColor = (day, currentMonth, currentYear) => {
     const shades = ['#FF6D00', '#FFA726', '#FFB74D', '#FFCC80', '#FFE0B2'];
   
     // 오늘 이후의 날짜는 흰색 박스 처리
-    if (currentYear === today.getFullYear() && currentMonth === today.getMonth() + 1 && day > today.getDate()) {
+    if (currentYear > today.getFullYear() || currentMonth > today.getMonth() + 1 || currentMonth > today.getMonth() && day > today.getDate()) {
       return '#FFFFFF'; // 아직 오지 않은 날짜는 흰색 박스
     }
     return shades[day % shades.length];
@@ -67,7 +67,7 @@ const getBackgroundColor = (day, currentMonth, currentYear) => {
   // 글자 색깔 결정 함수 (아직 오지 않은 날짜는 회색 텍스트)
   const getTextColor = (day, currentMonth, currentYear) => {
     const today = new Date();
-    if (currentYear === today.getFullYear() && currentMonth === today.getMonth() + 1 && day > today.getDate()) {
+    if (currentYear > today.getFullYear() || currentMonth > today.getMonth() + 1 || currentMonth > today.getMonth() && day > today.getDate()) {
       return '#79747E'; // 아직 오지 않은 날짜는 회색 텍스트
     }
     return '#FFFFFF'; // 기본 흰색 텍스트
@@ -129,8 +129,8 @@ const getBackgroundColor = (day, currentMonth, currentYear) => {
               key={day}
               className={`calendar-day ${isToday(currentYear, currentMonth, day) ? 'today' : ''}`}
               style={{
-                background: getBackgroundColor(day),
-                color: getTextColor(day),
+                background: getBackgroundColor(day, currentMonth, currentYear),
+                color: getTextColor(day, currentMonth, currentYear),
               }}
             >
               {day}

@@ -11,7 +11,7 @@ const Navigation = () => {
   <a href='/main'>
     <img width="80" height="80" src={process.env.PUBLIC_URL + "/img/Nav_item_59_122.png"} alt="nav item 1" />
   </a>
-  <a href='/schedule'>
+  <a href='/calender'>
     <img width="80" height="80" src={process.env.PUBLIC_URL + "/img/Nav_item_69_127.png"} alt="nav item 2" />
   </a>
   <a href='/kit/anxiety'>

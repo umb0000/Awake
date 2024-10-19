@@ -565,3 +565,53 @@ video {
   scrollbar-width: none; /* Firefox */
 }
 
+.app-container {
+  margin-top: 20px; /* 상태바 높이에 맞게 조정 */
+  height: calc(100% - 20px); /* 전체 화면 높이에서 상태바 높이만큼 제외 */
+  box-sizing: border-box;
+}
+
+/* 달력 */
+
+.calendar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  top: 0px;
+  gap: 10px;
+  width: 300px; /* 달력을 화면 중앙에 맞춤 */
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* 한 줄에 7개의 칸 */
+  gap: 3px;
+}
+
+.calendar-day {
+  width: 30px;
+  height: 45px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  display: flex;
+  align-items: flex-start; /* 날짜가 박스 위쪽에 배치됨 */
+  justify-content: center;
+  color: #fff;
+  font-size: 10px; /* 날짜 폰트 크기를 줄임 */
+  padding-top: 5px; /* 날짜를 약간 위로 이동 */
+}
+
+.empty-day {
+  visibility: hidden; /* 빈 칸 숨기기 */
+}
+
+.today {
+  border: 2px solid #000; /* 오늘 날짜 강조 */
+  color: #000;
+  background-color: #FFD700; /* 오늘 날짜 배경색 */
+}
+
+
+
+

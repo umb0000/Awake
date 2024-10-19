@@ -17,6 +17,8 @@ import Breath from './Breath';
 import ConflictResolution from './angry/ConflictResolution';
 import ConflictBoard from './angry/ConflictBoard';
 import ConflictBoardadd from './angry/ConflictBoardadd';
+import TrashCan from './depression/trashcan';
+import Calender from './calender';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -57,6 +59,7 @@ root.render(
                 <Route path="/Anxiety" element={<Anxiety />} />
                 <Route path="/Angry" element={<Angry />} />
                 <Route path="/Depression" element={<Depression />} />
+                <Route path="/calender" element={<Calender />} />
               </Routes>
 
               {/* Navigation 컴포넌트 */}

@@ -1,44 +1,79 @@
-import React, { Suspense, useRef } from 'react';
+import React, { Suspense, useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame, useLoader } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
-import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
-import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
+import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'; // FBXLoader 사용
 import './output.css';
 
 const Model = () => {
   const modelRef = useRef();
 
-  // MTLLoader로 MTL 파일 로드
-  const materials = useLoader(MTLLoader, process.env.PUBLIC_URL + '/img/catuv_purple.mb');
-  
-  // OBJLoader로 OBJ 파일 로드 (MTL과 함께 적용)
-  const obj = useLoader(OBJLoader, process.env.PUBLIC_URL + '/img/test_purple.obj', (loader) => {
-    materials.preload();
-    loader.setMaterials(materials);  // OBJ에 MTL(재질) 적용
-  });
+  // FBXLoader로 FBX 파일 로드
+  const fbx = useLoader(FBXLoader, process.env.PUBLIC_URL + '/img/test_cat.fbx');
 
   // 천천히 좌에서 우로 회전
   useFrame(() => {
     if (modelRef.current) {
-      modelRef.current.rotation.y += 0.005;  // 천천히 좌에서 우로 회전
+      modelRef.current.rotation.y += 0.002;  // 천천히 좌에서 우로 회전
     }
   });
 
   return (
-    <primitive object={obj} ref={modelRef} castShadow receiveShadow scale={[2, 2, 2]} />
+    <primitive object={fbx} ref={modelRef} castShadow receiveShadow scale={[3, 3, 3]} />
   );
 };
 
 const Main = () => {
+  const [currentText, setCurrentText] = useState('');
+  const [displayText, setDisplayText] = useState('');
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  // 텍스트 목록
+  const texts = [
+    "오 늘은 기분이 어때? ",
+    "할 일을 잊지 마! ",
+    "운 동을 해볼까? ",
+    "건 강한 하루! ",
+    "물  많이 마시자! "
+  ];
+
+  // 텍스트 변경 함수
+  const changeText = () => {
+    if (!isAnimating) {
+      const randomText = texts[Math.floor(Math.random() * texts.length)];
+      setCurrentText(randomText);
+      setDisplayText(''); // 기존 텍스트 초기화
+      setIsAnimating(true);
+    }
+  };
+
+  // 텍스트 애니메이션 효과
+  useEffect(() => {
+    if (isAnimating && currentText && currentText.length > 0) {
+      let currentIndex = 0;
+      setDisplayText(''); // displayText 초기화
+      const interval = setInterval(() => {
+        setDisplayText((prev) => prev + currentText[currentIndex]);
+        currentIndex++;
+        if (currentIndex +1 === currentText.length) {
+          clearInterval(interval);
+          setIsAnimating(false);
+        }
+      }, 100); // 0.5초마다 한 글자씩 보여줌
+    }
+  }, [isAnimating, currentText]);
+
+const [currentMonth, setCurrentMonth] = useState(new Date().getMonth() + 1); // 0부터 시작하므로 +1
+const [currentDate, setCurrentDate] = useState(new Date().getDate()); // 오늘 날짜
+
   return (
     <div className="relative w-[100%] h-[800px] bg-[#fff] overflow-hidden">
       <div className="absolute left-0 top-0 w-[100%] h-[800px] flex flex-col items-center justify-start gap-[10px]">
         {/* 3D 오브젝트가 들어갈 곳 */}
-        <div className="relative self-stretch h-[40vh] shrink-0 flex justify-center items-center bg-white " style={{ top: '10vh' }}>
+        <div className="relative self-stretch w-[100%] h-[50vh] shrink-0 flex justify-center items-center" style={{ paddingTop: '5vh', paddingBottom: '0vh' }}>
           {/* Three.js Canvas */}
           <Canvas className="w-full h-full" shadows>
             <ambientLight intensity={0.5} />
-            <directionalLight position={[0.3, 1, 0.5]} intensity={0.5} castShadow />
+            <directionalLight position={[1, 1, 1]} intensity={0.5} castShadow />
             <Suspense fallback={null}>
               <Model /> {/* 3D 모델 */}
             </Suspense>
@@ -51,21 +86,50 @@ const Main = () => {
           </Canvas>
         </div>
 
+        {/* 텍스트 박스 */}
+                <div
+          className="relative bg-[#f4f7f8] rounded-[16px] px-[10px] py-[5px] text-center text-[10px] leading-[24px]"
+          style={{
+            position: 'absolute',
+            top: '23vh',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: 'auto', // 텍스트 길이에 따라 박스 크기 조절
+            maxWidth: '300px', // 최대 크기 제한
+            whiteSpace: 'nowrap',
+          }}
+          onClick={changeText} // 터치하면 텍스트 변경
+        >
+          {displayText || "클릭해서 말해보세요!"}
+        </div>
+
         {/* 나머지 UI */}
-        <div className="relative w-[95%] h-[478px] shrink-0 flex">
-          <div className="absolute left-0 top-[35px] w-[100%] h-[443px] flex flex-col items-start justify-start gap-[7px]">
+        <div className="relative w-[100%] h-auto flex shrink-0 flex mt-[3vh] left-[2vh]">
+          <div className="absolute w-[100%] h-[443px] flex flex-col items-center justify-start gap-[7px]">
+            {/* 날짜 표시 */}
+            <div className="relative w-[100%] h-[15px] flex ml-[16px]">
+              <div className="realative top-0 w-[40%] h-[23px] text-[24px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-bold text-[#000] text-center flex flex-col justify-center" style={{ paddingLeft: '2vh'} }>
+                {currentMonth}월 {currentDate}일
+              </div>
+              <a href='/AddTodo'>
+                <img className="absolute right-0 top-[3px]" width="27" height="26" src={process.env.PUBLIC_URL + "/img/add1_206.png"} alt="add icon" />
+              </a>
+            </div>
+
+            {/* To-do 아이템 */}
             <div className="h-[27px] shrink-0 flex flex-row items-start justify-start gap-[7px]">
               <img width="51" height="23" src={process.env.PUBLIC_URL + "/img/todo_cell1_119.png"} alt="todo cell 1" />
               <img width="51" height="23" src={process.env.PUBLIC_URL + "/img/todo_cell1_122.png"} alt="todo cell 2" />
               <img width="51" height="23" src={process.env.PUBLIC_URL + "/img/todo_cell1_124.png"} alt="todo cell 3" />
             </div>
-            <div className="relative w-[95%] h-[63px] shrink-0 flex">
+
+            {/* 첫 번째 UI 블록 */}
+            <div className="relative w-[100%] h-[63px] shrink-0 flex">
               <div className="absolute left-0 top-0 w-[100%] h-[63px] bg-[#f4f7f8] rounded-[10px]"></div>
-              <div className="absolute -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 w-[100%] h-[63px]"></div>
               <div className="absolute -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 w-[294px] flex flex-row items-center justify-start gap-[21px]">
                 <div className="w-[30px] h-[31px] shrink-0 flex flex-col items-center justify-between">
                   <div className="relative w-[26px] h-[9px] shrink-0 flex">
-                    <div className="absolute left-0 top-0 w-[26px] h-[9px] text-[7px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-bold text-[#79747e] text-center flex flex-col justify-center">중요도</div>
+                    <div className="absolute left-0 top-0 w-[26px] h-[9px] text-[7px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-bold text-[#79747e] text-center">중요도</div>
                   </div>
                   <div className="relative w-[26px] h-[22px] shrink-0 flex">
                     <div className="absolute left-[2px] top-0 w-[22px] h-[22px] bg-[#f44336] rounded-full"></div>
@@ -76,13 +140,14 @@ const Main = () => {
                 <img width="26" height="26" src={process.env.PUBLIC_URL + "/img/check.png"} alt="icon" />
               </div>
             </div>
+
+            {/* 두 번째 UI 블록 */}
             <div className="relative w-[95%] h-[63px] shrink-0 flex">
               <div className="absolute left-0 top-0 w-[100%] h-[63px] bg-[#f4f7f8] rounded-[10px]"></div>
-              <div className="absolute -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 w-[330px] h-[63px]"></div>
               <div className="absolute -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 w-[294px] flex flex-row items-center justify-start gap-[21px]">
                 <div className="w-[30px] h-[31px] shrink-0 flex flex-col items-center justify-between">
                   <div className="relative w-[26px] h-[9px] shrink-0 flex">
-                    <div className="absolute left-0 top-0 w-[26px] h-[9px] text-[7px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-bold text-[#79747e] text-center flex flex-col justify-center">중요도</div>
+                    <div className="absolute left-0 top-0 w-[26px] h-[9px] text-[7px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-bold text-[#79747e] text-center">중요도</div>
                   </div>
                   <div className="relative w-[26px] h-[22px] shrink-0 flex">
                     <div className="absolute left-[2px] top-0 w-[22px] h-[22px] bg-[#ff9800] rounded-full"></div>
@@ -94,13 +159,8 @@ const Main = () => {
               </div>
             </div>
           </div>
-          <div className="absolute left-0 top-0 w-[100%] h-[29px] flex">
-            <div className="absolute left-0 top-0 w-[40%] h-[23px] text-[24px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-bold text-[#000] text-center flex flex-col justify-center">8월 24일</div>
-            <a href='/AddTodo'><img className="absolute right-0 top-[3px]" width="27" height="26" src={process.env.PUBLIC_URL + "/img/add1_206.png"} alt="add icon" /></a>
-          </div>
         </div>
       </div>
-      
     </div>
   );
 };

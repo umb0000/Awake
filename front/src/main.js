@@ -3,6 +3,7 @@ import { Canvas, useFrame, useLoader } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'; // FBXLoader 사용
 import './output.css';
+import TodoList from './maintodo';
 
 const Model = () => {
   const modelRef = useRef();
@@ -21,6 +22,10 @@ const Model = () => {
     <primitive object={fbx} ref={modelRef} castShadow receiveShadow scale={[3, 3, 3]} />
   );
 };
+
+
+
+
 
 const Main = () => {
   const [currentText, setCurrentText] = useState('');
@@ -67,7 +72,7 @@ const [currentDate, setCurrentDate] = useState(new Date().getDate()); // 오늘 
 
   return (
     <div className="relative w-[100%] h-[800px] bg-[#fff] overflow-hidden">
-      <div className="absolute left-0 top-0 w-[100%] h-[800px] flex flex-col items-center justify-start gap-[10px]">
+      <div className="absolute left-0 top-0 w-[100%] h-[800px] flex flex-col items-center justify-start gap-[2vh]">
         {/* 3D 오브젝트가 들어갈 곳 */}
         <div className="relative self-stretch w-[100%] h-[50vh] shrink-0 flex justify-center items-center" style={{ paddingTop: '5vh', paddingBottom: '0vh' }}>
           {/* Three.js Canvas */}
@@ -91,7 +96,7 @@ const [currentDate, setCurrentDate] = useState(new Date().getDate()); // 오늘 
           className="relative bg-[#f4f7f8] rounded-[16px] px-[10px] py-[5px] text-center text-[10px] leading-[24px]"
           style={{
             position: 'absolute',
-            top: '23vh',
+            top: '19vh',
             left: '50%',
             transform: 'translateX(-50%)',
             width: 'auto', // 텍스트 길이에 따라 박스 크기 조절
@@ -104,16 +109,19 @@ const [currentDate, setCurrentDate] = useState(new Date().getDate()); // 오늘 
         </div>
 
         {/* 나머지 UI */}
+        
         <div className="self-stretch h-[534px] shrink-0 flex flex-col items-center justify-center gap-[5px] py-[10px] px-[15px]"style={{ paddingLeft:'2vh', paddingRight: '2vh'} }>
       {/* 날짜 표시 */}
             <div className="relative w-[100%] h-[15px] flex ml-[16px]">
-              <div className="realative top-0 w-[40%] h-[23px] text-[24px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-bold text-[#000] text-center flex flex-col justify-center">
+              <div className="realative top-0 w-[40%] h-[23px] text-[20px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-bold text-[#000] text-center flex flex-col justify-center">
                 {currentMonth}월 {currentDate}일
               </div>
               <a href='/AddTodo'>
                 <img className="absolute right-0 top-[3px]" width="27" height="26" src={process.env.PUBLIC_URL + "/img/add1_206.png"} alt="add icon" />
               </a>
             </div>
+
+      
       <div className="self-stretch h-[454px] shrink-0 flex flex-col items-start justify-start gap-[7px]">
         <div className="self-stretch flex flex-row items-start justify-start gap-[7px]">
           <div className="w-[205px] h-[27px] shrink-0 flex flex-row items-start justify-start gap-[7px]">
@@ -125,57 +133,8 @@ const [currentDate, setCurrentDate] = useState(new Date().getDate()); // 오늘 
             <img width="64" height="23" src={process.env.PUBLIC_URL + "/img/order118_808.png"}></img>
           </div>
         </div>
-        <img width="330" height="63" src={process.env.PUBLIC_URL + "/img/todo_cell118_811.png"}></img>
-        <div className="relative w-[100%] h-[63px] shrink-0 flex">
-          <div className="absolute left-0 top-0 w-[100%] h-[63px] bg-[#f4f7f8] rounded-[10px]"></div>
-          <div className="absolute -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 w-[330px] h-[63px]"></div>
-          <div className="absolute -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 w-[294px] flex flex-row items-center justify-start gap-[21px]">
-            <img width="30" height="31" src={process.env.PUBLIC_URL + "/img/level3.png"}></img>
-            <div className="h-[48px] flex flex-col items-start justify-center">
-            <div className="w-[196px] h-[24px] text-[13px] leading-[24px] tracking-[.01em] font-bold text-[#79747e] flex flex-col justify-center">
-                메일 확인하기
-              </div>
-              <div className="w-[196px] text-[10px] leading-[10px] tracking-[.01em] font-bold text-[#79747e] flex flex-col justify-center">
-                중요🚩, 긴급🚨
-              </div>
-              </div>
-            <img width="26" height="26" src={process.env.PUBLIC_URL + "/img/unchecked118_837.png"}></img>
-          </div>
+        <TodoList/>
         </div>
-
-        {/*중 박스가 가장 적절, 폰트 이슈*/}
-        <div className="relative w-[100%] h-[63px] shrink-0 flex">
-          <div className="absolute left-0 top-0 w-[100%] h-[63px] bg-[#f4f7f8] rounded-[10px]"></div>
-          <div className="absolute -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 w-[330px] h-[63px]"></div>
-          <div className="absolute -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 w-[294px] flex flex-row items-center justify-start gap-[21px]">
-            <img width="30" height="31" src={process.env.PUBLIC_URL + "/img/level2118_843.png"}></img>
-            <div className="h-[48px] flex flex-col items-start justify-center">
-              <div className="w-[196px] h-[24px] text-[13px] leading-[24px] tracking-[.01em] font-['Pretendard'] font-bold text-[#79747e] flex flex-col justify-center">과제 확인하기</div>
-              <div className="w-[196px] h-[8px] text-[10px] leading-[10px] tracking-[.01em] font-['Pretendard'] font-bold text-[#79747e] flex flex-col justify-center">긴급🚨</div>
-            </div>
-            <img width="23" height="24" src={process.env.PUBLIC_URL + "/img/checked118_847.png"}></img>
-          </div>
-        </div>
-        <div className="relative w-[330px] h-[63px] shrink-0 flex">
-          <div className="absolute left-0 top-0 w-[330px] h-[63px] bg-[#f4f7f8] rounded-[10px]"></div>
-          <div className="absolute -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 w-[330px] h-[63px]"></div>
-          <div className="absolute -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 w-[294px] flex flex-row items-center justify-start gap-[21px]">
-            <img width="30" height="31" src={process.env.PUBLIC_URL + "/img/level1.png"}></img>
-            <div className="w-[196px] h-[24px] text-[13px] leading-[24px] tracking-[.01em] font-['Pretendard'] font-bold text-[#79747e] flex flex-col justify-center">쓰레기 버리기</div>
-            <img width="23" height="24" src={process.env.PUBLIC_URL + "/img/checked.png"}></img>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div className="relative w-[360px] h-[429px] shrink-0 flex">
-      <div className="absolute left-0 top-0 w-[360px] h-[429px] bg-[#fff]"></div>
-    </div>
-  </div>
-  <div className="absolute left-[19px] top-[824px] w-[321px] h-[512px]">
-    <div className="absolute left-0 right-0 top-0 h-[480px] bg-[#fff] rounded-tl-[28px] rounded-tr-[28px] rounded-br-0 rounded-bl-0 overflow-hidden shadow-[0_4px_8px_3px_#00000026]">
-      <div className="absolute left-0 right-0 top-0 flex flex-col items-center justify-start p-[16px]">
-        <div className="w-[32px] h-[4px] shrink-0 bg-[#79747e] rounded-[100px]"></div>
-      </div>
     </div>
   </div>
           </div>

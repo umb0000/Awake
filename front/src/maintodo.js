@@ -23,7 +23,7 @@ const TodoList = ({ onCompletionRateChange }) => {
     const completionRate = Math.floor((completedCards / totalCards) * 100);
 
     // 달성률을 Main 컴포넌트로 전달
-    onCompletionRateChange(completionRate);
+    onCompletionRateChange(completionRate, totalCards, completedCards);
   }, [cards, onCompletionRateChange]);
 
   const handleButtonClick = (type) => {
@@ -104,10 +104,10 @@ const TodoList = ({ onCompletionRateChange }) => {
 
               {/* 텍스트 영역 */}
               <div className="h-[48px] flex-grow flex flex-col items-start justify-center" style={{ minWidth: '160px', maxWidth: '180px' }}>
-                <div className="w-full h-[24px] text-[13px] leading-[24px] tracking-[.01em] font-bold text-[#79747e] flex flex-col justify-center">
+                <div className="w-full h-[24px] text-[40px] leading-[24px] tracking-[.01em] font-['Pretendard'] font-bold text-[#79747e] flex flex-col justify-center">
                   {card.title}
                 </div>
-                <div className="w-full text-[10px] leading-[10px] tracking-[.01em] font-bold text-[#79747e] flex flex-col justify-center">
+                <div className="w-full text-[10px] leading-[10px] tracking-[.01em] font-['Pretendard'] font-bold text-[#79747e] flex flex-col justify-center">
                   {card.detail}
                 </div>
               </div>

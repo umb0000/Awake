@@ -10,14 +10,14 @@ const ConflictResolution = () => {
       
 
       {/* 내용 */}
-      <div className="relative w-[100%] h-auto flex flex-col items-center gap-[12px] px-[15px]">
+      <div  style={{ paddingTop : '5%'}}className="relative w-[100%] h-auto flex flex-col items-center gap-[12px] px-[15px]">
         {/* 단계 1: 상황 설명 */}
         <div className="w-full h-[45px] flex items-center justify-between px-[20px] py-[20px]">
         <div className="text-[20px] font-bold">상감이결 공식</div>
       </div>
         <div className="w-[327px] h-[165px] flex items-center gap-[1px] p-[10px] bg-[#fff] border border-solid border-[#d9d9d9] rounded-[15px]">
           <div className="w-[70%] h-[144px] flex items-center justify-center p-[10px]">
-            <div style={{ fontSize: '80px', lineHeight: '80px' }} className="text-[100px] leading-none">🔍</div>
+          <img width="69" height="69" src="image 34138_396.png"></img>
           </div>
           <div className="flex-1 flex flex-col gap-[8px]">
             <div className="text-[14px] font-bold">상황에 대해 말하기</div>
@@ -32,7 +32,7 @@ const ConflictResolution = () => {
         {/* 단계 2: 감정 설명 */}
         <div className="w-[327px] h-[165px] flex items-center gap-[10px] p-[10px] bg-[#fff] border border-solid border-[#d9d9d9] rounded-[15px]">
           <div className="w-[80px] h-[144px] flex items-center justify-center p-[10px]">
-            <div className="text-[64px]">❤‍</div>
+          <img width="69" height="69" src="image 35138_406.png"></img>
           </div>
           <div className="flex-1 flex flex-col gap-[8px]">
             <div className="text-[14px] font-bold">감정 설명하기</div>
@@ -47,7 +47,7 @@ const ConflictResolution = () => {
         {/* 단계 3: 이해시키기 */}
         <div className="w-[327px] h-[165px] flex items-center gap-[10px] p-[10px] bg-[#fff] border border-solid border-[#d9d9d9] rounded-[15px]">
           <div className="w-[80px] h-[144px] flex items-center justify-center p-[10px]">
-            <div className="text-[64px]">💡</div>
+          <img width="69" height="69" src="image 36138_416.png"></img>
           </div>
           <div className="flex-1 flex flex-col gap-[8px]">
             <div className="text-[14px] font-bold">이해시키기</div>
@@ -62,7 +62,7 @@ const ConflictResolution = () => {
         {/* 단계 4: 결과 분명히 하기 */}
         <div className="w-[327px] h-[165px] flex items-center gap-[10px] p-[10px] bg-[#fff] border border-solid border-[#d9d9d9] rounded-[15px]">
           <div className="w-[80px] h-[144px] flex items-center justify-center p-[10px]">
-            <div className="text-[64px]">📢</div>
+          <img width="69" height="69" src="image 37138_426.png"></img>
           </div>
           <div className="flex-1 flex flex-col gap-[8px]">
             <div className="text-[14px] font-bold">결과 분명히 하기</div>

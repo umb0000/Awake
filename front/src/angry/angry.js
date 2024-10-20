@@ -69,19 +69,22 @@ const Angry = () => {
           </div>
           <div className="self-stretch h-[1px] shrink-0 bg-[#fff]"></div>
           <div className="self-stretch flex flex-row items-center justify-center">
-            <div className="relative w-[95%] h-[166px] shrink-0 flex">
+            <div className="relative w-[100%] h-[166px] shrink-0 flex bg-[#6fddc6] rounded-[16px]">
               <a href='http://localhost:3000/Breath'>
-                <div className="absolute left-0 top-0 w-[100%] h-[166px] flex flex-col items-start justify-end p-[20px] bg-[#6fddc6] rounded-[16px]">
+                <div className="w-[60%] h-[166px] flex flex-col items-start justify-end p-[20px] ">
                   <div className="self-stretch text-[20px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-bold text-[#fff]">호흡하기</div>
                   <div className="self-stretch text-[10px] leading-[10px] tracking-[.01em] font-['Pretendard_Variable'] font-semibold text-[#fff]">열을 내리는 호흡법으로 천천히 진정해봐요.</div>
                 </div>
-              </a>
-              <img className="absolute left-[75%] top-[12px]" width="108" height="100" src={process.env.PUBLIC_URL + "/img/3dicons1_517.png"} alt="3d icon" />
+              
+                </a>
+                <div className="w-[40%] h-[166px] flex items-center justify-center" style={{ marginLeft: '40px'}}>
+                  <img className="w-[108px] h-[100px]" src={process.env.PUBLIC_URL + "/img/3dicons1_517.png"} alt="3d icon" />
+                </div>
             </div>
           </div>
 
           {/*스크롤*/}
-          <div className="w-[95%] h-[166px] shrink-0 flex flex-row items-center justify-center gap-[11px] overflow-x-scroll scroll-smooth no-scrollbar"
+          <div className="w-[95%] h-[166px] flex flex-row items-center justify-left gap-[11px] overflow-x-scroll scroll-smooth no-scrollbar"
         ref={containerRef}
         onMouseDown={handleMouseDown}
         onMouseLeave={handleMouseLeave}
@@ -122,7 +125,7 @@ const Angry = () => {
       <div className="relative w-[95%] h-[68px] shrink-0 flex flex-col items-start justify-center py-[10px] px-[20px] bg-[#f8f8f8] rounded-[16px]">
         <a href='http://localhost:3000/breath' className="w-full h-full flex flex-col items-start justify-center">
         <div className="self-stretch text-[16px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-bold text-[#000]">숨 고르기</div>
-        <div className="self-stretch text-[10px] leading-[10px] tracking-[.01em] font-['Pretendard_Variable'] font-semibold text-[#000]">불안하고 머리 아플 때</div></a>
+        <div className="self-stretch text-[10px] leading-[10px] tracking-[.01em] font-['Pretendard_Variable'] font-semibold text-[#000]">진정이 필요할 때</div></a>
       </div>
 
           <div className="relative w-[95%] h-[68px] shrink-0 flex">

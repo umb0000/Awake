@@ -26,41 +26,35 @@ jobs:
     # 4. Docker 이미지 빌드 및 태그
     - name: Build and tag Docker image
       run: |
-        docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/your_docker_image:latest .
-        docker tag ${{ secrets.DOCKER_HUB_USERNAME }}/your_docker_image:latest ${{ secrets.DOCKER_HUB_USERNAME }}/your_docker_image:latest
+        docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/awake_FE:latest .
+        docker tag ${{ secrets.DOCKER_HUB_USERNAME }}/awake_FE:latest ${{ secrets.DOCKER_HUB_USERNAME }}/awake_FE:latest
 
     # 5. Docker Hub로 푸시
     - name: Push Docker image to Docker Hub
       run: |
-        docker push ${{ secrets.DOCKER_HUB_USERNAME }}/your_docker_image:latest
+        docker push ${{ secrets.DOCKER_HUB_USERNAME }}/awake_FE:latest
 
   deploy:
     runs-on: ubuntu-latest
     needs: build-and-push  # 'build-and-push' 작업이 완료되면 실행
 
     steps:
-    - name: Install expect
-      run: sudo apt-get install -y expect
-
+    - name: Install SSH and sshpass
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y openssh-client sshpass
+        
     # 6. SSH 접속 및 Docker 이미지 Pull & Run
     - name: Deploy to Server
       run: |
         echo "Starting deployment..."
-        expect << EOF
-        spawn ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_ID }}@${{ secrets.SSH_SERVER_IP }}
-        expect "password:"
-        send "${{ secrets.SSH_PASSWORD }}\r"
-        expect "$ "
-        send "docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/your_docker_image:latest\r"
-        expect "$ "
-        send "docker stop your_container || true\r"
-        expect "$ "
-        send "docker rm your_container || true\r"
-        expect "$ "
-        send "docker run -d --name your_container ${{ secrets.DOCKER_HUB_USERNAME }}/your_docker_image:latest\r"
-        expect "$ "
-        send "exit\r"
-        expect eof
+        sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_ID }}@${{ secrets.SSH_SERVER_IP }} << EOF
+          IMAGE=${IMAGE}
+          sudo docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/awake_FE:latest
+          sudo docker stop awake_FE || true
+          sudo docker rm awake_FE || true
+          sudo docker run -d --name awake_FE -p 10201:80 \$IMAGE
+
+          sudo docker system prune -af
         EOF
-      env:
-        SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
+        

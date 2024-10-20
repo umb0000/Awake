@@ -104,6 +104,7 @@ const [currentDate, setCurrentDate] = useState(new Date().getDate()); // 오늘 
         </div>
 
         {/* 나머지 UI */}
+         <div className="self-stretch h-[534px] shrink-0 flex flex-col items-center justify-center gap-[5px] py-[10px] px-[15px]"style={{ paddingLeft:'2vh', paddingRight: '2vh'} }>
         <div className="relative w-[100%] h-auto flex shrink-0 flex mt-[3vh] left-[2vh]">
           <div className="absolute w-[100%] h-[443px] flex flex-col items-center justify-start gap-[7px]">
             {/* 날짜 표시 */}
@@ -161,7 +162,7 @@ const [currentDate, setCurrentDate] = useState(new Date().getDate()); // 오늘 
           </div>
         </div>
       </div>
-    </div>
+    </div></div>
   );
 };
 

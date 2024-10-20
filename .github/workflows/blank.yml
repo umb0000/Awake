@@ -50,11 +50,9 @@ jobs:
         echo "Starting deployment..."
         sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_ID }}@${{ secrets.SSH_SERVER_IP }} << EOF
           IMAGE=${IMAGE}
-          sudo docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/awake_frontend:latest
-          sudo docker stop awake_FE || true
-          sudo docker rm awake_FE || true
-          sudo docker run -d --name awake_FE -p 10201:80 \$IMAGE
-
-          sudo docker system prune -af
+          echo "${{ secrets.SSH_PASSWORD }}" | sudo -S docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/awake_frontend:latest
+          echo "${{ secrets.SSH_PASSWORD }}" | sudo -S docker stop awake_FE || true
+          echo "${{ secrets.SSH_PASSWORD }}" | sudo -S docker rm awake_FE || true
+          echo "${{ secrets.SSH_PASSWORD }}" | sudo -S docker run -d --name awake_FE -p 10201:80 \$IMAGE
+          echo "${{ secrets.SSH_PASSWORD }}" | sudo -S docker system prune -af
         EOF
-        

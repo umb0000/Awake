@@ -69,7 +69,7 @@ const Angry = () => {
           </div>
           <div className="self-stretch h-[1px] shrink-0 bg-[#fff]"></div>
           <div className="self-stretch flex flex-row items-center justify-center">
-            <div className="relative w-[100%] h-[166px] shrink-0 flex bg-[#6fddc6] rounded-[16px]">
+            <div className="relative w-[95%] h-[166px] shrink-0 flex bg-[#6fddc6] rounded-[16px]">
               <a href='http://localhost:3000/Breath'>
                 <div className="w-[60%] h-[166px] flex flex-col items-start justify-end p-[20px] ">
                   <div className="self-stretch text-[20px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-bold text-[#fff]">호흡하기</div>

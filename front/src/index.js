@@ -33,7 +33,8 @@ root.render(
         <Route path="/Breath" element={<Breath />} />
         <Route path="/ConflictResolution" element={<ConflictResolution />} />
         <Route path="/ConflictBoard" element={<ConflictBoard />} />
-        <Route path="/ConflictBoardadd" element={<ConflictBoard />} />
+        <Route path="/ConflictBoardadd" element={<ConflictBoardadd />} />
+        <Route path="/trashcan" element={<TrashCan />} />
 
 
         {/* 네비게이션을 포함한 모든 다른 라우트 */}

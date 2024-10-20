@@ -70,10 +70,12 @@ const Angry = () => {
           <div className="self-stretch h-[1px] shrink-0 bg-[#fff]"></div>
           <div className="self-stretch flex flex-row items-center justify-center">
             <div className="relative w-[95%] h-[166px] shrink-0 flex">
-              <div className="absolute left-0 top-0 w-[100%] h-[166px] flex flex-col items-start justify-end p-[20px] bg-[#6fddc6] rounded-[16px]">
-                <div className="self-stretch text-[20px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-bold text-[#fff]">호흡하기</div>
-                <div className="self-stretch text-[10px] leading-[10px] tracking-[.01em] font-['Pretendard_Variable'] font-semibold text-[#fff]">열을 내리는 호흡법으로 천천히 진정해봐요.</div>
-              </div>
+              <a href='http://localhost:3000/Breath'>
+                <div className="absolute left-0 top-0 w-[100%] h-[166px] flex flex-col items-start justify-end p-[20px] bg-[#6fddc6] rounded-[16px]">
+                  <div className="self-stretch text-[20px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-bold text-[#fff]">호흡하기</div>
+                  <div className="self-stretch text-[10px] leading-[10px] tracking-[.01em] font-['Pretendard_Variable'] font-semibold text-[#fff]">열을 내리는 호흡법으로 천천히 진정해봐요.</div>
+                </div>
+              </a>
               <img className="absolute left-[75%] top-[12px]" width="108" height="100" src={process.env.PUBLIC_URL + "/img/3dicons1_517.png"} alt="3d icon" />
             </div>
           </div>
@@ -86,21 +88,24 @@ const Angry = () => {
         onMouseUp={handleMouseUp}
         onMouseMove={handleMouseMove}>
         <div className="relative w-[175px] h-[166px] shrink-0 flex">
+        <a href='http://localhost:3000/ConflictResolution'>
           <div className="absolute left-0 top-0 w-[175px] h-[166px] flex flex-col items-start justify-end p-[20px] bg-[#fe776d] rounded-[16px]">
             <div className="self-stretch text-[20px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-bold text-[#fff]">갈등 대처법</div>
-            <div className="self-stretch text-[10px] leading-[10px] tracking-[.01em] font-['Pretendard_Variable'] font-semibold text-[#fff]">좋은 갈등 대처법이 붤까?</div>
+            <div className="self-stretch text-[10px] leading-[10px] tracking-[.01em] font-['Pretendard_Variable'] font-semibold text-[#fff]">갈등 해결 with '상감이결'</div>
           </div>
           <img className="absolute left-[136px] top-[124px]" width="23" height="22" src={process.env.PUBLIC_URL + "/img/별1_523.png"} alt="star" />
           <img className="absolute left-[81px] top-[22px]" width="66" height="78" src={process.env.PUBLIC_URL + "/img/3dicons1_524.png"} alt="3d icon" />
+          </a>
         </div>
 
         <div className="relative w-[175px] h-[166px] shrink-0 flex">
+        <a href='http://localhost:3000/ConflictBoard'>
           <div className="absolute left-0 top-0 w-[175px] h-[166px] flex flex-col items-start justify-end p-[20px] bg-[#ff6d00] rounded-[16px]">
             <div className="self-stretch text-[20px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-bold text-[#fff]">모욕 대처법</div>
             <div className="self-stretch text-[10px] leading-[10px] tracking-[.01em] font-['Pretendard_Variable'] font-semibold text-[#fff]">당황스러운 언행에 대처</div>
           </div>
           <img className="absolute left-[136px] top-[124px]" width="23" height="22" src={process.env.PUBLIC_URL + "/img/별1_529.png"} alt="star" />
-          <img className="absolute left-[88px] top-[22px]" width="67" height="78" src={process.env.PUBLIC_URL + "/img/3dicons1_530.png"} alt="3d icon" />
+          <img className="absolute left-[88px] top-[22px]" width="67" height="78" src={process.env.PUBLIC_URL + "/img/3dicons1_530.png"} alt="3d icon" /></a>
         </div>
 
         {/* 추가된 비판 대처법 */}
@@ -115,21 +120,13 @@ const Angry = () => {
       </div>
 
       <div className="relative w-[95%] h-[68px] shrink-0 flex flex-col items-start justify-center py-[10px] px-[20px] bg-[#f8f8f8] rounded-[16px]">
-        <div className="self-stretch text-[16px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-bold text-[#000]">갈등 대처법</div>
-        <div className="self-stretch text-[10px] leading-[10px] tracking-[.01em] font-['Pretendard_Variable'] font-semibold text-[#000]">좋은 갈등 대처법이란?</div>
+        <a href='http://localhost:3000/breath' className="w-full h-full flex flex-col items-start justify-center">
+        <div className="self-stretch text-[16px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-bold text-[#000]">숨 고르기</div>
+        <div className="self-stretch text-[10px] leading-[10px] tracking-[.01em] font-['Pretendard_Variable'] font-semibold text-[#000]">불안하고 머리 아플 때</div></a>
       </div>
 
-      <div className="relative w-[95%] h-[68px] shrink-0 flex flex-col items-start justify-center py-[10px] px-[20px] bg-[#f8f8f8] rounded-[16px]">
-        <div className="self-stretch text-[16px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-bold text-[#000]">갈등 대처법</div>
-        <div className="self-stretch text-[10px] leading-[10px] tracking-[.01em] font-['Pretendard_Variable'] font-semibold text-[#000]">좋은 갈등 대처법이란?</div>
-      </div>
-
-          <div className="w-[328px] h-[68px] shrink-0 flex flex-col items-start justify-center gap-[1px] py-[10px] px-[20px] bg-[#f8f8f8] rounded-[16px]">
-            <div className="self-stretch text-[16px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-bold text-[#000]">숨 고르기</div>
-            <div className="self-stretch text-[10px] leading-[10px] tracking-[.01em] font-['Pretendard_Variable'] font-semibold text-[#000]">불안하고 머리 아플 때</div>
-          </div>
-          <div className="relative w-[328px] h-[68px] shrink-0 flex">
-            <div className="absolute left-0 top-0 w-[328px] h-[68px] flex flex-col items-start justify-center py-[10px] px-[20px] bg-[#ffcd63] rounded-[16px]">
+          <div className="relative w-[95%] h-[68px] shrink-0 flex">
+            <div className="absolute left-0 top-0 w-[100%] h-[68px] flex flex-col items-start justify-center py-[10px] px-[20px] bg-[#ffcd63] rounded-[16px]">
               <div className="self-stretch text-[16px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-black text-[#fff]">AWAKE 분노 상담 센터</div>
               <div className="self-stretch text-[10px] leading-[10px] tracking-[.01em] font-['Pretendard_Variable'] font-semibold text-[#fff]">상담이 필요하신가요? AWAKE 불안 상담센터</div>
             </div>

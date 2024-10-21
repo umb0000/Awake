@@ -14,23 +14,34 @@ const Breath = () => {
   return (
     <div className="relative w-[100%] h-[800px] bg-[#fff] overflow-hidden">
       {/* 상단 영역 */}
-      <div className="absolute left-0 top-[57px] w-[100%] h-[646px] flex flex-col items-center justify-center py-0 px-[10px]">
-        <div className="h-[642px] flex flex-col items-center justify-start gap-[30px] p-[10px]">
+      <div className="absolute left-0 top-[57px] w-[100%] h-[auto] flex flex-col items-center justify-center py-0 px-[10px]">
+        <div className="h-[642px] flex flex-col items-center justify-start gap-[30px] p-[20px]">
 
           {/* 제목과 설명 */}
-          <div className="w-[95%] flex flex-col items-center justify-center gap-[3px]">
-            <div className="w-[100%] flex flex-row items-center justify-center p-[5px] px-[16px]">
+          <div className="w-[95%] flex flex-col items-center justify-center gap-[5px] p-[10px] ">
+            <div className="w-[100%] flex flex-row items-center justify-center px-[16px]">
               <div className="text-[24px] font-bold text-[#000]">숨 고르기</div>
             </div>
-            <div className="w-[100%] flex flex-row items-center font-['Pretendard_Variable'] justify-center py-0 px-[16px]">
+            <div className="w-[100%] flex flex-row items-center font-['Pretendard_Variable'] justify-center px-[16px]">
               <div className="text-[11px] font-light text-[#000] text-center">
-                분노로 가득 찬 마음을 잠시 진정시켜요.
+                호흡으로 마음을 진정시켜요.
               </div>
             </div>
           </div>
 
-          {/* 시간 선택 버튼 */}
-          <div className="w-[80%] h-auto flex justify-center  p-[10px] gap-[10px]">
+          
+
+          {/* clock 이미지와 시작하기 버튼 */}
+          <div style={{marginTop : '5%'}} className="w-[95%] flex flex-col items-center justify-start gap-[10px]">
+            {/* clock 이미지 */}
+            <img
+              className="w-full max-w-[340px]"
+              src={process.env.PUBLIC_URL + "/img/clock.png"} // 이미지 경로 수정
+              alt="clock"
+            />
+            
+            {/* 시간 선택 버튼 */}
+          <div style={{marginTop : '5%'}} className="w-[80%] h-auto flex justify-center  p-[10px] gap-[10px]">
             {['1분', '3분', '5분', '10분'].map((time) => (
               <button
                 key={time}
@@ -47,15 +58,6 @@ const Breath = () => {
             ))}
           </div>
 
-          {/* clock 이미지와 시작하기 버튼 */}
-          <div className="w-[95%] flex flex-col items-center justify-start gap-[10px]">
-            {/* clock 이미지 */}
-            <img
-              className="w-full max-w-[340px]"
-              src={process.env.PUBLIC_URL + "/img/clock.png"} // 이미지 경로 수정
-              alt="clock"
-            />
-            
             {/* 시작하기 버튼 */}
             <button
               style={{

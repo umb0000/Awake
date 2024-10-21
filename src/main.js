@@ -4,7 +4,7 @@ import { OrbitControls } from '@react-three/drei';
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader';
 import './output.css';
 import TodoList from './maintodo';
-import MainAdd from './MainAdd';
+import MainAdd from './mainAdd';
 
 const Model = () => {
   const modelRef = useRef();

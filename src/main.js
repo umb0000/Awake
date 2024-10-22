@@ -118,7 +118,7 @@ const Main = () => {
         </div>
 
         {/* 달성률, 날짜 표시 */}
-        <div className="rounded-t-md w-full h-full items-center justify-center gap-[5px] py-[20px] bg-[#fff] " style={{ paddingLeft: '2vh', paddingRight: '2vh', paddingBottom: '2vh' }}>
+        <div className="rounded-t-[16px] w-full h-full items-center justify-center gap-[5px] py-[20px] bg-[#fff] " style={{ paddingLeft: '2vh', paddingRight: '2vh', paddingBottom: '2vh' }}>
           <div className="relative flex-col items-start" style={{ paddingBottom: '1vh'}}>
             <div>
               <span className="w-full h-[40px] text-[24px] leading-[24px] tracking-[.01em] font-bold font-[Pretendard] text-[#000] items-start justify-center">{completionRate}% </span>

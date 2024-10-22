@@ -19,10 +19,10 @@ jobs:
       run: |
         echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
 
-    # 3. Docker 이미지 빌드 및 태그
+    # 3. Docker 이미지 빌드 및 태그 (no-cache 옵션 추가)
     - name: Build and tag Docker image
       run: |
-        docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/awake_frontend:latest .
+        docker build --no-cache -t ${{ secrets.DOCKER_HUB_USERNAME }}/awake_frontend:latest .
         docker tag ${{ secrets.DOCKER_HUB_USERNAME }}/awake_frontend:latest ${{ secrets.DOCKER_HUB_USERNAME }}/awake_frontend:latest
 
     # 4. Docker Hub로 푸시

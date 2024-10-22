@@ -81,7 +81,7 @@ const getBackgroundColor = (day, currentMonth, currentYear) => {
     <div className="w-full h-[15%] flex flex-col items-center justify-start gap-[10px] py-[9px] px-[10px] bg-[#f8f8f8] z-10">
         <div className="relative w-[95%] h-[51px] shrink-0 flex flex-col items-start justify-start py-[7px] px-0">
           <div className="absolute left-0 top-[5px] w-[308px] h-[41px] shrink-0 flex flex-row items-center justify-start gap-[11px] overflow-hidden">
-            <img width="24" height="22" src={process.env.PUBLIC_URL + "/img/Vector1_233.png"} alt="icon" />
+            
             <div className="text-[24px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-black text-black text-center whitespace-nowrap">
             {currentMonth}월
             <button onClick={handlePrevMonth} className="text-[15px] font-bold">

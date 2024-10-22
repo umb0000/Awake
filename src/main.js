@@ -10,15 +10,25 @@ import { motion, AnimatePresence } from 'framer-motion'; // framer-motion 추가
 const Model = () => {
   const modelRef = useRef();
   const fbx = useLoader(FBXLoader, process.env.PUBLIC_URL + '/img/test_cat.fbx');
+  const clockRef = useRef(0); // 애니메이션의 시간을 추적하기 위한 변수
 
   useFrame(() => {
     if (modelRef.current) {
-      modelRef.current.rotation.y += 0.002;
+      modelRef.current.rotation.y += 0.001;
+      clockRef.current += 0.02; // 시간을 지속적으로 증가시킴
+      const scale = 5 + Math.sin(clockRef.current) * 0.15; // 주기적으로 0.95 ~ 1.05 크기로 변동
+      modelRef.current.scale.set(scale, scale, scale); // 고양이 스케일 조정
     }
   });
 
   return (
-    <primitive object={fbx} ref={modelRef} castShadow receiveShadow scale={[3, 3, 3]} />
+    <primitive 
+    object={fbx} 
+    ref={modelRef}
+    position={[0, -1, 0]}
+    castShadow 
+    receiveShadow 
+    scale={[4, 4, 4]} />
   );
 };
 
@@ -32,11 +42,11 @@ const Main = () => {
   const [completedCards, setCompletedCards] = useState(0);
 
   const texts = [
-    "오 늘은 기분이 어때? ",
-    "할 일을 잊지 마! ",
-    "운 동을 해볼까? ",
-    "건 강한 하루! ",
-    "물  많이 마시자! "
+    "오늘은 기분이 어때? ",
+    "할일을 잊지 마! ",
+    "운동을 해볼까? ",
+    "건강한 하루! ",
+    "물 많이 마시자! "
   ];
 
   const changeText = () => {
@@ -74,21 +84,18 @@ const Main = () => {
   };
 
   return (
-    <div className="relative w-[100%] h-[800px] bg-[#fff] overflow-hidden">
-      <div className="relative left-0 top-0 w-[100%] flex flex-col items-center justify-start gap-[2vh]">
+    <div className="relative w-[100%] h-[800px]  bg-gradient-to-b from-white via-[#fefdfa] via-[#FFE9C9] to-[#fff] overflow-hidden">
+      <div className="relative left-0 top-0 w-[100%] flex flex-col items-center justify-start ">
         
         {/* 3D 모델 */}
-        <div className="relative self-stretch w-[100%] h-[25vh] shrink-0 flex justify-center items-center" style={{ paddingTop: '5vh', paddingBottom: '0vh' }}>
-          <Canvas className="w-full h-full" shadows>
+        <div className="relative self-stretch w-[100%] h-[25vh] shrink-0 flex justify-center items-center" style={{ paddingTop: '0vh', paddingBottom: '0vh' }}>
+        <Canvas className="w-full h-full" gl={{ alpha: true }} style={{ backgroundColor: 'transparent' }}>
             <ambientLight intensity={1} />
-            <directionalLight position={[0.5, 0.1, 0.3]} intensity={1} castShadow />
+            <directionalLight position={[0.3, 0.3, 0.3]} intensity={1}  />
             <Suspense fallback={null}>
               <Model />
             </Suspense>
-            <mesh receiveShadow rotation={[-Math.PI / 2, 0, 0]} position={[0.2, -1, 0]}>
-              <planeGeometry args={[100, 100]} />
-              <meshStandardMaterial color="#D7DE8E" />
-            </mesh>
+           
             <OrbitControls enableZoom={false} />
           </Canvas>
         </div>
@@ -111,13 +118,13 @@ const Main = () => {
         </div>
 
         {/* 달성률, 날짜 표시 */}
-        <div className="w-full items-center justify-center gap-[5px] py-[10px]" style={{ paddingLeft: '2vh', paddingRight: '2vh', paddingBottom: '2vh' }}>
-          <div className="relative flex-col items-start" style={{ paddingBottom: '2vh'}}>
+        <div className="w-full h-full items-center justify-center gap-[5px] py-[20px] bg-[#fff] rounded-t-[16px]" style={{ paddingLeft: '2vh', paddingRight: '2vh', paddingBottom: '2vh' }}>
+          <div className="relative flex-col items-start" style={{ paddingBottom: '1vh'}}>
             <div>
-              <span className="w-full h-[40px] text-[24px] leading-[24px] tracking-[.01em] font-bold text-[#000] items-start justify-center">{completionRate}% </span>
-              <span>{completedCards}/{totalCards}</span>
+              <span className="w-full h-[40px] text-[24px] leading-[24px] tracking-[.01em] font-bold font-[Pretendard] text-[#000] items-start justify-center">{completionRate}% </span>
+              <span className='font-[Pretendard] font-bold text-[13px] text-[#79747e]'>{completedCards}/{totalCards}</span>
             </div>
-            <div className="w-full h-[24px] text-[13px] leading-[24px] tracking-[.01em] font-bold font-[Pretendard_Valuable] text-[#79747e] flex flex-col justify-center">
+            <div className="w-full h-[24px] text-[13px] leading-[24px] tracking-[.01em] font-bold font-[Pretendard] text-[#79747e] flex flex-col justify-center">
               <p>{new Date().getMonth() + 1}월 {new Date().getDate()}일</p>
             </div>
             <a onClick={toggleAddDrawer} href="#">
@@ -126,7 +133,7 @@ const Main = () => {
           </div>
 
           {/* TodoList에서 달성률을 받아옴 */}
-          <div className="self-stretch h-[200px] shrink-0 flex flex-col items-start justify-start gap-[7px]">
+          <div className="self-stretch h-[600px] shrink-0 flex flex-col items-start justify-start gap-[7px]">
             <TodoList onCompletionRateChange={handleCompletionRateChange} />
           </div>
         </div>

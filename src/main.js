@@ -124,9 +124,7 @@ const Main = () => {
               <span className="w-full h-[40px] text-[24px] leading-[24px] tracking-[.01em] font-bold font-[Pretendard] text-[#000] items-start justify-center">{completionRate}% </span>
               <span className='font-[Pretendard] font-bold text-[13px] text-[#79747e]'>{completedCards}/{totalCards}</span>
             </div>
-            <div className="custom-gradient">
-          하이하이
-        </div>
+            
             <div className="w-full h-[24px] text-[13px] leading-[24px] tracking-[.01em] font-bold font-[Pretendard] text-[#79747e] flex flex-col justify-center">
               <p>{new Date().getMonth() + 1}월 {new Date().getDate()}일</p>
             </div>

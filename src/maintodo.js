@@ -90,24 +90,24 @@ const TodoList = ({ onCompletionRateChange }) => {
         {filteredCards.map(card => (
           <motion.div
             key={card.id}
-            className="relative w-[100%] h-[63px] shrink-0 flex"
+            className="relative w-[100%] h-[50px] shrink-0 flex"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             layout
             transition={{ duration: 0.5 }}
           >
-            <div className="absolute left-0 top-0 w-[100%] h-[63px] bg-[#f4f7f8] rounded-[10px]"></div>
-            <div className="absolute -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 w-[330px] h-[63px]"></div>
-            <div className="absolute -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 w-[294px] flex flex-row items-center justify-between gap-[21px]">
+            <div className="absolute left-0 top-0 w-[100%] h-[50px] bg-[#f4f7f8] rounded-[10px]"></div>
+            <div className="absolute -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 w-[330px] h-[60px]"></div>
+            <div className="absolute -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 w-[294px] flex flex-row items-center gap-[10px]">
               <img width="30" height="31" src={process.env.PUBLIC_URL + `/img/${card.image}`} alt={`level${card.level}`} />
 
               {/* 텍스트 영역 */}
-              <div className="h-[48px] flex-grow flex flex-col items-start justify-center" style={{ minWidth: '160px', maxWidth: '180px' }}>
-                <div className="w-full h-[24px] text-[16px] leading-[24px] tracking-[.01em] font-['Pretendard'] font-bold text-[#79747e] flex flex-col justify-center">
+              <div className="h-[30px] flex-grow flex flex-col items-start justify-center" style={{ minWidth: '73%', maxWidth: '180px' }}>
+                <div className="w-full text-[13px] leading-[20px] tracking-[.01em] font-['Pretendard'] font-semibold text-[#79747e] flex flex-col justify-center">
                   {card.title}
                 </div>
-                <div className="w-full text-[10px] leading-[10px] tracking-[.01em] font-['Pretendard'] font-bold text-[#79747e] flex flex-col justify-center">
+                <div className="w-full text-[10px] leading-[10px] tracking-[.01em] font-['Pretendard']  text-[#79747e] flex flex-col justify-center">
                   {card.detail}
                 </div>
               </div>

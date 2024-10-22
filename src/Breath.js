@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './output.css'; // 스타일 시트를 포함
 
 const Breath = () => {
@@ -10,6 +10,35 @@ const Breath = () => {
   const [fadeClass, setFadeClass] = useState("opacity-100"); // 페이드 효과를 위한 클래스
   const [hasInitialTextShown, setHasInitialTextShown] = useState(false); // 초기 텍스트가 표시되었는지 여부
 
+  const audioRef = useRef(null); // 오디오를 위한 참조
+
+  // 음악 파일 초기화
+  useEffect(() => {
+    audioRef.current = new Audio(process.env.PUBLIC_URL + "/audio/breath.mp3"); // 음악 파일 경로
+  }, []);
+
+  // 음악 재생 함수
+  const playAudio = () => {
+    if (audioRef.current) {
+      audioRef.current.volume = 1;
+      audioRef.current.play();
+    }
+  };
+
+  // 음악 페이드아웃 함수
+  const fadeOutAudio = () => {
+    if (audioRef.current) {
+      let fadeInterval = setInterval(() => {
+        if (audioRef.current.volume > 0.01) {
+          audioRef.current.volume -= 0.01;
+        } else {
+          clearInterval(fadeInterval);
+          audioRef.current.pause(); // 음악을 멈춤
+        }
+      }, 50); // 볼륨을 천천히 줄임
+    }
+  };
+
   // 시간 버튼 클릭 시 처리
   const handleTimeSelect = (time) => {
     setSelectedTime(time);
@@ -20,6 +49,7 @@ const Breath = () => {
   const handleStartStop = () => {
     if (isCountingDown) {
       // 멈추기 로직
+      fadeOutAudio(); // 음악 페이드아웃
       setIsCountingDown(false);
       setRemainingTime(null); // 타이머 초기화
       setCurrentText("호흡으로 마음을 진정시켜요."); // 초기 텍스트로 복귀
@@ -31,6 +61,7 @@ const Breath = () => {
       setIsCountingDown(true);
       setCurrentText("코로 숨을 깊게 들이쉬고..."); // 타이머 시작과 동시에 텍스트 변경
       setHasInitialTextShown(true); // 초기 텍스트가 표시되었음을 기록
+      playAudio(); // 음악 재생
     }
   };
 
@@ -45,6 +76,7 @@ const Breath = () => {
     } else if (remainingTime === 0) {
       setIsCountingDown(false); // 타이머가 끝나면 멈춤
       setCurrentText("코로 숨을 깊게 들이쉬고... 입으로 천천히 후~ 내쉬세요."); // 카운트다운 종료 시 텍스트 고정
+      fadeOutAudio(); // 음악 페이드아웃
     }
   }, [isCountingDown, remainingTime]);
 
@@ -54,7 +86,7 @@ const Breath = () => {
       let toggle = !hasInitialTextShown; // 초기 텍스트가 이미 표시되었는지 여부에 따라 시작을 결정
       const textInterval = setInterval(() => {
         setFadeClass("opacity-0"); // 투명도 설정 (페이드 아웃)
-        
+
         setTimeout(() => {
           if (toggle) {
             setCurrentText("코로 숨을 깊게 들이쉬고...");
@@ -79,10 +111,10 @@ const Breath = () => {
           {/* 제목과 설명 */}
           <div className="w-[95%] flex flex-col items-center justify-center gap-[5px] p-[10px] ">
             <div className="w-[100%] flex flex-row items-center justify-center px-[16px]">
-              <div className="text-[28px] font-['Pretendard_Variable'] font-bold text-[#000]">숨 고르기</div>
+              <div className="text-[28px] font-bold font-['Pretendard_Variable'] text-[#000]">숨 고르기</div>
             </div>
-            <div className="w-[100%] flex flex-row items-center font-['Pretendard_Variable'] justify-center px-[16px] transition-opacity duration-1000 ${fadeClass}}">
-              <div className="text-[14px] font-['Pretendard_Variable'] font-medium text-[#000] text-center">
+            <div className={`w-[100%] flex flex-row items-center font-['Pretendard_Variable'] justify-center px-[16px] transition-opacity duration-1000 ${fadeClass}`}>
+              <div className="text-[14px] font-medium text-[#000] text-center">
                 {currentText}
               </div>
             </div>
@@ -151,4 +183,3 @@ const Breath = () => {
 };
 
 export default Breath;
-

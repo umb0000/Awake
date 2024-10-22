@@ -33,7 +33,7 @@ const Angry = () => {
   };
 
   return (
-    <div className="relative w-[100%] h-[800px]bg-[#fff] overflow-hidden">
+    <div className="relative w-[100%] h-[800px] sbg-[#fff] overflow-hidden">
       {/* <div className="absolute left-0 top-[30px] w-[100%] h-[680px] flex flex-col items-center justify-start gap-[10px] py-[9px] px-[10px]">
         <div className="relative w-[95%] h-[51px] shrink-0 flex flex-col items-start justify-start py-[7px] px-0">
           <div className="absolute left-0 top-[5px] w-[308px] h-[41px] shrink-0 flex flex-row items-center justify-start gap-[11px] overflow-hidden">
@@ -71,13 +71,13 @@ const Angry = () => {
           <div className="self-stretch flex flex-row items-center justify-center">
             <div className="relative w-[95%] h-[166px] shrink-0 flex bg-[#6fddc6] rounded-[16px]">
               <a href='http://localhost:3000/Breath'>
-                <div className="w-[60%] h-[166px] flex flex-col items-start justify-end p-[20px] ">
+                <div className="w-[70%] h-[166px] flex flex-col items-start justify-end p-[20px] ">
                   <div className="self-stretch text-[20px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-bold text-[#fff]">호흡하기</div>
                   <div className="self-stretch text-[10px] leading-[10px] tracking-[.01em] font-['Pretendard_Variable'] font-semibold text-[#fff]">열을 내리는 호흡법으로 천천히 진정해봐요.</div>
                 </div>
               
                 </a>
-                <div className="w-[40%] h-[166px] flex items-center justify-center" style={{ marginLeft: '40px'}}>
+                <div className="w-[40%] h-[166px] flex items-center justify-center" style={{ marginLeft: '5px'}}>
                   <img className="w-[108px] h-[100px]" src={process.env.PUBLIC_URL + "/img/3dicons1_517.png"} alt="3d icon" />
                 </div>
             </div>

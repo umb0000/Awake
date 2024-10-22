@@ -29,7 +29,7 @@ root.render(
         {/* Addtodo 라우트 - 네비게이션 제외 */}
         <Route path="/addTodo" element={<Addtodo />} />
         <Route path="/AnxietyBook" element={<AnxietyBook />} />
-        <Route path="/AnxietyBook2" element={<AnxietyBook2 />} />
+        <Route path="/AnxietyBook2/:id" element={<AnxietyBook2 />} />
         <Route path="/Breath" element={<Breath />} />
         <Route path="/ConflictResolution" element={<ConflictResolution />} />
         <Route path="/ConflictBoard" element={<ConflictBoard />} />

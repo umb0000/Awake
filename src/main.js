@@ -84,12 +84,12 @@ const Main = () => {
   };
 
   return (
-    <div className="relative w-[100%] h-[800px] overflow-hidden">
+    <div className="relative w-[100%] h-[800px] custom-gradient overflow-hidden">
       <div className="relative left-0 top-0 w-[100%] flex flex-col items-center justify-start ">
         
         {/* 3D 모델 */}
         <div className="relative self-stretch w-[100%] h-[25vh] shrink-0 flex justify-center items-center" style={{ paddingTop: '0vh', paddingBottom: '0vh' }}>
-        <Canvas className="custom-gradient w-full h-full" gl={{ alpha: true }}>
+        <Canvas className="w-full h-full" gl={{ alpha: true }}>
             <ambientLight intensity={1} />
             <directionalLight position={[0.3, 0.3, 0.3]} intensity={1}  />
             <Suspense fallback={null}>
@@ -118,7 +118,7 @@ const Main = () => {
         </div>
 
         {/* 달성률, 날짜 표시 */}
-        <div className="rounded-t-lx w-full h-full items-center justify-center gap-[5px] py-[20px] bg-[#fff] " style={{ paddingLeft: '2vh', paddingRight: '2vh', paddingBottom: '2vh' }}>
+        <div className="rounded-t-md w-full h-full items-center justify-center gap-[5px] py-[20px] bg-[#fff] " style={{ paddingLeft: '2vh', paddingRight: '2vh', paddingBottom: '2vh' }}>
           <div className="relative flex-col items-start" style={{ paddingBottom: '1vh'}}>
             <div>
               <span className="w-full h-[40px] text-[24px] leading-[24px] tracking-[.01em] font-bold font-[Pretendard] text-[#000] items-start justify-center">{completionRate}% </span>

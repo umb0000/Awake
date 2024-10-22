@@ -89,7 +89,7 @@ const Main = () => {
         
         {/* 3D 모델 */}
         <div className="relative self-stretch w-[100%] h-[25vh] shrink-0 flex justify-center items-center" style={{ paddingTop: '0vh', paddingBottom: '0vh' }}>
-        <Canvas className="w-full h-full" gl={{ alpha: true }} style={{ backgroundColor: 'transparent' }}>
+        <Canvas className="w-full h-full" gl={{ alpha: true }} >
             <ambientLight intensity={1} />
             <directionalLight position={[0.3, 0.3, 0.3]} intensity={1}  />
             <Suspense fallback={null}>

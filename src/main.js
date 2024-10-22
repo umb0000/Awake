@@ -84,7 +84,7 @@ const Main = () => {
   };
 
   return (
-    <div className="relative w-[100%] h-[800px]  bg-gradient-to-b from-white via-[#fefdfa] via-[#FFE9C9] to-[#fff] overflow-hidden">
+    <div className="relative w-[100%] h-[800px] bg-gradient-to-b from-white via-[#fefdfa] via-[#FFE9C9] to-[#fff] overflow-hidden">
       <div className="relative left-0 top-0 w-[100%] flex flex-col items-center justify-start ">
         
         {/* 3D 모델 */}
@@ -118,7 +118,7 @@ const Main = () => {
         </div>
 
         {/* 달성률, 날짜 표시 */}
-        <div className="w-full h-full items-center justify-center gap-[5px] py-[20px] bg-[#fff] rounded-t-[16px]" style={{ paddingLeft: '2vh', paddingRight: '2vh', paddingBottom: '2vh' }}>
+        <div className="w-full h-full items-center justify-center rounded-t-[16px] gap-[5px] py-[20px] bg-[#fff] " style={{ paddingLeft: '2vh', paddingRight: '2vh', paddingBottom: '2vh' }}>
           <div className="relative flex-col items-start" style={{ paddingBottom: '1vh'}}>
             <div>
               <span className="w-full h-[40px] text-[24px] leading-[24px] tracking-[.01em] font-bold font-[Pretendard] text-[#000] items-start justify-center">{completionRate}% </span>

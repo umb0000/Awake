@@ -137,6 +137,9 @@ const Main = () => {
             <TodoList onCompletionRateChange={handleCompletionRateChange} />
           </div>
         </div>
+        <div className="custom-gradient">
+          하이하이
+        </div>
       </div>
 
       {/* 입력 서랍 (MainAdd) */}

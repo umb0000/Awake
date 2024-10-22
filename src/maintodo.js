@@ -60,7 +60,7 @@ const TodoList = ({ onCompletionRateChange }) => {
 
   return (
     <div className="self-stretch h-[454px] shrink-0 flex flex-col items-start justify-start gap-[7px]">
-      <div className="w-[205px] h-[27px] shrink-0 flex flex-row items-start justify-start gap-[7px]">
+      <div className="w-[205px] h-[23px] shrink-0 flex flex-row items-start justify-start gap-[7px]">
         <img
           width="51"
           height="23"
@@ -82,10 +82,10 @@ const TodoList = ({ onCompletionRateChange }) => {
           onClick={() => handleButtonClick('todo')}
           alt="Todo"
         />
-      </div>
-      <div className="flex-1 h-[27px] flex flex-row items-start justify-end">
+      </div>{/*
+      <div className="flex-1 h-[23px] flex flex-row items-start justify-end">
         <img width="64" height="23" src={process.env.PUBLIC_URL + "/img/order118_808.png"} alt="Order" />
-      </div>
+      </div>*/}
       <AnimatePresence>
         {filteredCards.map(card => (
           <motion.div
@@ -104,7 +104,7 @@ const TodoList = ({ onCompletionRateChange }) => {
 
               {/* 텍스트 영역 */}
               <div className="h-[48px] flex-grow flex flex-col items-start justify-center" style={{ minWidth: '160px', maxWidth: '180px' }}>
-                <div className="w-full h-[24px] text-[40px] leading-[24px] tracking-[.01em] font-['Pretendard'] font-bold text-[#79747e] flex flex-col justify-center">
+                <div className="w-full h-[24px] text-[16px] leading-[24px] tracking-[.01em] font-['Pretendard'] font-bold text-[#79747e] flex flex-col justify-center">
                   {card.title}
                 </div>
                 <div className="w-full text-[10px] leading-[10px] tracking-[.01em] font-['Pretendard'] font-bold text-[#79747e] flex flex-col justify-center">

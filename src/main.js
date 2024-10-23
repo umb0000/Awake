@@ -16,7 +16,7 @@ const Model = () => {
     if (modelRef.current) {
       modelRef.current.rotation.y += 0.001;
       clockRef.current += 0.02; // 시간을 지속적으로 증가시킴
-      const scale = 3 + Math.sin(clockRef.current) * 0.15; // 주기적으로 0.95 ~ 1.05 크기로 변동
+      const scale = 5 + Math.sin(clockRef.current) * 0.15; // 주기적으로 0.95 ~ 1.05 크기로 변동
       modelRef.current.scale.set(scale, scale, scale); // 고양이 스케일 조정
     }
   });
@@ -167,7 +167,16 @@ const Main = () => {
           <div className="self-stretch h-[600px] shrink-0 flex flex-col items-start justify-start gap-[7px]">
           <TodoList onCompletionRateChange={handleCompletionRateChange} onPointChange={handlePointChange} />
           </div>
-        </div>        
+
+
+        </div>  
+        {/* Add 버튼을 우측 하단에 고정 */}
+    <button
+      onClick={toggleAddDrawer}
+      className="fixed bottom-[100px] right-[20px] bg-[#ff9800] text-white p-[10px] rounded-full shadow-lg hover:bg-[#ff6d00] transition duration-200"
+    >
+      <img width="46" height="46" src={process.env.PUBLIC_URL + "/img/main_add_btn.png"} alt="Add" />
+    </button>      
       </div>
 
       {/* 입력 서랍 (MainAdd) */}          

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'; // Link 컴포넌트 가져오기
 import '../output.css';
 
 const TrashCan = () => {
@@ -80,7 +81,7 @@ const TrashCan = () => {
 
         {/* 마지막 버리기 버튼 */}
         <button
-          className="w-[260px] h-[45px] bg-[#c0e4dc] rounded-full font-['Pretendard_Variable'] font-medium  text-center text-black text-[16px] font-medium mt-11"
+          className="w-[260px] h-[45px] bg-[#c0e4dc] rounded-full font-['Pretendard_Variable'] font-medium text-center text-black text-[16px] font-medium mt-11"
           onClick={handleCleanScreenClick} // 최종 화면으로 전환하는 클릭 핸들러
         >
           버리기
@@ -142,11 +143,13 @@ const TrashCan = () => {
   return (
     <div className="relative w-full h-[800px] flex flex-col justify-start items-center pt-20">
       {/* sqmenu.png를 화면 최상단에 고정 */}
-      <img
-        className="absolute top-0 left-0 w-[15%] h-auto mt-2"
-        src={process.env.PUBLIC_URL + "/img/sqmenu.png"}
-        alt="icon"
-      />
+      <a to="http://112.152.14.116:10201/trashcan_i"> {/* sqmenu를 클릭했을 때 trashcan_inside로 이동 */} 
+        <img
+          className="absolute top-0 left-0 w-[15%] h-auto mt-2 cursor-pointer" // cursor-pointer 추가
+          src={process.env.PUBLIC_URL + "/img/sqmenu.png"}
+          alt="icon"
+        />
+      </a>
 
       {/* 나머지 컨텐츠는 sqmenu.png 아래에서 시작 */}
       <div className="relative w-full flex flex-col items-center justify-start mt-[50px]">

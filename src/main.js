@@ -16,7 +16,7 @@ const Model = () => {
     if (modelRef.current) {
       modelRef.current.rotation.y += 0.001;
       clockRef.current += 0.02; // 시간을 지속적으로 증가시킴
-      const scale = 5 + Math.sin(clockRef.current) * 0.15; // 주기적으로 0.95 ~ 1.05 크기로 변동
+      const scale = 3 + Math.sin(clockRef.current) * 0.15; // 주기적으로 0.95 ~ 1.05 크기로 변동
       modelRef.current.scale.set(scale, scale, scale); // 고양이 스케일 조정
     }
   });

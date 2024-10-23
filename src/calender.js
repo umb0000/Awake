@@ -84,7 +84,7 @@ const getBackgroundColor = (day, currentMonth, currentYear) => {
             
             <div className="text-[24px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-black text-black text-center whitespace-nowrap">
             {currentMonth}월
-            <button onClick={handlePrevMonth} className="text-[15px] font-bold">
+            <button onClick={handlePrevMonth} className="text-[15px] font-bold p-[10px]">
             &lt;
           </button>
           <button onClick={handleNextMonth} className="text-[15px] font-bold">

@@ -57,7 +57,7 @@ const Anxiety = () => {
             </div>
           </div>
           
-          <a href='http://localhost:3000/Breath' className="w-[95%] h-[68px] shrink-0 flex flex-col items-start justify-center gap-[1px] py-[10px] px-[20px] bg-[#f8f8f8] rounded-[16px] no-underline">
+          <a href='112.152.14.116:10201//Breath' className="w-[95%] h-[68px] shrink-0 flex flex-col items-start justify-center gap-[1px] py-[10px] px-[20px] bg-[#f8f8f8] rounded-[16px] no-underline">
             <div className="self-stretch text-[16px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-bold text-[#000]">
               숨 고르기
             </div>

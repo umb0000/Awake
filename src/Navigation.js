@@ -33,12 +33,12 @@ const Navigation = () => {
         </button>
         
         {/* 캘린더 버튼 */}
-        <button onClick={() => handleButtonClick('calendar', '/calendar')}>
+        <button onClick={() => handleButtonClick('calender', '/calender')}>
           <img
             width="64"
             height="64"
-            src={activeButton === 'calendar' ? process.env.PUBLIC_URL + "/img/nav_calender_clicked.png" : process.env.PUBLIC_URL + "/img/nav_calender_unclicked.png"}
-            alt="nav calendar"
+            src={activeButton === 'calender' ? process.env.PUBLIC_URL + "/img/nav_calender_clicked.png" : process.env.PUBLIC_URL + "/img/nav_calender_unclicked.png"}
+            alt="nav calender"
           />
         </button>
         

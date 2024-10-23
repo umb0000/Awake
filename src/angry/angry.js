@@ -70,7 +70,7 @@ const Angry = () => {
           <div className="self-stretch h-[1px] shrink-0 bg-[#fff]"></div>
           <div className="self-stretch flex flex-row items-center justify-center">
             <div className="relative w-[95%] h-[166px] shrink-0 flex bg-[#6fddc6] rounded-[16px]">
-              <a href='112.152.14.116:10201/Breath'>
+              <a href='http://112.152.14.116:10201/Breath'>
                 <div className="w-[70%] h-[166px] flex flex-col items-start justify-end p-[20px] ">
                   <div className="self-stretch text-[20px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-bold text-[#fff]">숨 고르기</div>
                   <div className="self-stretch text-[10px] leading-[10px] tracking-[.01em] font-['Pretendard_Variable'] font-semibold text-[#fff]">열을 내리는 호흡법으로 천천히 진정해봐요.</div>
@@ -91,7 +91,7 @@ const Angry = () => {
         onMouseUp={handleMouseUp}
         onMouseMove={handleMouseMove}>
         <div className="relative w-[175px] h-[166px] shrink-0 flex">
-        <a href='112.152.14.116:10201/ConflictResolution'>
+        <a href='http://112.152.14.116:10201/ConflictResolution'>
           <div className="absolute left-0 top-0 w-[175px] h-[166px] flex flex-col items-start justify-end p-[20px] bg-[#fe776d] rounded-[16px]">
             <div className="self-stretch text-[20px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-bold text-[#fff]">갈등 대처법</div>
             <div className="self-stretch text-[10px] leading-[10px] tracking-[.01em] font-['Pretendard_Variable'] font-semibold text-[#fff]">갈등 해결 with '상감이결'</div>
@@ -102,7 +102,7 @@ const Angry = () => {
         </div>
 
         <div className="relative w-[175px] h-[166px] shrink-0 flex">
-        <a href='112.152.14.116:10201/ConflictBoard'>
+        <a href='http://112.152.14.116:10201/ConflictBoard'>
           <div className="absolute left-0 top-0 w-[175px] h-[166px] flex flex-col items-start justify-end p-[20px] bg-[#ff6d00] rounded-[16px]">
             <div className="self-stretch text-[20px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-bold text-[#fff]">모욕 대처법</div>
             <div className="self-stretch text-[10px] leading-[10px] tracking-[.01em] font-['Pretendard_Variable'] font-semibold text-[#fff]">당황스러운 언행에 대처</div>

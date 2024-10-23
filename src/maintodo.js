@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import './output.css'
 
-const TodoList = ({ onCompletionRateChange }) => {
+const TodoList = ({ onCompletionRateChange, onPointChange }) => {
   const [cards, setCards] = useState([
-    { id: 1, level: 5, checked: false, title: "메일 확인하기", detail: "아침", image: "level3.png", type: "routine" },
-    { id: 4, level: 4, checked: false, title: "중요한 미팅 준비", detail: "저녁", image: "level2.png", type: "routine" },
-    { id: 2, level: 2, checked: false, title: "과제 확인하기", detail: "긴급🚨", image: "level2.png", type: "todo" },
-    { id: 3, level: 1, checked: false, title: "쓰레기 버리기", detail: "", image: "level1.png", type: "todo" },
-    { id: 5, level: 3, checked: false, title: "고객 응대", detail: "긴급🚨", image: "level3.png", type: "todo" }
+    { id: 1, level: 5, checked: false, title: "메일 확인하기", detail: "아침", image: "main_morning.png", type: "routine", points: 50 },
+    { id: 4, level: 4, checked: false, title: "중요한 미팅 준비", detail: "저녁", image: "main_dinner.png", type: "routine", points: 40 },
+    { id: 2, level: 2, checked: false, title: "과제 확인하기", detail: "긴급🚨", image: "level2.png", type: "todo", points: 20 },
+    { id: 3, level: 1, checked: false, title: "쓰레기 버리기", detail: "", image: "level1.png", type: "todo", points: 10 },
+    { id: 5, level: 3, checked: false, title: "고객 응대", detail: "긴급🚨", image: "level3.png", type: "todo", points: 30 }
   ]);
 
   const [activeFilter, setActiveFilter] = useState('all'); 
@@ -46,6 +47,14 @@ const TodoList = ({ onCompletionRateChange }) => {
         card.id === id ? { ...card, checked: !card.checked } : card
       );
 
+      // 체크된 카드에 따라 포인트 변경
+      const checkedCard = updatedCards.find(card => card.id === id);
+      if (checkedCard.checked) {
+        onPointChange(checkedCard.level); // 체크되면 포인트 추가
+      } else {
+        onPointChange(-checkedCard.level); // 체크 해제되면 포인트 감소
+      }
+
       const sortedCards = updatedCards.sort((a, b) => {
         if (a.checked !== b.checked) {
           return a.checked ? 1 : -1;
@@ -82,10 +91,9 @@ const TodoList = ({ onCompletionRateChange }) => {
           onClick={() => handleButtonClick('todo')}
           alt="Todo"
         />
-      </div>{/*
-      <div className="flex-1 h-[23px] flex flex-row items-start justify-end">
-        <img width="64" height="23" src={process.env.PUBLIC_URL + "/img/order118_808.png"} alt="Order" />
-      </div>*/}
+      </div>
+      
+
       <AnimatePresence>
         {filteredCards.map(card => (
           <motion.div

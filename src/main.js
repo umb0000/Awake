@@ -28,7 +28,7 @@ const Model = () => {
     position={[0, -1, 0]}
     castShadow 
     receiveShadow 
-    scale={[4, 4, 4]} />
+    scale={[3, 3, 3]} />
   );
 };
 
@@ -40,6 +40,7 @@ const Main = () => {
   const [showAddDrawer, setShowAddDrawer] = useState(false); // 입력 서랍 상태 추가
   const [totalCards, setTotalCards] = useState(0);
   const [completedCards, setCompletedCards] = useState(0);
+  const [points, setPoints] = useState(0); // 포인트 상태 추가
 
   const texts = [
     "오늘은 기분이 어때? ",
@@ -77,6 +78,10 @@ const Main = () => {
     setCompletionRate(rate);
     setTotalCards(total);
     setCompletedCards(completed);
+  };
+
+  const handlePointChange = (newPoints) => {
+    setPoints(prevPoints => prevPoints + newPoints); // 포인트 누적
   };
 
   const toggleAddDrawer = () => {
@@ -117,6 +122,31 @@ const Main = () => {
           {displayText || "클릭해서 말해보세요!"}
         </div>
 
+        {/*게이지*/}
+        <div className='flex-row items-center' style={{
+          position: 'absolute',
+          top: '20vh',
+          left:'67px',
+          width: 'auto',
+          whiteSpace: 'nowrap',
+        }}>
+
+        <div className="w-[229px] h-[31px] px-[18px] py-[5px] bg-white rounded-[30px] flex-col justify-center items-center gap-2.5 inline-flex">
+  <div className="justify-start items-center gap-[11px] inline-flex">
+    <div className="w-[21px] h-[21px] relative">
+      <div className="w-[21px] h-[21px] left-0 top-0 absolute bg-[#ff9800] rounded-full" />
+      <div className="w-[7.30px] h-[18.26px] left-[6.39px] top-[0.91px] absolute text-white text-sm font-medium font-['Roboto'] leading-tight tracking-tight">2</div>
+    </div>
+    <div className="w-[123px] h-[5px] relative bg-[#EEEFEF]">
+
+      {/*게이지 바*/}
+      <div className="w-[101px] h-[5px] left-0 top-0 absolute bg-gradient-to-r from-[#ff8300] via-[#ff9800] to-[#ffdb8f] rounded-2xl" />
+    </div>
+    <div className="text-[#ff6d00] text-sm font-medium font-['Roboto'] leading-tight tracking-tight">81.3%</div>
+  </div>
+</div>
+</div>
+
         {/* 달성률, 날짜 표시 */}
         <div className="rounded-t-[30px] w-full h-full items-center justify-center gap-[5px] py-[20px] bg-[#fff] " style={{ paddingLeft: '2vh', paddingRight: '2vh', paddingBottom: '2vh' }}>
           <div className="relative flex-col items-start" style={{ paddingBottom: '1vh'}}>
@@ -126,7 +156,7 @@ const Main = () => {
             </div>
             
             <div className="w-full h-[24px] text-[13px] leading-[24px] tracking-[.01em] font-bold font-[Pretendard] text-[#79747e] flex flex-col justify-center">
-              <p>{new Date().getMonth() + 1}월 {new Date().getDate()}일</p>
+              <p>{new Date().getMonth() + 1}월 {new Date().getDate()}일 Current Points: {points}</p> 
             </div>
             <a onClick={toggleAddDrawer} href="#">
               <img className="absolute right-0 top-[3px]" width="27" height="26" src={process.env.PUBLIC_URL + "/img/add1_206.png"} alt="add icon" />
@@ -135,15 +165,12 @@ const Main = () => {
 
           {/* TodoList에서 달성률을 받아옴 */}
           <div className="self-stretch h-[600px] shrink-0 flex flex-col items-start justify-start gap-[7px]">
-            <TodoList onCompletionRateChange={handleCompletionRateChange} />
+          <TodoList onCompletionRateChange={handleCompletionRateChange} onPointChange={handlePointChange} />
           </div>
-        </div>
-        
+        </div>        
       </div>
 
-      {/* 입력 서랍 (MainAdd) */}
-     
-          
+      {/* 입력 서랍 (MainAdd) */}          
           <AnimatePresence>
   {showAddDrawer && (
     <>

@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './output.css';
 
 const Navigation = () => {
-  const [activeButton, setActiveButton] = useState('home'); // 현재 클릭된 버튼 상태 관리
+  const [activeButton, setActiveButton] = useState('home');
+  const navigate = useNavigate(); // 리액트 라우터의 useNavigate 훅 사용
 
-  // 버튼 클릭 핸들러
-  const handleButtonClick = (buttonName) => {
-    setActiveButton(buttonName); // 클릭된 버튼을 활성화
+  const handleButtonClick = (buttonName, path) => {
+    setActiveButton(buttonName); // 클릭된 버튼 상태 업데이트
+    navigate(path); // 해당 경로로 이동
   };
 
   return (
@@ -17,40 +19,48 @@ const Navigation = () => {
         <img width="46" height="17" src={process.env.PUBLIC_URL + "/img/right_iconsI1_276.png"} alt="status icons" />
       </div>
 
-      {/* 하단 네비게이션 */}
+      {/* 하단 네비게이션 바 */}
       <div className="fixed left-0 w-[100%] bottom-[0px] h-[70px] flex flex-row items-start justify-center gap-[20px] py-0 px-[8px] bg-[#fff] border-[0px] border-solid border-[#d9d9d9] shadow-[0_1px_3px_1px_#00000026]">
-        <a href="/main" onClick={() => handleButtonClick('home')}>
+        
+        {/* 홈 버튼 */}
+        <button onClick={() => handleButtonClick('home', '/main')}>
           <img
             width="64"
             height="64"
             src={activeButton === 'home' ? process.env.PUBLIC_URL + "/img/nav_home_clicked.png" : process.env.PUBLIC_URL + "/img/nav_home_unclicked.png"}
             alt="nav home"
           />
-        </a>
-        <a href="/calendar" onClick={() => handleButtonClick('calendar')}>
+        </button>
+        
+        {/* 캘린더 버튼 */}
+        <button onClick={() => handleButtonClick('calendar', '/calendar')}>
           <img
             width="64"
             height="64"
             src={activeButton === 'calendar' ? process.env.PUBLIC_URL + "/img/nav_calander_clicked.png" : process.env.PUBLIC_URL + "/img/nav_calander_unclicked.png"}
             alt="nav calendar"
           />
-        </a>
-        <a href="/kit/anxiety" onClick={() => handleButtonClick('kit')}>
+        </button>
+        
+        {/* 키트 버튼 */}
+        <button onClick={() => handleButtonClick('kit', '/kit/anxiety')}>
           <img
             width="64"
             height="64"
             src={activeButton === 'kit' ? process.env.PUBLIC_URL + "/img/nav_kit_clicked.png" : process.env.PUBLIC_URL + "/img/nav_kit_unclicked.png"}
             alt="nav kit"
           />
-        </a>
-        <a href="/profile" onClick={() => handleButtonClick('profile')}>
+        </button>
+        
+        {/* 프로필 버튼 */}
+        <button onClick={() => handleButtonClick('profile', '/profile')}>
           <img
             width="64"
             height="64"
             src={activeButton === 'profile' ? process.env.PUBLIC_URL + "/img/nav_my_clicked.png" : process.env.PUBLIC_URL + "/img/nav_my_unclicked.png"}
             alt="nav profile"
           />
-        </a>
+        </button>
       </div>
     </div>
   );

@@ -8,6 +8,7 @@ const TrashCan = () => {
   const [currentDate, setCurrentDate] = useState(''); // 현재 날짜 저장
   const [isTextChanged, setIsTextChanged] = useState(false); // 텍스트 변경 여부 관리
   const [isReadyForNextText, setIsReadyForNextText] = useState(false); // 새로운 텍스트 표시 딜레이
+  const [isCleanScreen, setIsCleanScreen] = useState(false); // 버리기 버튼 클릭 후 상태
 
   // 페이지를 열 때 현재 날짜를 받아와서 설정하는 useEffect
   useEffect(() => {
@@ -22,6 +23,10 @@ const TrashCan = () => {
 
   const handleSecondScreenClick = () => {
     setIsSecondScreen(true); // 두 번째 화면으로 전환
+  };
+
+  const handleCleanScreenClick = () => {
+    setIsCleanScreen(true); // 버리기 버튼 클릭 후 마지막 화면 전환
   };
 
   // 텍스트 입력 시 상태 변경
@@ -41,6 +46,22 @@ const TrashCan = () => {
     }
   };
 
+  // 최종 화면 (버리기 버튼을 클릭했을 때 렌더링)
+  if (isCleanScreen) {
+    return (
+      <div className="relative w-full h-[800px] flex flex-col items-center justify-center">
+        <img
+          className="w-[60%] h-auto"
+          src="/img/3dicons_edited.png"
+          alt="정리된 상태 이미지"
+        />
+        <div className="mt-8 text-center text-black text-xl font-extrabold font-['Pretendard_Variable'] leading-tight tracking-tight">
+          당신의 마음이 정리되었습니다.
+        </div>
+      </div>
+    );
+  }
+
   // 두 번째 화면 렌더링
   if (isSecondScreen) {
     return (
@@ -58,7 +79,10 @@ const TrashCan = () => {
         </div>
 
         {/* 마지막 버리기 버튼 */}
-        <button className="w-[260px] h-[45px] bg-[#c0e4dc] rounded-full font-['Pretendard_Variable'] font-medium  text-center text-black text-[16px] font-medium mt-11">
+        <button
+          className="w-[260px] h-[45px] bg-[#c0e4dc] rounded-full font-['Pretendard_Variable'] font-medium  text-center text-black text-[16px] font-medium mt-11"
+          onClick={handleCleanScreenClick} // 최종 화면으로 전환하는 클릭 핸들러
+        >
           버리기
         </button>
       </div>

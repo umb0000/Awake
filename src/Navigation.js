@@ -37,7 +37,7 @@ const Navigation = () => {
           <img
             width="64"
             height="64"
-            src={activeButton === 'calendar' ? process.env.PUBLIC_URL + "/img/nav_calander_clicked.png" : process.env.PUBLIC_URL + "/img/nav_calander_unclicked.png"}
+            src={activeButton === 'calendar' ? process.env.PUBLIC_URL + "/img/nav_calender_clicked.png" : process.env.PUBLIC_URL + "/img/nav_calender_unclicked.png"}
             alt="nav calendar"
           />
         </button>

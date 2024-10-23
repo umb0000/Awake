@@ -40,7 +40,7 @@ const Anxiety = () => {
           <div className="self-stretch h-[1px] shrink-0 bg-[#fff]"></div>
           <div className="w-[95%] h-[166px] shrink-0 flex flex-row items-center justify-center gap-[11px]">
             <div className="relative w-[160px] h-[166px] shrink-0 flex">
-              <a href='http://localhost:3000/AnxietyBook'><div className="absolute left-0 top-0 w-[160px] h-[166px] flex flex-col items-start justify-end p-[20px] bg-[#ff9800] rounded-[16px]">
+              <a href='112.152.14.116:10201/AnxietyBook'><div className="absolute left-0 top-0 w-[160px] h-[166px] flex flex-col items-start justify-end p-[20px] bg-[#ff9800] rounded-[16px]">
                 <div className="self-stretch text-[20px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-bold text-[#fff]">불안의 책</div>
                 <div className="self-stretch text-[10px] leading-[10px] tracking-[.01em] font-['Pretendard_Variable'] font-semibold text-[#fff]">불안할 때 보세요</div>
               </div></a>

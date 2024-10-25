@@ -105,6 +105,18 @@ const Main = () => {
           </Canvas>
         </div>
 
+        <div
+          className="relative px-[10px] py-[5px] text-center text-[10px] leading-[24px]"
+          style={{
+            position: 'absolute',
+            top: '5vh',
+            left: '50%',
+            width: 'auto',
+            maxWidth: '300px',
+            whiteSpace: 'nowrap',}}>
+            LV 2. 으쌰으쌰 고양이
+          </div>
+
         {/* 대화 텍스트 */}
         {/*<div
           className="relative bg-[#f4f7f8] rounded-[16px] px-[10px] py-[5px] text-center text-[10px] leading-[24px]"

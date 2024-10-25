@@ -16,7 +16,7 @@ const Model = () => {
     if (modelRef.current) {
       modelRef.current.rotation.y += 0.001;
       clockRef.current += 0.02; // 시간을 지속적으로 증가시킴
-      const scale = 5 + Math.sin(clockRef.current) * 0.15; // 주기적으로 0.95 ~ 1.05 크기로 변동
+      const scale = 3 + Math.sin(clockRef.current) * 0.15; // 주기적으로 0.95 ~ 1.05 크기로 변동
       modelRef.current.scale.set(scale, scale, scale); // 고양이 스케일 조정
     }
   });
@@ -106,7 +106,7 @@ const Main = () => {
         </div>
 
         {/* 대화 텍스트 */}
-        <div
+        {/*<div
           className="relative bg-[#f4f7f8] rounded-[16px] px-[10px] py-[5px] text-center text-[10px] leading-[24px]"
           style={{
             position: 'absolute',
@@ -120,7 +120,7 @@ const Main = () => {
           onClick={changeText}
         >
           {displayText || "클릭해서 말해보세요!"}
-        </div>
+        </div>*/}
 
         {/*게이지*/}
         <div className='flex-row items-center' style={{

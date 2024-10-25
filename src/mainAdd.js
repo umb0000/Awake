@@ -77,7 +77,7 @@ const MainAdd = () => {
                   <div
                     key={time}
                     onClick={() => handleTimeClick(time)}
-                    className={`w-[70px] h-10 px-[12.7px] py-2 ${selectedTime === time ? 'bg-[#FFE298] text-white' : 'bg-white text-black'} rounded-[5px] border border-[#f4f7f8] justify-center items-center gap-[9px] flex`}
+                    className={`w-[70px] h-10 px-[12.7px] py-2 ${selectedTime === time ? 'border-[#ff9800] text-[#ff9800]' : 'bg-white text-black'} rounded-[5px] border border-[#f4f7f8] justify-center items-center gap-[9px] flex`}
                   >
                     <div className="w-[44.43px] h-[22.56px] text-center text-xs font-bold font-['Pretendard'] leading-7">
                       {time}
@@ -89,7 +89,7 @@ const MainAdd = () => {
               <div className="w-[290px] justify-start items-start gap-[5px] inline-flex">
                 <div
                   onClick={toggleImportant}
-                  className={`w-[142px] h-10 px-[49px] py-2 ${isImportant ? 'bg-[#FFE298] text-white' : 'bg-white text-black'} rounded-[5px] border border-[#f4f7f8] justify-center items-center gap-2.5 flex`}
+                  className={`w-[142px] h-10 px-[49px] py-2 ${isImportant ? 'border-[#ff9800] text-[#ff9800]' : 'bg-white text-black'} rounded-[5px] border border-[#f4f7f8] justify-center items-center gap-2.5 flex`}
                 >
                   <div className="w-[44.43px] h-[22.56px] text-center text-xs font-bold font-['Pretendard'] leading-7">
                     중요 🚩
@@ -97,7 +97,7 @@ const MainAdd = () => {
                 </div>
                 <div
                   onClick={toggleUrgent}
-                  className={`w-[142px] h-10 px-9 py-[9px] ${isUrgent ? 'bg-[#FFE298] text-white' : 'bg-white text-black'} rounded-[5px] border border-[#f4f7f8] justify-center items-center gap-2.5 flex`}
+                  className={`w-[142px] h-10 px-9 py-[9px] ${isUrgent ? 'border-[#ff9800] text-[#ff9800]' : 'bg-white text-black'} rounded-[5px] border border-[#f4f7f8] justify-center items-center gap-2.5 flex`}
                 >
                   <div className="w-[49px] h-[22px] text-center text-xs font-bold font-['Pretendard'] leading-7">
                     긴급 🚨

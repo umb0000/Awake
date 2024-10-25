@@ -72,43 +72,35 @@ const getBackgroundColor = (day, currentMonth, currentYear) => {
     }
     return '#FFFFFF'; // 기본 흰색 텍스트
   };
+  
 
 
   return (
     <div className='app-container'>
     <div className='content'>
     {/*<div className="relative w-full h-[800px] bg-[#f8f8f8] flex justify-center items-start">*/}
-    <div className="w-full h-[15%] flex flex-col items-center justify-start gap-[10px] py-[9px] px-[10px] bg-[#f8f8f8] z-10">
-        <div className="relative w-[95%] h-[51px] shrink-0 flex flex-col items-start justify-start py-[7px] px-0">
-          <div className="absolute left-0 top-[5px] w-[308px] h-[41px] shrink-0 flex flex-row items-center justify-start gap-[11px] overflow-hidden">
+    <div className="w-full h-[800px] flex flex-col items-center justify-start gap-[10px] py-[9px] px-[10px] bg-[#f8f8f8] z-10">
+        <div className="relative w-[95%] h-[40px] shrink-0 flex flex-col items-start justify-start  px-0">
+          <div className="absolute left-0 top-[5px] w-[100%] h-[36px] shrink-0 flex flex-row items-center justify-start gap-[11px] overflow-hidden">
+          <div className="w-[360px] h-[31px] justify-center items-center gap-[15px] inline-flex">
+          <button onClick={handlePrevMonth}>
+          <img width="9px" height="18px" src={process.env.PUBLIC_URL + "/img/left.png"} alt="status icons" />
+          </button>
+
+  <div className="text-black text-2xl font-bold font-['Pretendard'] leading-normal tracking-wide"> {currentMonth}월</div>
+  <button onClick={handleNextMonth}>
+  <img width="9px" height="18px" src={process.env.PUBLIC_URL + "/img/right.png"} alt="status icons" />
+          </button>
+</div>
+
             
-            <div className="text-[24px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-black text-black text-center whitespace-nowrap">
-            {currentMonth}월
-            <button onClick={handlePrevMonth} className="text-[15px] font-bold p-[10px]">
-            &lt;
-          </button>
-          <button onClick={handleNextMonth} className="text-[15px] font-bold">
-            &gt;
-          </button>
-            </div>
+            
+         
           </div>
-        </div>
-      <div className="calendar-container">
-        {/* 월과 좌우 버튼 */}
-        {/*<div className="flex justify-between items-center mb-4">
-          <button onClick={handlePrevMonth} className="text-[24px] font-bold">
-            &lt;
-          </button>
-          <div className="text-center text-[15px]  font-['Pretendard_Variable'] font-bold">
-            {currentYear}년 {currentMonth}월
-          </div>
-          <button onClick={handleNextMonth} className="text-[24px] font-bold">
-            &gt;
-          </button>*/}
         </div>
 
         {/* 요일 */}
-        <div className="flex justify-between w-full mb-4">
+        <div className="flex justify-between w-full">
   <div className="w-[42px] text-[10px] font-bold text-[#79747e] text-center">월</div>
   <div className="w-[42px] text-[10px] font-bold text-[#79747e] text-center">화</div>
   <div className="w-[42px] text-[10px] font-bold text-[#79747e] text-center">수</div>
@@ -135,9 +127,63 @@ const getBackgroundColor = (day, currentMonth, currentYear) => {
             >
               {day}
             </div>
+            
           ))}
+          
         </div>
+<div className="h-[160px] px-[19px] bg-white  rounded-[20px] flex-col justify-center items-center gap-5px inline-flex">
+  <span className="text-[#79747e] text-sm font-bold font-['Pretendard'] leading-normal tracking-wide">나의 11월 기록</span><span classname="text-[#79747e] text-[13px] font-bold font-['Pretendard'] leading-normal tracking-wide"> </span>
+  <div className="flex-col justify-center items-center gap-[3px] flex">
+    <div className="w-[302px] justify-between items-center inline-flex">
+      <div className="w-[71px] h-[18px] text-[#79747e] text-[10px] font-bold font-['Pretendard'] leading-normal tracking-wide">우선도 상 달성률</div>
+      <div className="w-[199px] h-[3.75px] relative">
+        <div className="w-[163.41px] h-[3.75px] left-0 top-0 absolute bg-gradient-to-r from-[#ff8300] via-[#ff9800] to-[#ffdb8f] rounded-2xl" />
       </div>
+      <div className="text-[#ff7936] text-[8px] font-normal font-['Pretendard Variable'] leading-normal tracking-wide">80%</div>
+    </div>
+    <div className="w-[302px] justify-between items-center inline-flex">
+      <div className="w-[71px] h-[18px] text-[#79747e] text-[10px] font-bold font-['Pretendard'] leading-normal tracking-wide">우선도 중 달성률</div>
+      <div className="w-[199px] h-[3.75px] relative">
+        <div className="w-[163.41px] h-[3.75px] left-0 top-0 absolute bg-gradient-to-r from-[#ff8300] via-[#ff9800] to-[#ffdb8f] rounded-2xl" />
+      </div>
+      <div className="text-[#ff7936] text-[8px] font-normal font-['Pretendard Variable'] leading-normal tracking-wide">80%</div>
+    </div>
+    <div className="w-[302px] justify-between items-center inline-flex">
+      <div className="w-[71px] h-[18px] text-[#79747e] text-[10px] font-bold font-['Pretendard'] leading-normal tracking-wide">우선도 하 달성률</div>
+      <div className="w-[199px] h-[3.75px] relative">
+        <div className="w-[163.41px] h-[3.75px] left-0 top-0 absolute bg-gradient-to-r from-[#ff8300] via-[#ff9800] to-[#ffdb8f] rounded-2xl" />
+      </div>
+      <div className="text-[#ff7936] text-[8px] font-normal font-['Pretendard Variable'] leading-normal tracking-wide">80%</div>
+    </div>
+    <div className="w-[302px] justify-between items-center inline-flex">
+      <div className="w-[71px] h-[18px] text-[#79747e] text-[10px] font-bold font-['Pretendard'] leading-normal tracking-wide">루틴 달성률</div>
+      <div className="w-[199px] h-[3.75px] relative">
+        <div className="w-[163.41px] h-[3.75px] left-0 top-0 absolute bg-gradient-to-r from-[#ff8300] via-[#ff9800] to-[#ffdb8f] rounded-2xl" />
+      </div>
+      <div className="text-[#ff7936] text-[8px] font-normal font-['Pretendard Variable'] leading-normal tracking-wide">80%</div>
+    </div>
+    <div className="w-[302px] justify-between items-center inline-flex">
+      <div className="w-[71px] h-[18px] text-[#79747e] text-[10px] font-bold font-['Pretendard'] leading-normal tracking-wide">월 평균 달성률</div>
+      <div className="w-[199px] h-[3.75px] relative">
+        <div className="w-[163.41px] h-[3.75px] left-0 top-0 absolute bg-gradient-to-r from-[#ff8300] via-[#ff9800] to-[#ffdb8f] rounded-2xl" />
+      </div>
+      <div className="text-[#ff7936] text-[8px] font-normal font-['Pretendard'] leading-normal tracking-wide">80%</div>
+    </div>
+  </div>
+</div>
+
+<div class="h-[63px] px-[19px] py-2.5 bg-white rounded-bl-[20px] rounded-[20px] flex-col justify-center items-center gap-2.5 inline-flex">
+  <div class="w-[302.91px] bg-white justify-start items-center gap-[5px] inline-flex">
+    <div class="w-[23.25px] h-[23.25px] relative">
+      <div class="w-[16.45px] h-[11.28px] left-[3.45px] top-[6.03px] absolute text-center text-[#ff6d00] text-[15px] font-bold font-['Pretendard'] leading-normal tracking-wide">S</div>
+    </div>
+    <div class="w-[147px] h-6 text-[#79747e] text-sm font-bold font-['Pretendard'] leading-normal tracking-wide">이번 달 올클리어 6회!</div>
+  </div>
+</div>
+        
+      </div>
+
+      
       </div>
     </div>
 

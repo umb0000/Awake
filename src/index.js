@@ -20,6 +20,7 @@ import ConflictBoardadd from './angry/ConflictBoardadd';
 import TrashCan from './depression/trashcan';
 import Calender from './calender';
 import TrashCan_i from './depression/trashcan_inside';
+import Move from './depression/move.js';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -37,6 +38,7 @@ root.render(
         <Route path="/ConflictBoardadd" element={<ConflictBoardadd />} />
         <Route path="/trashcan" element={<TrashCan />} />
         <Route path="/trashcan_i" element={<TrashCan_i />} />
+        <Route path="/move" element={<Move />} />
 
 
         {/* 네비게이션을 포함한 모든 다른 라우트 */}

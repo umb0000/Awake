@@ -58,8 +58,10 @@ const Depression = () => {
           </div>
 
           <div className="w-[95%] h-[68px] shrink-0 flex flex-col items-start justify-center py-[10px] px-[20px] bg-[#f8f8f8] rounded-[16px]">
+          <a href='http://112.152.14.116:10201/onion'>
             <div className="self-stretch text-[16px] leading-[24px] font-['Pretendard_Variable'] font-bold text-[#000]">양파 키우기</div>
             <div className="self-stretch text-[10px] leading-[10px] font-['Pretendard_Variable'] font-semibold text-[#000]">긍정의 말로 내 마음 속 양파 키우기</div>
+            </a>
           </div>
 
           <div className="relative w-[95%] h-[68px] shrink-0 flex flex-col items-start justify-center py-[10px] px-[20px] bg-[#f8f8f8] rounded-[16px]">

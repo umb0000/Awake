@@ -22,7 +22,7 @@ import Calender from './calender';
 import TrashCan_i from './depression/trashcan_inside';
 import Move from './depression/move.js';
 import Onion from './depression/Onion.js';
-import Insult from './angry/insultPrevent.js'
+import InsultFeedbackExample from './angry/insultPrevent.js'
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -42,7 +42,7 @@ root.render(
         <Route path="/trashcan_i" element={<TrashCan_i />} />
         <Route path="/move" element={<Move />} />
         <Route path="/onion" element={<Onion />} />
-        <Route path="/insult" element={<Insult />} />
+        <Route path="/insult" element={<InsultFeedbackExample />} />
 
 
         {/* 네비게이션을 포함한 모든 다른 라우트 */}

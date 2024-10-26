@@ -48,17 +48,20 @@ const Depression = () => {
           </div>
 
           <div className="relative w-[95%] h-[166px] shrink-0 flex">
+          <a href='http://112.152.14.116:10201/move'>
             <div className="absolute left-0 top-0 w-[100%] h-[166px] flex flex-col items-start justify-end p-[20px] bg-[#ff9800] rounded-[16px]">
               <div className="w-[177px] text-[20px] leading-[24px] font-['Pretendard_Variable'] font-bold text-[#fff]">몸 움직이기</div>
               <div className="w-[131px] text-[10px] leading-[10px] font-['Pretendard_Variable'] font-semibold text-[#fff]">가볍게 하나씩 따라해보세요.</div>
             </div>
-            <img className="absolute left-[190px] top-[4px]" width="123" height="114" src={process.env.PUBLIC_URL + "/img/3dicons1_348.png"} alt="3d icon" />
+            <img className="absolute left-[190px] top-[4px]" width="123" height="114" src={process.env.PUBLIC_URL + "/img/3dicons1_348.png"} alt="3d icon" /></a>
             <img className="absolute left-[87.22%] right-[5.98%] top-[75.3%] bottom-[11.45%]" width="23" height="22" src={process.env.PUBLIC_URL + "/img/별1_349.png"} alt="star" />
           </div>
 
           <div className="w-[95%] h-[68px] shrink-0 flex flex-col items-start justify-center py-[10px] px-[20px] bg-[#f8f8f8] rounded-[16px]">
+          <a href='http://112.152.14.116:10201/onion'>
             <div className="self-stretch text-[16px] leading-[24px] font-['Pretendard_Variable'] font-bold text-[#000]">양파 키우기</div>
             <div className="self-stretch text-[10px] leading-[10px] font-['Pretendard_Variable'] font-semibold text-[#000]">긍정의 말로 내 마음 속 양파 키우기</div>
+            </a>
           </div>
 
           <div className="relative w-[95%] h-[68px] shrink-0 flex flex-col items-start justify-center py-[10px] px-[20px] bg-[#f8f8f8] rounded-[16px]">

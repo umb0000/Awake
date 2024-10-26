@@ -113,12 +113,13 @@ const Angry = () => {
 
         {/* 추가된 비판 대처법 */}
         <div className="relative w-[175px] h-[166px] shrink-0 flex">
+        <a href='http://112.152.14.116:10201/insult'>
           <div className="absolute left-0 top-0 w-[175px] h-[166px] flex flex-col items-start justify-end p-[20px] bg-[#b269ff] rounded-[16px]">
             <div className="self-stretch text-[20px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-bold text-[#fff]">비판 대처법</div>
             <div className="self-stretch text-[10px] leading-[10px] tracking-[.01em] font-['Pretendard_Variable'] font-semibold text-[#fff]">비판 대처표</div>
           </div>
           <img className="absolute left-[88px] top-[22px]" width="67" height="78" src={process.env.PUBLIC_URL + "/img/3dicons1_535.png"} alt="3d icon" />
-          <img className="absolute left-[75.29%] right-[11.18%] top-[74.1%] bottom-[12.65%]" width="23" height="22" src={process.env.PUBLIC_URL + "/img/별1_536.png"} alt="star" />
+          <img className="absolute left-[75.29%] right-[11.18%] top-[74.1%] bottom-[12.65%]" width="23" height="22" src={process.env.PUBLIC_URL + "/img/별1_536.png"} alt="star" /></a>
         </div>
       </div>
 

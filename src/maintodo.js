@@ -4,7 +4,7 @@ import './output.css'
 
 const TodoList = ({ onCompletionRateChange, onPointChange }) => {
   const [cards, setCards] = useState([
-    { id: 1, level: 6, checked: false, title: "비타민 먹기", detail: "아침", image: "main_morning.png", type: "routine", points: 50 },
+    { id: 1, level: 7, checked: false, title: "비타민 먹기", detail: "아침", image: "main_morning.png", type: "routine", points: 50 },
     { id: 2, level: 5, checked: false, title: "책 2페이지 읽기", detail: "저녁", image: "main_dinner.png", type: "routine", points: 40 },
     { id: 6, level: 4, checked: false, title: "텀블러 한 컵 다 마시기", detail: "종일", image: "main_allday.png", type: "routine", points: 50 },
     { id: 3, level: 3, checked: false, title: "기계학습 5주차 강의 듣기", detail: "긴급🚨", image: "level3.png", type: "todo", points: 30 },

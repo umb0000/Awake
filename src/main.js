@@ -9,7 +9,7 @@ import { motion, AnimatePresence } from 'framer-motion'; // framer-motion 추가
 
 const Model = () => {
   const modelRef = useRef();
-  const fbx = useLoader(FBXLoader, process.env.PUBLIC_URL + '/img/test_cat.fbx');
+  const fbx = useLoader(FBXLoader, process.env.PUBLIC_URL + '/img/cat_ani.fbx');
   const clockRef = useRef(0); // 애니메이션의 시간을 추적하기 위한 변수
 
   useFrame(() => {

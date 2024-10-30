@@ -603,7 +603,9 @@ video {
   justify-content: center;
   color: #fff;
   font-size: 10px; /* 날짜 폰트 크기를 줄임 */
-  padding-top: 5px; /* 날짜를 약간 위로 이동 */
+  font-family:'Pretendard';
+  font-weight:300;
+  padding-top: 8px; /* 날짜를 약간 위로 이동 */
 }
 
 .empty-day {
@@ -617,7 +619,8 @@ video {
   justify-content: center;
   color: #79747E;
   font-size: 10px; /* 날짜 폰트 크기를 줄임 */
-  padding-top: 5px;
+  font-family:'Pretendard';
+  padding-top: 8px;
   background-color: #fff; 
 }
 

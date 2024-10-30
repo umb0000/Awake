@@ -5,10 +5,11 @@ import './output.css'
 const TodoList = ({ onCompletionRateChange, onPointChange }) => {
   const [cards, setCards] = useState([
     { id: 1, level: 5, checked: false, title: "메일 확인하기", detail: "아침", image: "main_morning.png", type: "routine", points: 50 },
-    { id: 4, level: 4, checked: false, title: "중요한 미팅 준비", detail: "저녁", image: "main_dinner.png", type: "routine", points: 40 },
-    { id: 2, level: 2, checked: false, title: "과제 확인하기", detail: "긴급🚨", image: "level2.png", type: "todo", points: 20 },
-    { id: 3, level: 1, checked: false, title: "쓰레기 버리기", detail: "", image: "level1.png", type: "todo", points: 10 },
-    { id: 5, level: 3, checked: false, title: "고객 응대", detail: "긴급🚨", image: "level3.png", type: "todo", points: 30 }
+    { id: 2, level: 4, checked: false, title: "책 2페이지 읽기", detail: "저녁", image: "main_dinner.png", type: "routine", points: 40 },
+    { id: 3, level: 3, checked: false, title: "기계학습 5주차 강의 듣기", detail: "긴급🚨", image: "level3.png", type: "todo", points: 30 },
+    { id: 4, level: 2, checked: false, title: "과제 확인하기", detail: "긴급🚨", image: "level2.png", type: "todo", points: 20 },
+    { id: 5, level: 1, checked: false, title: "쓰레기 버리기", detail: "", image: "level1.png", type: "todo", points: 10 }
+    
   ]);
 
   const [activeFilter, setActiveFilter] = useState('all'); 

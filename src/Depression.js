@@ -64,11 +64,6 @@ const Depression = () => {
             </a>
           </div>
 
-          <div className="relative w-[95%] h-[68px] shrink-0 flex flex-col items-start justify-center py-[10px] px-[20px] bg-[#f8f8f8] rounded-[16px]">
-            <div className="self-stretch text-[16px] leading-[24px] font-['Pretendard_Variable'] font-bold text-[#000]">혼자서도 토닥토닥</div>
-            <div className="self-stretch text-[10px] leading-[10px] font-['Pretendard_Variable'] font-semibold text-[#000]">간단한 질문을 통해 스스로를 보듬어요</div>
-          </div>
-
           <div className="relative w-[95%] h-[68px] shrink-0 flex">
             <div className="absolute left-0 top-0 w-[100%] h-[68px] flex flex-col items-start justify-center py-[10px] px-[20px] bg-[#ffcd63] rounded-[16px]">
               <div className="self-stretch text-[16px] leading-[24px] font-['Pretendard_Variable'] font-black text-[#fff]">AWAKE 우울 상담 센터</div>

@@ -6,31 +6,63 @@ import './output.css';
 import TodoList from './maintodo';
 import MainAdd from './mainAdd'; // MainAdd 컴포넌트 추가
 import { motion, AnimatePresence } from 'framer-motion'; // framer-motion 추가
+import { AnimationMixer, LoopRepeat } from 'three';
+import { useFBX } from '@react-three/drei';
 
 const Model = () => {
   const modelRef = useRef();
-  const fbx = useLoader(FBXLoader, process.env.PUBLIC_URL + '/img/cat_ani.fbx');
-  const clockRef = useRef(0); // 애니메이션의 시간을 추적하기 위한 변수
+  const clockRef = useRef(0); // 스케일 효과를 위한 시간 추적 변수
+  const fbx = useFBX(process.env.PUBLIC_URL + '/img/cat_ani.fbx');
+  const mixer = useRef(null); // 애니메이션 믹서 참조
+  const [isModelLoaded, setIsModelLoaded] = useState(false); // 모델 로드 상태
 
-  useFrame(() => {
+  useEffect(() => {
+    // 모델이 로드된 후 애니메이션 믹서 및 애니메이션 초기화
+    if (fbx && fbx.animations.length > 0) {
+      mixer.current = new AnimationMixer(fbx);
+      const action = mixer.current.clipAction(fbx.animations[0]); // 첫 번째 애니메이션 액션
+      action.setLoop(LoopRepeat, Infinity); // 무한 반복 설정
+      action.play();
+      setIsModelLoaded(true); // 모델이 로드되었음을 표시
+    }
+  }, [fbx]);
+
+  useFrame((state, delta) => {
     if (modelRef.current) {
-      modelRef.current.rotation.y += 0.001;
-      clockRef.current += 0.02; // 시간을 지속적으로 증가시킴
-      const scale = 3 + Math.sin(clockRef.current) * 0.15; // 주기적으로 0.95 ~ 1.05 크기로 변동
-      modelRef.current.scale.set(scale, scale, scale); // 고양이 스케일 조정
+      // 모델 회전
+      modelRef.current.rotation.y += 0.000;
+
+      // 스케일 애니메이션 처리
+      clockRef.current += 0.02;
+      const scale = 4 + Math.sin(clockRef.current) * 0.15;
+      modelRef.current.scale.set(scale, scale, scale);
+
+      // 모델 로드 상태가 true일 때만 애니메이션 믹서 업데이트
+      if (isModelLoaded && mixer.current) {
+        // 애니메이션 속도를 느리게 하기 위해 delta 값을 조정
+        const slowDelta = delta * 1; // 애니메이션 속도를 절반으로 줄임 (0.5배 속도)
+
+        // 믹서 업데이트
+        mixer.current.update(slowDelta);
+
+        // 애니메이션의 현재 시점을 콘솔에 출력
+        //const action = mixer.current.clipAction(fbx.animations[0]);
+        //console.log(`Current animation time: ${action.time.toFixed(2)}s`);
+      }
     }
   });
 
   return (
     <primitive 
-    object={fbx} 
-    ref={modelRef}
-    position={[0, -1, 0]}
-    castShadow 
-    receiveShadow 
-    scale={[3, 3, 3]} />
+      object={fbx} 
+      ref={modelRef}
+      position={[0, -2, 0]}
+      receiveShadow 
+      scale={[3, 3, 3]} 
+    />
   );
 };
+
 
 const Main = () => {
   const [currentText, setCurrentText] = useState('');
@@ -96,7 +128,7 @@ const Main = () => {
         <div className="relative self-stretch w-[100%] h-[25vh] shrink-0 flex justify-center items-center" style={{ paddingTop: '0vh', paddingBottom: '0vh' }}>
         <Canvas className="w-full h-full" gl={{ alpha: true }}>
             <ambientLight intensity={1} />
-            <directionalLight position={[0.3, 0.3, 0.3]} intensity={1}  />
+            <directionalLight position={[1, 0.7, 0.7]} intensity={1}  />
             <Suspense fallback={null}>
               <Model />
             </Suspense>
@@ -105,34 +137,8 @@ const Main = () => {
           </Canvas>
         </div>
 
-        <div
-          className="relative px-[10px] py-[5px] text-center text-[10px] leading-[24px]"
-          style={{
-            position: 'absolute',
-            top: '5vh',
-            left: '50%',
-            width: 'auto',
-            maxWidth: '300px',
-            whiteSpace: 'nowrap',}}>
-            LV 2. 으쌰으쌰 고양이
-          </div>
-
         {/* 대화 텍스트 */}
-        {/*<div
-          className="relative bg-[#f4f7f8] rounded-[16px] px-[10px] py-[5px] text-center text-[10px] leading-[24px]"
-          style={{
-            position: 'absolute',
-            top: '5vh',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            width: 'auto',
-            maxWidth: '300px',
-            whiteSpace: 'nowrap',
-          }}
-          onClick={changeText}
-        >
-          {displayText || "클릭해서 말해보세요!"}
-        </div>*/}
+        
 
         {/*게이지*/}
         <div className='flex-row items-center' style={{

@@ -105,7 +105,7 @@ const Angry = () => {
         <a href='http://112.152.14.116:10201/ConflictBoard'>
           <div className="absolute left-0 top-0 w-[175px] h-[166px] flex flex-col items-start justify-end p-[20px] bg-[#ff6d00] rounded-[16px]">
             <div className="self-stretch text-[20px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-bold text-[#fff]">모욕 대처법</div>
-            <div className="self-stretch text-[10px] leading-[10px] tracking-[.01em] font-['Pretendard_Variable'] font-semibold text-[#fff]">당황스러운 언행에 대처</div>
+            <div className="self-stretch text-[10px] leading-[10px] tracking-[.01em] font-['Pretendard_Variable'] font-semibold text-[#fff]">웨이의 분노 문답소</div>
           </div>
           <img className="absolute left-[136px] top-[124px]" width="23" height="22" src={process.env.PUBLIC_URL + "/img/별1_529.png"} alt="star" />
           <img className="absolute left-[88px] top-[22px]" width="67" height="78" src={process.env.PUBLIC_URL + "/img/3dicons1_530.png"} alt="3d icon" /></a>

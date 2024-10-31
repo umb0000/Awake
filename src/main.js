@@ -12,7 +12,7 @@ import { useFBX } from '@react-three/drei';
 const Model = () => {
   const modelRef = useRef();
   const clockRef = useRef(0); // 스케일 효과를 위한 시간 추적 변수
-  const fbx = useFBX(process.env.PUBLIC_URL + '/img/3d_models/cat_ani_orangewhite.fbx');
+  const fbx = useFBX(process.env.PUBLIC_URL + '/3d_models/cat_ani_orangewhite.fbx');
   const mixer = useRef(null); // 애니메이션 믹서 참조
   const [isModelLoaded, setIsModelLoaded] = useState(false); // 모델 로드 상태
 

@@ -169,7 +169,7 @@ const ConflictBoard = () => {
   const renderTimeline = () => (
     <div className="relative w-full h-[800px] bg-[#F5F3EF] overflow-y-scroll p-4 font-['Pretendard_Variable']">
       <div className="sticky top-0 z-10 bg-white py-3 shadow-md rounded-tl-[20px] rounded-tr-[20px] border-b border-[#FFAD7A]">
-        <h1 className="text-center text-xl font-bold text-[#FFAD7A]">웨이의 분노 진정소</h1>
+        <h1 className="text-center text-xl font-bold text-[#FFAD7A]">웨이의 분노 문답소</h1>
       </div>
 
       <div className="space-y-6 mt-6">

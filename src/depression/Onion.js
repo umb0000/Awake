@@ -74,8 +74,8 @@ const EncouragementPage = () => {
               <div className="w-[118px] text-center text-black text-2xl font-bold leading-tight tracking-tight">양파 키우기</div>
               <div className="w-[168px] text-center text-black text-[12px] font-medium leading-tight tracking-tight">양파 양과 함께 긍정의 말을 연습해요</div>
             </div>
-            <div className="w-[316px] h-[302px] px-[5px] py-0.5 flex-col justify-start items-center gap-2.5 flex">
-              <img className="self-stretch h-[306px]" src="/img/onion_sad.png" alt="Onion character" />
+            <div className="w-[316px] h-[auto] px-[5px] py-0.5 mt-5 flex-col justify-start items-center gap-2.5 flex">
+              <img className="w-[80%]" src="/img/onion_sad.png" alt="Onion character" />
             </div>
             <div className="w-[316px] h-11 flex-col justify-start items-center gap-2.5 flex">
               <div className="w-[262px] h-10 text-center text-black text-sm font-medium leading-tight tracking-tight">울적해 하는 양파 양에게<br />따뜻한 말 한 마디 건네주세요!</div>

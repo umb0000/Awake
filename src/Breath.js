@@ -106,12 +106,10 @@ const Breath = () => {
             </div>
           )}
 
-          <div className="w-[95%] flex flex-col items-center justify-start gap-[1px] mt-[1px]">
+          <div className="w-[95%] flex flex-col items-center justify-start gap-[10px] mt-[0.2px]">
             {isCountingDown ? (
               <>
-                <div className="text-[20px] font-bold text-[#8090FF]">
-                  {Math.floor(remainingTime / 60).toString().padStart(2, '0')} : {(remainingTime % 60).toString().padStart(2, '0')}
-                </div>
+                
                 {videoId && (
                   <YouTube
                     videoId={videoId}
@@ -119,7 +117,11 @@ const Breath = () => {
                     onEnd={(e) => e.target.stopVideo()}
                   />
                 )}
+
                 <div className={`circle ${breathPhase === 'inhale' ? 'expand' : 'shrink'}`}></div>
+                <div className="text-[20px] font-bold text-[#8090FF] mt-2 mb-2">
+                  {Math.floor(remainingTime / 60).toString().padStart(2, '0')} : {(remainingTime % 60).toString().padStart(2, '0')}
+                </div>
               </>
             ) : (
               <>
@@ -168,7 +170,7 @@ const Breath = () => {
                 backgroundColor: isStartEnabled ? '#8090FF' : '#d3d3d3',
                 color: '#FFFFFF',
               }}
-              className="w-[266px] h-[40px] flex items-center justify-center rounded-full font-['Pretendard_Variable'] font-medium"
+              className="top-[600px] w-[266px] h-[40px] flex items-center justify-center rounded-full font-['Pretendard_Variable'] font-medium"
               disabled={!isStartEnabled && !isCountingDown}
             >
               <div className="text-[11px]">{isCountingDown ? '멈추기' : '시작하기'}</div>

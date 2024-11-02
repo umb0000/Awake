@@ -120,8 +120,7 @@ const FirstScreen = ({ selectedTime, selectedCategory, onTimeSelect, onCategoryS
         <div className="w-[100%] flex flex-row items-center justify-center px-[16px]">
           <div className="text-[28px] font-bold font-['Pretendard_Variable'] text-[#000]">숨 고르기</div>
         </div>
-        <div className="text-[14px] font-medium text-[#000] text-center mt-2">{currentText}</div>
-        <div className="text-[12px] text-[#8090FF] font-medium mt-10">힐링 영상 카테고리를 선택하세요</div>
+        <div className="text-[12px] text-[#8090FF] font-medium mt-5">힐링 영상 카테고리를 선택하세요</div>
       </div>
 
       <div className="w-[95%] flex justify-center gap-[4px] my-1 mb-5">
@@ -160,7 +159,7 @@ const FirstScreen = ({ selectedTime, selectedCategory, onTimeSelect, onCategoryS
       <button
         onClick={onStart}
         style={{ backgroundColor: selectedTime ? '#8090FF' : '#d3d3d3', color: '#FFFFFF' }}
-        className="w-[266px] h-[40px] flex items-center justify-center rounded-full font-['Pretendard_Variable'] font-medium"
+        className="absolute bottom-5 w-[266px] h-[40px] flex items-center justify-center rounded-full bg-[#8090FF] text-white font-['Pretendard_Variable'] font-medium hover:bg-[#ff6b6b] transition-colors"
         disabled={!selectedTime}
       >
         <div className="h-[40px] mt-4 text-[15px]">시작하기</div>

@@ -148,23 +148,4 @@
   text-align: center; /* Centered text */
 }
 
-.remaining-time {
-  font-size: 20px;
-  color: #555; /* Slightly lighter text color */
-  margin-bottom: 20px;
-}
 
-.stop-button {
-  background-color: #ff6b6b; /* Attractive button color */
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s;
-}
-
-.stop-button:hover {
-  background-color: #ff3b3b; /* Darker shade on hover */
-}

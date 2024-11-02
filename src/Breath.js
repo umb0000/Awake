@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import YouTube from 'react-youtube';
 import './output.css';
 
@@ -24,6 +24,7 @@ const Breath = () => {
   const [videoId, setVideoId] = useState(null);
   const [breathPhase, setBreathPhase] = useState('inhale');
   const [currentText, setCurrentText] = useState("호흡으로 마음을 진정시켜요.");
+  const playerRef = useRef(null); // Ref for the YouTube player
 
   const handleTimeSelect = (time) => {
     setSelectedTime(time);
@@ -36,10 +37,9 @@ const Breath = () => {
 
   const handleStartStop = () => {
     if (isCountingDown) {
-      // 타이머와 영상만 멈추도록 remainingTime과 videoId를 null로 설정
-      setRemainingTime(null);
-      setVideoId(null); // 영상 멈추기
-      setCurrentText("호흡으로 마음을 진정시켜요.");
+      // 타이머만 멈추기
+      setIsCountingDown(false);
+      setCurrentText("호흡을 계속하세요."); // 계속하라는 텍스트로 업데이트
     } else {
       const timeInSeconds = selectedTime === '1분' ? 60 : selectedTime === '3분' ? 180 : selectedTime === '5분' ? 300 : 600;
       setRemainingTime(timeInSeconds);
@@ -49,9 +49,6 @@ const Breath = () => {
     }
   };
   
-  // SecondScreen 컴포넌트 수정 필요 없음
-  
-
   useEffect(() => {
     if (isCountingDown && remainingTime > 0) {
       const timerId = setTimeout(() => {
@@ -83,8 +80,12 @@ const Breath = () => {
       autoplay: 1,
       rel: 0,
       modestbranding: 1,
-      start: 1
+      enablejsapi: 1 // Enable JavaScript API
     }
+  };
+
+  const onPlayerReady = (event) => {
+    playerRef.current = event.target; // Store the player instance
   };
 
   return (
@@ -105,6 +106,7 @@ const Breath = () => {
           breathPhase={breathPhase}
           onStop={handleStartStop}
           currentText={currentText}
+          onPlayerReady={onPlayerReady} // Pass the function to SecondScreen
         />
       )}
     </div>
@@ -166,45 +168,43 @@ const FirstScreen = ({ selectedTime, selectedCategory, onTimeSelect, onCategoryS
     </div>
   </div>
 );
-
-// SecondScreen 컴포넌트
-const SecondScreen = ({ remainingTime, videoId, breathPhase, onStop, currentText }) => (
-  <div className="absolute left-0 top-[57px] w-[100%] h-[auto] flex flex-col items-center justify-start py-0 px-[10px] z-10">
-    <div className="h-[700px] flex flex-col items-center justify-start gap-[5px] p-[20px]">
-      <div className="flex flex-col items-center justify-start gap-[5px] mt-[40px]">
+const SecondScreen = ({ remainingTime, videoId, breathPhase, onStop, currentText, onPlayerReady }) => (
+  <div className="absolute left-0 top-[57px] w-full h-auto flex flex-col items-center justify-start py-0 px-10 z-10">
+    <div className="h-[700px] flex flex-col items-center justify-start gap-5 p-5">
+      <div className="flex flex-col items-center justify-start gap-5 mt-10">
         {videoId && (
           <YouTube
             videoId={videoId}
-            opts={{ height: '200', width: '340', playerVars: { autoplay: 1, rel: 0, modestbranding: 1, start: 1 } }}
+            opts={{
+              height: '200',
+              width: '340',
+              playerVars: { autoplay: 1, rel: 0, modestbranding: 1, enablejsapi: 1 }
+            }}
+            onReady={onPlayerReady}
           />
         )}
         <div className={`circle-container ${breathPhase}`}>
           <div className="circle circle-1"></div>
           <div className="circle circle-2"></div>
           <div className="circle circle-3"></div>
-          {/* 중앙 텍스트와 타이머 */}
           <div className="absolute w-full text-center flex flex-col items-center justify-center" style={{ whiteSpace: 'nowrap' }}>
-            <div className="text-[14px] font-medium text-[#000] mt-2">{currentText}</div>
-            
+            <div className="text-[14px] font-medium text-black mt-2">{currentText}</div>
           </div>
         </div>
-        {/* 타이머를 원의 하단에 위치하도록 조정 */}
         <div className="absolute bottom-16 text-[20px] font-bold text-[#8090FF]">
           {Math.floor(remainingTime / 60).toString().padStart(2, '0')} : {(remainingTime % 60).toString().padStart(2, '0')}
         </div>
       </div>
-      
-      {/* 버튼 위치 조정 */}
+
       <button
         onClick={onStop}
-        className="absolute bottom-5 w-[266px] h-[40px] flex items-center justify-center rounded-full bg-[#8090FF] text-white font-['Pretendard_Variable'] font-medium"
+        className="absolute bottom-5 w-[266px] h-[40px] flex items-center justify-center rounded-full bg-[#8090FF] text-white font-['Pretendard_Variable'] font-medium hover:bg-[#ff6b6b] transition-colors"
       >
         <div className="text-[15px]">멈추기</div>
       </button>
     </div>
   </div>
 );
-
 
 
 export default Breath;

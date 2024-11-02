@@ -42,12 +42,18 @@ const EncouragementPage = () => {
                     <div className="w-[316px] h-[302px] flex-col justify-start items-center gap-2.5 flex">
                       <img className="self-stretch h-[306px]" src="/img/happy_onion.png" alt="Onion character" />
                     </div>
-                    <div className="h-9 p-2.5 bg-[#237740] flex-col justify-between items-center inline-flex">
+                    <div className="p-2.5 bg-[#237740] flex-col justify-between items-center inline-flex">
                       {/* 선택된 메시지 표시 */}
-                      <div className="w-[162px] text-center text-white text-[11px] font-bold leading-tight tracking-tight">
+                      <div
+                        className="max-w-[300px] px-4 text-center text-white text-[14px] font-semibold tracking-tight break-words"
+                      >
                         {selectedMessage}
                       </div>
                     </div>
+
+
+
+
                     <div className="w-[316px] h-11 flex-col justify-start items-center gap-3 flex mt-3">
                       <div className="w-[262px] h-10 text-center text-[15px] text-black text-sm font-medium leading-tight tracking-tight">
                         당신의 위로 덕분에<br />양파 양이 기운을 되찾았어요!

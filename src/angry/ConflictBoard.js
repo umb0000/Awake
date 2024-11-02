@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import '../output.css';
 
 const ConflictBoard = () => {
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [messages, setMessages] = useState([]);
+  const textareaRef = useRef(null); // useRef로 textareaRef 정의
   const [userMessage, setUserMessage] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [userResponses, setUserResponses] = useState([]);
@@ -43,21 +44,28 @@ const ConflictBoard = () => {
   const initialMessages = [
     { 
       sender: '웨이', 
-      text: `안녕하세요, 저는 웨이입니다. 😊 \n\n오늘 조금 힘든 일이 있으신가요?\n이곳에서는 속상한 마음을 가볍게 풀어내고, 스스로를 다독이는 과정을 함께할 수 있어요.\n\n편안하게 답변해 주세요.` 
+      text: `안녕하세요, 저는 웨이입니다. 🐱\n\n오늘 속상한 일이 있으셨나요?\n\n저와 함께 천천히 이야기 나누며\n마음을 정리해보는 건 어때요? 💭`
+    },
+    {
+      sender: '웨이',
+      text: `제가 차근차근 도와드릴게요. 🕊️\n\n질문은 총 3개로 구성되어 있고,\n마지막 답변 후엔 전체 내용을 요약해 보여드릴게요. 📝`
+    },
+    {
+      sender: '웨이',
+      text: `정리된 내용을 보시고,\n스스로에게 위로의 말을\n건네보는 시간을 가져보세요. 💬`
+    },
+    { 
+      isSeparator: true // 구분선 표시 여부
     },
     { 
       sender: '웨이', 
-      text: `제가 차분히 도와드릴게요.\n\n답변은 자동으로 저장되니, 걱정 마시고 편하게 말씀해 주세요. 📝` 
-    },
-    { 
-      sender: '웨이', 
-      text: `첫 번째 질문입니다. 🌱\n\n최근에 가장 속상했던 말은 무엇인가요?` 
-    },
+      text: `첫 번째 질문입니다. 🌱\n\n오늘 가장 속상했던 말은\n무엇인가요? 🤔`
+    }
   ];
 
   const questions = [
-    "두 번째 질문입니다.\n\n그 말이 왜 속상했는지 말씀해 주실래요?🥺",
-    "마지막 질문입니다.\n\n상대가 그런 말을 한 이유가 무엇일까요?",
+    "두 번째 질문입니다.\n\n그 말이 왜 속상했는지\n말씀해 주실래요? 🥺",
+    "마지막 질문입니다.\n\n상대가 그런 말을 한\n이유가 무엇일까요?",
   ];
 
   const getRandomImages = () => {
@@ -76,7 +84,7 @@ const ConflictBoard = () => {
       initialMessages.forEach((message, index) => {
         setTimeout(() => {
           setMessages((prev) => [...prev, message]);
-        }, index * 1500);
+        }, index * 3000);
       });
     }
   }, [isChatOpen]);
@@ -89,7 +97,7 @@ const ConflictBoard = () => {
               `▪️ 속상하게 한 말: "${userResponses[0] || ''}\n"` +
               `▪️ 상처가 된 이유: ${userResponses[1] || ''}\n` +
               `▪️ 상대방의 의도: ${userResponses[2] || ''}\n\n` +
-              "\n🤔이 내용을 토대로, 자신에게 어떤 위로의 말을 건네고 싶으신가요? 💬",
+              "이 내용을 바탕으로, 자신에게 위로의 말을 건네보세요. 💬",
       };
       setMessages((prev) => [...prev, summaryMessage]);
     }
@@ -100,6 +108,7 @@ const ConflictBoard = () => {
       setMessages((prev) => [...prev, { sender: '사용자', text: userMessage }]);
       setUserResponses((prev) => [...prev, userMessage]); 
       setUserMessage('');
+      resetTextareaHeight(); // 높이 초기화
       setIsTyping(true);
 
       setTimeout(() => {
@@ -124,6 +133,49 @@ const ConflictBoard = () => {
     return null;
   };
 
+  // WayMessage 컴포넌트
+const WayMessage = ({ text }) => (
+  <div className="flex items-start">
+    <div className="w-12 h-12 rounded-full bg-[#FFAD7A] flex items-center justify-center shadow-md">
+      <img
+        className="w-10 h-10 rounded-full"
+        src="/img/cat_way_crop2.png"
+        alt="웨이"
+      />
+    </div>
+    <div
+      className="p-4 rounded-lg bg-gray-200 shadow-md ml-2"
+      style={{
+        display: 'inline-block',       // 텍스트에 따라 너비가 조정되도록 설정
+        maxWidth: '75%',               // 최대 너비를 75%로 제한
+        whiteSpace: 'pre-wrap',        // \n 줄바꿈을 적용하며 단어가 자연스럽게 줄바꿈되도록 설정
+        hyphens: 'auto',               // 단어가 부드럽게 줄바꿈될 수 있도록 설정
+        overflowWrap: 'break-word',    // 긴 단어나 URL 등이 자연스럽게 줄바꿈되도록 설정
+      }}
+    >
+      <p className="text-sm">{text}</p>
+    </div>
+  </div>
+);
+
+// UserMessage 컴포넌트
+const UserMessage = ({ text }) => (
+  <div className="flex justify-end">
+    <div
+      className="p-4 rounded-lg bg-blue-500 text-white shadow-md ml-2"
+      style={{
+        display: 'inline-block',
+        maxWidth: '75%',
+        wordBreak: 'break-word',
+        whiteSpace: 'pre-wrap',
+        hyphens: 'auto',
+      }}
+    >
+      <p className="text-sm">{text}</p>
+    </div>
+  </div>
+);
+
   const handleFinalMessage = () => {
     setFinalMessage(userMessage);
     setMessages((prev) => [...prev, { sender: '사용자', text: userMessage }]);
@@ -133,11 +185,12 @@ const ConflictBoard = () => {
     setTimeout(() => {
       setMessages((prev) => [
         ...prev, 
-        { sender: '웨이', text: "이제 감정을 표현할 수 있는 사진과 이모티콘을 선택해 주세요. 이렇게 기록하면 나중에 돌아보면서 스스로를 다독이는 데 도움이 될 거예요. 🌄" }
+        { sender: '웨이',  text: `멋진 답변이에요. 자신을 다독이는 말이 큰 힘이 될 거예요. 😊\n\n` +
+          `이제 감정을 표현할 수 있는 사진과 이모티콘을 선택해 주세요.\n이 기록을 저장할게요, 나중에 돌아보며 스스로를 다독이는 데 도움이 될 거예요.` }
       ]);
       setIsTyping(false);
       setImageChoices(getRandomImages());
-      setShowImageAndMoodOptions(true); // 사진과 이모지 선택 화면 표시
+      setShowImageAndMoodOptions(true);
     }, 2000);
   };
 
@@ -157,7 +210,7 @@ const ConflictBoard = () => {
     setSelectedImage(image); 
     setSelectedMood(moodIcon);
     setShowSavePopup(true); 
-    setShowImageAndMoodOptions(false); // 사진과 이모지 선택 화면 닫기
+    setShowImageAndMoodOptions(false);
   };
 
   const handleReturnToMain = () => {
@@ -166,10 +219,17 @@ const ConflictBoard = () => {
     setFinalMessage('');
   };
 
+  const resetTextareaHeight = () => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = 'auto';
+    }
+  };
+  
+
   const renderTimeline = () => (
     <div className="relative w-full h-[800px] bg-[#F5F3EF] overflow-y-scroll p-4 font-['Pretendard_Variable']">
       <div className="sticky top-0 z-10 bg-white py-3 shadow-md rounded-tl-[20px] rounded-tr-[20px] border-b border-[#FFAD7A]">
-        <h1 className="text-center text-xl font-bold text-[#FFAD7A]">웨이의 분노 문답소</h1>
+        <h1 className="text-center text-xl font-bold text-[#FFAD7A]">웨이의 분노 진정소</h1>
       </div>
 
       <div className="space-y-6 mt-6">
@@ -203,7 +263,11 @@ const ConflictBoard = () => {
         onClick={() => setIsChatOpen(true)}
         className="fixed bottom-[20px] right-[20px] bg-[#FFAD7A] text-white p-4 rounded-full shadow-lg hover:bg-[#E5946D] transition duration-200"
       >
-        ✒️
+        <img 
+          src="/img/pen_icon.png" 
+          alt="펜" 
+          className="w-[22px] h-[24px] rounded-lg"
+        />
       </button>
     </div>
   );
@@ -216,33 +280,23 @@ const ConflictBoard = () => {
       </div>
   
       <div className="flex-1 overflow-y-auto p-6 space-y-4 bg-gray-50">
-        {messages.map((msg, idx) => (
-          msg && msg.sender && msg.text ? (
-            <div key={idx} className={`flex ${msg.sender === '웨이' ? 'items-start' : 'justify-end'}`}>
-              {msg.sender === '웨이' && (
-                <div className="w-12 h-12 rounded-full bg-[#FFAD7A] flex items-center justify-center shadow-md">
-                  <img 
-                    className="w-10 h-10 rounded-full" 
-                    src="/img/cat_way_crop2.png" 
-                    alt="웨이" 
-                  />
-                </div>
-              )}
-              <div 
-                className={`p-4 rounded-lg ${msg.sender === '웨이' ? 'bg-gray-200' : 'bg-blue-500 text-white'} max-w-[75%] shadow-md ml-2 whitespace-pre-line`}
-                style={{ wordBreak: 'keep-all', hyphens: 'auto' }}
-              >
-                <p className="text-sm">{msg.text}</p>
-              </div>
+        {messages.map((msg, idx) =>
+          msg.isSeparator ? (
+            <div key={idx} className="flex items-center justify-center my-4">
+              <div className="border-t border-gray-300 w-full mx-4"></div>
             </div>
-          ) : null
-        ))}
+          ) : msg.sender === '웨이' ? (
+            <WayMessage key={idx} text={msg.text} />
+          ) : (
+            <UserMessage key={idx} text={msg.text} />
+          )
+        )}
   
         {isTyping && (
-          <div className="flex items-center space-x-1 mt-2">
-            <div className="w-2 h-2 bg-gray-400 rounded-full animate-ping"></div>
-            <div className="w-2 h-2 bg-gray-400 rounded-full animate-ping"></div>
-            <div className="w-2 h-2 bg-gray-400 rounded-full animate-ping"></div>
+          <div className="typing-indicator flex items-center justify-start bg-gray-200 px-3 py-2 rounded-lg max-w-[75%] shadow-md ml-2">
+            <div className="dot bg-gray-500 rounded-full w-2 h-2 mx-1 animate-bounce"></div>
+            <div className="dot bg-gray-500 rounded-full w-2 h-2 mx-1 animate-bounce delay-75"></div>
+            <div className="dot bg-gray-500 rounded-full w-2 h-2 mx-1 animate-bounce delay-150"></div>
           </div>
         )}
 
@@ -278,7 +332,8 @@ const ConflictBoard = () => {
       </div>
   
       <div className="flex items-center px-4 py-3 bg-white border-t border-gray-200">
-        <textarea
+      <textarea
+          ref={textareaRef}
           rows={1}
           onInput={(e) => {
             e.target.style.height = 'auto';
@@ -290,9 +345,14 @@ const ConflictBoard = () => {
           onChange={(e) => setUserMessage(e.target.value)}
           style={{ maxHeight: '80px' }}
         />
-        <button onClick={currentQuestionIndex === 3 ? handleFinalMessage : handleSendMessage} className="ml-2 text-blue-500 text-2xl">
-          ➡️
+
+        <button 
+          onClick={currentQuestionIndex === 3 ? handleFinalMessage : handleSendMessage} 
+          className="ml-2 px-4 py-2 bg-[#FFAD7A] text-white font-semibold rounded-[11px] hover:bg-[#E5946D] transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FFAD7A]"
+        >
+          보내기
         </button>
+
       </div>
   
       {showSavePopup && (
@@ -305,7 +365,6 @@ const ConflictBoard = () => {
       )}
     </div>
   );
-  
 
   return isChatOpen ? renderChat() : renderTimeline();
 };

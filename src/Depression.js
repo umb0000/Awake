@@ -57,12 +57,11 @@ const Depression = () => {
             <img className="absolute left-[87.22%] right-[5.98%] top-[75.3%] bottom-[11.45%]" width="23" height="22" src={process.env.PUBLIC_URL + "/img/별1_349.png"} alt="star" />
           </div>
 
+          <a className="w-[95%] h-[68px] shrink-0 flex " href='http://112.152.14.116:10201/onion'>
           <div className="w-[95%] h-[68px] shrink-0 flex flex-col items-start justify-center py-[10px] px-[20px] bg-[#f8f8f8] rounded-[16px]">
-          <a href='http://112.152.14.116:10201/onion'>
             <div className="self-stretch text-[16px] leading-[24px] font-['Pretendard_Variable'] font-bold text-[#000]">양파 키우기</div>
             <div className="self-stretch text-[10px] leading-[10px] font-['Pretendard_Variable'] font-semibold text-[#000]">긍정의 말로 내 마음 속 양파 키우기</div>
-            </a>
-          </div>
+          </div></a>
 
           <div className="relative w-[95%] h-[68px] shrink-0 flex">
             <div className="absolute left-0 top-0 w-[100%] h-[68px] flex flex-col items-start justify-center py-[10px] px-[20px] bg-[#ffcd63] rounded-[16px]">

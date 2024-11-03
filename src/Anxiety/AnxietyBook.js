@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom';
+import '../output.css';
+
 
 const AnxietyBook = () => {
   return (

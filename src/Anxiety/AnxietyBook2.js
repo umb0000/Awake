@@ -1,5 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
+import '../output.css';
+
 
 const AnxietyBook2 = () => {
   const { id } = useParams();

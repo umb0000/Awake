@@ -5,11 +5,7 @@ const Forest = () => {
   return (
 
     <div className="w-[360px] h-[800px] relative bg-white">
-    <div className="w-[321px] h-[893px] pb-[857px] left-[19px] top-[826px] absolute bg-[#f7f2fa] rounded-tl-[28px] rounded-tr-[28px] flex-col justify-start items-center inline-flex">
-        <div className="self-stretch h-9 p-4 flex-col justify-start items-center gap-3 inline-flex">
-            <div className="w-8 h-1 bg-[#79747e] rounded-[100px]" />
-        </div>
-    </div>
+
     <div className="w-[360px] h-[680px] px-2.5 py-[9px] left-0 top-[30px] absolute flex-col justify-start items-center gap-2.5 inline-flex">
         <div className="w-[328px] h-[51px] py-[7px] flex-col justify-start items-start flex">
             <div className="w-[308px] h-[41px] justify-start items-center gap-[11px] inline-flex">
@@ -18,33 +14,41 @@ const Forest = () => {
         </div>
         <div className="h-[523px] bg-white flex-col justify-start items-center gap-2 flex">
             <div className="self-stretch h-px bg-white" />
+            <a className="w-[100%] h-[auto] shrink-0 flex " href='http://112.152.14.116:10201/kit/anxiety'>
+  
             <div className="self-stretch justify-center items-center gap-[11px] inline-flex">
                 <div className="w-[338.50px] h-[166px] relative">
                     <div className="w-[338.50px] h-[166px] p-5 left-0 top-0 absolute bg-[#ffba7e] rounded-2xl flex-col justify-end items-start inline-flex">
                         <div className="w-[177px] h-[47px] text-white text-[32px] font-bold font-['Pretendard'] leading-normal tracking-wide">불안</div>
                         <div className="self-stretch text-white text-base font-semibold font-['Pretendard'] leading-[10px] tracking-wide">불안하고 초조한 마음을 치유해요</div>
                     </div>
-                    <img className="w-[60px] h-[99px] left-[258.25px] top-[18px] absolute" src="https://via.placeholder.com/60x99" />
+                    <img className="w-[60px] h-[99px] left-[258.25px] top-[18px] absolute" src="/img/anxiety.png" />
                 </div>
             </div>
+            </a>
+            <a className="w-[100%] h-[auto] shrink-0 flex " href='http://112.152.14.116:10201/kit/angry'>
             <div className="self-stretch justify-center items-center gap-[11px] inline-flex">
                 <div className="w-[338.50px] h-[166px] relative">
                     <div className="w-[338.50px] h-[166px] p-5 left-0 top-0 absolute bg-[#ff5d5d] rounded-2xl flex-col justify-end items-start inline-flex">
                         <div className="w-[177px] h-[49px] text-white text-[32px] font-bold font-['Pretendard'] leading-normal tracking-wide">분노</div>
                         <div className="self-stretch text-white text-base font-semibold font-['Pretendard'] leading-[10px] tracking-wide">분노한 마음을 서서히 가라앉혀요</div>
                     </div>
-                    <img className="w-[74.93px] h-[95px] left-[248.32px] top-[17px] absolute" src="https://via.placeholder.com/75x95" />
+                    <img className="w-[74.93px] h-[95px] left-[248.32px] top-[17px] absolute" src="/img/angry.png" />
                 </div>
             </div>
+            </a>
+            <a className="w-[100%] h-[auto] shrink-0 flex " href='http://112.152.14.116:10201/kit/depression'>
             <div className="self-stretch justify-center items-center gap-[11px] inline-flex">
                 <div className="w-[338.50px] h-[166px] relative">
                     <div className="w-[338.50px] h-[166px] p-5 left-0 top-0 absolute bg-[#6891e8] rounded-2xl flex-col justify-end items-start inline-flex">
                         <div className="w-[177px] h-[47px] text-white text-[32px] font-bold font-['Pretendard'] leading-normal tracking-wide">우울</div>
                         <div className="self-stretch text-white text-base font-semibold font-['Pretendard'] leading-[10px] tracking-wide">우울한 마음을 보듬어요</div>
                     </div>
-                    <img className="w-[92.34px] h-[86px] left-[237.91px] top-[17px] absolute" src="https://via.placeholder.com/92x86" />
+                    <img className="w-[92.34px] h-[86px] left-[237.91px] top-[17px] absolute" src="/img/depression.png" />
                 </div>
             </div>
+            </a>
+
         </div>
         <div className="w-[340px] h-[72px] px-5 py-2.5 bg-[#ffcc63] rounded-2xl flex-col justify-center items-start flex">
             <div className="self-stretch h-[33px] text-white text-xl font-black font-['Pretendard'] leading-normal tracking-wide">AWAKE 상담 센터</div>

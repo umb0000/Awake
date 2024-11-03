@@ -25,7 +25,6 @@ import Onion from './depression/Onion.js';
 import InsultFeedbackExample from './angry/insultPrevent.js'
 import Forest from './forest/forest.js'
 
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
@@ -44,7 +43,7 @@ root.render(
         <Route path="/move" element={<Move />} />
         <Route path="/onion" element={<Onion />} />
         <Route path="/insult" element={<InsultFeedbackExample />} />
-        <Route path="/forest" element={<Forest />} />
+        <Route path="/forest" element={<Forest/>} />
 
 
         {/* 네비게이션을 포함한 모든 다른 라우트 */}

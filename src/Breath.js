@@ -37,24 +37,33 @@ const Breath = () => {
 
   const handleStartStop = () => {
     if (isCountingDown) {
-      // 타이머만 멈추기
       setIsCountingDown(false);
-      setCurrentText("호흡을 계속하세요."); // 계속하라는 텍스트로 업데이트
+      setCurrentText("코로 숨을 깊게 들이쉬고..."); // 계속하라는 텍스트로 업데이트
     } else {
       const timeInSeconds = selectedTime === '1분' ? 60 : selectedTime === '3분' ? 180 : selectedTime === '5분' ? 300 : 600;
       setRemainingTime(timeInSeconds);
       setIsCountingDown(true);
-      setCurrentText("코로 숨을 깊게 들이쉬고...");
+      setCurrentText("입으로 후~ 내쉬세요...");
       setBreathPhase('inhale');
     }
   };
-  
+
   useEffect(() => {
     if (isCountingDown && remainingTime > 0) {
       const timerId = setTimeout(() => {
         setRemainingTime((prevTime) => prevTime - 1);
       }, 1000);
 
+      return () => clearTimeout(timerId);
+    } else if (remainingTime === 0) {
+      setIsCountingDown(false);
+      setCurrentText("호흡 완료");
+      setBreathPhase('inhale');
+    }
+  }, [isCountingDown, remainingTime]);
+
+  useEffect(() => {
+    if (isCountingDown) {
       const breathInterval = setInterval(() => {
         setBreathPhase((prev) => (prev === 'inhale' ? 'exhale' : 'inhale'));
         setCurrentText((prev) =>
@@ -62,16 +71,9 @@ const Breath = () => {
         );
       }, 5000);
 
-      return () => {
-        clearTimeout(timerId);
-        clearInterval(breathInterval);
-      };
-    } else if (remainingTime === 0) {
-      setIsCountingDown(false);
-      setCurrentText("호흡 완료");
-      setBreathPhase('inhale');
+      return () => clearInterval(breathInterval);
     }
-  }, [isCountingDown, remainingTime]);
+  }, [isCountingDown]);
 
   const playerOptions = {
     height: '200',
@@ -167,6 +169,7 @@ const FirstScreen = ({ selectedTime, selectedCategory, onTimeSelect, onCategoryS
     </div>
   </div>
 );
+
 const SecondScreen = ({ remainingTime, videoId, breathPhase, onStop, currentText, onPlayerReady }) => (
   <div className="absolute left-0 top-[57px] w-full h-auto flex flex-col items-center justify-start py-0 px-10 z-10">
     <div className="h-[700px] flex flex-col items-center justify-start gap-5 p-5">
@@ -204,6 +207,5 @@ const SecondScreen = ({ remainingTime, videoId, breathPhase, onStop, currentText
     </div>
   </div>
 );
-
 
 export default Breath;

@@ -51,43 +51,7 @@ const Forest = () => {
             <div className="self-stretch text-white text-[15px] font-semibold font-['Pretendard'] leading-[10px] tracking-wide">도움이 필요하신가요? AWAKE 상담센터</div>
         </div>
     </div>
-    <div className="w-[360px] h-[45px] px-6 py-2.5 left-0 top-0 absolute justify-between items-end inline-flex">
-        <div className="text-[#1d1b20] text-sm font-medium font-['Roboto'] leading-tight tracking-tight">9:30</div>
-        <div className="w-[46px] h-[17px] relative">
-            <div className="w-[17px] h-[17px] left-0 top-0 absolute">
-                <div className="w-[17px] h-[17px] left-0 top-0 absolute" />
-            </div>
-            <div className="w-[17px] h-[17px] left-[16px] top-0 absolute">
-            </div>
-            <div className="w-2 h-[15px] left-[38px] top-[1px] absolute" />
-        </div>
-    </div>
-    <div className="w-[360px] px-2 left-0 top-[724px] absolute bg-white shadow border border-[#d9d9d9] justify-start items-start gap-2 inline-flex">
-        <div className="grow shrink basis-0 pt-3 pb-4 flex-col justify-center items-center gap-1 inline-flex">
-            <div className="rounded-2xl flex-col justify-center items-center flex">
-                <div className="w-16 h-8 px-5 py-1 justify-center items-center inline-flex" />
-            </div>
-            <div className="self-stretch text-center text-[#1d1b20] text-xs font-semibold font-['Pretendard'] leading-none tracking-wide">홈</div>
-        </div>
-        <div className="grow shrink basis-0 pt-3 pb-4 flex-col justify-center items-center gap-1 inline-flex">
-            <div className="w-8 rounded-2xl justify-center items-center inline-flex">
-                <div className="w-16 h-8 px-5 py-1 justify-center items-center gap-2.5 flex" />
-            </div>
-            <div className="self-stretch text-center text-[#49454f] text-xs font-medium font-['Pretendard'] leading-none tracking-wide">일정</div>
-        </div>
-        <div className="grow shrink basis-0 h-20 pt-3 pb-4 flex-col justify-center items-center gap-1 inline-flex">
-            <div className="w-16 h-8 bg-[#eeeeee] rounded-2xl justify-center items-center inline-flex" />
-            <div className="self-stretch text-center text-[#49454f] text-xs font-medium font-['Pretendard'] leading-none tracking-wide">마음숲</div>
-        </div>
-        <div className="grow shrink basis-0 pt-3 pb-4 flex-col justify-center items-center gap-1 inline-flex">
-            <div className="w-8 rounded-2xl justify-center items-center inline-flex">
-                <div className="w-16 h-8 px-5 py-1 justify-center items-center gap-2.5 flex">
-                    <div className="w-7 h-7 relative" />
-                </div>
-            </div>
-            <div className="self-stretch text-center text-[#49454f] text-xs font-medium font-['Roboto'] leading-none tracking-wide">MY</div>
-        </div>
-    </div>
+
     <div className="w-[123.84px] left-[223px] top-[669.36px] absolute origin-top-left rotate-[-17.07deg] opacity-30 text-white text-[50px] font-black font-['Pretendard'] leading-normal tracking-wide">AWA</div>
 </div>
 

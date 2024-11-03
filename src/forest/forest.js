@@ -1,0 +1,97 @@
+import React from 'react';
+import './output.css';
+
+const Forest = () => {
+  return (
+
+    <div className="w-[360px] h-[800px] relative bg-white">
+    <div className="w-[321px] h-[893px] pb-[857px] left-[19px] top-[826px] absolute bg-[#f7f2fa] rounded-tl-[28px] rounded-tr-[28px] flex-col justify-start items-center inline-flex">
+        <div className="self-stretch h-9 p-4 flex-col justify-start items-center gap-3 inline-flex">
+            <div className="w-8 h-1 bg-[#79747e] rounded-[100px]" />
+        </div>
+    </div>
+    <div className="w-[360px] h-[680px] px-2.5 py-[9px] left-0 top-[30px] absolute flex-col justify-start items-center gap-2.5 inline-flex">
+        <div className="w-[328px] h-[51px] py-[7px] flex-col justify-start items-start flex">
+            <div className="w-[308px] h-[41px] justify-start items-center gap-[11px] inline-flex">
+                <div className="text-center text-[#237740] text-2xl font-black font-['Pretendard'] leading-normal tracking-wide">마음숲</div>
+            </div>
+        </div>
+        <div className="h-[523px] bg-white flex-col justify-start items-center gap-2 flex">
+            <div className="self-stretch h-px bg-white" />
+            <div className="self-stretch justify-center items-center gap-[11px] inline-flex">
+                <div className="w-[338.50px] h-[166px] relative">
+                    <div className="w-[338.50px] h-[166px] p-5 left-0 top-0 absolute bg-[#ffba7e] rounded-2xl flex-col justify-end items-start inline-flex">
+                        <div className="w-[177px] h-[47px] text-white text-[32px] font-bold font-['Pretendard'] leading-normal tracking-wide">불안</div>
+                        <div className="self-stretch text-white text-base font-semibold font-['Pretendard'] leading-[10px] tracking-wide">불안하고 초조한 마음을 치유해요</div>
+                    </div>
+                    <img className="w-[60px] h-[99px] left-[258.25px] top-[18px] absolute" src="https://via.placeholder.com/60x99" />
+                </div>
+            </div>
+            <div className="self-stretch justify-center items-center gap-[11px] inline-flex">
+                <div className="w-[338.50px] h-[166px] relative">
+                    <div className="w-[338.50px] h-[166px] p-5 left-0 top-0 absolute bg-[#ff5d5d] rounded-2xl flex-col justify-end items-start inline-flex">
+                        <div className="w-[177px] h-[49px] text-white text-[32px] font-bold font-['Pretendard'] leading-normal tracking-wide">분노</div>
+                        <div className="self-stretch text-white text-base font-semibold font-['Pretendard'] leading-[10px] tracking-wide">분노한 마음을 서서히 가라앉혀요</div>
+                    </div>
+                    <img className="w-[74.93px] h-[95px] left-[248.32px] top-[17px] absolute" src="https://via.placeholder.com/75x95" />
+                </div>
+            </div>
+            <div className="self-stretch justify-center items-center gap-[11px] inline-flex">
+                <div className="w-[338.50px] h-[166px] relative">
+                    <div className="w-[338.50px] h-[166px] p-5 left-0 top-0 absolute bg-[#6891e8] rounded-2xl flex-col justify-end items-start inline-flex">
+                        <div className="w-[177px] h-[47px] text-white text-[32px] font-bold font-['Pretendard'] leading-normal tracking-wide">우울</div>
+                        <div className="self-stretch text-white text-base font-semibold font-['Pretendard'] leading-[10px] tracking-wide">우울한 마음을 보듬어요</div>
+                    </div>
+                    <img className="w-[92.34px] h-[86px] left-[237.91px] top-[17px] absolute" src="https://via.placeholder.com/92x86" />
+                </div>
+            </div>
+        </div>
+        <div className="w-[340px] h-[72px] px-5 py-2.5 bg-[#ffcc63] rounded-2xl flex-col justify-center items-start flex">
+            <div className="self-stretch h-[33px] text-white text-xl font-black font-['Pretendard'] leading-normal tracking-wide">AWAKE 상담 센터</div>
+            <div className="self-stretch text-white text-[15px] font-semibold font-['Pretendard'] leading-[10px] tracking-wide">도움이 필요하신가요? AWAKE 상담센터</div>
+        </div>
+    </div>
+    <div className="w-[360px] h-[45px] px-6 py-2.5 left-0 top-0 absolute justify-between items-end inline-flex">
+        <div className="text-[#1d1b20] text-sm font-medium font-['Roboto'] leading-tight tracking-tight">9:30</div>
+        <div className="w-[46px] h-[17px] relative">
+            <div className="w-[17px] h-[17px] left-0 top-0 absolute">
+                <div className="w-[17px] h-[17px] left-0 top-0 absolute" />
+            </div>
+            <div className="w-[17px] h-[17px] left-[16px] top-0 absolute">
+            </div>
+            <div className="w-2 h-[15px] left-[38px] top-[1px] absolute" />
+        </div>
+    </div>
+    <div className="w-[360px] px-2 left-0 top-[724px] absolute bg-white shadow border border-[#d9d9d9] justify-start items-start gap-2 inline-flex">
+        <div className="grow shrink basis-0 pt-3 pb-4 flex-col justify-center items-center gap-1 inline-flex">
+            <div className="rounded-2xl flex-col justify-center items-center flex">
+                <div className="w-16 h-8 px-5 py-1 justify-center items-center inline-flex" />
+            </div>
+            <div className="self-stretch text-center text-[#1d1b20] text-xs font-semibold font-['Pretendard'] leading-none tracking-wide">홈</div>
+        </div>
+        <div className="grow shrink basis-0 pt-3 pb-4 flex-col justify-center items-center gap-1 inline-flex">
+            <div className="w-8 rounded-2xl justify-center items-center inline-flex">
+                <div className="w-16 h-8 px-5 py-1 justify-center items-center gap-2.5 flex" />
+            </div>
+            <div className="self-stretch text-center text-[#49454f] text-xs font-medium font-['Pretendard'] leading-none tracking-wide">일정</div>
+        </div>
+        <div className="grow shrink basis-0 h-20 pt-3 pb-4 flex-col justify-center items-center gap-1 inline-flex">
+            <div className="w-16 h-8 bg-[#eeeeee] rounded-2xl justify-center items-center inline-flex" />
+            <div className="self-stretch text-center text-[#49454f] text-xs font-medium font-['Pretendard'] leading-none tracking-wide">마음숲</div>
+        </div>
+        <div className="grow shrink basis-0 pt-3 pb-4 flex-col justify-center items-center gap-1 inline-flex">
+            <div className="w-8 rounded-2xl justify-center items-center inline-flex">
+                <div className="w-16 h-8 px-5 py-1 justify-center items-center gap-2.5 flex">
+                    <div className="w-7 h-7 relative" />
+                </div>
+            </div>
+            <div className="self-stretch text-center text-[#49454f] text-xs font-medium font-['Roboto'] leading-none tracking-wide">MY</div>
+        </div>
+    </div>
+    <div className="w-[123.84px] left-[223px] top-[669.36px] absolute origin-top-left rotate-[-17.07deg] opacity-30 text-white text-[50px] font-black font-['Pretendard'] leading-normal tracking-wide">AWA</div>
+</div>
+
+  );
+};
+
+export default Forest;

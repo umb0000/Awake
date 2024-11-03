@@ -7,8 +7,9 @@ const Breath = () => {
   const [remainingTime, setRemainingTime] = useState(null);
   const [breathPhase, setBreathPhase] = useState('inhale');
   const [currentText, setCurrentText] = useState("호흡으로 마음을 진정시켜요.");
-  const [isPaused, setIsPaused] = useState(false); // 애니메이션과 음악 멈추기 상태
-  const [textFadeClass, setTextFadeClass] = useState(""); // 텍스트 페이드 효과를 위한 클래스 상태
+  const [isPaused, setIsPaused] = useState(false);
+  const [audioEnabled, setAudioEnabled] = useState(true); // 음악 활성화 상태
+  const [textFadeClass, setTextFadeClass] = useState("");
   const audioRef = useRef(null);
   const textIntervalRef = useRef(null);
   const timerIntervalRef = useRef(null);
@@ -32,7 +33,7 @@ const Breath = () => {
       setBreathPhase('inhale');
       setCurrentText("코로 숨을 깊게 들이쉬고...");
       audioRef.current.currentTime = 0;
-      audioRef.current.play();
+      if (audioEnabled) audioRef.current.play();
       startTextAnimation();
       startTimer();
     }
@@ -42,7 +43,7 @@ const Breath = () => {
     if (isPaused) {
       setIsPaused(false);
       setIsCountingDown(true);
-      audioRef.current.play();
+      if (audioEnabled) audioRef.current.play();
       startTextAnimation();
       startTimer();
     } else {
@@ -51,6 +52,15 @@ const Breath = () => {
       audioRef.current.pause();
       clearInterval(textIntervalRef.current);
       clearInterval(timerIntervalRef.current);
+    }
+  };
+
+  const handleAudioToggle = () => {
+    setAudioEnabled((prev) => !prev);
+    if (audioEnabled) {
+      audioRef.current.pause();
+    } else if (!isPaused && isCountingDown) {
+      audioRef.current.play();
     }
   };
 
@@ -112,6 +122,7 @@ const Breath = () => {
   return (
     <div className="relative w-[100%] h-[800px] bg-[#fff] overflow-hidden">
       <audio ref={audioRef} src="/audio/breath.mp3" loop />
+
       {!isCountingDown && !isPaused ? (
         <FirstScreen
           selectedTime={selectedTime}
@@ -128,6 +139,8 @@ const Breath = () => {
           currentText={currentText}
           isPaused={isPaused}
           textFadeClass={textFadeClass}
+          audioEnabled={audioEnabled}
+          handleAudioToggle={handleAudioToggle}
         />
       )}
     </div>
@@ -170,10 +183,20 @@ const FirstScreen = ({ selectedTime, onTimeSelect, onStart, currentText }) => (
   </div>
 );
 
-const SecondScreen = ({ remainingTime, breathPhase, onPauseResume, onExit, currentText, isPaused, textFadeClass }) => (
+const SecondScreen = ({ remainingTime, breathPhase, onPauseResume, onExit, currentText, isPaused, textFadeClass, audioEnabled, handleAudioToggle }) => (
   <div className="relative w-full h-screen flex flex-col items-center justify-center bg-gradient-to-b from-[#e0f7fa] to-[#ffffff] p-5">
     <button onClick={onExit} className="absolute top-5 right-5 text-2xl text-gray-500 z-20">✕</button>
-    <div className="absolute top-5 right-[60px] text-[16px] text-[#8090FF] font-bold z-10">
+    <div className="absolute top-5 left-5 z-20">
+    <button onClick={handleAudioToggle}>
+      <img 
+        src={audioEnabled ? (process.env.PUBLIC_URL + "/img/volume.png") : (process.env.PUBLIC_URL + "/img/mute.png")} 
+        alt="audio toggle" 
+        className="w-6 h-6" 
+      />
+    </button>
+
+    </div>
+    <div className="absolute top-5 right-[60px] text-[19px] text-[#8090FF] font-bold z-10">
       {Math.floor(remainingTime / 60).toString().padStart(2, '0')} : {(remainingTime % 60).toString().padStart(2, '0')}
     </div>
     <div className="relative flex flex-col items-center justify-center mb-10 z-0">

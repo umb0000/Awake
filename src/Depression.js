@@ -1,6 +1,7 @@
 import React from 'react';
 import './output.css';
 
+
 const Depression = () => {
   return (
     <div className="relative w-[100%] h-[800px] bg-[#fff] overflow-hidden">

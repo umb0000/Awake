@@ -12,12 +12,15 @@ const Back = () => {
 
   return (
     <div>
+<<<<<<< HEAD
       {/* 상단 상태 표시 */}
       <div className="fixed left-0 top-[0px] w-[100%] h-[45px] bg-white flex flex-row items-end justify-between py-[10px] px-[24px]">
         <div className="text-[14px] opacity-[50] leading-[20px] tracking-[.01em] font-['Pretendard_Variable'] font-medium text-[#1d1b20] whitespace-nowrap">9:30</div>
         
       </div>
 
+=======
+>>>>>>> 6e1b4f4d4f58dd90754156716e14341429c4543a
       {/* 상단 뒤로가기 버튼 */}
       <div className="fixed left-0 top-0 w-[360px] h-16 px-1 py-2 bg-white z-50 flex justify-start items-center gap-1 shadow-md" style={{ marginBottom: '10px' }}>
         {/* 버튼 컨테이너 */}

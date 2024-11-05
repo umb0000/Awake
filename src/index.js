@@ -62,8 +62,8 @@ root.render(
                 {/* Kit 네비게이션을 추가한 라우트 */}
                 <Route path="/Kit" element={<Kit />}>
                   {/* Kit 하위 라우트 */}
+                  <Route path="Forest" element={<Forest />} />
                   <Route path="Anxiety" element={<Anxiety />} />
-                  
                   <Route path="Angry" element={<Angry />} />
                   <Route path="Depression" element={<Depression />} />
                 </Route>

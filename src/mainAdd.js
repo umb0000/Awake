@@ -132,14 +132,14 @@ const MainAdd = () => {
             )}
 
 <div className="w-[290px] h-[42px] px-3.5 bg-white border border-[#f4f7f8] justify-start items-center gap-[17px] inline-flex relative cursor-pointer" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
-      <div className="w-[148px] text-[#49454f] text-xs font-normal font-['Roboto'] leading-7">반복</div>
+      <div className="w-[148px] text-[#49454f] text-xs font-normal font-['Pretendard_Variable'] leading-7">반복</div>
       <div className="w-[98px] h-7 relative">
         <img
           className="w-3 h-3.5 left-[86px] top-[7px] absolute"
           src="https://via.placeholder.com/12x14"
           alt="Dropdown Icon"
         />
-        <div className="w-[79px] left-0 top-0 absolute text-right text-[#49454f] text-xs font-normal font-['Roboto'] leading-7">
+        <div className="w-[79px] left-0 top-0 absolute text-right text-[#49454f] text-xs font-normal font-['Pretendard_Variable'] leading-7">
           {selectedOption}
         </div>
       </div>
@@ -149,7 +149,7 @@ const MainAdd = () => {
           {options.map((option) => (
             <div
               key={option}
-              className="px-4 py-1 text-[#49454f] text-xs font-normal font-['Pretendard'] leading-7 hover:bg-gray-100"
+              className="px-4 py-1 text-[#49454f] text-xs font-normal font-['Pretendard_Variable'] leading-7 hover:bg-gray-100"
               onClick={() => handleOptionClick(option)}
             >
               {option}
@@ -161,14 +161,14 @@ const MainAdd = () => {
 
 
             <div className="w-[290px] h-[42px] px-3.5 bg-white border border-[#f4f7f8] justify-start items-center gap-[17px] inline-flex relative cursor-pointer">
-      <div className="w-[148px] text-[#49454f] text-xs font-normal font-['Roboto'] leading-7">날짜</div>
+      <div className="w-[148px] text-[#49454f] text-xs font-normal font-['Pretendard_Variable'] leading-7">날짜</div>
       <div className="w-[98px] h-7 relative">
         <img
           className="w-3 h-3.5 left-[86px] top-[7px] absolute"
           src="https://via.placeholder.com/12x14"
           alt="Calendar Icon"
         />
-        <div className="w-[79px] left-0 top-0 absolute text-right text-[#49454f] text-xs font-normal font-['Roboto'] leading-7">
+        <div className="w-[79px] left-0 top-0 absolute text-right text-[#49454f] text-xs font-normal font-['Pretendard_Variable'] leading-7">
           {formatDate(selectedDate) }
           {/* 전체 영역을 클릭할 수 있도록 설정 */}
       <input
@@ -187,7 +187,7 @@ const MainAdd = () => {
               disabled={!isFormValid} // 입력된 값이 없으면 비활성화
               className={` w-[290px] h-[42px] px-[100px] py-[5px] rounded-[5px] justify-center items-center gap-2.5 inline-flex ${isFormValid ? 'bg-[#FF9800]' : 'bg-[#d9d9d9]'}`}
             >
-              <div className="text-white text-base font-bold font-['Pretendard'] leading-7">추가하기</div>
+              <div className="text-white text-base font-bold font-['Pretendard_Variable'] leading-7">추가하기</div>
             </button>
 
           </div>

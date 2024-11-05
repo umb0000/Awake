@@ -153,14 +153,14 @@ const Main = () => {
   <div className="justify-start items-center gap-[11px] inline-flex">
     <div className="w-[21px] h-[21px] relative">
       <div className="w-[21px] h-[21px] left-0 top-0 absolute bg-[#ff9800] rounded-full" />
-      <div className="w-[7.30px] h-[18.26px] left-[6.39px] top-[0.91px] absolute text-white text-sm font-medium font-['Roboto'] leading-tight tracking-tight">2</div>
+      <div className="w-[7.30px] h-[18.26px] left-[6.39px] top-[0.91px] absolute text-white text-sm font-medium  font-['Pretendard_Variable'] leading-tight tracking-tight">2</div>
     </div>
     <div className="w-[123px] h-[5px] relative bg-[#EEEFEF]">
 
       {/*게이지 바*/}
       <div className="w-[101px] h-[5px] left-0 top-0 absolute bg-gradient-to-r from-[#ff8300] via-[#ff9800] to-[#ffdb8f] rounded-2xl" />
     </div>
-    <div className="text-[#ff6d00] text-sm font-medium font-['Roboto'] leading-tight tracking-tight">81.3%</div>
+    <div className="text-[#ff6d00] text-sm font-medium font-['Pretendard_Variable'] leading-tight tracking-tight">81.3%</div>
   </div>
 </div>
 </div>

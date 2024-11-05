@@ -11,7 +11,7 @@ const Kit = () => {
   };
 
   return (
-    <div className="relative w-full h-[100%] bg-[#fff] overflow-hidden">
+    <div className="relative w-full h-[100%] bg-[#fff] overflow-hidden font-['Pretendard_Variable']">
       {/* 네비게이션 바 */}
       <div className='app-container'>
         <div className='content'>

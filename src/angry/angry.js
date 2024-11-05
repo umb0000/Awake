@@ -33,7 +33,7 @@ const Angry = () => {
   };
 
   return (
-    <div className="relative w-[100%] h-[800px] sbg-[#fff] overflow-hidden">
+    <div className="relative w-[100%] h-[800px] sbg-[#fff] overflow-hidden font-['Pretendard_Variable']">
       {/* <div className="absolute left-0 top-[30px] w-[100%] h-[680px] flex flex-col items-center justify-start gap-[10px] py-[9px] px-[10px]">
         <div className="relative w-[95%] h-[51px] shrink-0 flex flex-col items-start justify-start py-[7px] px-0">
           <div className="absolute left-0 top-[5px] w-[308px] h-[41px] shrink-0 flex flex-row items-center justify-start gap-[11px] overflow-hidden">

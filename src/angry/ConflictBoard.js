@@ -136,7 +136,7 @@ const ConflictBoard = () => {
   // WayMessage 컴포넌트
 const WayMessage = ({ text }) => (
   <div className="flex items-start">
-    <div className="w-12 h-12 rounded-full bg-[#FFAD7A] flex items-center justify-center shadow-md">
+    <div className="w-12 h-12 rounded-full bg-[#FFAD7A] flex items-center justify-center shadow-md font-['Pretendard_Variable']">
       <img
         className="w-10 h-10 rounded-full"
         src="/img/cat_way_crop2.png"
@@ -229,7 +229,7 @@ const UserMessage = ({ text }) => (
   const renderTimeline = () => (
     <div className="relative w-full h-[800px] bg-[#F5F3EF] overflow-y-scroll p-4 font-['Pretendard_Variable']">
       <div className="sticky top-0 z-10 bg-white py-3 shadow-md rounded-tl-[20px] rounded-tr-[20px] border-b border-[#FFAD7A]">
-        <h1 className="text-center text-xl font-bold text-[#FFAD7A]">웨이의 분노 진정소</h1>
+        <h1 className="text-center text-xl font-bold text-[#FFAD7A] font-['Pretendard_Variable']">웨이의 분노 진정소</h1>
       </div>
 
       <div className="space-y-6 mt-6">
@@ -242,7 +242,7 @@ const UserMessage = ({ text }) => (
               <span className="mr-2 p-1 rounded-full bg-[#FFAD7A]/20 text-[#D88C65] text-lg">{response.moodIcon}</span>
               <span className="text-gray-400">{response.timestamp}</span>
             </div>
-            <h2 className="text-lg font-semibold text-[#4B4B4B] leading-relaxed mb-2">{response.finalMessage}</h2>
+            <h2 className="text-lg font-semibold text-[#4B4B4B] leading-relaxed mb-2 font-['Pretendard_Variable']">{response.finalMessage}</h2>
             {response.image && (
               <div className="mb-3 rounded-lg overflow-hidden w-full">
                 <img 

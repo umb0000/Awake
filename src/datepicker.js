@@ -5,7 +5,7 @@ function DatePicker() {
   const [selectedDate, setSelectedDate] = useState("");
 
   return (
-    <div className="flex flex-col items-center justify-center p-4 bg-white rounded-lg shadow-lg max-w-md mx-auto mt-8">
+    <div className="flex flex-col items-center justify-center p-4 bg-white rounded-lg shadow-lg max-w-md mx-auto mt-8  font-['Pretendard_Variable']" >
       <h2 className="text-2xl font-semibold mb-4 text-gray-800">날짜 선택</h2>
       <input
         type="date"
@@ -15,7 +15,7 @@ function DatePicker() {
       />
       {selectedDate && (
         <p className="mt-4 text-gray-700">
-          선택된 날짜: <span className="font-medium">{selectedDate}</span>
+          선택된 날짜: <span className="font-medium" >{selectedDate}</span>
         </p>
       )}
     </div>

@@ -42,7 +42,7 @@ const AnxietyBookIndex = () => {
       </div>
 
       {/* Bookmarks List with Scrollable Area */}
-      <div className="w-full flex flex-col gap-4 p-4 mt-4 overflow-y-auto h-[620px]">
+      <div className="w-full flex flex-col gap-4 p-4 mt-4 overflow-y-auto h-[620px] font-['Pretendard_Variable']">
         {filteredBookmarks.length > 0 ? (
           filteredBookmarks.map((bookmark, index) => (
             <div

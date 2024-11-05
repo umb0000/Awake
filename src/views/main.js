@@ -6,7 +6,7 @@ import './main.css'
 
 const Main = (props) => {
   return (
-    <div className="main-container">
+    <div className="main-container  font-['Pretendard_Variable']" >
       <Helmet>
         <title>exported project</title>
       </Helmet>

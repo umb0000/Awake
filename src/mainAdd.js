@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './output.css';
 
 const MainAdd = () => {
@@ -16,6 +16,12 @@ const MainAdd = () => {
     const day = date.getDate();
     return `${month}월 ${day}일`;
   };
+
+  useEffect(() => {
+    const today = new Date();
+    const formattedToday = today.toISOString().split("T")[0];
+    setSelectedDate(formattedToday);
+  }, []);
 
   const isFormValid = taskName.trim() !== ''; // 입력된 값이 있으면 true
 
@@ -135,7 +141,7 @@ const MainAdd = () => {
           alt="Calendar Icon"
         />
         <div className="w-[79px] left-0 top-0 absolute text-right text-[#49454f] text-xs font-normal font-['Roboto'] leading-7">
-          {selectedDate ? formatDate(selectedDate) : "날짜 선택"}
+          {formatDate(selectedDate) }
           {/* 전체 영역을 클릭할 수 있도록 설정 */}
       <input
         type="date"

@@ -7,6 +7,15 @@ const MainAdd = () => {
   const [selectedTime, setSelectedTime] = useState(''); // 아침, 점심, 저녁, 종일 중 선택된 시간
   const [isImportant, setIsImportant] = useState(false); // 중요 버튼 상태
   const [isUrgent, setIsUrgent] = useState(false); // 긴급 버튼 상태
+  const [selectedDate, setSelectedDate] = useState("");
+
+  // 날짜를 '8월 24일' 형식으로 표시하는 함수
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const month = date.getMonth() + 1; // 월은 0부터 시작하므로 +1
+    const day = date.getDate();
+    return `${month}월 ${day}일`;
+  };
 
   const isFormValid = taskName.trim() !== ''; // 입력된 값이 있으면 true
 
@@ -70,8 +79,8 @@ const MainAdd = () => {
               />
             </div>
 
-            {/* 상태에 따라 다른 버튼 표시 */}
-            {!isTaskSelected ? (
+           {/* 상태에 따라 다른 버튼 표시 */}
+           {!isTaskSelected ? (
               <div className="w-[290px] h-10 justify-center items-start gap-[3.33px] inline-flex">
                 {['아침', '점심', '저녁', '종일'].map((time) => (
                   <div
@@ -116,13 +125,27 @@ const MainAdd = () => {
               </div>
             </div>
 
+
             <div className="w-[290px] h-[42px] px-3.5 bg-white border border-[#f4f7f8] justify-start items-center gap-[17px] inline-flex">
-          <div className="w-[148px] text-[#49454f] text-xs font-normal font-['Roboto'] leading-7">날짜</div>
-          <div className="w-[98px] h-7 relative">
-            <img className="w-3 h-3.5 left-[86px] top-[7px] absolute" src="https://via.placeholder.com/12x14" />
-            <div className="w-[79px] left-0 top-0 absolute text-right text-[#49454f] text-xs font-normal font-['Roboto'] leading-7">8월 24일</div>
-          </div>
+      <div className="w-[148px] text-[#49454f] text-xs font-normal font-['Roboto'] leading-7">날짜</div>
+      <div className="w-[98px] h-7 relative">
+        <img
+          className="w-3 h-3.5 left-[86px] top-[7px] absolute"
+          src="https://via.placeholder.com/12x14"
+          alt="Calendar Icon"
+        />
+        <input
+          type="date"
+          value={selectedDate}
+          onChange={(e) => setSelectedDate(e.target.value)}
+          className="w-full opacity-0 absolute top-0 left-0"
+          style={{ cursor: 'pointer' }}
+        />
+        <div className="w-[79px] left-0 top-0 absolute text-right text-[#49454f] text-xs font-normal font-['Roboto'] leading-7">
+          {selectedDate ? formatDate(selectedDate) : "날짜 선택"}
         </div>
+      </div>
+    </div>
 
             <button
               onClick={handleSubmit}

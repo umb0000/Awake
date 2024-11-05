@@ -96,7 +96,6 @@ const Angry = () => {
             <div className="self-stretch text-[20px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-bold text-[#fff]">갈등 대처법</div>
             <div className="self-stretch text-[10px] leading-[10px] tracking-[.01em] font-['Pretendard_Variable'] font-semibold text-[#fff]">갈등 해결 with '상감이결'</div>
           </div>
-          <img className="absolute left-[136px] top-[124px]" width="23" height="22" src={process.env.PUBLIC_URL + "/img/별1_523.png"} alt="star" />
           <img className="absolute left-[81px] top-[22px]" width="66" height="78" src={process.env.PUBLIC_URL + "/img/3dicons1_524.png"} alt="3d icon" />
           </a>
         </div>
@@ -107,7 +106,6 @@ const Angry = () => {
             <div className="self-stretch text-[20px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-bold text-[#fff]">모욕 대처법</div>
             <div className="self-stretch text-[10px] leading-[10px] tracking-[.01em] font-['Pretendard_Variable'] font-semibold text-[#fff]">웨이의 분노 진정소</div>
           </div>
-          <img className="absolute left-[136px] top-[124px]" width="23" height="22" src={process.env.PUBLIC_URL + "/img/별1_529.png"} alt="star" />
           <img className="absolute left-[88px] top-[22px]" width="67" height="78" src={process.env.PUBLIC_URL + "/img/3dicons1_530.png"} alt="3d icon" /></a>
         </div>
 
@@ -119,7 +117,7 @@ const Angry = () => {
             <div className="self-stretch text-[10px] leading-[10px] tracking-[.01em] font-['Pretendard_Variable'] font-semibold text-[#fff]">비판 대처표</div>
           </div>
           <img className="absolute left-[88px] top-[22px]" width="67" height="78" src={process.env.PUBLIC_URL + "/img/3dicons1_535.png"} alt="3d icon" />
-          <img className="absolute left-[75.29%] right-[11.18%] top-[74.1%] bottom-[12.65%]" width="23" height="22" src={process.env.PUBLIC_URL + "/img/별1_536.png"} alt="star" /></a>
+          </a>
         </div>
       </div>
 

@@ -39,23 +39,26 @@ const Anxiety = () => {
           </div>
           <div className="self-stretch h-[1px] shrink-0 bg-[#fff]"></div>
           <div className="w-[95%] h-[166px] shrink-0 flex flex-row items-center justify-center gap-[11px]">
+            <a href='http://112.152.14.116:10201/AnxietyBook'>
             <div className="relative w-[160px] h-[166px] shrink-0 flex">
-              <a href='http://112.152.14.116:10201/AnxietyBook'><div className="absolute left-0 top-0 w-[160px] h-[166px] flex flex-col items-start justify-end p-[20px] bg-[#ff9800] rounded-[16px]">
+              <div className="absolute left-0 top-0 w-[160px] h-[166px] flex flex-col items-start justify-end p-[20px] bg-[#ff9800] rounded-[16px]">
                 <div className="self-stretch text-[20px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-bold text-[#fff]">불안의 책</div>
                 <div className="self-stretch text-[10px] leading-[10px] tracking-[.01em] font-['Pretendard_Variable'] font-semibold text-[#fff]">불안할 때 보세요</div>
-              </div></a>
+              </div>
               <img className="absolute left-[81px] top-[12px]" width="66" height="78" src={process.env.PUBLIC_URL + "/img/3dicons1_257.png"} alt="3d icon" />
               <img className="absolute left-[77.19%] right-[8.44%] top-[74.1%] bottom-[12.65%]" width="23" height="22" src={process.env.PUBLIC_URL + "/img/별1_258.png"} alt="star" />
             </div>
+            </a>
+
+            <a href='http://112.152.14.116:10201/AnxietyBookIndex'>
             <div className="relative w-[160px] h-[166px] shrink-0 flex">
-              <a href='http://112.152.14.116:10201/AnxietyBookIndex'>
               <div className="absolute left-0 top-0 w-[160px] h-[166px] flex flex-col items-start justify-end p-[20px] bg-[#f8f8f8] rounded-[16px]">
                 <div className="self-stretch text-[20px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-bold text-[#000]">책갈피</div>
                 <div className="self-stretch text-[10px] leading-[10px] tracking-[.01em] font-['Pretendard_Variable'] font-semibold text-[#000]">불안의 책 스크랩 모음</div>
-              </div></a>
+              </div>
               <img className="absolute left-[81px] top-[12px]" width="69" height="81" src={process.env.PUBLIC_URL + "/img/3dicons1_263.png"} alt="3d icon" />
               <img className="absolute left-[79.06%] right-[6.56%] top-[75.3%] bottom-[11.45%]" width="23" height="22" src={process.env.PUBLIC_URL + "/img/별1_264.png"} alt="star" />
-            </div>
+            </div></a>
           </div>
           
           <a href='http://112.152.14.116:10201/Breath' className="w-[95%] h-[68px] shrink-0 flex flex-col items-start justify-center gap-[1px] py-[10px] px-[20px] bg-[#f8f8f8] rounded-[16px] no-underline">

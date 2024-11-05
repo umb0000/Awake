@@ -126,7 +126,7 @@ const MainAdd = () => {
             </div>
 
 
-            <div className="w-[290px] h-[42px] px-3.5 bg-white border border-[#f4f7f8] justify-start items-center gap-[17px] inline-flex">
+            <div className="w-[290px] h-[42px] px-3.5 bg-white border border-[#f4f7f8] justify-start items-center gap-[17px] inline-flex relative cursor-pointer">
       <div className="w-[148px] text-[#49454f] text-xs font-normal font-['Roboto'] leading-7">날짜</div>
       <div className="w-[98px] h-7 relative">
         <img
@@ -134,17 +134,18 @@ const MainAdd = () => {
           src="https://via.placeholder.com/12x14"
           alt="Calendar Icon"
         />
-        <input
-          type="date"
-          value={selectedDate}
-          onChange={(e) => setSelectedDate(e.target.value)}
-          className="w-full opacity-0 absolute top-0 left-0"
-          style={{ cursor: 'pointer' }}
-        />
         <div className="w-[79px] left-0 top-0 absolute text-right text-[#49454f] text-xs font-normal font-['Roboto'] leading-7">
           {selectedDate ? formatDate(selectedDate) : "날짜 선택"}
+          {/* 전체 영역을 클릭할 수 있도록 설정 */}
+      <input
+        type="date"
+        value={selectedDate}
+        onChange={(e) => setSelectedDate(e.target.value)}
+        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+      />
         </div>
       </div>
+      
     </div>
 
             <button

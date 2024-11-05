@@ -14,7 +14,7 @@ const Forest = () => {
         </div>
         <div className="h-[523px] bg-white flex-col justify-start items-center gap-2 flex">
             <div className="self-stretch h-px bg-white" />
-            <a className="w-[100%] h-[auto] shrink-0 flex " href='http://112.152.14.116:10201/kit/anxiety'>
+            <a className="w-[100%] h-[auto] shrink-0 flex " href='http://kwawake.duckdns.org/kit/anxiety'>
   
             <div className="self-stretch justify-center items-center gap-[11px] inline-flex">
                 <div className="w-[338.50px] h-[166px] relative">
@@ -26,7 +26,7 @@ const Forest = () => {
                 </div>
             </div>
             </a>
-            <a className="w-[100%] h-[auto] shrink-0 flex " href='http://112.152.14.116:10201/kit/angry'>
+            <a className="w-[100%] h-[auto] shrink-0 flex " href='http://kwawake.duckdns.org/kit/angry'>
             <div className="self-stretch justify-center items-center gap-[11px] inline-flex">
                 <div className="w-[338.50px] h-[166px] relative">
                     <div className="w-[338.50px] h-[166px] p-5 left-0 top-0 absolute bg-[#ff5d5d] rounded-2xl flex-col justify-end items-start inline-flex">
@@ -37,7 +37,7 @@ const Forest = () => {
                 </div>
             </div>
             </a>
-            <a className="w-[100%] h-[auto] shrink-0 flex " href='http://112.152.14.116:10201/kit/depression'>
+            <a className="w-[100%] h-[auto] shrink-0 flex " href='http://kwawake.duckdns.org/kit/depression'>
             <div className="self-stretch justify-center items-center gap-[11px] inline-flex">
                 <div className="w-[338.50px] h-[166px] relative">
                     <div className="w-[338.50px] h-[166px] p-5 left-0 top-0 absolute bg-[#6891e8] rounded-2xl flex-col justify-end items-start inline-flex">

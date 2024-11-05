@@ -41,7 +41,7 @@ const Anxiety = () => {
           <div className="w-[95%] h-[166px] shrink-0 flex flex-row items-center justify-center gap-[11px]">
             <a href='http://112.152.14.116:10201/AnxietyBook'>
             <div className="relative w-[160px] h-[166px] shrink-0 flex">
-              <div className="absolute left-0 top-0 w-[160px] h-[166px] flex flex-col items-start justify-end p-[20px] bg-[#ff9800] rounded-[16px]">
+              <a href='http://kwawake.duckdns.org/AnxietyBook'><div className="absolute left-0 top-0 w-[160px] h-[166px] flex flex-col items-start justify-end p-[20px] bg-[#ff9800] rounded-[16px]">
                 <div className="self-stretch text-[20px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-bold text-[#fff]">불안의 책</div>
                 <div className="self-stretch text-[10px] leading-[10px] tracking-[.01em] font-['Pretendard_Variable'] font-semibold text-[#fff]">불안할 때 보세요</div>
               </div>
@@ -52,6 +52,7 @@ const Anxiety = () => {
 
             <a href='http://112.152.14.116:10201/AnxietyBookIndex'>
             <div className="relative w-[160px] h-[166px] shrink-0 flex">
+              <a href='http://kwawake.duckdns.org/AnxietyBookIndex'>
               <div className="absolute left-0 top-0 w-[160px] h-[166px] flex flex-col items-start justify-end p-[20px] bg-[#f8f8f8] rounded-[16px]">
                 <div className="self-stretch text-[20px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-bold text-[#000]">책갈피</div>
                 <div className="self-stretch text-[10px] leading-[10px] tracking-[.01em] font-['Pretendard_Variable'] font-semibold text-[#000]">불안의 책 스크랩 모음</div>
@@ -61,7 +62,7 @@ const Anxiety = () => {
             </div></a>
           </div>
           
-          <a href='http://112.152.14.116:10201/Breath' className="w-[95%] h-[68px] shrink-0 flex flex-col items-start justify-center gap-[1px] py-[10px] px-[20px] bg-[#f8f8f8] rounded-[16px] no-underline">
+          <a href='http://kwawake.duckdns.org/Breath' className="w-[95%] h-[68px] shrink-0 flex flex-col items-start justify-center gap-[1px] py-[10px] px-[20px] bg-[#f8f8f8] rounded-[16px] no-underline">
             <div className="self-stretch text-[16px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-bold text-[#000]">
               숨 고르기
             </div>

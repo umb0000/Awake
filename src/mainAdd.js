@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './output.css';
 
 const MainAdd = () => {
@@ -7,6 +7,31 @@ const MainAdd = () => {
   const [selectedTime, setSelectedTime] = useState(''); // 아침, 점심, 저녁, 종일 중 선택된 시간
   const [isImportant, setIsImportant] = useState(false); // 중요 버튼 상태
   const [isUrgent, setIsUrgent] = useState(false); // 긴급 버튼 상태
+  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedOption, setSelectedOption] = useState("한 번만");
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  // 날짜를 '8월 24일' 형식으로 표시하는 함수
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const month = date.getMonth() + 1; // 월은 0부터 시작하므로 +1
+    const day = date.getDate();
+    return `${month}월 ${day}일`;
+  }; 
+
+
+  const options = ["한 번만", "매일", "평일", "주말"];
+
+  const handleOptionClick = (option) => {
+    setSelectedOption(option);
+    setIsDropdownOpen(false);
+  }
+
+  useEffect(() => {
+    const today = new Date();
+    const formattedToday = today.toISOString().split("T")[0];
+    setSelectedDate(formattedToday);
+  }, []);
 
   const isFormValid = taskName.trim() !== ''; // 입력된 값이 있으면 true
 
@@ -70,8 +95,8 @@ const MainAdd = () => {
               />
             </div>
 
-            {/* 상태에 따라 다른 버튼 표시 */}
-            {!isTaskSelected ? (
+           {/* 상태에 따라 다른 버튼 표시 */}
+           {!isTaskSelected ? (
               <div className="w-[290px] h-10 justify-center items-start gap-[3.33px] inline-flex">
                 {['아침', '점심', '저녁', '종일'].map((time) => (
                   <div
@@ -106,23 +131,56 @@ const MainAdd = () => {
               </div>
             )}
 
-            <div className="w-[290px] h-[42px] px-3.5 bg-white border border-[#f4f7f8] justify-start items-center gap-[17px] inline-flex">
-              <div className="w-[148px] text-[#49454f] text-xs font-normal font-['Roboto'] leading-7">반복</div>
-              <div className="w-[98px] h-7 relative">
-                <img className="w-3 h-3.5 left-[86px] top-[7px] absolute" src="https://via.placeholder.com/12x14" />
-                <div className="w-[79px] left-0 top-0 absolute text-right text-[#49454f] text-xs font-normal font-['Roboto'] leading-7">
-                  한 번만
-                </div>
-              </div>
-            </div>
-
-            <div className="w-[290px] h-[42px] px-3.5 bg-white border border-[#f4f7f8] justify-start items-center gap-[17px] inline-flex">
-          <div className="w-[148px] text-[#49454f] text-xs font-normal font-['Roboto'] leading-7">날짜</div>
-          <div className="w-[98px] h-7 relative">
-            <img className="w-3 h-3.5 left-[86px] top-[7px] absolute" src="https://via.placeholder.com/12x14" />
-            <div className="w-[79px] left-0 top-0 absolute text-right text-[#49454f] text-xs font-normal font-['Roboto'] leading-7">8월 24일</div>
-          </div>
+<div className="w-[290px] h-[42px] px-3.5 bg-white border border-[#f4f7f8] justify-start items-center gap-[17px] inline-flex relative cursor-pointer" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
+      <div className="w-[148px] text-[#49454f] text-xs font-normal font-['Roboto'] leading-7">반복</div>
+      <div className="w-[98px] h-7 relative">
+        <img
+          className="w-3 h-3.5 left-[86px] top-[7px] absolute"
+          src="https://via.placeholder.com/12x14"
+          alt="Dropdown Icon"
+        />
+        <div className="w-[79px] left-0 top-0 absolute text-right text-[#49454f] text-xs font-normal font-['Roboto'] leading-7">
+          {selectedOption}
         </div>
+      </div>
+      {/* 드롭다운 메뉴 */}
+      {isDropdownOpen && (
+        <div className="absolute top-[42px] left-0 w-full bg-white border border-[#f4f7f8] shadow-md z-10">
+          {options.map((option) => (
+            <div
+              key={option}
+              className="px-4 py-1 text-[#49454f] text-xs font-normal font-['Pretendard'] leading-7 hover:bg-gray-100"
+              onClick={() => handleOptionClick(option)}
+            >
+              {option}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+
+
+            <div className="w-[290px] h-[42px] px-3.5 bg-white border border-[#f4f7f8] justify-start items-center gap-[17px] inline-flex relative cursor-pointer">
+      <div className="w-[148px] text-[#49454f] text-xs font-normal font-['Roboto'] leading-7">날짜</div>
+      <div className="w-[98px] h-7 relative">
+        <img
+          className="w-3 h-3.5 left-[86px] top-[7px] absolute"
+          src="https://via.placeholder.com/12x14"
+          alt="Calendar Icon"
+        />
+        <div className="w-[79px] left-0 top-0 absolute text-right text-[#49454f] text-xs font-normal font-['Roboto'] leading-7">
+          {formatDate(selectedDate) }
+          {/* 전체 영역을 클릭할 수 있도록 설정 */}
+      <input
+        type="date"
+        value={selectedDate}
+        onChange={(e) => setSelectedDate(e.target.value)}
+        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+      />
+        </div>
+      </div>
+      
+    </div>
 
             <button
               onClick={handleSubmit}

@@ -27,7 +27,6 @@ import Forest from './forest/forest.js'
 import AnxietyBookIndex from './Anxiety/AnxietyBookIndex.js'
 import Profile from './Profile'
 import Back from './go_back';
-import Forest from './forest/forest.js'
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

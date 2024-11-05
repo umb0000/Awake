@@ -27,6 +27,7 @@ import Forest from './forest/forest.js'
 import AnxietyBookIndex from './Anxiety/AnxietyBookIndex.js'
 import Profile from './Profile'
 import Back from './go_back';
+import Forest from './forest/forest.js'
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -62,8 +63,8 @@ root.render(
                 {/* Kit 네비게이션을 추가한 라우트 */}
                 <Route path="/Kit" element={<Kit />}>
                   {/* Kit 하위 라우트 */}
+                  <Route path="Forest" element={<Forest />} />
                   <Route path="Anxiety" element={<Anxiety />} />
-                  
                   <Route path="Angry" element={<Angry />} />
                   <Route path="Depression" element={<Depression />} />
                 </Route>

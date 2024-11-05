@@ -43,7 +43,7 @@ const Navigation = () => {
         </button>
         
         {/* 키트 버튼 */}
-        <button onClick={() => handleButtonClick('kit', '/kit/anxiety')}>
+        <button onClick={() => handleButtonClick('kit', '/kit/forest')}>
           <img
             width="64"
             height="64"

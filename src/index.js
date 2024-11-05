@@ -28,7 +28,6 @@ import AnxietyBookIndex from './Anxiety/AnxietyBookIndex.js'
 import Profile from './Profile'
 import Back from './go_back';
 
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
@@ -49,26 +48,22 @@ root.render(
         <Route path="/forest" element={<><Back /><Forest /></>} />
         <Route path="/AnxietyBookIndex" element={<><Back /><AnxietyBookIndex /></>} />
 
-
         {/* 네비게이션을 포함한 모든 다른 라우트 */}
         <Route
           path="*"
           element={
             <div className="main-content pb-[80px]">
               <Routes>
-                {/* Main 라우트 */}
                 <Route path="/" element={<Main />} />
 
                 {/* Kit 네비게이션을 추가한 라우트 */}
                 <Route path="/Kit" element={<Kit />}>
-                  {/* Kit 하위 라우트 */}
                   <Route path="Forest" element={<Forest />} />
                   <Route path="Anxiety" element={<Anxiety />} />
                   <Route path="Angry" element={<Angry />} />
                   <Route path="Depression" element={<Depression />} />
                 </Route>
 
-                {/* 개별 경로에 대한 라우트 */}
                 <Route path="/main" element={<Main />} />
                 <Route path="/Anxiety" element={<Anxiety />} />
                 <Route path="/Angry" element={<Angry />} />
@@ -76,8 +71,6 @@ root.render(
                 <Route path="/calender" element={<Calender />} />
                 <Route path="/profile" element={<Profile />} />
               </Routes>
-
-              {/* Navigation 컴포넌트 */}
               <Navigation />
             </div>
           }

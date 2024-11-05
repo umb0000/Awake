@@ -58,7 +58,7 @@ const Anxiety = () => {
                 <div className="self-stretch text-[10px] leading-[10px] tracking-[.01em] font-['Pretendard_Variable'] font-semibold text-[#000]">불안의 책 스크랩 모음</div>
               </div>
               <img className="absolute left-[81px] top-[12px]" width="69" height="81" src={process.env.PUBLIC_URL + "/img/3dicons1_263.png"} alt="3d icon" />
-              <img className="absolute left-[79.06%] right-[6.56%] top-[75.3%] bottom-[11.45%]" width="23" height="22" src={process.env.PUBLIC_URL + "/img/별1_264.png"} alt="star" />
+              
             </div></a>
           </div>
           

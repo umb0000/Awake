@@ -25,6 +25,7 @@ import Onion from './depression/Onion.js';
 import InsultFeedbackExample from './angry/insultPrevent.js'
 import Forest from './forest/forest.js'
 import AnxietyBookIndex from './Anxiety/AnxietyBookIndex.js'
+import Profile from './Profile'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -72,6 +73,7 @@ root.render(
                 <Route path="/Angry" element={<Angry />} />
                 <Route path="/Depression" element={<Depression />} />
                 <Route path="/calender" element={<Calender />} />
+                <Route path="/profile" element={<Profile />} />
               </Routes>
 
               {/* Navigation 컴포넌트 */}

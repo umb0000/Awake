@@ -25,13 +25,13 @@ const Forest = () => {
         <div className="w-[360px] h-[382px] left-0 top-[210px] absolute bg-white rounded-tl-[20px] rounded-tr-[20px] overflow-x-scroll scroll-smooth no-scrollbar" ref={containerRef}>
           <div className="w-[312px] h-[301px] left-[24px] top-[24px] flex flex-row gap-[13px] px-[24px] py-[24px] ">
             <a href="http://kwawake.duckdns.org/kit/anxiety" className="flex-shrink-0">
-              <img className="w-[236px] h-[307px] rounded-tl-[20px] rounded-tr-[20px] object-cover" src="/img/kit_main_card1.png" alt="kit_main_card1" style={{ boxShadow: "0 0 20px rgba(29, 27, 32, 0.25)" }} />
+              <img className="w-[236px] h-[307px] rounded-tl-[20px] rounded-tr-[20px] object-cover" src="/img/kit_main_card1.png" alt="kit_main_card1" style={{ boxShadow: "0 0 20px rgba(29, 27, 32, 0.35)" }} />
             </a>
             <a href="http://kwawake.duckdns.org/kit/angry" className="flex-shrink-0">
-              <img className="w-[236px] h-[307px] rounded-tl-[20px] rounded-tr-[20px] object-cover" src="/img/kit_main_card2.png" alt="kit_main_card2" style={{ boxShadow: "0 0 20px rgba(29, 27, 32, 0.25)" }} />
+              <img className="w-[236px] h-[307px] rounded-tl-[20px] rounded-tr-[20px] object-cover" src="/img/kit_main_card2.png" alt="kit_main_card2" style={{ boxShadow: "0 0 20px rgba(29, 27, 32, 0.35)" }} />
             </a>
             <a href="http://kwawake.duckdns.org/kit/depression" className="flex-shrink-0">
-              <img className="w-[236px] h-[307px] rounded-tl-[20px] rounded-tr-[20px] object-cover" src="/img/kit_main_card3.png" alt="kit_main_card3" style={{ boxShadow: "0 0 20px rgba(29, 27, 32, 0.25)" }} />
+              <img className="w-[236px] h-[307px] rounded-tl-[20px] rounded-tr-[20px] object-cover" src="/img/kit_main_card3.png" alt="kit_main_card3" style={{ boxShadow: "0 0 20px rgba(29, 27, 32, 0.35)" }} />
             </a>
           </div>
         </div>

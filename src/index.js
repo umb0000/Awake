@@ -27,12 +27,21 @@ import Forest from './forest/forest.js'
 import AnxietyBookIndex from './Anxiety/AnxietyBookIndex.js'
 import Profile from './Profile'
 import Back from './go_back';
+import LoginLoading from './login/loginLoading.js';
+import Unlogined from './login/unlogined.js';
+import Login from './login/login.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Router>
       <Routes>
+        {/*로그인 및 오프닝*/}
+        <Route path='/join' element={<Join/>} />
+        <Route path='/LoginLoading' element={<LoginLoading/>} />
+        <Route path='/Unlogined' element={<Unlogined/>} />
+        <Route path='/Login' element={<Login/>} />
+
         {/* 뒤로가기 버튼이 필요한 페이지 */}
         <Route path="/AnxietyBook" element={<><Back /><AnxietyBook /></>} />
         <Route path="/AnxietyBook2/:id" element={<><Back /><AnxietyBook2 /></>} />

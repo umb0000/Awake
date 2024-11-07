@@ -8,14 +8,13 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [currentStep, setCurrentStep] = useState(2);
     const [animateOut, setAnimateOut] = useState(false);
-
-    const [isRegister, setIsRegister] = useState(false);
-    const [result, setResult] = useState('');
-    const [loading, setLoading] = useState(false);
     const [loginErrorMessage, setLoginErrorMessage] = useState('');
+    const [loading, setLoading] = useState(false);
+
     const navigate = useNavigate();
 
-    const isEmailValid = email.includes('@', '.');
+    // 이메일 유효성 검사
+    const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     const isPasswordValid = password.length >= 6;
 
     const handleNext = () => {
@@ -45,9 +44,6 @@ const Login = () => {
             setLoading(true);
             setLoginErrorMessage('');
 
-            const email = e.target.loginEmail.value;
-            const password = e.target.loginPassword.value;
-
             try {
                 const response = await fetch('http://112.152.14.116:10211/token', {
                     method: 'POST',
@@ -61,29 +57,17 @@ const Login = () => {
                 if (response.ok) {
                     localStorage.setItem('token', data.access_token);
                     localStorage.setItem('email', data.email);
-                    // setToken 대신 직접 localStorage를 통해 토큰을 설정
-                    setResult('Login successful: ' + JSON.stringify(data, null, 2));
-                    navigate('/main'); // 로그인 성공 시 메인 페이지로 이동
+                    navigate('/main');
                 } else if (response.status === 401) {
                     setLoginErrorMessage('아이디 혹은 비밀번호가 맞지 않습니다.');
-                } else {
-                    setResult('Login failed: ' + JSON.stringify(data, null, 2));
                 }
             } catch (error) {
-                setResult('Login error: ' + error.message);
+                setLoginErrorMessage('로그인 오류: ' + error.message);
             }
             setLoading(false);
         },
-        [navigate]
+        [email, password, navigate]
     );
-
-    const handleRegisterSuccess = useCallback(() => {
-        setIsRegister(false);
-    }, []);
-
-    const handleFindPassword = () => {
-        navigate('/find-account');
-    };
 
     return (
         <div className="w-[360px] h-[800px] mx-auto relative bg-white">
@@ -126,11 +110,11 @@ const Login = () => {
                     type={currentStep === 3 ? 'submit' : 'button'}
                     onClick={handleNext}
                     disabled={
-                      (currentStep === 2 && isEmailValid) ||
-                      (currentStep === 3 && isPasswordValid)
+                        (currentStep === 2 && !isEmailValid) ||
+                        (currentStep === 3 && !isPasswordValid)
                     }
                     className={`w-full py-3 mt-6 absolute bottom-0 left-0 flex items-center justify-center py-[17px] px-[113px] ${
-                        currentStep === 2 || currentStep === 3 ? 'bg-[#ff6d00]' : 'bg-gray-300'
+                        currentStep === 2 && isEmailValid || currentStep === 3 && isPasswordValid ? 'bg-[#ff6d00]' : 'bg-gray-300'
                     } text-white font-semibold z-20`}
                 >
                     {currentStep === 3 ? '로그인' : '다음'}

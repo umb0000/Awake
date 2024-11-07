@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Signup.css'; // 별도의 CSS 파일로 스타일 분리
 import '.././output.css';
 
-function Login() {
+function Login({ setTocken }) {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -137,8 +138,8 @@ function Login() {
                         (currentStep === 3 && !isPasswordValid)
                     }
                     className={`w-full py-3 mt-6 absolute bottom-0 left-0 flex items-center justify-center py-[17px] px-[113px] ${
-                        (currentStep === 2 && isEmailValid && !isEmailDuplicate) ||
-                        (currentStep === 3 && isPasswordValid) 
+                        (currentStep === 2) ||
+                        (currentStep === 3) 
                             ? 'bg-[#ff6d00]'
                             : 'bg-gray-300'
                     } text-white font-semibold z-20`}

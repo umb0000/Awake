@@ -15,17 +15,58 @@ function Join({ onRegisterSuccess, onSwitchToLogin }) {
     const isEmailValid = email.includes('@') && email.includes('.');
     const isPasswordValid = password.length >= 6;
 
-    const handleNext = () => {
-        if ((currentStep === 1 && isNicknameValid) ||
-            (currentStep === 2 && isEmailValid) ||
-            (currentStep === 3 && isPasswordValid)) {
-            setAnimateOut(true);
-            setTimeout(() => {
-                setAnimateOut(false);
-                setCurrentStep((prevStep) => prevStep + 1);
-            }, 500);
-        }
-    };
+    const checkEmailDuplicate = async (email) => {
+      try {
+          const response = await fetch(`http://112.152.14.116:10211/check-email`, {
+              method: "POST",
+              headers: {
+                  "Content-Type": "application/x-www-form-urlencoded",
+              },
+              body: new URLSearchParams({ email }),
+          });
+  
+          const data = await response.json();
+          if (response.ok) {
+              return data.isDuplicate; // 서버에서 중복 확인 후 true/false 반환한다고 가정
+          } else {
+              console.error("Error checking email: ", data);
+              return true; // 오류 시 중복된 것으로 가정
+          }
+      } catch (error) {
+          console.error("Error checking email: ", error);
+          return true; // 오류 시 중복된 것으로 가정
+      }
+  };
+
+    const handleNext = async () => {
+      if (currentStep === 2) {
+          // 이메일 유효성 검사 후 중복 확인
+          if (!isEmailValid) {
+              setEmailErrorMessage("유효한 이메일 주소를 입력하세요.");
+              return;
+          }
+  
+          const isDuplicate = await checkEmailDuplicate(email);
+          if (isDuplicate) {
+              setEmailErrorMessage("중복된 이메일입니다.");
+              return;
+          } else {
+              setEmailErrorMessage("");
+          }
+      }
+  
+      if (
+          (currentStep === 1 && isNicknameValid) ||
+          (currentStep === 2 && isEmailValid && !emailErrorMessage) ||
+          (currentStep === 3 && isPasswordValid)
+      ) {
+          setAnimateOut(true);
+          setTimeout(() => {
+              setAnimateOut(false);
+              setCurrentStep((prevStep) => prevStep + 1);
+          }, 500);
+      }
+  };
 
     const handleBack = () => {
         setAnimateOut(true);
@@ -34,6 +75,8 @@ function Join({ onRegisterSuccess, onSwitchToLogin }) {
             setCurrentStep((prevStep) => prevStep - 1);
         }, 500);
     };
+
+    
 
     const handleRegister = useCallback(
         async (e) => {

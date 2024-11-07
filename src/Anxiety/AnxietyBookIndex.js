@@ -5,7 +5,7 @@ import '../output.css';
 const AnxietyBookIndex = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
-  const bookmarks = [
+  const thoughts = [
     { text: "나는 항상 배우고 성장하는 중이야. 모든 사람이 완벽할 필요는 없어.", note: "내가 완벽하지 않으면 사람들은 날 싫어할 거야." },
     { text: "내 속도대로 가는 거야. 내 방식으로 충분히 잘하고 있어.", note: "다른 사람들보다 뒤쳐지고 있는 것 같아." },
     { text: "과거는 이미 지나갔고, 나는 매일 더 나아지고 있어.", note: "과거의 실수 때문에 난 앞으로도 실패할 거야." },
@@ -17,7 +17,7 @@ const AnxietyBookIndex = () => {
     { text: "나는 최선을 다했고, 그걸로도 충분해.", note: "난 왜 항상 이것밖에 못 할까?" }
   ];
 
-  const filteredBookmarks = bookmarks.filter(bookmark =>
+  const filteredBookmarks = thoughts.filter(bookmark =>
     bookmark.text.toLowerCase().includes(searchQuery.toLowerCase()) ||
     bookmark.note.toLowerCase().includes(searchQuery.toLowerCase())
   );

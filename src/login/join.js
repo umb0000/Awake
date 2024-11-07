@@ -17,7 +17,7 @@ function Join({ onRegisterSuccess, onSwitchToLogin }) {
 
     const checkEmailDuplicate = async (email) => {
       try {
-          const response = await fetch(`http://112.152.14.116:10211/check-email`, {
+          const response = await fetch("http://112.152.14.116:10211/check-email", {
               method: "POST",
               headers: {
                   "Content-Type": "application/x-www-form-urlencoded",
@@ -79,41 +79,48 @@ function Join({ onRegisterSuccess, onSwitchToLogin }) {
     
 
     const handleRegister = useCallback(
-        async (e) => {
-            e.preventDefault();
-            setEmailErrorMessage('');
-
-            // 이메일 유효성 검사
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                setEmailErrorMessage("유효한 이메일 주소를 입력하세요.");
-                return;
-            }
-
-            // 회원가입 요청 보내기
-            try {
-                const response = await fetch("http://112.152.14.116:10211/register", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/x-www-form-urlencoded",
-                    },
-                    body: new URLSearchParams({ username : nickname, password, email }),
-                });
-
-                const data = await response.json();
-                if (response.ok) {
-                    onRegisterSuccess();
-                } else if (data.detail === "Email already registered") {
-                    setEmailErrorMessage("중복된 이메일입니다.");
-                } else {
-                    console.error("Registration failed: ", data);
-                }
-            } catch (error) {
-                console.error("Registration error: ", error);
-            }
-        },
-        [nickname, email, password, onRegisterSuccess]
-    );
+      async (e) => {
+          e.preventDefault();
+          setEmailErrorMessage('');
+  
+          // 이메일 유효성 검사
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(email)) {
+              setEmailErrorMessage("유효한 이메일 주소를 입력하세요.");
+              return;
+          }
+  
+          // 회원가입 요청 보내기
+          try {
+              const response = await fetch("http://112.152.14.116:10211/register", {
+                  method: "POST",
+                  headers: {
+                      "Content-Type": "application/x-www-form-urlencoded",
+                  },
+                  body: new URLSearchParams({ nickname, password, email }),
+              });
+  
+              if (!response.ok) {
+                  const data = await response.json();
+                  if (data.detail === "Email already registered") {
+                      setEmailErrorMessage("중복된 이메일입니다.");
+                      return;
+                  }
+                  throw new Error("Registration failed");
+              }
+  
+              // 회원가입 성공 시 호출
+              if (typeof onRegisterSuccess === 'function') {
+                  onRegisterSuccess();
+              }
+  
+          } catch (error) {
+              console.error("Registration error: ", error);
+          }
+      },
+      [nickname, email, password, onRegisterSuccess]
+  );
+  
 
     return (
         <div className="w-[360px] h-[800px] mx-auto relative bg-white">

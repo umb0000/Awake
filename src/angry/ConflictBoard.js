@@ -1,10 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
 import '../output.css';
+import Typewriter from "typewriter-effect/dist/core";
+import GraphemeSplitter from "grapheme-splitter";
 
 const ConflictBoard = () => {
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [messages, setMessages] = useState([]);
-  const textareaRef = useRef(null); // useRef로 textareaRef 정의
+  const textareaRef = useRef(null);
+  const messagesEndRef = useRef(null);
   const [userMessage, setUserMessage] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [userResponses, setUserResponses] = useState([]);
@@ -32,7 +35,7 @@ const ConflictBoard = () => {
     },
   ]);
 
-  const moodIcons = ["😊", "😌", "🙂", "🌈", "☀️", "🌟", "👍", "💪", "🙌", "❤️"];
+  const moodIcons = ["😊", "😌", "🙂", "🌈", "☀️", "🌟", "👍", "💪", "🤘", "❤️"];
   const imageOptions = [
     "/img/a.jpg", "/img/b.jpg", "/img/c.jpg", "/img/d.jpg", "/img/e.jpg",
     "/img/f.jpg", "/img/g.jpg", "/img/h.jpg", "/img/i.jpg", "/img/j.jpg",
@@ -44,18 +47,18 @@ const ConflictBoard = () => {
   const initialMessages = [
     { 
       sender: '웨이', 
-      text: `안녕하세요, 저는 웨이입니다. 🐱\n\n오늘 속상한 일이 있으셨나요?\n\n저와 함께 천천히 이야기 나누며\n마음을 정리해보는 건 어때요? 💭`
+      text: `안녕하세요, 저는 웨이입니다. 🐱\n\n오늘 속상한 일이 있으셨나요?\n\n저와 함께 천천히 이야기 나누며\n마음을 정리해보는 건 어때요? 💫`
     },
     {
       sender: '웨이',
-      text: `제가 차근차근 도와드릴게요. 🕊️\n\n질문은 총 3개로 구성되어 있고,\n마지막 답변 후엔 전체 내용을 요약해 보여드릴게요. 📝`
+      text: `제가 차근차근 도와드릴게요. 🧓\n\n질문은 총 3개로 구성되어 있고,\n마지막 답변 후엔 전체 내용을 요약해 보여드릴게요. 📝`
     },
     {
       sender: '웨이',
       text: `정리된 내용을 보시고,\n스스로에게 위로의 말을\n건네보는 시간을 가져보세요. 💬`
     },
     { 
-      isSeparator: true // 구분선 표시 여부
+      isSeparator: true 
     },
     { 
       sender: '웨이', 
@@ -81,11 +84,14 @@ const ConflictBoard = () => {
       setFinalMessage('');
       setShowImageAndMoodOptions(false);
 
-      initialMessages.forEach((message, index) => {
-        setTimeout(() => {
-          setMessages((prev) => [...prev, message]);
-        }, index * 3000);
-      });
+      const sendMessagesSequentially = async () => {
+        for (let index = 0; index < initialMessages.length; index++) {
+          await new Promise((resolve) => setTimeout(resolve, 3000));
+          setMessages((prev) => [...prev, initialMessages[index]]);
+          scrollToBottom();
+        }
+      };
+      sendMessagesSequentially();
     }
   }, [isChatOpen]);
 
@@ -100,6 +106,7 @@ const ConflictBoard = () => {
               "이 내용을 바탕으로, 자신에게 위로의 말을 건네보세요. 💬",
       };
       setMessages((prev) => [...prev, summaryMessage]);
+      scrollToBottom();
     }
   }, [currentQuestionIndex, userResponses]);
 
@@ -108,7 +115,7 @@ const ConflictBoard = () => {
       setMessages((prev) => [...prev, { sender: '사용자', text: userMessage }]);
       setUserResponses((prev) => [...prev, userMessage]); 
       setUserMessage('');
-      resetTextareaHeight(); // 높이 초기화
+      resetTextareaHeight();
       setIsTyping(true);
 
       setTimeout(() => {
@@ -117,6 +124,7 @@ const ConflictBoard = () => {
           setMessages((prev) => [...prev, nextMessage]);
         }
         setIsTyping(false);
+        scrollToBottom();
       }, 2000);
     }
   };
@@ -133,49 +141,6 @@ const ConflictBoard = () => {
     return null;
   };
 
-  // WayMessage 컴포넌트
-const WayMessage = ({ text }) => (
-  <div className="flex items-start">
-    <div className="w-12 h-12 rounded-full bg-[#FFAD7A] flex items-center justify-center shadow-md font-['Pretendard_Variable']">
-      <img
-        className="w-10 h-10 rounded-full"
-        src="/img/cat_way_crop2.png"
-        alt="웨이"
-      />
-    </div>
-    <div
-      className="p-4 rounded-lg bg-gray-200 shadow-md ml-2"
-      style={{
-        display: 'inline-block',       // 텍스트에 따라 너비가 조정되도록 설정
-        maxWidth: '75%',               // 최대 너비를 75%로 제한
-        whiteSpace: 'pre-wrap',        // \n 줄바꿈을 적용하며 단어가 자연스럽게 줄바꿈되도록 설정
-        hyphens: 'auto',               // 단어가 부드럽게 줄바꿈될 수 있도록 설정
-        overflowWrap: 'break-word',    // 긴 단어나 URL 등이 자연스럽게 줄바꿈되도록 설정
-      }}
-    >
-      <p className="text-sm">{text}</p>
-    </div>
-  </div>
-);
-
-// UserMessage 컴포넌트
-const UserMessage = ({ text }) => (
-  <div className="flex justify-end">
-    <div
-      className="p-4 rounded-lg bg-blue-500 text-white shadow-md ml-2"
-      style={{
-        display: 'inline-block',
-        maxWidth: '75%',
-        wordBreak: 'break-word',
-        whiteSpace: 'pre-wrap',
-        hyphens: 'auto',
-      }}
-    >
-      <p className="text-sm">{text}</p>
-    </div>
-  </div>
-);
-
   const handleFinalMessage = () => {
     setFinalMessage(userMessage);
     setMessages((prev) => [...prev, { sender: '사용자', text: userMessage }]);
@@ -191,26 +156,18 @@ const UserMessage = ({ text }) => (
       setIsTyping(false);
       setImageChoices(getRandomImages());
       setShowImageAndMoodOptions(true);
+      scrollToBottom();
     }, 2000);
   };
 
-  const selectImageAndMood = (image, moodIcon) => {
-    const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
 
-    setAllResponses((prev) => [
-      {
-        finalMessage: finalMessage,
-        userResponses: [...userResponses],
-        timestamp: timestamp,
-        moodIcon: moodIcon,
-        image: image,
-      },
-      ...prev,
-    ]);
-    setSelectedImage(image); 
-    setSelectedMood(moodIcon);
-    setShowSavePopup(true); 
-    setShowImageAndMoodOptions(false);
+  const resetTextareaHeight = () => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = 'auto';
+    }
   };
 
   const handleReturnToMain = () => {
@@ -219,15 +176,8 @@ const UserMessage = ({ text }) => (
     setFinalMessage('');
   };
 
-  const resetTextareaHeight = () => {
-    if (textareaRef.current) {
-      textareaRef.current.style.height = 'auto';
-    }
-  };
-  
-
   const renderTimeline = () => (
-    <div className="relative w-full h-[800px] bg-[#F5F3EF] overflow-y-scroll p-4 font-['Pretendard_Variable']">
+    <div className="relative w-full min-h-screen bg-[#F5F3EF] overflow-y-scroll p-4 font-['Pretendard_Variable']">
       <div className="sticky top-0 z-10 bg-white py-3 shadow-md rounded-tl-[20px] rounded-tr-[20px] border-b border-[#FFAD7A]">
         <h1 className="text-center text-xl font-bold text-[#FFAD7A] font-['Pretendard_Variable']">웨이의 분노 진정소</h1>
       </div>
@@ -273,13 +223,13 @@ const UserMessage = ({ text }) => (
   );
 
   const renderChat = () => (
-    <div className="w-full h-[800px] bg-white flex flex-col font-['Pretendard_Variable']">
-      <div className="w-full h-[60px] bg-[#f7f2fa] flex items-center justify-between px-6 shadow-sm border-b">
+    <div className="w-full min-h-screen bg-white flex flex-col font-['Pretendard_Variable']">
+      <div className="w-full h-[60px] bg-[#f7f2fa] flex items-center justify-between px-6 shadow-sm border-b fixed top-0 z-10">
         <span className="text-lg font-bold">웨이와의 대화</span>
         <button onClick={() => setIsChatOpen(false)} className="text-gray-500 text-xl font-bold">×</button>
       </div>
   
-      <div className="flex-1 overflow-y-auto p-6 space-y-4 bg-gray-50">
+      <div className="flex-1 overflow-y-auto p-6 space-y-4 bg-gray-50 mt-[60px]">
         {messages.map((msg, idx) =>
           msg.isSeparator ? (
             <div key={idx} className="flex items-center justify-center my-4">
@@ -300,39 +250,11 @@ const UserMessage = ({ text }) => (
           </div>
         )}
 
-        {showImageAndMoodOptions && (
-          <div className="flex flex-col space-y-4 mt-4">
-            <div className="flex space-x-3">
-              {imageChoices.map((image, index) => (
-                <img
-                  key={index}
-                  src={image}
-                  alt={`옵션 ${index + 1}`}
-                  onClick={() => setSelectedImage(image)}
-                  className={`w-20 h-20 rounded-lg cursor-pointer hover:opacity-75 transition ${selectedImage === image ? 'border-2 border-blue-500' : ''}`}
-                />
-              ))}
-            </div>
-            <div className="flex space-x-2">
-              {moodIcons.map((icon, index) => (
-                <span
-                  key={index}
-                  onClick={() => setSelectedMood(icon)}
-                  className={`cursor-pointer text-2xl ${selectedMood === icon ? 'text-blue-500 border-2 border-blue-500 rounded-full p-1' : 'text-gray-500'}`}
-                >
-                  {icon}
-                </span>
-              ))}
-            </div>
-            <button onClick={() => selectImageAndMood(selectedImage, selectedMood)} className="bg-blue-500 text-white px-4 py-2 rounded-lg">
-              선택 완료
-            </button>
-          </div>
-        )}
+        <div ref={messagesEndRef} />
       </div>
   
-      <div className="flex items-center px-4 py-3 bg-white border-t border-gray-200">
-      <textarea
+      <div className="flex items-center px-4 py-3 bg-white border-t border-gray-200 fixed bottom-0 w-full">
+        <textarea
           ref={textareaRef}
           rows={1}
           onInput={(e) => {
@@ -340,19 +262,20 @@ const UserMessage = ({ text }) => (
             e.target.style.height = `${e.target.scrollHeight}px`;
           }}
           className="flex-1 p-3 bg-gray-100 border rounded-lg resize-none overflow-hidden"
-          placeholder="메시지 입력"
+          placeholder={isTyping ? "지금은 메세지 입력이 불가합니다. 기다려주세요." : "메시지를 입력하세요.."}
           value={userMessage}
           onChange={(e) => setUserMessage(e.target.value)}
           style={{ maxHeight: '80px' }}
+          disabled={isTyping}
         />
 
         <button 
           onClick={currentQuestionIndex === 3 ? handleFinalMessage : handleSendMessage} 
           className="ml-2 px-4 py-2 bg-[#FFAD7A] text-white font-semibold rounded-[11px] hover:bg-[#E5946D] transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FFAD7A]"
+          disabled={isTyping}
         >
           보내기
         </button>
-
       </div>
   
       {showSavePopup && (
@@ -370,3 +293,63 @@ const UserMessage = ({ text }) => (
 };
 
 export default ConflictBoard;
+
+const WayMessage = ({ text }) => {
+  useEffect(() => {
+    const app = document.getElementById("way-message");
+    const stringSplitter = (string) => {
+      const splitter = new GraphemeSplitter();
+      return splitter.splitGraphemes(string);
+    };
+
+    if (app) {
+      const typewriter = new Typewriter(app, {
+        loop: false,
+        delay: 75,
+        stringSplitter,
+      });
+
+      typewriter.typeString(text).start();
+    }
+  }, [text]);
+
+  return (
+    <div className="flex items-start">
+      <div className="w-12 h-12 rounded-full bg-[#FFAD7A] flex items-center justify-center shadow-md font-['Pretendard_Variable']">
+        <img
+          className="w-10 h-10 rounded-full"
+          src="/img/cat_way_crop2.png"
+          alt="웨이"
+        />
+      </div>
+      <div
+        id="way-message"
+        className="typewriter-text p-4 rounded-lg bg-gray-200 shadow-md ml-2"
+        style={{
+          display: 'inline-block',
+          maxWidth: '75%',
+          whiteSpace: 'pre-wrap',
+          hyphens: 'auto',
+          overflowWrap: 'break-word',
+        }}
+      />
+    </div>
+  );
+};
+
+const UserMessage = ({ text }) => (
+  <div className="flex justify-end">
+    <div
+      className="p-4 rounded-lg bg-blue-500 text-white shadow-md ml-2"
+      style={{
+        display: 'inline-block',
+        maxWidth: '75%',
+        whiteSpace: 'pre-wrap',
+        hyphens: 'auto',
+        overflowWrap: 'break-word',
+      }}
+    >
+      {text}
+    </div>
+  </div>
+);

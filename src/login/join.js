@@ -97,7 +97,7 @@ function Join({ onRegisterSuccess, onSwitchToLogin }) {
                   headers: {
                       "Content-Type": "application/x-www-form-urlencoded",
                   },
-                  body: new URLSearchParams({ nickname, password, email }),
+                  body: new URLSearchParams({ username : nickname, password, email }),
               });
   
               if (!response.ok) {

@@ -135,7 +135,7 @@ function Join({ onRegisterSuccess, onSwitchToLogin }) {
                         </div>
                         <div className="self-stretch h-[64px] flex items-center justify-start py-[8px] px-[23px] bg-[#fff]">
                             <button onClick={handleBack}>
-                                <img width="12" height="24" src={${process.env.PUBLIC_URL} + "/img/back.png"} alt="back" />
+                                <img width="12" height="24" src={process.env.PUBLIC_URL + "/img/back.png"} alt="back" />
                             </button>
                         </div>
                     </div>

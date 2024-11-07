@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './Signup.css'; // 별도의 CSS 파일로 스타일 분리
 import '.././output.css';
 
-function Login({ setTocken }) {
+const Login = ({ setTocken }) => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');

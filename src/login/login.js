@@ -126,8 +126,8 @@ const Login = () => {
                     type={currentStep === 3 ? 'submit' : 'button'}
                     onClick={handleNext}
                     disabled={
-                        (currentStep === 2)||
-                        (currentStep === 3)
+                      (currentStep === 2 && isEmailValid) ||
+                      (currentStep === 3 && isPasswordValid)
                     }
                     className={`w-full py-3 mt-6 absolute bottom-0 left-0 flex items-center justify-center py-[17px] px-[113px] ${
                         currentStep === 2 || currentStep === 3 ? 'bg-[#ff6d00]' : 'bg-gray-300'

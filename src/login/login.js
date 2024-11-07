@@ -72,6 +72,19 @@ const Login = () => {
     return (
         <div className="w-[360px] h-[800px] mx-auto relative bg-white">
             <form onSubmit={handleLogin} className="flex flex-col items-center justify-center gap-4">
+            {currentStep > 2 && (
+                    <div className="w-[360px] flex flex-col items-center justify-start">
+                        <div className="self-stretch h-[45px] flex items-end justify-between py-[10px] px-[24px]">
+                            <div className="text-[14px] font-['Roboto'] font-medium text-[#1d1b20]">9:30</div>
+                            <img width="46" height="17" src="right iconsI257_737;50758_11372.png" alt="icon" />
+                        </div>
+                        <div className="self-stretch h-[64px] flex items-center justify-start py-[8px] px-[23px] bg-[#fff]">
+                            <button onClick={handleBack}>
+                                <img width="12" height="24" src={process.env.PUBLIC_URL + "/img/back.png"} alt="back" />
+                            </button>
+                        </div>
+                    </div>
+                )}
                 <div className={`transition-container ${animateOut ? 'slide-out-left' : 'slide-in-right'}`}>
                     {currentStep === 2 && (
                         <div className="absolute left-[27px] top-[209px] w-[307px] flex flex-col items-start justify-start gap-[20px]">

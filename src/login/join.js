@@ -10,63 +10,66 @@ function Join({ onRegisterSuccess, onSwitchToLogin }) {
     const [animateOut, setAnimateOut] = useState(false);
 
     const [emailErrorMessage, setEmailErrorMessage] = useState('');
+    const [isEmailDuplicate, setIsEmailDuplicate] = useState(false);
 
     const isNicknameValid = nickname.length >= 2;
     const isEmailValid = email.includes('@') && email.includes('.');
     const isPasswordValid = password.length >= 6;
 
     const checkEmailDuplicate = async (email) => {
-      try {
-          const response = await fetch("http://112.152.14.116:10211/check-email", {
-              method: "POST",
-              headers: {
-                  "Content-Type": "application/x-www-form-urlencoded",
-              },
-              body: new URLSearchParams({ email }),
-          });
-  
-          const data = await response.json();
-          if (response.ok) {
-              return data.isDuplicate; // 서버에서 중복 확인 후 true/false 반환한다고 가정
-          } else {
-              console.error("Error checking email: ", data);
-              return true; // 오류 시 중복된 것으로 가정
-          }
-      } catch (error) {
-          console.error("Error checking email: ", error);
-          return true; // 오류 시 중복된 것으로 가정
-      }
-  };
+        try {
+            const response = await fetch("http://112.152.14.116:10211/check-email", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: new URLSearchParams({ email }),
+            });
+
+            const data = await response.json();
+            if (response.ok) {
+                setIsEmailDuplicate(data.isDuplicate);
+                return data.isDuplicate; // 서버에서 중복 확인 후 true/false 반환한다고 가정
+            } else {
+                console.error("Error checking email: ", data);
+                setIsEmailDuplicate(true);
+                return true; // 오류 시 중복된 것으로 가정
+            }
+        } catch (error) {
+            console.error("Error checking email: ", error);
+            setIsEmailDuplicate(true);
+            return true; // 오류 시 중복된 것으로 가정
+        }
+    };
 
     const handleNext = async () => {
-      if (currentStep === 2) {
-          // 이메일 유효성 검사 후 중복 확인
-          if (!isEmailValid) {
-              setEmailErrorMessage("유효한 이메일 주소를 입력하세요.");
-              return;
-          }
-  
-          const isDuplicate = await checkEmailDuplicate(email);
-          if (isDuplicate) {
-              setEmailErrorMessage("중복된 이메일입니다.");
-              return;
-          } else {
-              setEmailErrorMessage("");
-          }
-      }
-  
-      if (
-          (currentStep === 1 && isNicknameValid) ||
-          (currentStep === 2 && isEmailValid && !emailErrorMessage) ||
-          (currentStep === 3 && isPasswordValid)
-      ) {
-          setAnimateOut(true);
-          setTimeout(() => {
-              setAnimateOut(false);
-              setCurrentStep((prevStep) => prevStep + 1);
-          }, 500);
-      }
-  };
+        if (currentStep === 2) {
+            if (!isEmailValid) {
+                setEmailErrorMessage("유효한 이메일 주소를 입력하세요.");
+                return;
+            }
+
+            const isDuplicate = await checkEmailDuplicate(email);
+            if (isDuplicate) {
+                setEmailErrorMessage("중복된 이메일입니다.");
+                return;
+            } else {
+                setEmailErrorMessage("");
+            }
+        }
+
+        if (
+            (currentStep === 1 && isNicknameValid) ||
+            (currentStep === 2 && isEmailValid && !isEmailDuplicate) ||
+            (currentStep === 3 && isPasswordValid)
+        ) {
+            setAnimateOut(true);
+            setTimeout(() => {
+                setAnimateOut(false);
+                setCurrentStep((prevStep) => prevStep + 1);
+            }, 500);
+        }
+    };
 
     const handleBack = () => {
         setAnimateOut(true);
@@ -76,51 +79,50 @@ function Join({ onRegisterSuccess, onSwitchToLogin }) {
         }, 500);
     };
 
-    
-
     const handleRegister = useCallback(
-      async (e) => {
-          e.preventDefault();
-          setEmailErrorMessage('');
-  
-          // 이메일 유효성 검사
-          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-          if (!emailRegex.test(email)) {
-              setEmailErrorMessage("유효한 이메일 주소를 입력하세요.");
-              return;
-          }
-  
-          // 회원가입 요청 보내기
-          try {
-              const response = await fetch("http://112.152.14.116:10211/register", {
-                  method: "POST",
-                  headers: {
-                      "Content-Type": "application/x-www-form-urlencoded",
-                  },
-                  body: new URLSearchParams({ username : nickname, password, email }),
-              });
-  
-              if (!response.ok) {
-                  const data = await response.json();
-                  if (data.detail === "Email already registered") {
-                      setEmailErrorMessage("중복된 이메일입니다.");
-                      return;
-                  }
-                  throw new Error("Registration failed");
-              }
-  
-              // 회원가입 성공 시 호출
-              if (typeof onRegisterSuccess === 'function') {
-                  onRegisterSuccess();
-              }
-  
-          } catch (error) {
-              console.error("Registration error: ", error);
-          }
-      },
-      [nickname, email, password, onRegisterSuccess]
-  );
-  
+        async (e) => {
+            e.preventDefault();
+            setEmailErrorMessage('');
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                setEmailErrorMessage("유효한 이메일 주소를 입력하세요.");
+                return;
+            }
+
+            if (isEmailDuplicate) {
+                setEmailErrorMessage("중복된 이메일입니다.");
+                return;
+            }
+
+            try {
+                const response = await fetch("http://112.152.14.116:10211/register", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                    body: new URLSearchParams({ username: nickname, password, email }),
+                });
+
+                if (!response.ok) {
+                    const data = await response.json();
+                    if (data.detail === "Email already registered") {
+                        setEmailErrorMessage("중복된 이메일입니다.");
+                        return;
+                    }
+                    throw new Error("Registration failed");
+                }
+
+                if (typeof onRegisterSuccess === 'function') {
+                    onRegisterSuccess();
+                }
+
+            } catch (error) {
+                console.error("Registration error: ", error);
+            }
+        },
+        [nickname, email, password, onRegisterSuccess, isEmailDuplicate]
+    );
 
     return (
         <div className="w-[360px] h-[800px] mx-auto relative bg-white">
@@ -133,7 +135,7 @@ function Join({ onRegisterSuccess, onSwitchToLogin }) {
                         </div>
                         <div className="self-stretch h-[64px] flex items-center justify-start py-[8px] px-[23px] bg-[#fff]">
                             <button onClick={handleBack}>
-                                <img width="12" height="24" src={`${process.env.PUBLIC_URL}/img/back.png`} alt="back" />
+                                <img width="12" height="24" src={${process.env.PUBLIC_URL} + "/img/back.png"} alt="back" />
                             </button>
                         </div>
                     </div>
@@ -166,7 +168,11 @@ function Join({ onRegisterSuccess, onSwitchToLogin }) {
                                 type="email"
                                 placeholder="email1234@example.com"
                                 value={email}
-                                onChange={(e) => setEmail(e.target.value)}
+                                onChange={(e) => {
+                                    setEmail(e.target.value);
+                                    setIsEmailDuplicate(false);
+                                    setEmailErrorMessage('');
+                                }}
                                 className="self-stretch h-[55px] flex items-center py-[17px] px-[20px] bg-[#fff] border border-[#b2b2b2] rounded-[10px] text-[14px] font-['Pretendard'] font-semibold"
                             />
                             {emailErrorMessage && <div className="text-red-500">{emailErrorMessage}</div>}
@@ -188,7 +194,6 @@ function Join({ onRegisterSuccess, onSwitchToLogin }) {
                             />
                         </div>
                     )}
-
                 </div>
 
                 <button
@@ -201,9 +206,8 @@ function Join({ onRegisterSuccess, onSwitchToLogin }) {
                     }
                     className={`w-full py-3 mt-6 absolute bottom-0 left-0 flex items-center justify-center py-[17px] px-[113px] ${
                         (currentStep === 1 && isNicknameValid) ||
-                        (currentStep === 2 && isEmailValid) ||
+                        (currentStep === 2 && isEmailValid && !isEmailDuplicate) ||
                         (currentStep === 3 && isPasswordValid) 
-
                             ? 'bg-[#ff6d00]'
                             : 'bg-gray-300'
                     } text-white font-semibold z-20`}

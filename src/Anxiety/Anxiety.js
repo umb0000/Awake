@@ -38,6 +38,7 @@ const Anxiety = () => {
             </div>
           </div>
           <div className="self-stretch h-[1px] shrink-0 bg-[#fff]"></div>
+          
           <div className="w-[95%] h-[166px] shrink-0 flex flex-row items-center justify-center gap-[11px]">
           <a href='http://kwawake.duckdns.org/AnxietyBook'>
             <div className="relative w-[160px] h-[166px] shrink-0 flex">

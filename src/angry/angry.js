@@ -42,7 +42,7 @@ const Angry = () => {
               <div className="w-[266px] text-[16px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-bold text-[#000]">분노한 마음을 서서히 가라앉혀요</div>
               <div className="w-[263px] text-[10px] leading-[10px] tracking-[.01em] font-['Pretendard_Variable'] font-medium text-[#79747e]">화가 나도 일단 진정!</div>
             </div>
-              <img className="absolute right-0 top-2 object-cover" width="41" height="49" src={process.env.PUBLIC_URL + "/img/3dicons1_509.png"} alt="3d icon" />
+              <img className="absolute left-[282px] top-2 object-cover" width="41" height="49" src={process.env.PUBLIC_URL + "/img/3dicons1_509.png"} alt="3d icon" />
         </div>
       </div>
       

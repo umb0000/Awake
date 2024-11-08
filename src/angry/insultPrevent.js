@@ -8,9 +8,10 @@ const InsultFeedbackExample = () => {
     <div className={`relative w-[360px] h-[800px] mx-auto bg-white font-['Pretendard_Variable'] p-4 shadow-lg rounded-lg z-10 ${showExample && 'opacity-50'}`}>
       {/* Header */}
       <div className="flex justify-center items-center px-4 py-2 border-b">
-        <span className="text-lg font-bold text-black">
-          <img src="/img/shield.png" alt="shield" className="inline w-5 h-5 mb-1" /> 모욕 대처 가이드
+      <span className="text-[20px] font-bold text-black">
+       <img src="/img/shield.png" alt="shield" className="inline w-5 h-5 mb-1" /> 모욕 대처 가이드
         </span>
+
       </div>
 
       {/* Guide Content */}

@@ -193,7 +193,7 @@ const ConflictBoard = () => {
   const renderTimeline = () => (
     <div className="relative w-full h-screen bg-[#F5F3EF] overflow-y-scroll font-['Pretendard_Variable']">
       <div className="fixed top-20 left-1/2 transform -translate-x-1/2 w-[93%] h-[60px] z-10 p-4 bg-white shadow-md rounded-tl-[20px] rounded-tr-[20px] border-b border-[#FFAD7A]">
-        <h1 className="text-center text-xl font-bold text-[#FFAD7A] font-['Pretendard_Variable']">웨이의 분노 진정소 기록</h1>
+        <h1 className="text-center text-[20px] font-bold text-[black] font-['Pretendard_Variable']">웨이의 분노 진정소 기록</h1>
       </div>
 
 
@@ -208,8 +208,9 @@ const ConflictBoard = () => {
               <span className="mr-2 p-1 rounded-full bg-[#FFAD7A]/20 text-[#D88C65] text-lg">{response.moodIcon}</span>
               <span className="text-gray-400">{response.timestamp}</span>
             </div>
-            <h2 className="text-lg font-semibold text-[#4B4B4B] leading-relaxed mb-2 font-['Pretendard_Variable']">{response.finalMessage}</h2>
-            <p className="text-xs text-gray-500 mt-2 whitespace-pre-wrap">
+            <h2 className="text-[15px] font-semibold text-[#4B4B4B] leading-relaxed mb-2 font-[Pretendard_Variable]">{response.finalMessage}</h2>
+              <p className="text-[10px] text-gray-500 mt-2 whitespace-pre-wrap">
+
               {response.userResponses[0] || ''}
             </p>
           </div>

@@ -23,14 +23,16 @@ const AnxietyBookIndex = () => {
   );
 
   return (
-    <div className="relative w-[360px] h-[800px] bg-[#FDFDFD] flex flex-col items-center overflow-hidden font-['Pretendard_Variable']">
-      {/* Fixed Header */}
-      <div className="w-full h-20 flex justify-center items-center sticky top-0 z-10 shadow-md border-b border-[#FFD8B1] bg-gradient-to-r from-[#FFA76B] to-[#FFD8B1]">
-        <h1 className="text-lg font-bold text-[#6D3F1F]">불안의 책갈피</h1>
+    <div className="flex flex-col items-center px-4 py-2">
+      {/* 상단바 */}
+      <div className="w-full flex justify-center items-center px-4 py-2 border-b">
+       <span className="text-[20px] font-bold text-black">
+        불안의 책갈피
+       </span>
       </div>
 
-      {/* Updated Search Bar */}
-      <div className="w-[90%] h-14 mt-4 flex items-center bg-white border border-[#FFD8B1] rounded-full shadow-sm px-4 mx-auto">
+      {/* 검색창 */}
+      <div className="w-[90%] h-14 mt-4 flex items-center bg-white border border-[#FFD8B1] shadow-sm px-4 mx-auto">
         <FiSearch className="text-[#FFA76B] mr-3 text-lg" />
         <input
           type="text"
@@ -41,7 +43,8 @@ const AnxietyBookIndex = () => {
         />
       </div>
 
-      {/* Bookmarks List with Scrollable Area */}
+
+      {/* 책갈피 목록 */}
       <div className="w-full flex flex-col gap-4 p-4 mt-4 overflow-y-auto h-[620px] font-['Pretendard_Variable']">
         {filteredBookmarks.length > 0 ? (
           filteredBookmarks.map((bookmark, index) => (

@@ -99,8 +99,8 @@ const Angry = () => {
 
         <div className="relative w-[95%]  h-[68px] flex-shrink-0">
           <div className="absolute left-0 top-0 w-full h-full flex flex-col items-start justify-center py-3 px-5 bg-[#ffcd63] rounded-[16px]">
-            <div className="text-lg font-black text-white">AWAKE 분노 상담 센터</div>
-            <div className="text-xs font-semibold text-white">상담이 필요하신가요? AWAKE 불안 상담센터</div>
+          <div className="self-stretch text-[16px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-black text-[#fff]">AWAKE 분노 상담 센터</div>
+          <div className="self-stretch text-[10px] leading-[10px] tracking-[.01em] font-['Pretendard_Variable'] font-semibold text-[#fff]">화를 참기 힘들 때가 많나요? AWAKE 분노 상담센터</div>
           </div>
           <div className="absolute right-5 top-1 w-[124px] text-[50px] font-black text-white opacity-30">AWA</div>
         </div>

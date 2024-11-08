@@ -64,18 +64,30 @@ const Main = () => {
   };
   
   // 점수 및 레벨 업데이트 핸들러
-  const updateLevelSystemState = (updatedState) => {
-    setLevel(updatedState.level);
-    setCurrentScore(updatedState.currentScore);
-    setScoreToNextLevel(updatedState.scoreToNextLevel);
-  };
+const updateLevelSystemState = (updatedState) => {
+  setLevel(updatedState.level); // 새로운 레벨 설정
+  setCurrentScore(updatedState.currentScore); // 현재 점수 설정
+  setScoreToNextLevel(updatedState.scoreToNextLevel); // 다음 레벨까지 필요한 점수 설정
+
+  // 퍼센트로 계산된 게이지 바 업데이트
+  const progressPercentage = ((updatedState.currentScore / updatedState.scoreToNextLevel) * 100).toFixed(1);
+  setCompletionRate(progressPercentage); // 달성률 업데이트
+};
+
 
   // 체크박스 클릭 시 실행되는 함수
   const handleCheck = (card) => {
-    const isHighPriorityCompleted = true; // 모든 상 우선순위 완료 여부 확인 로직 추가 가능
-    const updatedState = card.checked
-      ? levelSystem.uncompleteTask(card.priority, isHighPriorityCompleted)
-      : levelSystem.completeTask(card.priority, isHighPriorityCompleted);
+    const priority = card.type === "todo" ? 
+    (card.image === "level3.png" ? "상" : card.image === "level2.png" ? "중" : "하") 
+    : "routine";
+
+  const isHighPriorityCompleted = priority === "상"; // 우선순위가 "상"인 경우
+
+
+  const updatedState = card.checked
+  ? levelSystem.uncompleteTask(priority, isHighPriorityCompleted)
+  : levelSystem.completeTask(priority, isHighPriorityCompleted);
+
 
     updateLevelSystemState(updatedState);
     card.checked = !card.checked; // 체크 상태 반전
@@ -195,7 +207,12 @@ const Main = () => {
 
           {/* TodoList 컴포넌트에서 달성률을 받아옴 */}
           <div className="self-stretch h-[600px] shrink-0 flex flex-col items-start justify-start gap-[7px]">
-            <TodoList  onCheck={handleCheck} onCompletionRateChange={handleCompletionRateChange} onPointChange={handlePointChange} />
+            <TodoList  onCheck={handleCheck} completeTask={(type, priority) => levelSystem.completeTask(type, priority)}
+            uncompleteTask={(type, priority) => levelSystem.uncompleteTask(type, priority)} onCompletionRateChange={(rate, total, completed) => {
+              setCompletionRate(rate);
+              setTotalCards(total);
+              setCompletedCards(completed);
+            }} />
           </div>
         </div>  
 

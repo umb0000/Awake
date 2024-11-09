@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './output.css';
 
 const MainAdd = () => {
@@ -6,19 +7,52 @@ const MainAdd = () => {
   const [isTaskSelected, setIsTaskSelected] = useState(true); // 할 일 선택 상태를 저장
   const [selectedTime, setSelectedTime] = useState(''); // 아침, 점심, 저녁, 종일 중 선택된 시간
   const [isImportant, setIsImportant] = useState(false); // 중요 버튼 상태
-  const [isUrgent, setIsUrgent] = useState(false); // 긴급 버튼 상태
+  const [isEmergency, setIsEmergency] = useState(false); // 긴급 버튼 상태
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedOption, setSelectedOption] = useState("한 번만");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  // 날짜를 '8월 24일' 형식으로 표시하는 함수
+  const [user, setUser] = useState(null); // 사용자 정보 상태
+  const navigate = useNavigate();
+
+  useEffect(() => {
+      const token = localStorage.getItem('token');
+      if (!token) {
+          navigate('/login');
+          return;
+      }
+
+      const fetchUserData = async () => {
+          try {
+              const response = await fetch('http://112.152.14.116:10211/user-info', {
+                  method: 'GET',
+                  headers: {
+                      Authorization: `Bearer ${token}`, // 토큰을 헤더에 추가
+                  },
+              });
+
+              if (response.ok) {
+                  const data = await response.json();
+                  setUser(data);
+              } else {
+                  localStorage.removeItem('token');
+                  navigate('/login');
+              }
+          } catch (error) {
+              console.error('Failed to fetch user info:', error);
+              navigate('/login');
+          }
+      };
+
+      fetchUserData();
+  }, [navigate]);
+
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    const month = date.getMonth() + 1; // 월은 0부터 시작하므로 +1
+    const month = date.getMonth() + 1;
     const day = date.getDate();
     return `${month}월 ${day}일`;
   }; 
-
 
   const options = ["한 번만", "매일", "평일", "주말"];
 
@@ -33,7 +67,7 @@ const MainAdd = () => {
     setSelectedDate(formattedToday);
   }, []);
 
-  const isFormValid = taskName.trim() !== ''; // 입력된 값이 있으면 true
+  const isFormValid = taskName.trim() !== ''; 
 
   const handleTaskClick = () => {
     setIsTaskSelected(true);
@@ -51,22 +85,45 @@ const MainAdd = () => {
     setIsImportant((prev) => !prev);
   };
 
-  const toggleUrgent = () => {
-    setIsUrgent((prev) => !prev);
+  const toggleEmergency = () => {
+    setIsEmergency((prev) => !prev);
   };
 
   const handleSubmit = () => {
-    console.log({
-      taskName,
-      selectedTime,
-      isImportant,
-      isUrgent
+    const todoData = {
+      title: taskName,
+      is_routine: !isTaskSelected, 
+      when_routine: selectedDate, 
+      is_importance: isImportant,
+      is_emergency: isEmergency, 
+      repeatance: selectedOption,
+      do_when: isTaskSelected ? null : selectedTime, 
+      is_done: false 
+    };
+
+    console.log(todoData); // 확인용 출력
+
+    // API 요청 보내기
+    const token = localStorage.getItem('token');
+    fetch('http://112.152.14.116:10211/todo', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(todoData),
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Todo 저장 성공:', data);
+    })
+    .catch(error => {
+      console.error('Todo 저장 실패:', error);
     });
   };
 
   return (
     <div className="w-[360px] h-[336px] relative">
-      <div className="w-[360px] h-[336px] left-0 top-0 absolute" />
       <div className="h-[316px] left-[15px] top-[25px] absolute flex-col justify-start items-start inline-flex">
         <div className="self-stretch justify-between items-center inline-flex">
           <div
@@ -95,7 +152,6 @@ const MainAdd = () => {
               />
             </div>
 
-           {/* 상태에 따라 다른 버튼 표시 */}
            {!isTaskSelected ? (
               <div className="w-[290px] h-10 justify-center items-start gap-[3.33px] inline-flex">
                 {['아침', '점심', '저녁', '종일'].map((time) => (
@@ -121,8 +177,8 @@ const MainAdd = () => {
                   </div>
                 </div>
                 <div
-                  onClick={toggleUrgent}
-                  className={`w-[142px] h-10 px-9 py-[9px] ${isUrgent ? 'border-[#ff9800] text-[#ff9800]' : 'bg-white text-black'} rounded-[5px] border border-[#f4f7f8] justify-center items-center gap-2.5 flex`}
+                  onClick={toggleEmergency}
+                  className={`w-[142px] h-10 px-9 py-[9px] ${isEmergency ? 'border-[#ff9800] text-[#ff9800]' : 'bg-white text-black'} rounded-[5px] border border-[#f4f7f8] justify-center items-center gap-2.5 flex`}
                 >
                   <div className="w-[49px] h-[22px] text-center text-xs font-bold font-['Pretendard'] leading-7">
                     긴급 🚨
@@ -131,63 +187,59 @@ const MainAdd = () => {
               </div>
             )}
 
-<div className="w-[290px] h-[42px] px-3.5 bg-white border border-[#f4f7f8] justify-start items-center gap-[17px] inline-flex relative cursor-pointer" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
-      <div className="w-[148px] text-[#49454f] text-xs font-normal font-['Pretendard_Variable'] leading-7">반복</div>
-      <div className="w-[98px] h-7 relative">
-        <img
-          className="w-3 h-3.5 left-[86px] top-[7px] absolute"
-          src="https://via.placeholder.com/12x14"
-          alt="Dropdown Icon"
-        />
-        <div className="w-[79px] left-0 top-0 absolute text-right text-[#49454f] text-xs font-normal font-['Pretendard_Variable'] leading-7">
-          {selectedOption}
-        </div>
-      </div>
-      {/* 드롭다운 메뉴 */}
-      {isDropdownOpen && (
-        <div className="absolute top-[42px] left-0 w-full bg-white border border-[#f4f7f8] shadow-md z-10">
-          {options.map((option) => (
-            <div
-              key={option}
-              className="px-4 py-1 text-[#49454f] text-xs font-normal font-['Pretendard_Variable'] leading-7 hover:bg-gray-100"
-              onClick={() => handleOptionClick(option)}
-            >
-              {option}
+            <div className="w-[290px] h-[42px] px-3.5 bg-white border border-[#f4f7f8] justify-start items-center gap-[17px] inline-flex relative cursor-pointer" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
+              <div className="w-[148px] text-[#49454f] text-xs font-normal font-['Roboto'] leading-7">반복</div>
+              <div className="w-[98px] h-7 relative">
+                <img
+                  className="w-3 h-3.5 left-[86px] top-[7px] absolute"
+                  src="https://via.placeholder.com/12x14"
+                  alt="Dropdown Icon"
+                />
+                <div className="w-[79px] left-0 top-0 absolute text-right text-[#49454f] text-xs font-normal font-['Roboto'] leading-7">
+                  {selectedOption}
+                </div>
+              </div>
+              {isDropdownOpen && (
+                <div className="absolute top-[42px] left-0 w-full bg-white border border-[#f4f7f8] shadow-md z-10">
+                  {options.map((option) => (
+                    <div
+                      key={option}
+                      className="px-4 py-1 text-[#49454f] text-xs font-normal font-['Pretendard'] leading-7 hover:bg-gray-100"
+                      onClick={() => handleOptionClick(option)}
+                    >
+                      {option}
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
-          ))}
-        </div>
-      )}
-    </div>
-
 
             <div className="w-[290px] h-[42px] px-3.5 bg-white border border-[#f4f7f8] justify-start items-center gap-[17px] inline-flex relative cursor-pointer">
-      <div className="w-[148px] text-[#49454f] text-xs font-normal font-['Pretendard_Variable'] leading-7">날짜</div>
-      <div className="w-[98px] h-7 relative">
-        <img
-          className="w-3 h-3.5 left-[86px] top-[7px] absolute"
-          src="https://via.placeholder.com/12x14"
-          alt="Calendar Icon"
-        />
-        <div className="w-[79px] left-0 top-0 absolute text-right text-[#49454f] text-xs font-normal font-['Pretendard_Variable'] leading-7">
-          {formatDate(selectedDate) }
-          {/* 전체 영역을 클릭할 수 있도록 설정 */}
-      <input
-        type="date"
-        value={selectedDate}
-        onChange={(e) => setSelectedDate(e.target.value)}
-        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-      />
-        </div>
-      </div>
-      
-    </div>
+              <div className="w-[148px] text-[#49454f] text-xs font-normal font-['Pretendard'] leading-7">날짜</div>
+              <div className="w-[98px] h-7 relative">
+                <img
+                  className="w-3 h-3.5 left-[86px] top-[7px] absolute"
+                  src="https://via.placeholder.com/12x14"
+                  alt="Calendar Icon"
+                />
+                <div className="w-[79px] left-0 top-0 absolute text-right text-[#49454f] text-xs font-normal font-['Pretendard'] leading-7">
+                  {formatDate(selectedDate)}
+                  <input
+                    type="date"
+                    value={selectedDate}
+                    onChange={(e) => setSelectedDate(e.target.value)}
+                    className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                  />
+                </div>
+              </div>
+            </div>
 
             <button
               onClick={handleSubmit}
-              disabled={!isFormValid} // 입력된 값이 없으면 비활성화
+              disabled={!isFormValid}
               className={` w-[290px] h-[42px] px-[100px] py-[5px] rounded-[5px] justify-center items-center gap-2.5 inline-flex ${isFormValid ? 'bg-[#FF9800]' : 'bg-[#d9d9d9]'}`}
             >
-              <div className="text-white text-base font-bold font-['Pretendard_Variable'] leading-7">추가하기</div>
+              <div className="text-white text-base font-bold font-['Pretendard'] leading-7">추가하기</div>
             </button>
 
           </div>

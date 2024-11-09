@@ -10,18 +10,14 @@ class LevelSystem {
     }
 
     completeTask(priority, isHighPriorityCompleted) {
-        const taskScore = this.calculateTaskScore(priority);
-        const bonus = isHighPriorityCompleted ? this.calculateBonus(priority) : 0;
-
-        this.currentScore += taskScore + bonus;
+        const taskScore = this.calculateTaskScore(priority) + (isHighPriorityCompleted ? 10 : 0);
+        this.currentScore += taskScore;
         return this.updateLevel();
     }
 
     uncompleteTask(priority, isHighPriorityCompleted) {
-        const taskScore = this.calculateTaskScore(priority);
-        const bonus = isHighPriorityCompleted ? this.calculateBonus(priority) : 0;
-
-        this.currentScore = Math.max(0, this.currentScore - (taskScore + bonus));
+        const taskScore = this.calculateTaskScore(priority) + (isHighPriorityCompleted ? 10 : 0);
+        this.currentScore = Math.max(0, this.currentScore - taskScore); // 올바른 감소 처리
         return this.updateLevel();
     }
 
@@ -66,12 +62,7 @@ class LevelSystem {
         return taskScore;
     }
 
-    calculateBonus(priority) {
-        if (priority === "상") return 10;
-        if (priority === "중") return 5;
-        if (priority === "하") return 2;
-        return 0;
-    }
+   
 }
 
 export default LevelSystem;

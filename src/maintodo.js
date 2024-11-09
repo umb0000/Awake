@@ -94,27 +94,23 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
   });
 
   const handleCheck = (card) => {
-    onCheck(card);
     
-    setCards(prevCards => {
-      const updatedCards = prevCards.map(item =>
-        item.id === card.id ? { ...item, checked: !item.checked } : item
+    
+    setCards((prevCards) => {
+      const updatedCards = prevCards.map((item) =>
+          item.id === card.id ? { ...item, checked: !item.checked } : item
       );
 
-      const checkedCard = updatedCards.find(item => item.id === card.id);
-      if (checkedCard) {
-        onCheck(checkedCard); // Main의 handleCheck 호출, card 객체 전달
-      }
-
       // 완료된 항목과 전체 항목 수 계산
-      const completedCount = updatedCards.filter(item => item.checked).length;
+      const completedCount = updatedCards.filter((item) => item.checked).length;
       const totalCount = updatedCards.length;
-      const newCompletionRate  = Math.round((completedCount / totalCount) * 100);
-      onCompletionRateChange(completionRate, totalCount, completedCount);
-      setCompletionRate(newCompletionRate);
-      onCheck(card);
+      const newCompletionRate = Math.round((completedCount / totalCount) * 100);
+
+      onCompletionRateChange(newCompletionRate, totalCount, completedCount);
+      
       return updatedCards;
     });
+    onCheck(card);
   };
 
   const handleDeleteCard = (id) => {

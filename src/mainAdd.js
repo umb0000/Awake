@@ -35,8 +35,8 @@ const MainAdd = () => {
                   const data = await response.json();
                   setUser(data);
               } else {
-                  localStorage.removeItem('token');
-                  navigate('/login');
+                 // localStorage.removeItem('token');
+                  //navigate('/login');
               }
           } catch (error) {
               console.error('Failed to fetch user info:', error);

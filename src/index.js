@@ -27,8 +27,6 @@ import Forest from './forest/forest.js';
 import AnxietyBookIndex from './Anxiety/AnxietyBookIndex.js';
 import Profile from './Profile';
 import Back from './go_back';
-<<<<<<< HEAD
-=======
 import Join from './login/join.js';
 import LoginLoading from './login/loginLoading.js';
 import Unlogined from './login/unlogined.js';
@@ -36,7 +34,6 @@ import Login from './login/login.js'
 import Help from './Help.js'
 import HelpList from './HelpList.js'
 import HelpListCheck from './HelpListCheck.js'
->>>>>>> a310d3ce1f4001f065e194a08e4d58ff8e20fdbb
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

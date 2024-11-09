@@ -93,11 +93,11 @@ const MainAdd = () => {
     const todoData = {
       title: taskName,
       is_routine: !isTaskSelected, 
-      when_routine: selectedDate, 
-      is_importance: isImportant,
-      is_emergency: isEmergency, 
-      repeatance: selectedOption,
-      do_when: isTaskSelected ? null : selectedTime, 
+      when_routine: selectedDate,  // 필드명 수정
+      is_important: isImportant,
+      is_emergency: isEmergency,   // 필드명 수정
+      repeatance: selectedOption,  // 필드명 수정
+      do_when: isTaskSelected ? null : selectedTime,
       is_done: false 
     };
 

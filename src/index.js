@@ -30,7 +30,10 @@ import Back from './go_back';
 import Join from './login/join.js';
 import LoginLoading from './login/loginLoading.js';
 import Unlogined from './login/unlogined.js';
-import Login from './login/login.js';
+import Login from './login/login.js'
+import Help from './Help.js'
+import HelpList from './HelpList.js'
+import HelpListCheck from './HelpListCheck.js'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -57,6 +60,9 @@ root.render(
         <Route path="/insult" element={<><Back /><InsultFeedbackExample /></>} />
         <Route path="/forest" element={<><Back /><Forest /></>} />
         <Route path="/AnxietyBookIndex" element={<><Back /><AnxietyBookIndex /></>} />
+        <Route path="/Help" element={<><Back /><Help /></>} />
+        <Route path="/HelpList" element={<><Back /><HelpList /></>} />
+        <Route path="/HelpListCheck" element={<><Back /><HelpListCheck /></>} />
 
         {/* 네비게이션을 포함한 모든 다른 라우트 */}
         <Route

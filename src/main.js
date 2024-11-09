@@ -18,24 +18,38 @@ const Model = () => {
   const [isModelLoaded, setIsModelLoaded] = useState(false); // 모델 로드 여부
 
   useEffect(() => {
+    // 모델이 로드된 후 애니메이션 믹서 및 애니메이션 초기화
     if (fbx && fbx.animations.length > 0) {
-      mixer.current = new AnimationMixer(fbx); // 애니메이션 믹서 초기화
-      const action = mixer.current.clipAction(fbx.animations[0]); // 첫 번째 애니메이션 사용
+      mixer.current = new AnimationMixer(fbx);
+      const action = mixer.current.clipAction(fbx.animations[0]); // 첫 번째 애니메이션 액션
       action.setLoop(LoopRepeat, Infinity); // 무한 반복 설정
       action.play();
-      setIsModelLoaded(true); // 모델이 로드됨을 표시
+      setIsModelLoaded(true); // 모델이 로드되었음을 표시
     }
   }, [fbx]);
 
-  // 매 프레임마다 애니메이션 업데이트
+
   useFrame((state, delta) => {
     if (modelRef.current) {
-      modelRef.current.rotation.y += 0.000; // 모델 회전
-      clockRef.current += 0.02; // 시계 업데이트
-      const scale = 4 + Math.sin(clockRef.current) * 0.15; // 모델 크기 애니메이션
+      // 모델 회전
+      modelRef.current.rotation.y += 0.000;
+
+      // 스케일 애니메이션 처리
+      clockRef.current += 0.02;
+      const scale = 4 + Math.sin(clockRef.current) * 0.15;
       modelRef.current.scale.set(scale, scale, scale);
+
+      // 모델 로드 상태가 true일 때만 애니메이션 믹서 업데이트
       if (isModelLoaded && mixer.current) {
-        mixer.current.update(delta * 1); // 애니메이션 업데이트
+        // 애니메이션 속도를 느리게 하기 위해 delta 값을 조정
+        const slowDelta = delta * 1; // 애니메이션 속도를 절반으로 줄임 (0.5배 속도)
+
+        // 믹서 업데이트
+        mixer.current.update(slowDelta);
+
+        // 애니메이션의 현재 시점을 콘솔에 출력
+        //const action = mixer.current.clipAction(fbx.animations[0]);
+        //console.log(`Current animation time: ${action.time.toFixed(2)}s`);
       }
     }
   });
@@ -91,8 +105,6 @@ const Main = () => {
       ? levelSystem.uncompleteTask(priority, isHighPriorityCompleted)
       : levelSystem.completeTask(priority, isHighPriorityCompleted);
   
-    
-
 
     card.checked = !card.checked; // 체크 상태 반전
     updateLevelSystemState(updatedState); // 레벨 시스템 상태 업데이트
@@ -216,7 +228,7 @@ const Main = () => {
           {/* TodoList 컴포넌트에서 달성률을 받아옴 */}
           <div className="self-stretch h-[600px] shrink-0 flex flex-col items-start justify-start gap-[7px]">
             <TodoList  onCheck={handleCheck} completeTask={(type, priority) => levelSystem.completeTask(type, priority)}
-            uncompleteTask={(type, priority) => levelSystem.uncompleteTask(type, priority)} onCompletionRateChange={handleCompletionRateChange} />
+            uncompleteTask={(type, priority) => levelSystem.uncompleteTask(type, priority)} onCompletionRateChange={handleCompletionRateChange} onPointChange={handlePointChange} />
           </div>
         </div>  
 
@@ -229,18 +241,18 @@ const Main = () => {
         </button>      
       </div>
 
-      {/* 입력 서랍 (MainAdd) */}          
-      <AnimatePresence>
+            {/* 입력 서랍 (MainAdd) */}          
+            <AnimatePresence>
         {showAddDrawer && (
           <>
             {/* 배경 페이드인/페이드아웃 */}
             <motion.div
               className="fixed inset-0 bg-black z-10"
               initial={{ opacity: 0 }}
-              animate={{ opacity: 0.1 }} // 배경 어두워짐
+              animate={{ opacity: 0.1 }}  // 배경이 어두워지는 정도
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }} // 페이드 인/아웃 속도
-              onClick={toggleAddDrawer}  // 클릭 시 서랍 닫기
+              onClick={toggleAddDrawer}  // 클릭하면 서랍 닫기
             />
 
             {/* 서랍 슬라이드 */}
@@ -255,7 +267,7 @@ const Main = () => {
               <motion.div
                 className="w-[360px] h-[336px] bg-white relative bg-opacity-0 overflow-visible"
               >
-                <MainAdd />  {/* MainAdd 컴포넌트 렌더링 */}
+                <MainAdd />  {/* MainAdd 렌더링 */}
               </motion.div>
             </motion.div>
           </>

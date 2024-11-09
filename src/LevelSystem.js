@@ -6,11 +6,13 @@ class LevelSystem {
     }
 
     calculateScoreToNextLevel() {
-        return 100 + Math.pow(this.level - 1, 2) * 20;
+        return 10 + Math.pow(this.level - 1, 1.5) * 15;
     }
 
     completeTask(priority, isHighPriorityCompleted) {
         const taskScore = this.calculateTaskScore(priority) + (isHighPriorityCompleted ? 10 : 0);
+        
+        
         this.currentScore += taskScore;
         return this.updateLevel();
     }
@@ -36,11 +38,8 @@ class LevelSystem {
             this.currentScore += this.scoreToNextLevel;
         }
 
-        // 점수가 0일 때 레벨과 점수를 초기화
-        if (this.currentScore === 0) {
-            this.level = 1;
-            this.scoreToNextLevel = this.calculateScoreToNextLevel();
-        }
+        // 점수가 음수로 떨어지지 않도록 제한
+        this.currentScore = Math.max(0, this.currentScore);
 
         return {
             level: this.level,
@@ -56,9 +55,11 @@ class LevelSystem {
     calculateTaskScore(priority) {
         const baseScore = this.calculateBaseScore();
         let taskScore = baseScore;
-        if (priority === "상") taskScore += 10;
-        else if (priority === "중") taskScore += 5;
-        else if (priority === "하") taskScore += 2;
+        if (priority === "상") taskScore += 15;
+        else if (priority === "중") taskScore += 7;
+        else if (priority === "하") taskScore += 3;
+
+        
         return taskScore;
     }
 

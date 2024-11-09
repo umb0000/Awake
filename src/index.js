@@ -93,8 +93,6 @@ root.render(
         />
       </Routes>
 
-      {/* Navigation은 모든 페이지에서 표시 */}
-      <Navigation />
     </Router>
   </React.StrictMode>
 );

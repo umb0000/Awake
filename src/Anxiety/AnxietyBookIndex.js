@@ -26,7 +26,7 @@ const AnxietyBookIndex = () => {
     <div className="flex flex-col items-center px-4 py-2">
       {/* 상단바 */}
       <div className="w-full flex justify-center items-center px-4 py-2 border-b">
-       <span className="text-[20px] font-bold text-black">
+       <span className="text-[20px] font-bold text-black font-['Pretendard_Variable']">
         불안의 책갈피
        </span>
       </div>

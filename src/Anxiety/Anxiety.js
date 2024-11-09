@@ -37,28 +37,27 @@ const Anxiety = () => {
               <img className="absolute left-[292px] top-[15px]" width="26" height="43" src={process.env.PUBLIC_URL + "/img/3dicons1_250.png"} alt="3d icon" />
             </div>
           </div>
-          <div className="self-stretch h-[1px] shrink-0 bg-[#fff]"></div>
           
-          <div className="w-[95%] h-[166px] shrink-0 flex flex-row items-center justify-center gap-[11px]">
+          
+          <div className="w-[95%] h-[166px] shrink-0 flex flex-row items-center justify-center gap-[10px]">
           <a href='http://kwawake.duckdns.org/AnxietyBook'>
-            <div className="relative w-[160px] h-[166px] shrink-0 flex">
-              <div className="absolute left-0 top-0 w-[160px] h-[166px] flex flex-col items-start justify-end p-[20px] bg-[#ff9800] rounded-[16px]">
+            <div className="relative w-[166px] h-[166px] shrink-0 flex">
+              <div className="absolute left-0 top-0 w-[166px] h-[166px] flex flex-col items-start justify-end p-[20px] bg-[#ff9800] rounded-[16px]">
                 <div className="self-stretch text-[20px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-bold text-[#fff]">불안의 책</div>
                 <div className="self-stretch text-[10px] leading-[10px] tracking-[.01em] font-['Pretendard_Variable'] font-semibold text-[#fff]">불안할 때 보세요</div>
               </div>
-              <img className="absolute left-[81px] top-[12px]" width="66" height="78" src={process.env.PUBLIC_URL + "/img/3dicons1_257.png"} alt="3d icon" />
+              <img className="absolute left-[75px] top-[12px]" width="66" height="78" src={process.env.PUBLIC_URL + "/img/3dicons1_257.png"} alt="3d icon" />
               <img className="absolute left-[77.19%] right-[8.44%] top-[74.1%] bottom-[12.65%]" width="23" height="22" src={process.env.PUBLIC_URL + "/img/별1_258.png"} alt="star" />
             </div>
           </a>
 
           <a href='http://kwawake.duckdns.org/AnxietyBookIndex'>
-            <div className="relative w-[160px] h-[166px] shrink-0 flex">
-              
-              <div className="absolute left-0 top-0 w-[160px] h-[166px] flex flex-col items-start justify-end p-[20px] bg-[#f8f8f8] rounded-[16px]">
+            <div className="relative w-[166px] h-[166px] shrink-0 flex">              
+              <div className="absolute left-0 top-0 w-[166px] h-[166px] flex flex-col items-start justify-end p-[20px] bg-[#f8f8f8] rounded-[16px]">
                 <div className="self-stretch text-[20px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-bold text-[#000]">책갈피</div>
                 <div className="self-stretch text-[10px] leading-[10px] tracking-[.01em] font-['Pretendard_Variable'] font-semibold text-[#000]">불안의 책 스크랩 모음</div>
               </div>
-              <img className="absolute left-[81px] top-[12px]" width="69" height="81" src={process.env.PUBLIC_URL + "/img/3dicons1_263.png"} alt="3d icon" />
+              <img className="absolute left-[75px] top-[12px]" width="69" height="81" src={process.env.PUBLIC_URL + "/img/3dicons1_263.png"} alt="3d icon" />
               
             </div></a>
           </div>

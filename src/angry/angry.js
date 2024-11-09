@@ -45,11 +45,6 @@ const Angry = () => {
               <img className="absolute left-[282px] top-2 object-cover" width="41" height="49" src={process.env.PUBLIC_URL + "/img/3dicons1_509.png"} alt="3d icon" />
         </div>
       </div>
-      
-
-       <div className="self-stretch h-[1px] shrink-0 bg-[#fff]"></div>
-       
-
        
        <div className="relative w-[95%] h-[166px] flex-shrink-0">
           <a href="http://kwawake.duckdns.org/Breath" className="relative block w-full h-full rounded-[16px] overflow-hidden">

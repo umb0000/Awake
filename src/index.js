@@ -6,7 +6,7 @@ import App from './App';
 import Anxiety from './Anxiety/Anxiety';
 import reportWebVitals from './reportWebVitals';
 import Angry from './angry/angry';
-import Main from './main';
+import Main from './main'; // Main 컴포넌트에 LevelUpPopup을 포함할 예정
 import Navigation from './Navigation';
 import Depression from './Depression';
 import Kit from './Kit';
@@ -22,12 +22,11 @@ import Calender from './calender';
 import TrashCan_i from './depression/trashcan_inside';
 import Move from './depression/move.js';
 import Onion from './depression/Onion.js';
-import InsultFeedbackExample from './angry/insultPrevent.js'
-import Forest from './forest/forest.js'
-import AnxietyBookIndex from './Anxiety/AnxietyBookIndex.js'
-import Profile from './Profile'
+import InsultFeedbackExample from './angry/insultPrevent.js';
+import Forest from './forest/forest.js';
+import AnxietyBookIndex from './Anxiety/AnxietyBookIndex.js';
+import Profile from './Profile';
 import Back from './go_back';
-
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -49,40 +48,26 @@ root.render(
         <Route path="/forest" element={<><Back /><Forest /></>} />
         <Route path="/AnxietyBookIndex" element={<><Back /><AnxietyBookIndex /></>} />
 
+        {/* Main 페이지에 LevelUpPopup을 포함하도록 Route 설정 */}
+        <Route path="/" element={<Main />} />
+        <Route path="/main" element={<Main />} />
 
-        {/* 네비게이션을 포함한 모든 다른 라우트 */}
-        <Route
-          path="*"
-          element={
-            <div className="main-content pb-[80px]">
-              <Routes>
-                {/* Main 라우트 */}
-                <Route path="/" element={<Main />} />
+        {/* 기타 페이지 */}
+        <Route path="/Kit" element={<Kit />}>
+          <Route path="Anxiety" element={<Anxiety />} />
+          <Route path="Angry" element={<Angry />} />
+          <Route path="Depression" element={<Depression />} />
+        </Route>
+        <Route path="/Anxiety" element={<Anxiety />} />
+        <Route path="/Angry" element={<Angry />} />
+        <Route path="/Depression" element={<Depression />} />
+        <Route path="/calender" element={<Calender />} />
+        <Route path="/profile" element={<Profile />} />
 
-                {/* Kit 네비게이션을 추가한 라우트 */}
-                <Route path="/Kit" element={<Kit />}>
-                  {/* Kit 하위 라우트 */}
-                  <Route path="Anxiety" element={<Anxiety />} />
-                  
-                  <Route path="Angry" element={<Angry />} />
-                  <Route path="Depression" element={<Depression />} />
-                </Route>
-
-                {/* 개별 경로에 대한 라우트 */}
-                <Route path="/main" element={<Main />} />
-                <Route path="/Anxiety" element={<Anxiety />} />
-                <Route path="/Angry" element={<Angry />} />
-                <Route path="/Depression" element={<Depression />} />
-                <Route path="/calender" element={<Calender />} />
-                <Route path="/profile" element={<Profile />} />
-              </Routes>
-
-              {/* Navigation 컴포넌트 */}
-              <Navigation />
-            </div>
-          }
-        />
       </Routes>
+
+      {/* Navigation은 모든 페이지에서 표시 */}
+      <Navigation />
     </Router>
   </React.StrictMode>
 );

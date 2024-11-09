@@ -6,7 +6,7 @@ import App from './App';
 import Anxiety from './Anxiety/Anxiety';
 import reportWebVitals from './reportWebVitals';
 import Angry from './angry/angry';
-import Main from './main';
+import Main from './main'; // Main 컴포넌트에 LevelUpPopup을 포함할 예정
 import Navigation from './Navigation';
 import Depression from './Depression';
 import Kit from './Kit';
@@ -22,11 +22,13 @@ import Calender from './calender';
 import TrashCan_i from './depression/trashcan_inside';
 import Move from './depression/move.js';
 import Onion from './depression/Onion.js';
-import InsultFeedbackExample from './angry/insultPrevent.js'
-import Forest from './forest/forest.js'
-import AnxietyBookIndex from './Anxiety/AnxietyBookIndex.js'
-import Profile from './Profile'
+import InsultFeedbackExample from './angry/insultPrevent.js';
+import Forest from './forest/forest.js';
+import AnxietyBookIndex from './Anxiety/AnxietyBookIndex.js';
+import Profile from './Profile';
 import Back from './go_back';
+<<<<<<< HEAD
+=======
 import Join from './login/join.js';
 import LoginLoading from './login/loginLoading.js';
 import Unlogined from './login/unlogined.js';
@@ -34,6 +36,7 @@ import Login from './login/login.js'
 import Help from './Help.js'
 import HelpList from './HelpList.js'
 import HelpListCheck from './HelpListCheck.js'
+>>>>>>> a310d3ce1f4001f065e194a08e4d58ff8e20fdbb
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -60,6 +63,25 @@ root.render(
         <Route path="/insult" element={<><Back /><InsultFeedbackExample /></>} />
         <Route path="/forest" element={<><Back /><Forest /></>} />
         <Route path="/AnxietyBookIndex" element={<><Back /><AnxietyBookIndex /></>} />
+<<<<<<< HEAD
+
+        {/* Main 페이지에 LevelUpPopup을 포함하도록 Route 설정 */}
+        <Route path="/" element={<Main />} />
+        <Route path="/main" element={<Main />} />
+
+        {/* 기타 페이지 */}
+        <Route path="/Kit" element={<Kit />}>
+          <Route path="Anxiety" element={<Anxiety />} />
+          <Route path="Angry" element={<Angry />} />
+          <Route path="Depression" element={<Depression />} />
+        </Route>
+        <Route path="/Anxiety" element={<Anxiety />} />
+        <Route path="/Angry" element={<Angry />} />
+        <Route path="/Depression" element={<Depression />} />
+        <Route path="/calender" element={<Calender />} />
+        <Route path="/profile" element={<Profile />} />
+
+=======
         <Route path="/Help" element={<><Back /><Help /></>} />
         <Route path="/HelpList" element={<><Back /><HelpList /></>} />
         <Route path="/HelpListCheck" element={<><Back /><HelpListCheck /></>} />
@@ -91,7 +113,11 @@ root.render(
             </div>
           }
         />
+>>>>>>> a310d3ce1f4001f065e194a08e4d58ff8e20fdbb
       </Routes>
+
+      {/* Navigation은 모든 페이지에서 표시 */}
+      <Navigation />
     </Router>
   </React.StrictMode>
 );

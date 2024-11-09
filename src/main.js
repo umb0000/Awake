@@ -28,25 +28,20 @@ const Model = () => {
     }
   }, [fbx]);
 
-
   useFrame((state, delta) => {
     if (modelRef.current) {
       // 모델 회전
       modelRef.current.rotation.y += 0.000;
-
       // 스케일 애니메이션 처리
       clockRef.current += 0.02;
       const scale = 4 + Math.sin(clockRef.current) * 0.15;
       modelRef.current.scale.set(scale, scale, scale);
-
       // 모델 로드 상태가 true일 때만 애니메이션 믹서 업데이트
       if (isModelLoaded && mixer.current) {
         // 애니메이션 속도를 느리게 하기 위해 delta 값을 조정
         const slowDelta = delta * 1; // 애니메이션 속도를 절반으로 줄임 (0.5배 속도)
-
         // 믹서 업데이트
         mixer.current.update(slowDelta);
-
         // 애니메이션의 현재 시점을 콘솔에 출력
         //const action = mixer.current.clipAction(fbx.animations[0]);
         //console.log(`Current animation time: ${action.time.toFixed(2)}s`);
@@ -76,8 +71,8 @@ const Main = () => {
   const handleTabChange = (tab) => {
     setSelectedTab(tab); // 탭 변경
   };
-  
-  
+
+
   // 점수 및 레벨 업데이트 핸들러
   const updateLevelSystemState = (updatedState) => {
     if (updatedState) {
@@ -97,20 +92,22 @@ const Main = () => {
     const priority = card.type === "todo" 
       ? (card.image === "level3.png" ? "상" : card.image === "level2.png" ? "중" : "하") 
       : "routine";
-  
+
     const isHighPriorityCompleted = priority === "상"; // 우선순위가 "상"인 경우
-  
+
     // 레벨 시스템 업데이트를 완료/취소에 따라 다르게 호출
     const updatedState = card.checked
       ? levelSystem.uncompleteTask(priority, isHighPriorityCompleted)
       : levelSystem.completeTask(priority, isHighPriorityCompleted);
-  
+
 
     card.checked = !card.checked; // 체크 상태 반전
     updateLevelSystemState(updatedState); // 레벨 시스템 상태 업데이트
 
   };
-  
+
+
+
 
   const texts = [
     "오늘은 기분이 어때? ",
@@ -166,7 +163,7 @@ const Main = () => {
   return (
     <div className="relative w-[100%] h-[800px] custom-gradient overflow-hidden">
       <div className="relative left-0 top-0 w-[100%] flex flex-col items-center justify-start ">
-        
+
         {/* 3D 모델 표시 영역 */}
         <div className="relative self-stretch w-[100%] h-[25vh] shrink-0 flex justify-center items-center" style={{ paddingTop: '0vh', paddingBottom: '0vh' }}>
           <Canvas className="w-full h-full" gl={{ alpha: true }}>

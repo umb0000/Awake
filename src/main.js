@@ -7,48 +7,49 @@ import MainAdd from './mainAdd';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AnimationMixer, LoopRepeat } from 'three';
 import { useFBX } from '@react-three/drei';
-<<<<<<< HEAD
-import LevelUpPopup from './get_Cat'; // 레벨업 팝업 컴포넌트 추가
-=======
 import LevelSystem from './LevelSystem';
->>>>>>> a310d3ce1f4001f065e194a08e4d58ff8e20fdbb
 
 // 3D 모델 컴포넌트
 const Model = () => {
-<<<<<<< HEAD
-  const modelRef = useRef();
-  const clockRef = useRef(0);
-  const fbx = useFBX(process.env.PUBLIC_URL + '/3d_models/cat_ani_orangewhite.fbx');
-  const mixer = useRef(null);
-  const [isModelLoaded, setIsModelLoaded] = useState(false);
-=======
   const modelRef = useRef(); // 모델의 참조
   const clockRef = useRef(0); // 애니메이션을 위한 시계
   const fbx = useFBX(process.env.PUBLIC_URL + '/3d_models/cat_ani_orangewhite.fbx'); // FBX 모델 로드
   const mixer = useRef(null); // 애니메이션 믹서
   const [isModelLoaded, setIsModelLoaded] = useState(false); // 모델 로드 여부
->>>>>>> a310d3ce1f4001f065e194a08e4d58ff8e20fdbb
 
   useEffect(() => {
+    // 모델이 로드된 후 애니메이션 믹서 및 애니메이션 초기화
     if (fbx && fbx.animations.length > 0) {
       mixer.current = new AnimationMixer(fbx);
-      const action = mixer.current.clipAction(fbx.animations[0]);
-      action.setLoop(LoopRepeat, Infinity);
+      const action = mixer.current.clipAction(fbx.animations[0]); // 첫 번째 애니메이션 액션
+      action.setLoop(LoopRepeat, Infinity); // 무한 반복 설정
       action.play();
-      setIsModelLoaded(true);
+      setIsModelLoaded(true); // 모델이 로드되었음을 표시
     }
   }, [fbx]);
 
 
   useFrame((state, delta) => {
     if (modelRef.current) {
+      // 모델 회전
       modelRef.current.rotation.y += 0.000;
+
+      // 스케일 애니메이션 처리
       clockRef.current += 0.02;
       const scale = 4 + Math.sin(clockRef.current) * 0.15;
       modelRef.current.scale.set(scale, scale, scale);
 
+      // 모델 로드 상태가 true일 때만 애니메이션 믹서 업데이트
       if (isModelLoaded && mixer.current) {
-        mixer.current.update(delta);
+        // 애니메이션 속도를 느리게 하기 위해 delta 값을 조정
+        const slowDelta = delta * 1; // 애니메이션 속도를 절반으로 줄임 (0.5배 속도)
+
+        // 믹서 업데이트
+        mixer.current.update(slowDelta);
+
+        // 애니메이션의 현재 시점을 콘솔에 출력
+        //const action = mixer.current.clipAction(fbx.animations[0]);
+        //console.log(`Current animation time: ${action.time.toFixed(2)}s`);
       }
     }
   });
@@ -57,17 +58,6 @@ const Model = () => {
 };
 
 const Main = () => {
-<<<<<<< HEAD
-  const [currentText, setCurrentText] = useState('');
-  const [displayText, setDisplayText] = useState('');
-  const [isAnimating, setIsAnimating] = useState(false);
-  const [completionRate, setCompletionRate] = useState(0);
-  const [showAddDrawer, setShowAddDrawer] = useState(false);
-  const [totalCards, setTotalCards] = useState(0);
-  const [completedCards, setCompletedCards] = useState(0);
-  const [points, setPoints] = useState(0);
-  const [showLevelUpPopup, setShowLevelUpPopup] = useState(false); // 레벨업 팝업 상태
-=======
   const [selectedTab, setSelectedTab] = useState('all'); // 선택된 탭 상태
   const [currentText, setCurrentText] = useState(''); // 현재 텍스트
   const [displayText, setDisplayText] = useState(''); // 화면에 표시되는 텍스트
@@ -122,9 +112,6 @@ const Main = () => {
   };
   
 
-  
->>>>>>> a310d3ce1f4001f065e194a08e4d58ff8e20fdbb
-
   const texts = [
     "오늘은 기분이 어때? ",
     "할일을 잊지 마! ",
@@ -168,23 +155,12 @@ const Main = () => {
 
   // 포인트 변경 함수
   const handlePointChange = (newPoints) => {
-    setPoints(prevPoints => prevPoints + newPoints);
+    setPoints(prevPoints => prevPoints + newPoints); // 포인트 누적
   };
 
   // 입력 서랍 열고 닫기
   const toggleAddDrawer = () => {
     setShowAddDrawer(!showAddDrawer);
-<<<<<<< HEAD
-  };
-
-  const handleLevelUp = () => {
-    setShowLevelUpPopup(true); // 레벨업 팝업 표시
-  };
-
-  const closeLevelUpPopup = () => {
-    setShowLevelUpPopup(false); // 레벨업 팝업 닫기
-=======
->>>>>>> a310d3ce1f4001f065e194a08e4d58ff8e20fdbb
   };
 
   return (
@@ -195,7 +171,7 @@ const Main = () => {
         <div className="relative self-stretch w-[100%] h-[25vh] shrink-0 flex justify-center items-center" style={{ paddingTop: '0vh', paddingBottom: '0vh' }}>
           <Canvas className="w-full h-full" gl={{ alpha: true }}>
             <ambientLight intensity={1} />
-            <directionalLight position={[1, 0.7, 0.7]} intensity={1} />
+            <directionalLight position={[1, 0.7, 0.7]} intensity={1}  />
             <Suspense fallback={null}>
               <Model /> {/* 3D 모델 렌더링 */}
             </Suspense>
@@ -203,37 +179,18 @@ const Main = () => {
           </Canvas>
         </div>
 
-<<<<<<< HEAD
-        {/* 대화 텍스트 */}
-        
-        {/* 게이지 */}
-        <div className="flex-row items-center" style={{
-=======
         {/* 텍스트 게이지 바 */}
         <div className='flex-row items-center' style={{
->>>>>>> a310d3ce1f4001f065e194a08e4d58ff8e20fdbb
           position: 'absolute',
           top: '20vh',
           left:'67px',
           width: 'auto',
           whiteSpace: 'nowrap',
         }}>
-<<<<<<< HEAD
-
-=======
->>>>>>> a310d3ce1f4001f065e194a08e4d58ff8e20fdbb
           <div className="w-[229px] h-[31px] px-[18px] py-[5px] bg-white rounded-[30px] flex-col justify-center items-center gap-2.5 inline-flex">
             <div className="justify-start items-center gap-[11px] inline-flex">
               <div className="w-[21px] h-[21px] relative">
                 <div className="w-[21px] h-[21px] left-0 top-0 absolute bg-[#ff9800] rounded-full" />
-<<<<<<< HEAD
-                <div className="w-[7.30px] h-[18.26px] left-[6.39px] top-[0.91px] absolute text-white text-sm font-medium font-['Roboto'] leading-tight tracking-tight">2</div>
-              </div>
-              <div className="w-[123px] h-[5px] relative bg-[#EEEFEF]">
-                <div className="w-[101px] h-[5px] left-0 top-0 absolute bg-gradient-to-r from-[#ff8300] via-[#ff9800] to-[#ffdb8f] rounded-2xl" />
-              </div>
-              <div className="text-[#ff6d00] text-sm font-medium font-['Roboto'] leading-tight tracking-tight">81.3%</div>
-=======
                 <div className="w-[7.30px] h-[18.26px] left-[6.39px] top-[0.91px] absolute text-white text-sm font-medium font-['Pretendard_Variable'] leading-tight tracking-tight">{level}</div>
               </div>
               <div className="w-[123px] h-[5px] relative bg-[#EEEFEF]">
@@ -247,7 +204,6 @@ const Main = () => {
                 />
               </div>
               <div className="text-[#ff6d00] text-sm font-medium font-['Pretendard_Variable'] leading-tight tracking-tight">{((currentScore / scoreToNextLevel) * 100).toFixed(1)}%</div>
->>>>>>> a310d3ce1f4001f065e194a08e4d58ff8e20fdbb
             </div>
           </div>
         </div>
@@ -257,7 +213,7 @@ const Main = () => {
           <div className="relative flex-col items-start" style={{ paddingBottom: '1vh'}}>
             <div>
               <span className="w-full h-[40px] text-[24px] leading-[24px] tracking-[.01em] font-bold font-[Pretendard] text-[#000] items-start justify-center">{completionRate}% </span>
-              <span className="font-[Pretendard] font-bold text-[13px] text-[#79747e]">{completedCards}/{totalCards}</span>
+              <span className='font-[Pretendard] font-bold text-[13px] text-[#79747e]'>{completedCards}/{totalCards}</span>
             </div>
             <div className="w-full h-[24px] text-[13px] leading-[24px] tracking-[.01em] font-bold font-[Pretendard] text-[#79747e] flex flex-col justify-center">
               <p>{new Date().getMonth() + 1}월 {new Date().getDate()}일 Current Points: {points}</p> 
@@ -269,12 +225,8 @@ const Main = () => {
 
           {/* TodoList 컴포넌트에서 달성률을 받아옴 */}
           <div className="self-stretch h-[600px] shrink-0 flex flex-col items-start justify-start gap-[7px]">
-<<<<<<< HEAD
-            <TodoList onCompletionRateChange={handleCompletionRateChange} onPointChange={handlePointChange} />
-=======
             <TodoList  onCheck={handleCheck} completeTask={(type, priority) => levelSystem.completeTask(type, priority)}
             uncompleteTask={(type, priority) => levelSystem.uncompleteTask(type, priority)} onCompletionRateChange={handleCompletionRateChange} onPointChange={handlePointChange} />
->>>>>>> a310d3ce1f4001f065e194a08e4d58ff8e20fdbb
           </div>
         </div>  
 
@@ -284,38 +236,6 @@ const Main = () => {
           className="fixed bottom-[100px] right-[20px] bg-[#ff9800] text-white p-[10px] rounded-full shadow-lg hover:bg-[#ff6d00] transition duration-200"
         >
           <img width="46" height="46" src={process.env.PUBLIC_URL + "/img/main_add_btn.png"} alt="Add" />
-<<<<<<< HEAD
-        </button> 
-
-        {/* 레벨업 테스트 버튼 */}
-        <button
-          onClick={handleLevelUp}
-          className="fixed top-[100px] right-[20px] bg-blue-500 text-white p-3 rounded-lg shadow-lg hover:bg-blue-600 transition duration-200"
-        >
-          레벨업 테스트
-        </button>
-      </div>
-
-      // Main 컴포넌트 내의 레벨업 팝업 및 입력 서랍 관련 코드 유지하면서 필요한 부분만 추가
-
-      {/* 레벨업 팝업 */}
-      // showLevelUpPopup이 true일 때만 표시되며, onClose로 팝업을 닫을 수 있도록 유지
-      {showLevelUpPopup && <LevelUpPopup onClose={closeLevelUpPopup} />}
-
-      // 입력 서랍 (MainAdd)
-      <AnimatePresence>
-        {showAddDrawer && (
-          <>
-            <motion.div
-              className="fixed inset-0 bg-black z-10"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0.1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              onClick={() => setShowAddDrawer(false)}  // 클릭 시 서랍 닫기
-            />
-
-=======
         </button>      
       </div>
 
@@ -334,36 +254,23 @@ const Main = () => {
             />
 
             {/* 서랍 슬라이드 */}
->>>>>>> a310d3ce1f4001f065e194a08e4d58ff8e20fdbb
             <motion.div
               className="fixed inset-x-0 bottom-0 z-20 flex items-end justify-center"
               initial={{ y: "100%" }}
               animate={{ y: 0 }}
               exit={{ y: "100%" }}
               transition={{ duration: 0.3 }}
-<<<<<<< HEAD
-              onClick={(e) => e.stopPropagation()} // 서랍 내 외부 클릭 방지
-=======
               onClick={(e) => e.stopPropagation()}  // 서랍 외부 클릭 차단
->>>>>>> a310d3ce1f4001f065e194a08e4d58ff8e20fdbb
             >
               <motion.div
                 className="w-[360px] h-[336px] bg-white relative bg-opacity-0 overflow-visible"
               >
-<<<<<<< HEAD
-                <MainAdd />  {/* MainAdd 서랍 콘텐츠 */}
-=======
                 <MainAdd />  {/* MainAdd 렌더링 */}
->>>>>>> a310d3ce1f4001f065e194a08e4d58ff8e20fdbb
               </motion.div>
             </motion.div>
           </>
         )}
       </AnimatePresence>
-<<<<<<< HEAD
-
-=======
->>>>>>> a310d3ce1f4001f065e194a08e4d58ff8e20fdbb
     </div>
   );
 };

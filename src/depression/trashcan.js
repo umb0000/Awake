@@ -145,7 +145,7 @@ const TrashCan = () => {
       {/* sqmenu.png를 화면 최상단에 고정 */}
       <Link to="/trashcan_i">
         <img
-          className="absolute top-0 left-0 w-[15%] h-auto mt-2 cursor-pointer"
+          className="absolute top-0 left-0 w-[15%] h-auto mt-2 ml-2 cursor-pointer"
           src={process.env.PUBLIC_URL + "/img/sqmenu.png"}
           alt="icon"
         />

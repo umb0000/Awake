@@ -196,7 +196,7 @@ const SecondScreen = ({ remainingTime, breathPhase, onPauseResume, onExit, curre
     </button>
 
     </div>
-    <div className="absolute top-5 right-[60px] text-[19px] text-[#8090FF] font-bold z-10">
+    <div className="absolute top-5 right-[60px] text-[19px] text-[#8090FF]  font-['Pretendard_Variable'] font-bold z-10">
       {Math.floor(remainingTime / 60).toString().padStart(2, '0')} : {(remainingTime % 60).toString().padStart(2, '0')}
     </div>
     <div className="relative flex flex-col items-center justify-center mb-10 z-0">
@@ -208,7 +208,7 @@ const SecondScreen = ({ remainingTime, breathPhase, onPauseResume, onExit, curre
         <div className="circle circle-2"></div>
         <div className="circle circle-3"></div>
       </div>
-      <div className={`text-[20px] font-semibold text-gray-700 z-10 ${textFadeClass}`}>
+      <div className={`text-[20px]  font-['Pretendard_Variable'] font-semibold text-gray-700 z-10 ${textFadeClass}`}>
         {currentText}
       </div>
     </div>

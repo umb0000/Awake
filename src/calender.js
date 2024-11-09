@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './output.css';
+import Diary from './calenderDiary.js';
 
 // 주황색 채도를 다르게 정할 수 있는 함수
 const getBackgroundColor = (day) => {
@@ -180,6 +181,8 @@ const getBackgroundColor = (day, currentMonth, currentYear) => {
     <div class="w-[147px] h-6 text-[#79747e] text-sm font-bold font-['Pretendard'] leading-normal tracking-wide">이번 달 올클리어 6회!</div>
   </div>
 </div>
+
+<Diary/>
         
       </div>
 

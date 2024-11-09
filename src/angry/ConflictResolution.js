@@ -5,7 +5,7 @@ const ConflictResolution = () => {
 
   
   return (
-    <div className="relative w-full h-auto bg-[#fff] overflow-hidden py-[20px] px-[15px]">
+    <div className="relative w-full h-auto bg-[#fff] overflow-hidden py-[20px] px-[15px]  font-['Pretendard_Variable']">
       {/* 상단바 */}
       
 

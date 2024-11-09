@@ -27,12 +27,28 @@ import Forest from './forest/forest.js';
 import AnxietyBookIndex from './Anxiety/AnxietyBookIndex.js';
 import Profile from './Profile';
 import Back from './go_back';
+<<<<<<< HEAD
+=======
+import Join from './login/join.js';
+import LoginLoading from './login/loginLoading.js';
+import Unlogined from './login/unlogined.js';
+import Login from './login/login.js'
+import Help from './Help.js'
+import HelpList from './HelpList.js'
+import HelpListCheck from './HelpListCheck.js'
+>>>>>>> a310d3ce1f4001f065e194a08e4d58ff8e20fdbb
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Router>
       <Routes>
+        {/*로그인 및 오프닝*/}
+        <Route path='/join' element={<Join/>} />
+        <Route path='/LoginLoading' element={<LoginLoading/>} />
+        <Route path='/Unlogined' element={<Unlogined/>} />
+        <Route path='/Login' element={<Login/>} />
+
         {/* 뒤로가기 버튼이 필요한 페이지 */}
         <Route path="/AnxietyBook" element={<><Back /><AnxietyBook /></>} />
         <Route path="/AnxietyBook2/:id" element={<><Back /><AnxietyBook2 /></>} />
@@ -47,6 +63,7 @@ root.render(
         <Route path="/insult" element={<><Back /><InsultFeedbackExample /></>} />
         <Route path="/forest" element={<><Back /><Forest /></>} />
         <Route path="/AnxietyBookIndex" element={<><Back /><AnxietyBookIndex /></>} />
+<<<<<<< HEAD
 
         {/* Main 페이지에 LevelUpPopup을 포함하도록 Route 설정 */}
         <Route path="/" element={<Main />} />
@@ -64,6 +81,39 @@ root.render(
         <Route path="/calender" element={<Calender />} />
         <Route path="/profile" element={<Profile />} />
 
+=======
+        <Route path="/Help" element={<><Back /><Help /></>} />
+        <Route path="/HelpList" element={<><Back /><HelpList /></>} />
+        <Route path="/HelpListCheck" element={<><Back /><HelpListCheck /></>} />
+
+        {/* 네비게이션을 포함한 모든 다른 라우트 */}
+        <Route
+          path="*"
+          element={
+            <div className="main-content pb-[80px]">
+              <Routes>
+                <Route path="/" element={<Main />} />
+
+                {/* Kit 네비게이션을 추가한 라우트 */}
+                <Route path="/Kit" element={<Kit />}>
+                  <Route path="Forest" element={<Forest />} />
+                  <Route path="Anxiety" element={<Anxiety />} />
+                  <Route path="Angry" element={<Angry />} />
+                  <Route path="Depression" element={<Depression />} />
+                </Route>
+
+                <Route path="/main" element={<Main />} />
+                <Route path="/Anxiety" element={<Anxiety />} />
+                <Route path="/Angry" element={<Angry />} />
+                <Route path="/Depression" element={<Depression />} />
+                <Route path="/calender" element={<Calender />} />
+                <Route path="/profile" element={<Profile />} />
+              </Routes>
+              <Navigation />
+            </div>
+          }
+        />
+>>>>>>> a310d3ce1f4001f065e194a08e4d58ff8e20fdbb
       </Routes>
 
       {/* Navigation은 모든 페이지에서 표시 */}

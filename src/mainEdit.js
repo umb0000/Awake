@@ -111,7 +111,7 @@ const MainEdit = () => {
               <div className="w-[148px] text-[#49454f] text-xs font-normal font-['Roboto'] leading-7">반복</div>
               <div className="w-[98px] h-7 relative">
                 <img className="w-3 h-3.5 left-[86px] top-[7px] absolute" src="https://via.placeholder.com/12x14" />
-                <div className="w-[79px] left-0 top-0 absolute text-right text-[#49454f] text-xs font-normal font-['Roboto'] leading-7">
+                <div className="w-[79px] left-0 top-0 absolute text-right text-[#49454f] text-xs font-normal font-['Pretendard_Variable'] leading-7">
                   한 번만
                 </div>
               </div>
@@ -121,7 +121,7 @@ const MainEdit = () => {
           <div className="w-[148px] text-[#49454f] text-xs font-normal font-['Roboto'] leading-7">날짜</div>
           <div className="w-[98px] h-7 relative">
             <img className="w-3 h-3.5 left-[86px] top-[7px] absolute" src="https://via.placeholder.com/12x14" />
-            <div className="w-[79px] left-0 top-0 absolute text-right text-[#49454f] text-xs font-normal font-['Roboto'] leading-7">8월 24일</div>
+            <div className="w-[79px] left-0 top-0 absolute text-right text-[#49454f] text-xs font-normal font-['Pretendard_Variable'] leading-7">8월 24일</div>
           </div>
         </div>
 

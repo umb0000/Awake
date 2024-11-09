@@ -7,7 +7,7 @@ const ConflictBoardadd = () => {
   const [input3, setInput3] = useState('');
 
   return (
-    <div className="relative w-[100%] h-[800px] bg-[#fff] overflow-hidden">
+    <div className="relative w-[100%] h-[800px] bg-[#fff] overflow-hidden  font-['Pretendard_Variable']">
       {/* Main Container */}
       <div className="absolute top-0 left-0 w-[100%] h-[100%] flex flex-col items-center justify-center gap-[15px] bg-[#fbc3bc00] p-[10px]">
 

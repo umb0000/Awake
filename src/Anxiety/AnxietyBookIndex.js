@@ -5,7 +5,7 @@ import '../output.css';
 const AnxietyBookIndex = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
-  const bookmarks = [
+  const thoughts = [
     { text: "나는 항상 배우고 성장하는 중이야. 모든 사람이 완벽할 필요는 없어.", note: "내가 완벽하지 않으면 사람들은 날 싫어할 거야." },
     { text: "내 속도대로 가는 거야. 내 방식으로 충분히 잘하고 있어.", note: "다른 사람들보다 뒤쳐지고 있는 것 같아." },
     { text: "과거는 이미 지나갔고, 나는 매일 더 나아지고 있어.", note: "과거의 실수 때문에 난 앞으로도 실패할 거야." },
@@ -17,20 +17,22 @@ const AnxietyBookIndex = () => {
     { text: "나는 최선을 다했고, 그걸로도 충분해.", note: "난 왜 항상 이것밖에 못 할까?" }
   ];
 
-  const filteredBookmarks = bookmarks.filter(bookmark =>
+  const filteredBookmarks = thoughts.filter(bookmark =>
     bookmark.text.toLowerCase().includes(searchQuery.toLowerCase()) ||
     bookmark.note.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
-    <div className="relative w-[360px] h-[800px] bg-[#FDFDFD] flex flex-col items-center overflow-hidden font-['Pretendard_Variable']">
-      {/* Fixed Header */}
-      <div className="w-full h-20 flex justify-center items-center sticky top-0 z-10 shadow-md border-b border-[#FFD8B1] bg-gradient-to-r from-[#FFA76B] to-[#FFD8B1]">
-        <h1 className="text-lg font-bold text-[#6D3F1F]">불안의 책갈피</h1>
+    <div className="flex flex-col items-center px-4 py-2">
+      {/* 상단바 */}
+      <div className="w-full flex justify-center items-center px-4 py-2 border-b">
+       <span className="text-[20px] font-bold text-black font-['Pretendard_Variable']">
+        불안의 책갈피
+       </span>
       </div>
 
-      {/* Updated Search Bar */}
-      <div className="w-[90%] h-14 mt-4 flex items-center bg-white border border-[#FFD8B1] rounded-full shadow-sm px-4 mx-auto">
+      {/* 검색창 */}
+      <div className="w-[90%] h-14 mt-4 flex items-center bg-white border border-[#FFD8B1] shadow-sm px-4 mx-auto">
         <FiSearch className="text-[#FFA76B] mr-3 text-lg" />
         <input
           type="text"
@@ -41,8 +43,9 @@ const AnxietyBookIndex = () => {
         />
       </div>
 
-      {/* Bookmarks List with Scrollable Area */}
-      <div className="w-full flex flex-col gap-4 p-4 mt-4 overflow-y-auto h-[620px]">
+
+      {/* 책갈피 목록 */}
+      <div className="w-full flex flex-col gap-4 p-4 mt-4 overflow-y-auto h-[620px] font-['Pretendard_Variable']">
         {filteredBookmarks.length > 0 ? (
           filteredBookmarks.map((bookmark, index) => (
             <div

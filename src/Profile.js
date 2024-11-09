@@ -5,7 +5,9 @@ import { AiOutlineStar } from "react-icons/ai";
 
 const Profile = () => {
   return (
-    <div className="w-[360px] h-[800px] pt-14 pb-[122px] bg-[#f8f8f8] flex flex-col ">
+
+    <div className="w-[360px] h-[800px] pt-14 pb-[122px] bg-[#f8f8f8] flex flex-col font-['Pretendard_Variable']">
+      
   {/* Header */}
   <div className="w-[315px] flex gap-2 mb-6 px-3">
     <h1 className="text-2xl font-bold text-black tracking-wide">MY</h1>

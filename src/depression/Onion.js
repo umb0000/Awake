@@ -61,7 +61,7 @@ const EncouragementPage = () => {
                     </div>
                     <div className="w-[316px] h-[184px] flex-col justify-end items-center gap-2.5 inline-flex">
                       <div className="self-stretch h-9 p-2.5 bg-[#e0e0e0] rounded-lg flex-col justify-between items-center flex">
-                      <a href="http://112.152.14.116:10201/depression" target="_blank" rel="noopener noreferrer">
+                      <a href="http://kwawake.duckdns.org/depression" target="_blank" rel="noopener noreferrer">
                         <div className="w-[162px] text-center text-black text-[11px] font-bold leading-tight tracking-tight">
                             떠나기
                         </div>

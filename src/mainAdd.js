@@ -21,8 +21,6 @@ const MainAdd = () => {
           navigate('/login');
          return;
       }
-
-      fetchUserData();
   }, [navigate]);
 
   const formatDate = (dateString) => {

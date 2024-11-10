@@ -6,7 +6,7 @@ const MainAdd = () => {
   const [taskName, setTaskName] = useState('');
   const [isTaskSelected, setIsTaskSelected] = useState(true); // 할 일 선택 상태를 저장
   const [selectedTime, setSelectedTime] = useState(''); // 아침, 점심, 저녁, 종일 중 선택된 시간
-  const [isImportant, setIsImportant] = useState(false); // 중요 버튼 상태
+  const [isImportance, setIsImportance] = useState(false); // 중요 버튼 상태
   const [isEmergency, setIsEmergency] = useState(false); // 긴급 버튼 상태
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedOption, setSelectedOption] = useState("한 번만");
@@ -17,32 +17,10 @@ const MainAdd = () => {
 
   useEffect(() => {
       const token = localStorage.getItem('token'); 
-      //if (!token) {
-       //   navigate('/login');
-       //   return;
-     // }
-
-      const fetchUserData = async () => {
-          try {
-              const response = await fetch('http://112.152.14.116:10211/user-info', {
-                  method: 'GET',
-                  headers: {
-                      Authorization: `Bearer ${token}`, // 토큰을 헤더에 추가
-                  },
-              });
-
-              if (response.ok) {
-                  const data = await response.json();
-                  setUser(data);
-              } else {
-                 // localStorage.removeItem('token');
-                  //navigate('/login');
-              }
-          } catch (error) {
-              console.error('Failed to fetch user info:', error);
-              navigate('/login');
-          }
-      };
+      if (!token) {
+          navigate('/login');
+         return;
+      }
 
       fetchUserData();
   }, [navigate]);
@@ -81,8 +59,8 @@ const MainAdd = () => {
     setSelectedTime(time);
   };
 
-  const toggleImportant = () => {
-    setIsImportant((prev) => !prev);
+  const toggleImportance = () => {
+    setIsImportance((prev) => !prev);
   };
 
   const toggleEmergency = () => {
@@ -94,7 +72,7 @@ const MainAdd = () => {
       title: taskName,
       is_routine: !isTaskSelected, 
       when_routine: selectedDate,  // 필드명 수정
-      is_important: isImportant,
+      is_importance: isImportance,
       is_emergency: isEmergency,   // 필드명 수정
       repeatance: selectedOption,  // 필드명 수정
       do_when: isTaskSelected ? null : selectedTime,
@@ -169,8 +147,8 @@ const MainAdd = () => {
             ) : (
               <div className="w-[290px] justify-start items-start gap-[5px] inline-flex">
                 <div
-                  onClick={toggleImportant}
-                  className={`w-[142px] h-10 px-[49px] py-2 ${isImportant ? 'border-[#ff9800] text-[#ff9800]' : 'bg-white text-black'} rounded-[5px] border border-[#f4f7f8] justify-center items-center gap-2.5 flex`}
+                  onClick={toggleImportance}
+                  className={`w-[142px] h-10 px-[49px] py-2 ${isImportance ? 'border-[#ff9800] text-[#ff9800]' : 'bg-white text-black'} rounded-[5px] border border-[#f4f7f8] justify-center items-center gap-2.5 flex`}
                 >
                   <div className="w-[44.43px] h-[22.56px] text-center text-xs font-bold font-['Pretendard'] leading-7">
                     중요 🚩

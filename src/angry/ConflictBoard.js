@@ -154,7 +154,7 @@ const ConflictBoard = () => {
       <div className="w-12 h-12 rounded-full bg-[#FEC673] flex items-center justify-center shadow-md font-['Pretendard_Variable']">
         <img
           className="w-10 h-10 rounded-full"
-          src="/img/Orange_eyeWhite_7_2017_crop.png"
+          src="/img/pink_catCrop.png"
           alt="웨이"
         />
       </div>

@@ -32,8 +32,8 @@ const Card = ({ card, onCheck, onDelete }) => {
       dragConstraints={{ left: 0, right: 0 }}
       onDragEnd={handleDragEnd}
       animate={{ x: isDragged ? -60 : 0 }} // 삭제 버튼을 보일 만큼만 이동
-      transition={{ type: "spring", stiffness: 300 }}
-      layout // 애니메이션을 위한 layout 속성 추가
+      transition={{ type: "spring", stiffness: 100, damping: 20 }}
+      layout
     >
       {/* 카드 배경 */}
       <div className="absolute left-0 top-0 w-[100%] h-[50px] bg-[#f4f7f8] rounded-[10px]"></div>

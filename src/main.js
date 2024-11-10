@@ -8,6 +8,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { AnimationMixer, LoopRepeat } from 'three';
 import { useFBX } from '@react-three/drei';
 import LevelSystem from './LevelSystem';
+import LevelUpPopup from './LevelUpPopUp'; // LevelUpPopup 컴포넌트 추가
+
 
 // 3D 모델 컴포넌트
 const Model = () => {
@@ -67,6 +69,9 @@ const Main = () => {
   const [currentScore, setCurrentScore] = useState(levelSystem.currentScore);
   const [scoreToNextLevel, setScoreToNextLevel] = useState(levelSystem.scoreToNextLevel);
 
+   // LevelUpPopup 표시 상태 추가
+  const [showLevelUpPopup, setShowLevelUpPopup] = useState(false);
+
 
   const handleTabChange = (tab) => {
     setSelectedTab(tab); // 탭 변경
@@ -76,6 +81,11 @@ const Main = () => {
   // 점수 및 레벨 업데이트 핸들러
   const updateLevelSystemState = (updatedState) => {
     if (updatedState) {
+      // 레벨업 발생 시 showLevelUpPopup을 true로 설정
+      if (updatedState.level > level) {
+        setShowLevelUpPopup(true);
+      }
+
       setLevel(updatedState.level);
       setCurrentScore(updatedState.currentScore);
       setScoreToNextLevel(updatedState.scoreToNextLevel);
@@ -86,6 +96,13 @@ const Main = () => {
       console.error("Error: updatedState is undefined or null");
     }
   };
+
+
+  // LevelUpPopup 닫기 함수
+  const closeLevelUpPopup = () => {
+    setShowLevelUpPopup(false);
+  };
+
 
   // 체크박스 클릭 시 실행되는 함수
   const handleCheck = (card) => {
@@ -162,6 +179,12 @@ const Main = () => {
 
   return (
     <div className="relative w-[100%] h-[800px] custom-gradient overflow-hidden">
+      {/* LevelUpPopup */}
+      <AnimatePresence>
+        {showLevelUpPopup && <LevelUpPopup onClose={closeLevelUpPopup} />}
+      </AnimatePresence>
+      
+      
       <div className="relative left-0 top-0 w-[100%] flex flex-col items-center justify-start ">
 
         {/* 3D 모델 표시 영역 */}

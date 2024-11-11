@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import MainEdit from './mainEdit'; // EditTodo 컴포넌트 임포트
 import './output.css';
+import DatePicker from './datepicker';
 
 
 // 개별 카드 컴포넌트
@@ -22,15 +23,6 @@ const Card = ({ card, onCheck, onDelete }) => {
    const handleDeleteClick = (e) => {
     e.stopPropagation(); // 이벤트 버블링 방지
     onDelete(card.id); // 카드 삭제
-  };
-
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
-    const dayOfWeek = new Intl.DateTimeFormat('ko-KR', { weekday: 'long' }).format(date); // 요일 추가
-    
-    return `${month}월 ${day}일 (${dayOfWeek})`;
   };
 
   return (
@@ -107,6 +99,16 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
 
   const [activeFilter, setActiveFilter] = useState('all'); // 필터 상태
   const [editingCard, setEditingCard] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split("T")[0]); // 초기 상태를 오늘 날짜로 설정
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const dayOfWeek = new Intl.DateTimeFormat('ko-KR', { weekday: 'long' }).format(date); // 요일 추가
+    
+    return `${month}월 ${day}일 (${dayOfWeek})`;
+  };
 
   const [buttonState, setButtonState] = useState({
     all: 'clicked',
@@ -213,6 +215,7 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
                 />
               </div>
     <div className="self-stretch h-[454px] shrink-0 flex flex-col items-start justify-start gap-[7px]">
+      
       {/* 필터 버튼 */}
       <div className="w-[205px] h-[23px] shrink-0 flex flex-row items-start justify-start gap-[7px]">
         <img

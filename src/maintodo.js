@@ -24,6 +24,15 @@ const Card = ({ card, onCheck, onDelete }) => {
     onDelete(card.id); // 카드 삭제
   };
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const dayOfWeek = new Intl.DateTimeFormat('ko-KR', { weekday: 'long' }).format(date); // 요일 추가
+    
+    return `${month}월 ${day}일 (${dayOfWeek})`;
+  };
+
   return (
     <motion.div
       key={card.id}
@@ -186,6 +195,23 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
   }, [cards, onCompletionRateChange]);
     
   return (
+    <div>
+    <div className="w-[200px] h-7 flex-row gap-[5px] relative">                
+                <div className="w-[100px] left-0 top-0 absolute text-left text-[#49454f] font-bold text-[13px] font-['Pretendard'] leading-7">
+                  {formatDate(selectedDate)}
+                  <input
+                    type="date"
+                    value={selectedDate}
+                    onChange={(e) => setSelectedDate(e.target.value)}
+                    className="absolute inset-0 w-200px h-10px opacity-0 cursor-pointer"
+                  />
+                </div>
+                <img
+                  className="w-[12px] h-[7px] left-[105px] top-[7px] relative"
+                  src={process.env.PUBLIC_URL + `/img/down.png`}
+                  alt="Calendar Icon"
+                />
+              </div>
     <div className="self-stretch h-[454px] shrink-0 flex flex-col items-start justify-start gap-[7px]">
       {/* 필터 버튼 */}
       <div className="w-[205px] h-[23px] shrink-0 flex flex-row items-start justify-start gap-[7px]">
@@ -253,6 +279,7 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
           </>
         )}
       </AnimatePresence>
+    </div>
     </div>
   );
 };

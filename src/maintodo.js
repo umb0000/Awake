@@ -60,8 +60,10 @@ const formatDate = (dateString) => {
   const date = new Date(dateString);
   const month = date.getMonth() + 1;
   const day = date.getDate();
-  return `${month}월 ${day}일`;
-};
+  const dayOfWeek = new Intl.DateTimeFormat('ko-KR', { weekday: 'long' }).format(date); // 요일 추가
+
+    return `${month}월 ${day}일 (${dayOfWeek})`;
+  }
 
 const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
   const [cards, setCards] = useState([]);
@@ -73,13 +75,17 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
     fetch('http://112.152.14.116:10211/todo-get')
       .then(response => response.json())
       .then(data => {
-        const processedCards = data.map(card => ({
-          ...getCardProperties({
-            ...card,
-            checked: card.is_done
-          })
-        }));
-        setCards(processedCards);
+        if (data && Array.isArray(data.undones)) {
+          const processedCards = data.undones.map(card => ({
+            ...getCardProperties({
+              ...card,
+              checked: card.is_done
+            })
+          }));
+          setCards(processedCards);
+        } else {
+          console.error('Expected an array but received:', data);
+        }
       })
       .catch(error => console.error('Error fetching data:', error));
   }, []);

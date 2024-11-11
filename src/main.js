@@ -123,8 +123,14 @@ const Main = () => {
 
   };
 
-
-
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const dayOfWeek = new Intl.DateTimeFormat('ko-KR', { weekday: 'long' }).format(date); // 요일 추가
+    
+    return `${month}월 ${day}일 (${dayOfWeek})`;
+  };
 
   const texts = [
     "오늘은 기분이 어때? ",
@@ -230,18 +236,23 @@ const Main = () => {
 
         {/* 달성률, 날짜 표시 */}
         <div className="rounded-t-[30px] w-full h-full items-center justify-center gap-[5px] py-[20px] bg-[#fff]" style={{ paddingLeft: '2vh', paddingRight: '2vh', paddingBottom: '2vh' }}>
-          <div className="relative flex-col items-start" style={{ paddingBottom: '1vh'}}>
-            <div>
-              <span className="w-full h-[40px] text-[24px] leading-[24px] tracking-[.01em] font-bold font-[Pretendard] text-[#000] items-start justify-center">{completionRate}% </span>
-              <span className='font-[Pretendard] font-bold text-[13px] text-[#79747e]'>{completedCards}/{totalCards}</span>
-            </div>
-            <div className="w-full h-[24px] text-[13px] leading-[24px] tracking-[.01em] font-bold font-[Pretendard] text-[#79747e] flex flex-col justify-center">
-              <p>{new Date().getMonth() + 1}월 {new Date().getDate()}일 Current Points: {points}</p> 
-            </div>
-            <a onClick={toggleAddDrawer} href="#">
-              <img className="absolute right-0 top-[3px]" width="27" height="26" src={process.env.PUBLIC_URL + "/img/add1_206.png"} alt="add icon" />
-            </a>
-          </div>
+        <div className="w-[200px] h-7 flex-row gap-[5px] relative">
+                
+                <div className="w-[100px] left-0 top-0 absolute text-left text-[#49454f] font-bold text-[13px] font-['Pretendard'] leading-7">
+                  {formatDate(selectedDate)}
+                  <input
+                    type="date"
+                    value={selectedDate}
+                    onChange={(e) => setSelectedDate(e.target.value)}
+                    className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                  />
+                </div>
+                <img
+                  className="w-3 h-3.5 left-[100px] top-[7px] relative"
+                  src="https://via.placeholder.com/12x14"
+                  alt="Calendar Icon"
+                />
+              </div>
 
           {/* TodoList 컴포넌트에서 달성률을 받아옴 */}
           <div className="self-stretch h-[600px] shrink-0 flex flex-col items-start justify-start gap-[7px]">

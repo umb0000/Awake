@@ -70,7 +70,7 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split("T")[0]);
 
   useEffect(() => {
-    fetch('http://112.152.14.116:10211/todo-list')
+    fetch('http://112.152.14.116:10211/todo-get')
       .then(response => response.json())
       .then(data => {
         const processedCards = data.map(card => ({

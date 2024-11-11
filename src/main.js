@@ -184,6 +184,11 @@ const Main = () => {
     setShowAddDrawer(!showAddDrawer);
   };
 
+  const handleAddSuccess = () => {
+    setShowAddDrawer(false); // 서랍 닫기
+    console.log('추가 성공');
+  };
+
   return (
     <div className="relative w-[100%] h-[800px] custom-gradient overflow-hidden">
       {/* LevelUpPopup */}
@@ -243,23 +248,6 @@ const Main = () => {
               <span className='font-[Pretendard] font-bold text-[13px] text-[#79747e]'>{completedCards}/{totalCards}</span>
             </div></div>
 
-            
-        <div className="w-[200px] h-7 flex-row gap-[5px] relative">                
-                <div className="w-[100px] left-0 top-0 absolute text-left text-[#49454f] font-bold text-[13px] font-['Pretendard'] leading-7">
-                  {formatDate(selectedDate)}
-                  <input
-                    type="date"
-                    value={selectedDate}
-                    onChange={(e) => setSelectedDate(e.target.value)}
-                    className="absolute inset-0 w-200px h-10px opacity-0 cursor-pointer"
-                  />
-                </div>
-                <img
-                  className="w-[12px] h-[7px] left-[105px] top-[7px] relative"
-                  src={process.env.PUBLIC_URL + `/img/down.png`}
-                  alt="Calendar Icon"
-                />
-              </div>
 
           {/* TodoList 컴포넌트에서 달성률을 받아옴 */}
           <div className="self-stretch h-[600px] shrink-0 flex flex-col items-start justify-start gap-[7px]">
@@ -281,29 +269,24 @@ const Main = () => {
             <AnimatePresence>
         {showAddDrawer && (
           <>
-            {/* 배경 페이드인/페이드아웃 */}
             <motion.div
               className="fixed inset-0 bg-black z-10"
               initial={{ opacity: 0 }}
-              animate={{ opacity: 0.1 }}  // 배경이 어두워지는 정도
+              animate={{ opacity: 0.1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }} // 페이드 인/아웃 속도
-              onClick={toggleAddDrawer}  // 클릭하면 서랍 닫기
+              transition={{ duration: 0.3 }}
+              onClick={toggleAddDrawer}
             />
-
-            {/* 서랍 슬라이드 */}
             <motion.div
               className="fixed inset-x-0 bottom-0 z-20 flex items-end justify-center"
               initial={{ y: "100%" }}
               animate={{ y: 0 }}
               exit={{ y: "100%" }}
               transition={{ duration: 0.3 }}
-              onClick={(e) => e.stopPropagation()}  // 서랍 외부 클릭 차단
+              onClick={(e) => e.stopPropagation()}
             >
-              <motion.div
-                className="w-[360px] h-[336px] bg-white relative bg-opacity-0 overflow-visible"
-              >
-                <MainAdd />  {/* MainAdd 렌더링 */}
+              <motion.div className="w-[360px] h-[336px] bg-white relative bg-opacity-0 overflow-visible">
+                <MainAdd onAddSuccess={handleAddSuccess} />
               </motion.div>
             </motion.div>
           </>

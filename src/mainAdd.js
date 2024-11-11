@@ -68,18 +68,15 @@ const MainAdd = () => {
   const handleSubmit = () => {
     const todoData = {
       title: taskName,
-      is_routine: !isTaskSelected, 
-      when_routine: selectedDate,  // 필드명 수정
+      is_routine: !isTaskSelected,
+      when_routine: selectedDate,
       is_importance: isImportance,
-      is_emergency: isEmergency,   // 필드명 수정
-      repeatance: selectedOption,  // 필드명 수정
+      is_emergency: isEmergency,
+      repeatance: selectedOption,
       do_when: isTaskSelected ? null : selectedTime,
-      is_done: false 
+      is_done: false
     };
-
-    console.log(todoData); // 확인용 출력
-
-    // API 요청 보내기
+  
     const token = localStorage.getItem('token');
     fetch('http://112.152.14.116:10211/todo-add', {
       method: 'POST',
@@ -92,6 +89,7 @@ const MainAdd = () => {
     .then(response => response.json())
     .then(data => {
       console.log('Todo 저장 성공:', data);
+      onAddSuccess(); // 추가 성공 후 Main 컴포넌트에 알림
     })
     .catch(error => {
       console.error('Todo 저장 실패:', error);

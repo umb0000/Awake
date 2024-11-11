@@ -242,19 +242,20 @@ const Main = () => {
               <span className="w-full h-[40px] text-[24px] leading-[24px] tracking-[.01em] font-bold font-[Pretendard] text-[#000] items-start justify-center">{completionRate}% </span>
               <span className='font-[Pretendard] font-bold text-[13px] text-[#79747e]'>{completedCards}/{totalCards}</span>
             </div></div>
-        <div className="w-[200px] h-7 flex-row gap-[5px] relative">
-                
+
+            
+        <div className="w-[200px] h-7 flex-row gap-[5px] relative">                
                 <div className="w-[100px] left-0 top-0 absolute text-left text-[#49454f] font-bold text-[13px] font-['Pretendard'] leading-7">
                   {formatDate(selectedDate)}
                   <input
                     type="date"
                     value={selectedDate}
                     onChange={(e) => setSelectedDate(e.target.value)}
-                    className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                    className="absolute inset-0 w-200px h-10px opacity-0 cursor-pointer"
                   />
                 </div>
                 <img
-                  className="w-12 h-7 left-[100px] top-[7px] relative"
+                  className="w-[6px] h-[3.5px] left-[105px] top-[7px] relative"
                   src={process.env.PUBLIC_URL + `/img/down.png`}
                   alt="Calendar Icon"
                 />

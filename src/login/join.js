@@ -13,7 +13,7 @@ function Join({ onRegisterSuccess, onSwitchToLogin }) {
     const [emailErrorMessage, setEmailErrorMessage] = useState('');
     const [isEmailDuplicate, setIsEmailDuplicate] = useState(false);
 
-    const isNicknameValid = nickname.length >= 2;
+    const isNicknameValid = nickname.length >= 1;
     const isEmailValid = email.includes('@') && email.includes('.');
     const isPasswordValid = password.length >= 6;
 
@@ -136,7 +136,7 @@ function Join({ onRegisterSuccess, onSwitchToLogin }) {
     );
 
     return (
-        <div className="w-[360px] h-[800px] mx-auto relative bg-white">
+        <div className="w-full h-full mx-auto relative bg-white">
             <form onSubmit={handleRegister}>
                 {currentStep > 1 && (
                     <div className="w-[360px] flex flex-col items-center justify-start">
@@ -208,8 +208,8 @@ function Join({ onRegisterSuccess, onSwitchToLogin }) {
 
 {currentStep === 4 && (
             <div className="w-[360px] h-[800px] relative bg-white">
-            <div className="w-full h-[60px]  flex-col justify-center items-center gap-5 inline-flex">
-            <div className="text-center mt-[600px] text-black text-xl font-medium font-['Pretendard'] font-bold leading-[30px] tracking-tight">어웨이크! <br/>깨어날 준비가 되었습니다.</div>
+            <div className="w-full h-[14vh]  flex-col justify-center items-center gap-5 inline-flex">
+            <div className="text-center mt-[76vh] text-black text-xl font-medium font-['Pretendard'] font-bold leading-[30px] tracking-tight">어웨이크! <br/>깨어날 준비가 되었습니다.</div>
           </div>
           </div>
             

@@ -68,6 +68,7 @@ const Main = () => {
   const [level, setLevel] = useState(levelSystem.level);
   const [currentScore, setCurrentScore] = useState(levelSystem.currentScore);
   const [scoreToNextLevel, setScoreToNextLevel] = useState(levelSystem.scoreToNextLevel);
+  const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split("T")[0]); // 초기 상태를 오늘 날짜로 설정
 
    // LevelUpPopup 표시 상태 추가
   const [showLevelUpPopup, setShowLevelUpPopup] = useState(false);

@@ -164,7 +164,6 @@ function Join({ onRegisterSuccess, onSwitchToLogin }) {
                                 placeholder="닉네임을 입력하세요."
                                 value={nickname}
                                 onChange={(e) => setNickname(e.target.value)}
-                                onKeyDown={(e) => e.key === 'Enter' && handleNext()}
                                 className="self-stretch h-[55px] flex items-center py-[17px] px-[20px] bg-[#fff] border border-[#b2b2b2] rounded-[10px] text-[14px] font-['Pretendard'] font-semibold"
                             />
                         </div>
@@ -185,7 +184,6 @@ function Join({ onRegisterSuccess, onSwitchToLogin }) {
                                     setIsEmailDuplicate(false);
                                     setEmailErrorMessage('');
                                 }}
-                                onKeyDown={(e) => e.key === 'Enter' && handleNext()}
                                 className="self-stretch h-[55px] flex items-center py-[17px] px-[20px] bg-[#fff] border border-[#b2b2b2] rounded-[10px] text-[14px] font-['Pretendard'] font-semibold"
                             />
                             {emailErrorMessage && <div className="text-red-500">{emailErrorMessage}</div>}
@@ -203,40 +201,39 @@ function Join({ onRegisterSuccess, onSwitchToLogin }) {
                                 placeholder="6자리 이상 비밀번호"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                onKeyDown={(e) => e.key === 'Enter' && handleNext()}
                                 className="self-stretch h-[55px] flex items-center py-[17px] px-[20px] bg-[#fff] border border-[#b2b2b2] rounded-[10px] text-[14px] font-['Pretendard'] font-semibold"
                             />
                         </div>
                     )}
 
-                    {currentStep === 4 && (
-                        <div className="w-full h-full relative bg-white">
-                            <div className="w-full h-[60px] flex-col justify-center items-center gap-5 inline-flex">
-                                <div className="text-center mt-[600px] text-black text-xl font-medium font-['Pretendard'] font-bold leading-[30px] tracking-tight">어웨이크! <br />깨어날 준비가 되었습니다.</div>
-                            </div>
-                        </div>
-                    )}
+{currentStep === 4 && (
+            <div className="w-full h-full relative bg-white">
+            <div className="w-full h-[60px]  flex-col justify-center items-center gap-5 inline-flex">
+            <div className="text-center mt-[600px] text-black text-xl font-medium font-['Pretendard'] font-bold leading-[30px] tracking-tight">어웨이크! <br/>깨어날 준비가 되었습니다.</div>
+          </div>
+          </div>
+            
+          )}
                 </div>
 
                 <button
-                    type={currentStep === 3 ? "submit" : "button"}
-                    onClick={handleNextClick}
-                    disabled={
-                        (currentStep === 1 && !isNicknameValid) ||
-                        (currentStep === 2 && !isEmailValid) ||
-                        (currentStep === 3 && !isPasswordValid)
-                    }
-                    className={`w-full py-3 mt-6 absolute bottom-0 left-0 flex items-center justify-center py-[17px] px-[113px] ${
-                        (currentStep === 1 && isNicknameValid) ||
-                        (currentStep === 2 && isEmailValid && !isEmailDuplicate) ||
-                        (currentStep === 3 && isPasswordValid)
-                        (currentStep === 4 && isNicknameValid)
-                            ? 'bg-[#ff6d00]'
-                            : 'bg-gray-300'
-                    } text-white font-semibold z-20`}
-                >
-                    {currentStep === 4 ? "로그인 하러 가기" : "다음"}
-                </button>
+            type={currentStep === 3 ? "submit" : "button"}
+            onClick={handleNextClick}
+            disabled={
+                (currentStep === 1 && !isNicknameValid) ||
+                (currentStep === 2 && !isEmailValid) ||
+                (currentStep === 3 && !isPasswordValid)
+            }
+            className={`w-full py-3 mt-6 absolute bottom-0 left-0 flex items-center justify-center py-[17px] px-[113px] ${
+                (currentStep === 1 && isNicknameValid) ||
+                (currentStep === 2 && isEmailValid && !isEmailDuplicate) ||
+                (currentStep === 3 && isPasswordValid)
+                    ? 'bg-[#ff6d00]'
+                    : 'bg-gray-300'
+            } text-white font-semibold z-20`}
+        >
+            {currentStep === 4 ? "로그인 하러 가기" : "다음"}
+        </button>
             </form>
         </div>
     );

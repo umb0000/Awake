@@ -2,16 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './output.css';
 
-const MainAdd = () => {
+const MainAdd = ({ onAddSuccess }) => { // onAddSuccess prop을 받아옵니다.
   const [taskName, setTaskName] = useState('');
-  const [isTaskSelected, setIsTaskSelected] = useState(true); // 할 일 선택 상태를 저장
-  const [selectedTime, setSelectedTime] = useState(''); // 아침, 점심, 저녁, 종일 중 선택된 시간
-  const [isImportance, setIsImportance] = useState(false); // 중요 버튼 상태
-  const [isEmergency, setIsEmergency] = useState(false); // 긴급 버튼 상태
+  const [isTaskSelected, setIsTaskSelected] = useState(true);
+  const [selectedTime, setSelectedTime] = useState('');
+  const [isImportance, setIsImportance] = useState(false);
+  const [isEmergency, setIsEmergency] = useState(false);
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedOption, setSelectedOption] = useState("한 번만");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
   const [user, setUser] = useState(null); // 사용자 정보 상태
   const navigate = useNavigate();
 
@@ -76,7 +75,7 @@ const MainAdd = () => {
       do_when: isTaskSelected ? null : selectedTime,
       is_done: false
     };
-  
+
     const token = localStorage.getItem('token');
     fetch('http://112.152.14.116:10211/todo-add', {
       method: 'POST',
@@ -89,12 +88,15 @@ const MainAdd = () => {
     .then(response => response.json())
     .then(data => {
       console.log('Todo 저장 성공:', data);
-      onAddSuccess(); // 추가 성공 후 Main 컴포넌트에 알림
+      if (onAddSuccess) {
+        onAddSuccess(); // 추가 성공 시 onAddSuccess 호출
+      }
     })
     .catch(error => {
       console.error('Todo 저장 실패:', error);
     });
-  };
+  
+};
 
   return (
     <div className="w-[360px] h-[336px] relative">

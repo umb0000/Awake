@@ -18,7 +18,7 @@ const TrashCan_i = () => {
   return (
     <div className="w-screen h-screen bg-white flex flex-col justify-start items-center">
       {/* 제목 영역 - 좌측 정렬 */}
-      <div className="w-[360px] text-left pt-20 mb-10">
+      <div className="w-full text-left px-10 mb-10">
         <h1 className="text-black text-xl font-extrabold font-['Pretendard_Variable'] leading-tight tracking-tight">내려 놓은 생각들</h1>
       </div>
 

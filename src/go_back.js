@@ -16,6 +16,7 @@ const Back = () => {
     setTimeout(() => {
       setAnimateOut(false);
       setCurrentStep((prevStep) => prevStep - 1);
+      navigate(-1); // 페이지 이동 추가
     }, 500);
   };
 

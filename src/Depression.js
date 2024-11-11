@@ -37,7 +37,7 @@ const Depression = () => {
         </div>
 
 
-        <a href='http://kwawake.duckdns.org/Breath' className="w-[95%] h-[68px] shrink-0 flex flex-col items-start justify-center gap-[1px] py-[10px] px-[20px] bg-[#f8f8f8] rounded-[16px] no-underline">
+        <a href='http://kwawake.duckdns.org/Onion' className="w-[95%] h-[68px] shrink-0 flex flex-col items-start justify-center gap-[1px] py-[10px] px-[20px] bg-[#f8f8f8] rounded-[16px] no-underline">
             <div className="self-stretch text-[16px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-bold text-[#000]">
             양파양 위로하기
             </div>

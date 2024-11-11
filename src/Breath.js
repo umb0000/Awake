@@ -148,8 +148,8 @@ const Breath = () => {
 };
 
 const FirstScreen = ({ selectedTime, onTimeSelect, onStart, currentText }) => (
-  <div className="absolute left-0 top-[57px] w-[100%] h-[auto] flex flex-col items-center justify-start py-0 px-[10px] z-10">
-    <div className="h-[642px] flex flex-col items-center justify-start gap-[40px] p-[10px]">
+  <div className="absolute w-[100%] h-[auto] flex flex-col items-center justify-start py-0 px-[10px] z-10">
+    <div className="h-[642px] flex flex-col items-center justify-start gap-[40px]">
       <div className="w-[95%] flex flex-col items-center justify-center gap-[1px] p-[1px]">
         <div className="text-[28px] font-bold font-['Pretendard_Variable'] text-[#000]">숨 고르기</div>
         <div className="text-[12px] font-['Pretendard_Variable'] font-medium">호흡으로 몸과 마음을 이완해요</div>

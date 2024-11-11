@@ -72,22 +72,35 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split("T")[0]);
 
   useEffect(() => {
-    fetch('http://112.152.14.116:10211/todo-get')
-      .then(response => response.json())
-      .then(data => {
-        if (data && Array.isArray(data.undones)) {
-          const processedCards = data.undones.map(card => ({
-            ...getCardProperties({
-              ...card,
-              checked: card.is_done
-            })
-          }));
-          setCards(processedCards);
-        } else {
-          console.error('Expected an array but received:', data);
-        }
-      })
-      .catch(error => console.error('Error fetching data:', error));
+    const token = localStorage.getItem('token'); // 토큰을 가져옵니다.
+  
+    fetch('http://112.152.14.116:10211/todo-get', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}` // 토큰을 Authorization 헤더에 추가합니다.
+      }
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      if (data && Array.isArray(data.undones)) {
+        const processedCards = data.undones.map(card => ({
+          ...getCardProperties({
+            ...card,
+            checked: card.is_done
+          })
+        }));
+        setCards(processedCards);
+      } else {
+        console.error('Expected an array but received:', data);
+      }
+    })
+    .catch(error => console.error('Error fetching data:', error));
   }, []);
 
   const handleButtonClick = (type) => {

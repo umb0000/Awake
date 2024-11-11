@@ -72,7 +72,7 @@ const Login = () => {
   );
 
     return (
-        <div className="w-full h-full mx-auto relative bg-white">
+        <div className="w-[360px] h-[800px] mx-auto relative bg-white">
             <form onSubmit={handleLogin} className="flex flex-col items-center justify-center gap-4">
             {currentStep > 2 && (
                     <div className="w-[360px] flex flex-col items-center justify-start">

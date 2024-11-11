@@ -255,7 +255,7 @@ const Main = () => {
                   />
                 </div>
                 <img
-                  className="w-[6px] h-[3.5px] left-[105px] top-[7px] relative"
+                  className="w-[12px] h-[7px] left-[105px] top-[7px] relative"
                   src={process.env.PUBLIC_URL + `/img/down.png`}
                   alt="Calendar Icon"
                 />

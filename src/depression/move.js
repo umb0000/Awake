@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import '../output.css';
 
 const Move = () => {
@@ -17,6 +19,7 @@ const Move = () => {
   const [timer, setTimer] = useState(60);
   const [isRunning, setIsRunning] = useState(false);
   const [buttonText, setButtonText] = useState('시작');
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
   useEffect(() => {
     const randomIndex = Math.floor(Math.random() * actions.length);
@@ -31,23 +34,42 @@ const Move = () => {
       }, 1000);
     } else if (timer === 0) {
       clearInterval(interval);
+      setIsRunning(false);
+      setShowSuccessPopup(true);
     }
     return () => clearInterval(interval);
   }, [isRunning, timer]);
+
+  useEffect(() => {
+    if (timer === 5) {
+      const warningSound = new Audio('/img/Analog Watch Alarm Sound.mp3');
+      warningSound.play();
+    }
+  }, [timer]);
 
   const handleButtonClick = () => {
     if (isRunning) {
       setIsRunning(false);
       setButtonText('시작');
+      if (timer > 0) {
+        setShowSuccessPopup(true);
+      }
     } else {
       setIsRunning(true);
       setButtonText('완료');
     }
   };
-
+  const navigate = useNavigate();
+  const handleReturnToMain = () => {
+    setShowSuccessPopup(false);
+    setTimer(60);
+    setCurrentAction(actions[Math.floor(Math.random() * actions.length)]);
+    setButtonText('시작');
+    navigate('/kit/forest'); // 클릭 시 '/kit/forest' 경로로 이동
+  };
   return (
-    <div className="w-[360px] h-[800px] bg-white flex-col justify-start items-start gap-3 inline-flex">
-      <div className="self-stretch h-[646px] px-2.5 flex-col justify-center items-center mt-20 gap-2 inline-flex">
+    <div className="w-full h-full bg-white flex-col justify-start items-start gap-3 inline-flex">
+      <div className="self-stretch h-[646px] px-2.5 flex-col justify-center items-center gap-2 inline-flex">
         <div className="p-2.5 flex-col justify-start items-center gap-2 flex">
           <div className="w-[340px] h-[53px] px-5 flex-col justify-center items-center gap-[1px] mb-10 flex">
             <div className="w-[340px] h-[30px] px-4 justify-center items-center gap-[26px] inline-flex">
@@ -57,11 +79,11 @@ const Move = () => {
             </div>
             <div className="w-[340px] h-4 px-4 justify-center items-center gap-px inline-flex">
               <div className="w-[254px] h-4 text-center text-black text-[13px] font-medium font-['Pretendard'] leading-normal tracking-wide">
-                랜덤으로 표시되는 행동을 1분 안에 완료하세요!
+                무기력 탈출, 지금 시작하세요!<br />랜덤 행동으로 활력을 찾아봐요
               </div>
             </div>
           </div>
-          <div className="w-[340] h-[500px] flex-col justify-start items-center gap-2  flex">
+          <div className="w-[340px] h-[500px] flex-col justify-start items-center gap-2 flex">
             <div className="self-stretch h-[350px] justify-center items-start gap-2 inline-flex">
               <div className="w-[330px] h-[330px] relative">
                 <img
@@ -83,13 +105,32 @@ const Move = () => {
               </div>
             </div>
             <div className="w-[266px] h-[35px] bg-[#ffdade] rounded-[15px] flex justify-center items-center">
-              <button onClick={handleButtonClick} className="text-black text-[15px] font-bold font-['Pretendard'] leading-normal tracking-wide">
+              <button onClick={handleButtonClick} className="w-full h-full text-black text-[15px] font-bold font-['Pretendard'] leading-normal tracking-wide">
                 {buttonText}
               </button>
             </div>
           </div>
         </div>
       </div>
+
+      {/* 성공 팝업 UI */}
+      {showSuccessPopup && (
+        <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-40 z-50 transition-opacity duration-300">
+          <div className="bg-white p-8 rounded-2xl shadow-2xl text-center max-w-xs mx-auto flex flex-col items-center">
+            <p className="text-[#333333] text-xl font-semibold mb-3">잘하셨어요!</p>
+            <p className="text-[#777777] text-sm mb-6 leading-relaxed">
+              이렇게라도 몸을 움직이는 게 중요해요.<br />오늘도 한 걸음 더 나아가셨습니다!
+            </p>
+            <button
+              onClick={handleReturnToMain}
+              className="w-full bg-[#FFA8A0] text-black font-medium py-3 rounded-lg shadow-md transition-transform duration-200"
+            >
+              마음숲 홈으로 돌아가기
+            </button>
+
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,16 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { VscArrowLeft } from "react-icons/vsc";
 import './output.css';
 
 const Back = () => {
   const navigate = useNavigate();
+  const [currentStep, setCurrentStep] = useState(2);
+  const [animateOut, setAnimateOut] = useState(false);
 
   const handleBackClick = () => {
     navigate(-1); // 이전 페이지로 이동
   };
 
- return (
+  const handleBack = () => {
+    setAnimateOut(true);
+    setTimeout(() => {
+      setAnimateOut(false);
+      setCurrentStep((prevStep) => prevStep - 1);
+      navigate(-1); // 페이지 이동 추가
+    }, 500);
+  };
+
+  return (
     <div className="relative">
       {/* 상단 상태 표시 */}
       <div className="fixed left-0 top-0 w-full h-[45px] flex flex-row items-end justify-between py-[10px] px-[24px] bg-white z-50">
@@ -26,9 +36,9 @@ const Back = () => {
       </div>
 
       {/* 상단 뒤로가기 버튼 */}
-      <div className="self-stretch h-[64px] flex items-center justify-start py-[8px] px-[23px] bg-[#fff] mt-[45px]">
-        <button onClick={handleBackClick} className="p-2 flex justify-center items-center">
-          <VscArrowLeft size={24} />
+      <div className="self-stretch w-screen h-[64px] flex items-center justify-start py-[8px] px-[23px] bg-[#fff] mt-[45px]">
+        <button onClick={handleBack}>
+          <img width="12" height="24" src={process.env.PUBLIC_URL + "/img/back.png"} alt="back" />
         </button>
       </div>
     </div>

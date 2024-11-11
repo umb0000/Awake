@@ -28,7 +28,7 @@ const ConflictBoard = () => {
     },
   ]);
 
-  const moodIcons = ["😊", "😌", "🙂", "🌈", "☀️", "🌟", "👍", "💪", "🙌", "❤️"];
+  const moodIcons = ["😊", "😌", "🙂", "🌈", "🌟", "👍", "💪", "❤️"];
 
   const initialMessages = [
     { sender: '웨이', text: `안녕하세요, 저는 웨이입니다. 🐱\n\n오늘 속상한 일이 있으셨나요?\n\n저와 함께 천천히 이야기 나누며\n마음을 정리해보는 건 어때요? 💭` },
@@ -189,18 +189,18 @@ const ConflictBoard = () => {
       </div>
     </div>
   );
-
   const renderTimeline = () => (
-    <div className="relative w-full h-screen bg-[#F5F3EF] overflow-y-scroll font-['Pretendard_Variable']">
-      <div className="fixed top-20 left-1/2 transform -translate-x-1/2 w-[93%] h-[60px] z-10 p-4 bg-white shadow-md rounded-tl-[20px] rounded-tr-[20px] border-b border-[#FFAD7A]">
-        <h1 className="text-center text-[20px] font-bold text-[black] font-['Pretendard_Variable']">웨이의 분노 진정소 기록</h1>
+    <div className="relative w-full h-screen bg-[#F9F8F6] overflow-y-scroll font-['Pretendard_Variable']">
+      <div className="sticky top-0 z-10 p-4 bg-white shadow-md rounded-tl-[20px] rounded-tr-[20px] border-b border-[#FFAD7A]">
+        <h1 className="text-center text-[20px] font-bold text-[#4B4B4B]">웨이의 상담 기록</h1>
       </div>
-
-
-
-      <div className="space-y-6 p-4 mt-20">
+  
+      <div className="space-y-6 p-4 mt-10">
         {allResponses.map((response, index) => (
-          <div key={index} className="flex flex-col items-start space-y-3 bg-white p-5 rounded-lg shadow-md border border-gray-200 relative">
+          <div
+            key={index}
+            className="flex flex-col items-start bg-white p-5 rounded-lg shadow-md border border-gray-200 relative space-y-2"
+          >
             {index !== allResponses.length - 1 && (
               <div className="absolute left-4 top-full h-6 w-1 bg-gray-300"></div>
             )}
@@ -208,27 +208,25 @@ const ConflictBoard = () => {
               <span className="mr-2 p-1 rounded-full bg-[#FFAD7A]/20 text-[#D88C65] text-lg">{response.moodIcon}</span>
               <span className="text-gray-400">{response.timestamp}</span>
             </div>
-            <h2 className="text-[15px] font-semibold text-[#4B4B4B] leading-relaxed mb-2 font-[Pretendard_Variable]">{response.finalMessage}</h2>
-              <p className="text-[10px] text-gray-500 mt-2 whitespace-pre-wrap">
-
+            <h2 className="text-[15px] font-semibold text-[#4B4B4B] leading-relaxed mb-2">
+              {response.finalMessage}
+            </h2>
+            <p className="text-[12px] text-gray-500 mt-2 whitespace-pre-wrap">
               {response.userResponses[0] || ''}
             </p>
           </div>
         ))}
       </div>
-
+  
       <button
         onClick={() => setIsChatOpen(true)}
         className="fixed bottom-[20px] right-[20px] bg-[#FFAD7A] text-white p-4 rounded-full shadow-lg hover:bg-[#E5946D] transition duration-200"
       >
-        <img 
-          src="/img/pen_icon.png" 
-          alt="펜" 
-          className="w-[22px] h-[24px] rounded-lg"
-        />
+        <img src="/img/pen_icon.png" alt="펜" className="w-[22px] h-[24px] rounded-lg" />
       </button>
     </div>
   );
+  
 
   const renderChat = () => (
     <div className="w-full h-screen bg-white flex flex-col font-['Pretendard_Variable']">

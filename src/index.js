@@ -34,6 +34,7 @@ import Login from './login/login.js'
 import Help from './Help.js'
 import HelpList from './HelpList.js'
 import HelpListCheck from './HelpListCheck.js'
+import Collect from './Collect.js'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -63,6 +64,7 @@ root.render(
         <Route path="/Help" element={<><Back /><Help /></>} />
         <Route path="/HelpList" element={<><Back /><HelpList /></>} />
         <Route path="/HelpListCheck" element={<><Back /><HelpListCheck /></>} />
+        <Route path="/Collect" element={<><Back /><Collect /></>} />
 
         {/* 네비게이션을 포함한 모든 다른 라우트 */}
         <Route

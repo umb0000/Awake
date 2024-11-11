@@ -21,39 +21,39 @@ const AnxietyBook2 = () => {
   const texts = {
     1: {
       first: "내가 완벽하지 않으면 사람들은 날 싫어할 거야.",
-      second: "나는 항상 배우고 성장하는 중이야. 모든 사람이 완벽할 필요는 없어.",
+      second: "나는 항상 배우고 성장하는 중이야.\n 모든 사람이 완벽할 필요는 없어.",
     },
     2: {
       first: "다른 사람들보다 뒤쳐지고 있는 것 같아.",
-      second: "내 속도대로 가는 거야. 내 방식으로 충분히 잘하고 있어.",
+      second: "내 속도대로 가는 거야.\n 내 방식으로 충분히 잘하고 있어.",
     },
     3: {
       first: "과거의 실수 때문에 난 앞으로도 실패할 거야.",
-      second: "과거는 이미 지나갔고, 나는 매일 더 나아지고 있어.",
+      second: "과거는 이미 지나갔고,\n 나는 매일 더 나아지고 있어.",
     },
     4: {
       first: "내가 한 일은 항상 부족하고 미완성이야.",
-      second: "나는 최선을 다했고, 그걸로도 충분해.",
+      second: "나는 최선을 다했고,\n 그걸로도 충분해.",
     },
     5: {
       first: "이 정도 성취로는 아무 의미가 없어.",
-      second: "나는 작은 성취도 인정하고 즐거워해.",
+      second: "나는 작은 성취도\n 인정하고 즐거워해.",
     },
     6: {
       first: "실수하면 다른 사람들이 나를 무시할 거야.",
-      second: "실수해도 괜찮아, 배우는 과정이니까.",
+      second: "실수해도 괜찮아,\n 배우는 과정이니까.",
     },
     7: {
       first: "왜 나만 자꾸 뒤처지는 것 같지?",
-      second: "내 속도대로 가는 거야. 내 방식으로 충분히 잘하고 있어.",
+      second: "내 속도대로 가는 거야.\n 내 방식으로 충분히 잘하고 있어.",
     },
     8: {
       first: "난 항상 이런 실수를 반복해. 앞으로도 나아질 수 없을 거야.",
-      second: "과거는 이미 지나갔고, 나는 매일 더 나아지고 있어.",
+      second: "과거는 이미 지나갔고,\n 나는 매일 더 나아지고 있어.",
     },
     9: {
       first: "난 왜 항상 이것밖에 못 할까?",
-      second: "나는 최선을 다했고, 그걸로도 충분해.",
+      second: "나는 최선을 다했고,\n 그걸로도 충분해.",
     },
   };
   
@@ -65,7 +65,7 @@ const AnxietyBook2 = () => {
 
   return (
     <div className="relative w-full h-[800px] bg-white overflow-hidden">
-      <div className="absolute left-0 top-0 w-full h-full flex flex-col items-center justify-center gap-4">
+      <div className="absolute left-0 top-0 w-full h-full flex flex-col items-center justify-start py-10 gap-4">
 
         {/* First section */}
         <div className="w-[90%] flex items-center justify-center p-4 bg-[#ffcd63] rounded-lg">

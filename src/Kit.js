@@ -19,12 +19,15 @@ const Kit = () => {
   };
 
   return (
+
     <div className="relative w-full h-[100%] bg-[#fff] overflow-hidden font-['Pretendard_Variable']">
       {/* 네비게이션 바 */}
+      <div className="w-full h-[15px]"></div> {/* 상단 상태 표시와 여백을 위한 공간 */}
+  
       <div className='app-container'>
         <div className='content'>
           <div className="w-full h-[15%] flex flex-col items-center justify-start gap-[10px] py-[9px] px-[10px] bg-[#fff] z-10">
-            <div className="relative w-[95%] h-[51px] shrink-0 flex flex-col items-start justify-start py-[7px] px-0">
+            <div className="relative w-[95%] h-[51px] shrink-0 flex flex-col items-start justify-start py-[9px] px-0">
               <div className="absolute left-0 top-[5px] w-[308px] h-[41px] shrink-0 flex flex-row items-center justify-start gap-[11px] overflow-hidden">
                 <img width="24" height="22" src={process.env.PUBLIC_URL + "/img/Vector1_233.png"} alt="icon" />
                 <div className="text-[24px] leading-[24px] tracking-[.01em] font-['Pretendard_Variable'] font-black text-[#237741] text-center whitespace-nowrap">
@@ -85,6 +88,7 @@ const Kit = () => {
         </div>
       </div>
     </div>
+
   );
 };
 

@@ -10,21 +10,27 @@ const Back = () => {
     navigate(-1); // 이전 페이지로 이동
   };
 
-  return (
-    <div>
-      {/* 상단 뒤로가기 버튼 */}
-      <div className="fixed left-0 top-0 w-full h-16 px-1 py-2 bg-white z-50 flex justify-start items-center gap-1 shadow-md" style={{ marginBottom: '10px' }}>
-        {/* 버튼 컨테이너 */}
-        <div className="w-12 h-12 flex-col justify-center items-center gap-2.5 inline-flex">
-          <div className="rounded-full justify-center items-center flex">
-            <button onClick={handleBackClick} className="p-2 flex justify-center items-center">
-              <VscArrowLeft size={24} />
-            </button>
-          </div>
+ return (
+    <div className="relative">
+      {/* 상단 상태 표시 */}
+      <div className="fixed left-0 top-0 w-full h-[45px] flex flex-row items-end justify-between py-[10px] px-[24px] bg-white z-50">
+        <div className="text-[14px] leading-[20px] tracking-[.01em] font-['Pretendard_Variable'] font-medium text-[#1d1b20] whitespace-nowrap">
+          9:30
         </div>
+        <img
+          width="46"
+          height="17"
+          src={process.env.PUBLIC_URL + "/img/right_iconsI1_276.png"}
+          alt="status icons"
+        />
       </div>
-      {/* 뒤로가기 버튼 하단에 공간을 추가하기 위해 빈 div */}
-      <div className="h-16"></div> {/* 16px의 여백 추가 */}
+
+      {/* 상단 뒤로가기 버튼 */}
+      <div className="self-stretch h-[64px] flex items-center justify-start py-[8px] px-[23px] bg-[#fff] mt-[45px]">
+        <button onClick={handleBackClick} className="p-2 flex justify-center items-center">
+          <VscArrowLeft size={24} />
+        </button>
+      </div>
     </div>
   );
 };

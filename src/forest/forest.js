@@ -5,7 +5,7 @@ const Forest = () => {
   const containerRef = useRef(null);
 
   return (
-    <div className="w-[360px] h-[800px] relative bg-gradient-to-b from-white to-[#8db28f]">
+    <div className="w-screen min-h-screen relative bg-gradient-to-b from-white to-[#8db28f]">
       <div className="w-[360px] h-[690px] left-0 absolute">
         <div className="py-[21px] left-[11px] absolute flex-col justify-start items-center gap-[5px] inline-flex">
           <div className="w-[103px] h-[17px] text-center text-[#237740] text-sm font-semibold font-['Pretendard'] leading-[15px] tracking-wide">

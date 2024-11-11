@@ -16,15 +16,25 @@ const ConflictBoard = () => {
   const [allResponses, setAllResponses] = useState([
     {
       finalMessage: "괜찮아, 네가 한 노력은 충분히 가치 있어",
-      userResponses: ["네가 해낸 건 별거 아니야, 다들 쉽게 할 수 있는 거야."],
+      userResponses: [
+        "네가 해낸 건 별거 아니야, 다들 쉽게 할 수 있는 거야.",
+        "그 말이 속상했던 이유: 아무리 노력해도 부족한 느낌이 들어요.",
+        "상대방의 의도: 아마 저를 자극하려고 한 말일지도 몰라요."
+      ],
       timestamp: "5분 전",
       moodIcon: "😊",
+      isExpanded: false,
     },
     {
       finalMessage: "넌 충분히 잘하고 있어, 자신감을 가져!",
-      userResponses: ["왜 그렇게 게으른 거야? 뭔가 제대로 해낸 게 있어?"],
+      userResponses: [
+        "왜 그렇게 게으른 거야?",
+        "그 말이 속상했던 이유: 스스로가 게으르다는 생각이 들어요.",
+        "상대방의 의도: 제가 더 발전하길 바라서 한 말일 수도 있어요."
+      ],
       timestamp: "1일 전",
       moodIcon: "🌈",
+      isExpanded: false,
     },
   ]);
 
@@ -129,6 +139,7 @@ const ConflictBoard = () => {
         userResponses: [...userResponses],
         timestamp: timestamp,
         moodIcon: moodIcon,
+        isExpanded: false,
       },
       ...prev,
     ]);
@@ -147,6 +158,14 @@ const ConflictBoard = () => {
     if (textareaRef.current) {
       textareaRef.current.style.height = 'auto';
     }
+  };
+
+  const toggleExpandCard = (index) => {
+    setAllResponses((prev) =>
+      prev.map((response, idx) =>
+        idx === index ? { ...response, isExpanded: !response.isExpanded } : response
+      )
+    );
   };
 
   const WayMessage = ({ text }) => (
@@ -189,53 +208,15 @@ const ConflictBoard = () => {
       </div>
     </div>
   );
-  const renderTimeline = () => (
-    <div className="relative w-full h-screen bg-[#F9F8F6] overflow-y-scroll font-['Pretendard_Variable']">
-      <div className="sticky top-0 z-10 p-4 bg-white shadow-md rounded-tl-[20px] rounded-tr-[20px] border-b border-[#FFAD7A]">
-        <h1 className="text-center text-[20px] font-bold text-[#4B4B4B]">웨이의 상담 기록</h1>
-      </div>
-  
-      <div className="space-y-6 p-4 mt-10">
-        {allResponses.map((response, index) => (
-          <div
-            key={index}
-            className="flex flex-col items-start bg-white p-5 rounded-lg shadow-md border border-gray-200 relative space-y-2"
-          >
-            {index !== allResponses.length - 1 && (
-              <div className="absolute left-4 top-full h-6 w-1 bg-gray-300"></div>
-            )}
-            <div className="flex items-center text-sm text-gray-500 mb-1">
-              <span className="mr-2 p-1 rounded-full bg-[#FFAD7A]/20 text-[#D88C65] text-lg">{response.moodIcon}</span>
-              <span className="text-gray-400">{response.timestamp}</span>
-            </div>
-            <h2 className="text-[15px] font-semibold text-[#4B4B4B] leading-relaxed mb-2">
-              {response.finalMessage}
-            </h2>
-            <p className="text-[12px] text-gray-500 mt-2 whitespace-pre-wrap">
-              {response.userResponses[0] || ''}
-            </p>
-          </div>
-        ))}
-      </div>
-  
-      <button
-        onClick={() => setIsChatOpen(true)}
-        className="fixed bottom-[20px] right-[20px] bg-[#FFAD7A] text-white p-4 rounded-full shadow-lg hover:bg-[#E5946D] transition duration-200"
-      >
-        <img src="/img/pen_icon.png" alt="펜" className="w-[22px] h-[24px] rounded-lg" />
-      </button>
-    </div>
-  );
-  
 
   const renderChat = () => (
-    <div className="w-full h-screen bg-white flex flex-col font-['Pretendard_Variable']">
-      <div className="w-full h-[60px] bg-[#f7f2fa] flex items-center justify-between px-6 shadow-sm border-b fixed top-16">
+    <div className="w-full h-[690px] bg-white flex flex-col font-['Pretendard_Variable']">
+      <div className="sticky top-0 z-10 p-4 bg-[#f7f2fa] flex items-center justify-between px-6 shadow-sm border-b fixed top-16">
         <span className="text-lg font-bold">웨이의 분노 상담소</span>
         <button onClick={() => setIsChatOpen(false)} className="text-gray-500 text-xl font-bold">×</button>
       </div>
-  
-      <div className="flex-1 overflow-y-auto p-6 space-y-4 pt-20 bg-gray-50">
+
+      <div className="flex-1 overflow-y-auto p-6 space-y-4 pt-5 bg-gray-50">
         {messages.map((msg, idx) =>
           msg.isSeparator ? (
             <div key={idx} className="flex items-center justify-center my-4">
@@ -247,7 +228,7 @@ const ConflictBoard = () => {
             <UserMessage key={idx} text={msg.text} />
           )
         )}
-  
+
         {isTyping && (
           <div className="typing-indicator flex items-center justify-start bg-gray-200 px-3 py-2 rounded-lg max-w-[75%] shadow-md ml-2">
             <div className="dot bg-gray-500 rounded-full w-2 h-2 mx-1 animate-bounce"></div>
@@ -267,13 +248,12 @@ const ConflictBoard = () => {
                 {icon}
               </span>
             ))}
-
           </div>
         )}
       </div>
-  
+
       <div className="flex items-center px-4 py-3 bg-white border-t border-gray-200">
-      <textarea
+        <textarea
           ref={textareaRef}
           rows={1}
           onInput={(e) => {
@@ -287,23 +267,65 @@ const ConflictBoard = () => {
           style={{ maxHeight: '80px' }}
         />
 
-        <button 
-          onClick={currentQuestionIndex === 3 ? handleFinalMessage : handleSendMessage} 
+        <button
+          onClick={currentQuestionIndex === 3 ? handleFinalMessage : handleSendMessage}
           className="ml-2 px-4 py-2 bg-[#FFAD7A] text-white font-semibold rounded-[11px] hover:bg-[#E5946D] transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FFAD7A]"
         >
           보내기
         </button>
-
       </div>
-  
+
       {showSavePopup && (
         <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg text-center">
-            <p>기록이 저장되었습니다. 메인 화면으로 돌아갑니다.</p>
+            <p>기록이 저장되었습니다.<br/>메인 화면으로 돌아갑니다.</p>
             <button onClick={handleReturnToMain} className="mt-4 bg-blue-500 text-white py-2 px-4 rounded-lg">메인으로 돌아가기</button>
           </div>
         </div>
       )}
+    </div>
+  );
+
+  const renderTimeline = () => (
+    <div className="relative w-full h-screen bg-[#F9F8F6] overflow-y-scroll font-['Pretendard_Variable']">
+      <div className="sticky top-0 z-10 p-4 bg-white shadow-md">
+        <h1 className="text-center text-[20px] font-bold text-[#4B4B4B]">웨이의 상담 기록</h1>
+      </div>
+  
+      <div className="space-y-6 p-4 mt-10">
+        {allResponses.map((response, index) => (
+          <div
+            key={index}
+            onClick={() => toggleExpandCard(index)}
+            className="flex flex-col items-start bg-white p-5 rounded-lg shadow-md border border-gray-200 relative space-y-2 cursor-pointer"
+          >
+            {index !== allResponses.length - 1 && (
+              <div className="absolute left-4 top-full h-6 w-1 bg-gray-300"></div>
+            )}
+            <div className="flex items-center text-sm text-gray-500 mb-1">
+              <span className="mr-2 p-1 rounded-full bg-[#FFAD7A]/20 text-[#D88C65] text-lg">{response.moodIcon}</span>
+              <span className="text-gray-400">{response.timestamp}</span>
+            </div>
+            <h2 className="text-[15px] font-semibold text-[#4B4B4B] leading-relaxed mb-2">
+              {response.finalMessage}
+            </h2>
+            {response.isExpanded && (
+              <div className="space-y-2 mt-2">
+                <p className="text-[12px] text-gray-500">{response.userResponses[0]}</p>
+                <p className="text-[12px] text-gray-500">{response.userResponses[1]}</p>
+                <p className="text-[12px] text-gray-500">{response.userResponses[2]}</p>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+  
+      <button
+        onClick={() => setIsChatOpen(true)}
+        className="fixed bottom-[20px] right-[20px] bg-[#FFAD7A] text-white p-4 rounded-full shadow-lg hover:bg-[#E5946D] transition duration-200"
+      >
+        <img src="/img/pen_icon.png" alt="펜" className="w-[48px] h-[50px] rounded-lg" />
+      </button>
     </div>
   );
 

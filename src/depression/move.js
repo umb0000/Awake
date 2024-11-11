@@ -69,11 +69,11 @@ const Move = () => {
   };
   return (
     <div className="w-full h-full bg-white flex-col justify-start items-start gap-3 inline-flex">
-      <div className="self-stretch h-[646px] px-2.5 flex-col justify-center items-center gap-2 inline-flex">
+      <div className="self-stretch h-[646px] px-2.5 flex-col justify-center items-center inline-flex">
         <div className="p-2.5 flex-col justify-start items-center gap-2 flex">
-          <div className="w-[340px] h-[53px] px-5 flex-col justify-center items-center gap-[1px] mb-10 flex">
+          <div className="w-[340px] h-[53px] px-5 flex-col justify-center items-center gap-[10px] mb-10 flex">
             <div className="w-[340px] h-[30px] px-4 justify-center items-center gap-[26px] inline-flex">
-              <div className="w-[115px] text-black text-2xl font-bold font-['Pretendard'] leading-normal tracking-wide">
+              <div className="w-[148px] text-black text-[28px] font-bold font-['Pretendard'] leading-normal tracking-wide">
                 몸 움직이기
               </div>
             </div>
@@ -104,7 +104,7 @@ const Move = () => {
                 </div>
               </div>
             </div>
-            <div className="w-[266px] h-[35px] bg-[#ffdade] rounded-[15px] flex justify-center items-center">
+            <div className="w-[266px] h-[45px] bg-[#ffdade] rounded-[15px] flex justify-center items-center">
               <button onClick={handleButtonClick} className="w-full h-full text-black text-[15px] font-bold font-['Pretendard'] leading-normal tracking-wide">
                 {buttonText}
               </button>

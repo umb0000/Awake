@@ -73,8 +73,8 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
 
   useEffect(() => {
     const token = localStorage.getItem('token'); // 토큰을 가져옵니다.
-  
-    fetch('http://112.152.14.116:10211/todo-get', {
+    
+    fetch(`http://112.152.14.116:10211/todo-get?time=${selectedDate}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -101,7 +101,8 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
       }
     })
     .catch(error => console.error('Error fetching data:', error));
-  }, []);
+  }, [selectedDate]); // selectedDate 변경 시 요청을 새로 보냄
+  
 
   const handleButtonClick = (type) => {
     setActiveFilter(type);

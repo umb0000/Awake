@@ -197,7 +197,8 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
   }, [cards, onCompletionRateChange]);
     
   return (
-    <div>
+    
+    <div className="self-stretch h-[454px] shrink-0 flex flex-col items-start justify-start gap-[7px]">
     <div className="w-[200px] h-7 flex-row gap-[5px] relative">                
                 <div className="w-[100px] left-0 top-0 absolute text-left text-[#49454f] font-bold text-[13px] font-['Pretendard'] leading-7">
                   {formatDate(selectedDate)}
@@ -214,8 +215,7 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
                   alt="Calendar Icon"
                 />
               </div>
-    <div className="self-stretch h-[454px] shrink-0 flex flex-col items-start justify-start gap-[7px]">
-      
+
       {/* 필터 버튼 */}
       <div className="w-[205px] h-[23px] shrink-0 flex flex-row items-start justify-start gap-[7px]">
         <img
@@ -282,7 +282,6 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
           </>
         )}
       </AnimatePresence>
-    </div>
     </div>
   );
 };

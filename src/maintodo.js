@@ -118,7 +118,7 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
         </div>
         <img
           className="w-[12px] h-[7px] left-[105px] top-[7px] relative"
-          src={process.env.PUBLIC_URL + /img/down.png}
+          src={process.env.PUBLIC_URL + "/img/down.png"}
           alt="Calendar Icon"
         />
       </div>
@@ -127,21 +127,21 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
         <img
           width="51"
           height="23"
-          src={process.env.PUBLIC_URL + /img/main_all_clicked.png}
+          src={process.env.PUBLIC_URL + "/img/main_all_clicked.png"}
           onClick={() => handleButtonClick('all')}
           alt="All"
         />
         <img
           width="51"
           height="23"
-          src={process.env.PUBLIC_URL + /img/main_routine_unclicked.png}
+          src={process.env.PUBLIC_URL + "/img/main_routine_unclicked.png"}
           onClick={() => handleButtonClick('routine')}
           alt="Routine"
         />
         <img
           width="51"
           height="23"
-          src={process.env.PUBLIC_URL + /img/main_todo_unclicked.png}
+          src={process.env.PUBLIC_URL + "/img/main_todo_unclicked.png"}
           onClick={() => handleButtonClick('todo')}
           alt="Todo"
         />

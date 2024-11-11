@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import MainEdit from './mainEdit';
+import Card from './Card';
 import './output.css';
 import DatePicker from './datepicker';
 
@@ -54,7 +55,14 @@ const getCardProperties = (card) => {
   return { ...card, level, points, image };
 };
 
-// TodoList component
+// 날짜 포맷 함수
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  return `${month}월 ${day}일`;
+};
+
 const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
   const [cards, setCards] = useState([]);
   const [activeFilter, setActiveFilter] = useState('all');
@@ -62,7 +70,6 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split("T")[0]);
 
   useEffect(() => {
-    // Fetch cards from the database and set initial states
     fetch('http://112.152.14.116:10211/todo-list')
       .then(response => response.json())
       .then(data => {
@@ -76,6 +83,10 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
       })
       .catch(error => console.error('Error fetching data:', error));
   }, []);
+
+  const handleButtonClick = (type) => {
+    setActiveFilter(type);
+  };
 
   const handleCheck = (card) => {
     setCards(prevCards => {
@@ -99,6 +110,14 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
     onCheck(card);
   };
 
+  const handleDeleteCard = (id) => {
+    setCards(prevCards => prevCards.filter(card => card.id !== id));
+  };
+
+  const handleCloseEdit = () => {
+    setEditingCard(null);
+  };
+
   const filteredCards = cards.filter(card => {
     if (activeFilter === 'all') return true;
     return card.type === activeFilter;
@@ -118,7 +137,7 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
         </div>
         <img
           className="w-[12px] h-[7px] left-[105px] top-[7px] relative"
-          src={process.env.PUBLIC_URL + "/img/down.png"}
+          src={`${process.env.PUBLIC_URL}/img/down.png`}
           alt="Calendar Icon"
         />
       </div>
@@ -127,21 +146,21 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
         <img
           width="51"
           height="23"
-          src={process.env.PUBLIC_URL + "/img/main_all_clicked.png"}
+          src={`${process.env.PUBLIC_URL}/img/main_all_clicked.png`}
           onClick={() => handleButtonClick('all')}
           alt="All"
         />
         <img
           width="51"
           height="23"
-          src={process.env.PUBLIC_URL + "/img/main_routine_unclicked.png"}
+          src={`${process.env.PUBLIC_URL}/img/main_routine_unclicked.png`}
           onClick={() => handleButtonClick('routine')}
           alt="Routine"
         />
         <img
           width="51"
           height="23"
-          src={process.env.PUBLIC_URL + "/img/main_todo_unclicked.png"}
+          src={`${process.env.PUBLIC_URL}/img/main_todo_unclicked.png`}
           onClick={() => handleButtonClick('todo')}
           alt="Todo"
         />

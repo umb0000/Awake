@@ -4,7 +4,7 @@ import './output.css';
 const Collect = () => {
     return (
         <div className="w-[360px] h-[800px] relative bg-white">
-            <div className="w-[360px] h-[743px] px-2.5 left-0 top-0 absolute flex-col justify-center items-center inline-flex">
+            <div className="w-[360px] h-[743px] px-0 left-0 top-0 absolute flex-col justify-center items-center inline-flex">
                 <div className="flex-col justify-start items-center flex pt-0 mt-0"> {/* pt-0, mt-0으로 상단 여백 제거 */}
                     <div className="w-[340px] h-[70px] flex-col justify-center items-center flex gap-0"> {/* gap-0으로 여백 제거 */}
                         <div className="w-[340px] h-[30px] flex justify-center items-center">

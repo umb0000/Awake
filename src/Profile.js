@@ -60,16 +60,17 @@ const Profile = () => {
 
       {/* Options List */}
       <div className="w-full px-4 flex flex-col gap-3">
-        <div className="w-full h-16 bg-white rounded-lg flex items-center px-4 text-[#79747e] text-base font-bold">
-          <a href="#">고양이 도감 보기</a>
-        </div>
-        <div className="w-full h-16 bg-white rounded-lg flex items-center px-4 text-[#79747e] text-base font-bold">
-          <a href="#">내 기록 확인</a>
-        </div>
-        <a className="w-full h-16 bg-white rounded-lg flex items-center px-4 text-[#79747e] text-base font-bold" href="http://kwawake.duckdns.org/Help">
-          <div>문의하기</div>
-        </a>
-      </div>
+    <a href="http://kwawake.duckdns.org/collect" className="w-full h-16 bg-white rounded-lg flex items-center px-4 text-[#79747e] text-base font-bold">
+        고양이 도감 보기
+    </a>
+    <a href="http://kwawake.duckdns.org/record" className="w-full h-16 bg-white rounded-lg flex items-center px-4 text-[#79747e] text-base font-bold">
+        내 기록 확인
+    </a>
+    <a href="http://kwawake.duckdns.org/help" className="w-full h-16 bg-white rounded-lg flex items-center px-4 text-[#79747e] text-base font-bold">
+        문의하기
+    </a>
+</div>
+
     </div>
   );
 };

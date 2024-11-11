@@ -136,10 +136,10 @@ function Join({ onRegisterSuccess, onSwitchToLogin }) {
     );
 
     return (
-        <div className="w-full h-full mx-auto relative bg-white">
+        <div className="w-[360px] h-[800px] mx-auto relative bg-white">
             <form onSubmit={handleRegister}>
                 {currentStep > 1 && (
-                    <div className="w-full flex flex-col items-center justify-start">
+                    <div className="w-[360px] flex flex-col items-center justify-start">
                         <div className="self-stretch h-[45px] flex items-end justify-between py-[10px] px-[24px]">
                             <div className="text-[14px] font-['Roboto'] font-medium text-[#1d1b20]">9:30</div>
                             <img width="46" height="17" src="right iconsI257_737;50758_11372.png" alt="icon" />
@@ -207,7 +207,7 @@ function Join({ onRegisterSuccess, onSwitchToLogin }) {
                     )}
 
 {currentStep === 4 && (
-            <div className="w-full h-full relative bg-white">
+            <div className="w-[360px] h-[800px] relative bg-white">
             <div className="w-full h-[60px]  flex-col justify-center items-center gap-5 inline-flex">
             <div className="text-center mt-[600px] text-black text-xl font-medium font-['Pretendard'] font-bold leading-[30px] tracking-tight">어웨이크! <br/>깨어날 준비가 되었습니다.</div>
           </div>

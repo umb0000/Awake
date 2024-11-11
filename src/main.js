@@ -255,7 +255,7 @@ const Main = () => {
                 </div>
                 <img
                   className="w-3 h-3.5 left-[100px] top-[7px] relative"
-                  src="https://via.placeholder.com/12x14"
+                  src={process.env.PUBLIC_URL + `/img/down.png`}
                   alt="Calendar Icon"
                 />
               </div>

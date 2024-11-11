@@ -81,7 +81,7 @@ const MainAdd = () => {
 
     // API 요청 보내기
     const token = localStorage.getItem('token');
-    fetch('http://112.152.14.116:10211/todo', {
+    fetch('http://112.152.14.116:10211/todo-add', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

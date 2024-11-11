@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import MainEdit from './mainEdit';
-import Card from './Card';
+import Card from './maintodoCardCard.js';
 import './output.css';
 import DatePicker from './datepicker';
 

@@ -211,20 +211,27 @@ const Main = () => {
 
       {/* Diary 팝업 */}
       <AnimatePresence>
-        {showDiary && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50"
+      {showDiary && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50"
+        >
+          <div 
+            className="relative bg-gradient-to-t from-[#e8f2ff] to-white w-[340px] h-[557px] rounded-md shadow-lg p-4"
+            style={{
+              backgroundColor: 'white', // Diary 컴포넌트의 배경과 일치
+              borderRadius: '10px', 
+            }}
           >
-            <div className="relative bg-white p-4 rounded-md shadow-lg z-60">
-              <button onClick={closeDiary} className="absolute top-5 right-5 text-2xl text-gray-500 z-20">✕</button>
-              <Diary />
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            <button onClick={closeDiary} className="absolute top-3 right-3 text-xl text-gray-500">✕</button>
+            <Diary />
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+
       
       <div className="relative left-0 top-0 w-[100%] flex flex-col items-center justify-start ">
 

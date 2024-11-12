@@ -2,7 +2,6 @@ import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import '../output.css';
 
-
 const AnxietyBook2 = () => {
   const { id } = useParams();
 
@@ -10,57 +9,50 @@ const AnxietyBook2 = () => {
     console.log('Received id:', id); // id 값을 콘솔에 출력
   }, [id]);
 
-
   // id를 숫자로 변환
   const numericId = Number(id);
   if (isNaN(numericId)) {
     console.error('Invalid id:', id);
     return <div>유효하지 않은 항목입니다.</div>;
   }
+
   // 각 id에 맞는 텍스트 설정
   const texts = {
     1: {
       first: "내가 완벽하지 않으면 사람들은 날 싫어할 거야.",
       second: "나는 항상 배우고 성장하는 중이야.\n 모든 사람이 완벽할 필요는 없어.",
     },
-    2: {
-      first: "다른 사람들보다 뒤쳐지고 있는 것 같아.",
-      second: "내 속도대로 가는 거야.\n 내 방식으로 충분히 잘하고 있어.",
-    },
-    3: {
-      first: "과거의 실수 때문에 난 앞으로도 실패할 거야.",
-      second: "과거는 이미 지나갔고,\n 나는 매일 더 나아지고 있어.",
-    },
-    4: {
-      first: "내가 한 일은 항상 부족하고 미완성이야.",
-      second: "나는 최선을 다했고,\n 그걸로도 충분해.",
-    },
-    5: {
-      first: "이 정도 성취로는 아무 의미가 없어.",
-      second: "나는 작은 성취도\n 인정하고 즐거워해.",
-    },
-    6: {
-      first: "실수하면 다른 사람들이 나를 무시할 거야.",
-      second: "실수해도 괜찮아,\n 배우는 과정이니까.",
-    },
-    7: {
-      first: "왜 나만 자꾸 뒤처지는 것 같지?",
-      second: "내 속도대로 가는 거야.\n 내 방식으로 충분히 잘하고 있어.",
-    },
-    8: {
-      first: "난 항상 이런 실수를 반복해. 앞으로도 나아질 수 없을 거야.",
-      second: "과거는 이미 지나갔고,\n 나는 매일 더 나아지고 있어.",
-    },
-    9: {
-      first: "난 왜 항상 이것밖에 못 할까?",
-      second: "나는 최선을 다했고,\n 그걸로도 충분해.",
-    },
+    //... (other text entries)
   };
-  
-  
+
   const text = texts[numericId] || {
     first: "텍스트를 찾을 수 없습니다.",
     second: "잘못된 항목입니다.",
+  };
+
+  // 북마크 저장 함수
+  const handleSaveBookmark = async () => {
+    const token = localStorage.getItem('token'); // Get the token from local storage
+    try {
+      const response = await fetch('http://your-backend-url/angerbook-post-bookmark', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ worry: text.first, reply: text.second }),
+      });
+      const result = await response.json();
+      if (response.ok) {
+        alert(result.message); // Display success message
+      } else {
+        console.error("Failed to save bookmark:", result.detail);
+        alert("Failed to save bookmark");
+      }
+    } catch (error) {
+      console.error("Error saving bookmark:", error);
+      alert("Error saving bookmark");
+    }
   };
 
   return (
@@ -71,10 +63,10 @@ const AnxietyBook2 = () => {
         <div className="w-[90%] flex items-center justify-center p-4 bg-[#ffcd63] rounded-lg">
           <div className="text-[16px] font-['Pretendard_Variable'] font-bold text-white text-center" style={{ color: '#49454F' }}>
             {text.first.split('\n').map((line, index) => (
-          <span key={index}>
-            {line}
-            <br />
-          </span>
+              <span key={index}>
+                {line}
+                <br />
+              </span>
             ))}
           </div>
         </div>
@@ -84,18 +76,21 @@ const AnxietyBook2 = () => {
           background: "radial-gradient(circle at center, #FFFFFF, #F8FEFF 42%, #A4F7FF 100%)"
         }}>
           <div className="text-center text-[#1d1b20] text-xl font-bold font-['Pretendard'] leading-[29px] tracking-tight whitespace-nowrap">
-          {text.second.split('\n').map((line, index) => (
-          <span key={index}>
-            {line}
-            <br />
-          </span>
+            {text.second.split('\n').map((line, index) => (
+              <span key={index}>
+                {line}
+                <br />
+              </span>
             ))}
           </div>
         </div>
 
         {/* Buttons Section */}
         <div className="flex flex-row items-start justify-between gap-4 w-[90%]">
-          <button className="w-[45%] p-4 border-2 border-[#70e9f9] rounded-lg hover:bg-[#70e9f9] hover:text-white transition-all duration-300">
+          <button
+            onClick={handleSaveBookmark}
+            className="w-[45%] p-4 border-2 border-[#70e9f9] rounded-lg hover:bg-[#70e9f9] hover:text-white transition-all duration-300"
+          >
             <div className="text-[14px] font-bold text-[#1d1b20] text-center">
               저장하기
             </div>

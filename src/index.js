@@ -38,6 +38,7 @@ import Collect from './Collect.js'
 import Explain1 from './Explain1.js'
 import Explain2 from './Explain2.js'
 import Explain3 from './Explain3.js'
+import { Center } from '@react-three/drei';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -71,6 +72,7 @@ root.render(
         <Route path="/Explain1" element={<><Back /><Explain1 /></>} />
         <Route path="/Explain2" element={<><Back /><Explain2 /></>} />
         <Route path="/Explain3" element={<><Back /><Explain3 /></>} />
+        <Route path="/Center" element={<><Back /><Center /></>} />
 
         {/* 네비게이션을 포함한 모든 다른 라우트 */}
         <Route
@@ -94,6 +96,7 @@ root.render(
                 <Route path="/Depression" element={<Depression />} />
                 <Route path="/calender" element={<Calender />} />
                 <Route path="/profile" element={<Profile />} />
+                <Route path="/Center" element={<Center />} />
               </Routes>
               <Navigation />
             </div>

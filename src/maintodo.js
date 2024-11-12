@@ -156,9 +156,12 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
       updateCompletionRate(sortedCards);
       return sortedCards;
     });
-  
+
     onCheck(card);
-  };
+
+    // 체크 여부 변경 시 데이터 갱신
+    fetchTodos();
+};
 
   const handleDeleteCard = (id) => {
     setCards(prevCards => {

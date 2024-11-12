@@ -179,7 +179,6 @@ const Main = () => {
     const changeText = () => {
       const randomText = texts[Math.floor(Math.random() * texts.length)];
       setDisplayText(randomText);
-      setIsAnimating(true);
     };
     
     changeText(); // 초기 텍스트 설정
@@ -187,22 +186,6 @@ const Main = () => {
     
     return () => clearInterval(interval);
   }, [texts]);
-
-  // 텍스트 애니메이션 효과
-  useEffect(() => {
-    if (isAnimating && displayText.length > 0) {
-      let currentIndex = 0;
-      setDisplayText('');
-      const interval = setInterval(() => {
-        setDisplayText((prev) => prev + displayText[currentIndex]);
-        currentIndex++;
-        if (currentIndex === displayText.length) {
-          clearInterval(interval);
-          setIsAnimating(false);
-        }
-      }, 100);
-    }
-  }, [isAnimating, displayText]);
 
   // 달성률 및 카드 개수 업데이트 함수
   const handleCompletionRateChange = (rate, total, completed) => {
@@ -254,12 +237,12 @@ const Main = () => {
       
       <div className="relative left-0 top-0 w-[100%] flex flex-col items-center justify-start ">
 
-      {/* 말풍선 */}
-      <div className="absolute top-6 left-6 bg-blue-400 text-white px-4 py-2 rounded-lg shadow-lg max-w-xs flex items-center z-10">
-        <span className="text-lg font-bold">{displayText}</span>
+     {/* 말풍선 */}
+     <div className="absolute top-6 left-6 bg-white text-white px-4 py-2 rounded-lg shadow-lg max-w-xs h-[50px] flex items-center z-10">
+        <span className="text-md font-bold">{displayText}</span>
         <div className="absolute -bottom-2 left-10 w-0 h-0 border-l-[10px] border-l-transparent border-t-[10px] border-t-blue-400 border-r-[10px] border-r-transparent"></div>
       </div>
-        
+
         {/* 오른쪽 상단 작은 이미지 */}
         <a
           href="http://kwawake.duckdns.org/collect"

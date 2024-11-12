@@ -225,9 +225,15 @@ const Main = () => {
           />
         </a>
         {/* 오른쪽 상단 메일 아이콘 버튼 */}
-      <button
-        className="absolute top-24 right-4 w-[39px] h-[40px] flex items-center justify-center z-50"
+        <button
+        className="absolute top-24 right-4 w-[49px] h-[50px] flex items-center justify-center z-50 cursor-pointer"
         onClick={handleMailClick} // 클릭 시 다이어리 팝업 표시
+        style={{
+          zIndex: 100, // 버튼을 최상단에 표시
+          background: 'transparent', // 배경 투명
+          border: 'none', // 테두리 없음
+          padding: 0, // 기본 여백 제거
+        }}
       >
         <img
           src={process.env.PUBLIC_URL + "/img/mail.png"}
@@ -240,7 +246,7 @@ const Main = () => {
         <div className="relative self-stretch w-[100%] h-[25vh] shrink-0 flex justify-center items-center" style={{ paddingTop: '0vh', paddingBottom: '0vh' }}>
           <Canvas className="w-full h-full" gl={{ alpha: true }}>
             
-          <ambientLight intensity={2.5} />
+          
           <directionalLight 
             position={[Math.cos(153 * (Math.PI / 180)), 0, Math.sin(153 * (Math.PI / 180)) * 3]} // 153도 방향으로 조정
             intensity={1.11}  // 강도 111

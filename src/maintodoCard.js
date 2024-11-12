@@ -11,12 +11,12 @@ const Card = ({ card, onCheck, onDelete }) => {
       onDragEnd={(event, info) => {
         if (info.offset.x < -100) {
           // 스와이프된 거리가 -100px을 넘으면 삭제 버튼을 보여줌
-      setIsDragged(true);
+          onDelete(true);
     } else {
-      setIsDragged(false);
+        onDelete(false);
     }
   }   }
-      animate={{ x: isDragged ? -60 : 0 }} // 삭제 버튼을 보일 만큼만 이동
+      animate={{ x: onDelete ? -60 : 0 }} // 삭제 버튼을 보일 만큼만 이동
       transition={{ type: "spring", stiffness: 300 }}
       layout
     >
@@ -38,7 +38,7 @@ const Card = ({ card, onCheck, onDelete }) => {
           </div>
         </div>
 
-        {isDragged && (
+        {onDelete && (
           <motion.button
             className="absolute right-[-70px] transform -translate-y-1/2 bg-red-500 text-white px-2 py-1 rounded"
             onClick={handleDeleteClick}

@@ -1,54 +1,57 @@
-import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 import '../output.css';
 
 const AnxietyBook2 = () => {
   const { id } = useParams();
-  const [saveMessage, setSaveMessage] = useState('');
 
   useEffect(() => {
-    console.log('Received id:', id);
+    console.log('Received id:', id); // id 값을 콘솔에 출력
   }, [id]);
 
+  // id를 숫자로 변환
   const numericId = Number(id);
   if (isNaN(numericId)) {
     console.error('Invalid id:', id);
     return <div>유효하지 않은 항목입니다.</div>;
   }
 
+  // 각 id에 맞는 텍스트 설정
   const texts = {
     1: {
-      worry: "내가 완벽하지 않으면 사람들은 날 싫어할 거야.",
-      reply: "나는 항상 배우고 성장하는 중이야.\n 모든 사람이 완벽할 필요는 없어.",
+      first: "내가 완벽하지 않으면 사람들은 날 싫어할 거야.",
+      second: "나는 항상 배우고 성장하는 중이야.\n 모든 사람이 완벽할 필요는 없어.",
     },
-    // Add other texts here as in the original code
+    //... (other text entries)
   };
 
   const text = texts[numericId] || {
-    worry: "텍스트를 찾을 수 없습니다.",
-    reply: "잘못된 항목입니다.",
+    first: "텍스트를 찾을 수 없습니다.",
+    second: "잘못된 항목입니다.",
   };
 
-  const handleSave = async () => {
-    const token = localStorage.getItem('token'); // Get token from local storage
+  // 북마크 저장 함수
+  const handleSaveBookmark = async () => {
+    const token = localStorage.getItem('token'); // Get the token from local storage
     try {
-      const response = await fetch('http://112.152.14.116:10211/angerbook-post-bookmark', {
+      const response = await fetch('http://your-backend-url/angerbook-post-bookmark', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`, // Add token in Authorization header
+          Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ worry: text.worry, reply: text.reply }),
+        body: JSON.stringify({ worry: text.first, reply: text.second }),
       });
-      
+      const result = await response.json();
       if (response.ok) {
-        setSaveMessage("북마크가 성공적으로 추가되었습니다.");
+        alert(result.message); // Display success message
       } else {
-        setSaveMessage("북마크 저장에 실패했습니다.");
+        console.error("Failed to save bookmark:", result.detail);
+        alert("Failed to save bookmark");
       }
     } catch (error) {
-      console.error('Error saving bookmark:', error);
-      setSaveMessage("서버 오류로 인해 북마크를 저장할 수 없습니다.");
+      console.error("Error saving bookmark:", error);
+      alert("Error saving bookmark");
     }
   };
 
@@ -59,7 +62,7 @@ const AnxietyBook2 = () => {
         {/* First section */}
         <div className="w-[90%] flex items-center justify-center p-4 bg-[#ffcd63] rounded-lg">
           <div className="text-[16px] font-['Pretendard_Variable'] font-bold text-white text-center" style={{ color: '#49454F' }}>
-            {text.worry.split('\n').map((line, index) => (
+            {text.first.split('\n').map((line, index) => (
               <span key={index}>
                 {line}
                 <br />
@@ -73,7 +76,7 @@ const AnxietyBook2 = () => {
           background: "radial-gradient(circle at center, #FFFFFF, #F8FEFF 42%, #A4F7FF 100%)"
         }}>
           <div className="text-center text-[#1d1b20] text-xl font-bold font-['Pretendard'] leading-[29px] tracking-tight whitespace-nowrap">
-            {text.reply.split('\n').map((line, index) => (
+            {text.second.split('\n').map((line, index) => (
               <span key={index}>
                 {line}
                 <br />
@@ -84,7 +87,10 @@ const AnxietyBook2 = () => {
 
         {/* Buttons Section */}
         <div className="flex flex-row items-start justify-between gap-4 w-[90%]">
-          <button onClick={handleSave} className="w-[45%] p-4 border-2 border-[#70e9f9] rounded-lg hover:bg-[#70e9f9] hover:text-white transition-all duration-300">
+          <button
+            onClick={handleSaveBookmark}
+            className="w-[45%] p-4 border-2 border-[#70e9f9] rounded-lg hover:bg-[#70e9f9] hover:text-white transition-all duration-300"
+          >
             <div className="text-[14px] font-bold text-[#1d1b20] text-center">
               저장하기
             </div>
@@ -96,12 +102,6 @@ const AnxietyBook2 = () => {
           </a>
         </div>
 
-        {/* Save message */}
-        {saveMessage && (
-          <div className="w-[90%] mt-4 p-2 text-center text-sm text-green-600">
-            {saveMessage}
-          </div>
-        )}
       </div>
     </div>
   );

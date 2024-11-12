@@ -207,6 +207,23 @@ const Main = () => {
         {showLevelUpPopup && <LevelUpPopup onClose={closeLevelUpPopup} />}
       </AnimatePresence>
       
+
+      {/* Diary 팝업 */}
+      <AnimatePresence>
+        {showDiary && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50"
+          >
+            <div className="relative bg-white p-4 rounded-md shadow-lg z-60">
+              <button onClick={closeDiary} className="absolute top-2 right-2 text-xl font-bold">✖</button>
+              <Diary />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
       
       <div className="relative left-0 top-0 w-[100%] flex flex-col items-center justify-start ">
 
@@ -234,7 +251,7 @@ const Main = () => {
           border: 'none', // 테두리 없음
           padding: 0, // 기본 여백 제거
         }}
-      >
+        >
         <img
           src={process.env.PUBLIC_URL + "/img/mail.png"}
           alt="Mail Icon"

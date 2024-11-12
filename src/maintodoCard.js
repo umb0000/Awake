@@ -4,12 +4,43 @@ import { motion } from 'framer-motion';
 const Card = ({ card, onCheck, onDelete }) => {
   const [isDragged, setIsDragged] = useState(false); // 드래그 상태를 저장하는 상태 추가
 
-  const handleCheckClick = (e) => {
-    e.stopPropagation();
-    const updatedCard = { ...card, checked: !card.checked }; // 체크 상태 반전
-    onCheck(updatedCard); // 업데이트된 카드 전달
-    console.log(updatedCard);
-};
+  const handleCheck = async (card) => {
+    try {
+      // 서버에 체크 상태 변경 요청 전송
+      await fetch('http://112.152.14.116:10211/todo-check', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        },
+        body: JSON.stringify({ item: card.id }),
+      });
+  
+      setCards(prevCards => {
+        const updatedCards = prevCards.map(item =>
+          item.id === card.id ? { ...item, checked: !item.checked } : item
+        );
+  
+        // Sort: Unchecked first, then by level descending
+        const sortedCards = updatedCards.sort((a, b) => {
+          if (!a.checked && b.checked) return -1;
+          if (a.checked && !b.checked) return 1;
+          if (!a.checked && !b.checked) return b.level - a.level;
+          return 0;
+        });
+  
+        updateCompletionRate(sortedCards);
+        return sortedCards;
+      });
+  
+      onCheck(card);
+  
+      // 체크 여부 변경 후 데이터 갱신
+      fetchTodos();
+    } catch (error) {
+      console.error('Error updating todo status:', error);
+    }
+  };
 
   const handleDeleteClick = async (e) => {
     e.stopPropagation();

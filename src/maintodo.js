@@ -132,7 +132,7 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
   };
 
   const handleCheck = async (card) => {
-    const itemId = typeof card.id === "number" ? card.id : parseInt(card.id, 10);
+    const itemId = Number(card.id); // 확실히 숫자로 변환하여 전송
     try {
       await fetch('http://112.152.14.116:10211/todo-check', {
         method: 'POST',

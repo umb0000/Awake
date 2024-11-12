@@ -47,8 +47,8 @@ const Card = ({ card, onCheck, onDelete }) => {
       layout
       style={{ height: '10vh' }}
     >
-      <div className="absolute left-0 top-0 w-full h-full bg-[#f4f7f8] rounded-[10px]"></div>
-      <div className="absolute -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 w-[294px] flex flex-row items-center gap-[10px]">
+      {/*<div className="absolute left-0 top-0 w-full h-full bg-[#f4f7f8] rounded-[10px]"></div>*/}
+      <div className="absolute w-full h-full -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 w-[294px] flex flex-row items-center gap-[10px] bg-[#f4f7f8] rounded-[10px]">
         <img
           width="30"
           height="31"
@@ -56,11 +56,11 @@ const Card = ({ card, onCheck, onDelete }) => {
           alt={`level${card.level}`}
         />
 
-        <div className="h-[10vh] flex-grow flex flex-col items-start justify-center" style={{ minWidth: '73%', maxWidth: '180px' }}>
-          <div className="w-full text-[13px] leading-[20px] tracking-[.01em] font-['Pretendard'] font-semibold text-[#79747e] flex flex-col justify-center">
+        <div className="h-[5vh] flex-grow flex flex-col items-start justify-center" style={{ minWidth: '73%', maxWidth: '180px' }}>
+          <div className="w-full h-[5vh] text-[13px] leading-[20px] tracking-[.01em] font-['Pretendard'] font-semibold text-[#79747e] flex flex-col justify-center">
             {card.title}
           </div>
-          <div className="w-full h-[8vh] text-[10px] leading-[10px] tracking-[.01em] font-['Pretendard'] text-[#79747e] flex flex-col justify-center">
+          <div className="w-full h-[2vh] text-[10px] leading-[10px] tracking-[.01em] font-['Pretendard'] text-[#79747e] flex flex-col justify-center">
             {card.detail}
           </div>
         </div>

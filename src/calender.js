@@ -33,13 +33,12 @@ const Calendar = () => {
   const fetchMonthlyData = async () => {
     const token = localStorage.getItem('token');
     try {
-      const response = await fetch(`http://112.152.14.116:10211/monthly-done-get`, {
+      const response = await fetch(`http://112.152.14.116:10211/monthly-done-get?year=${currentYear}&month=${currentMonth}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
         },
-        body: JSON.stringify({ year: currentYear, month: currentMonth })
       });
       const data = await response.json();
       setDailyPercentages(data.daily_percentages || {});

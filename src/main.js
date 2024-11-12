@@ -15,7 +15,7 @@ import { useNavigate } from 'react-router-dom';
 const Model = () => {
   const modelRef = useRef(); // 모델의 참조
   const clockRef = useRef(0); // 애니메이션을 위한 시계
-  const fbx = useFBX(process.env.PUBLIC_URL + '/3d_models/Orange_eyeWhite_Final_2017.fbx'); // FBX 모델 로드
+  const fbx = useFBX(process.env.PUBLIC_URL + '/3d_models/j015.fbx'); // FBX 모델 로드
   const mixer = useRef(null); // 애니메이션 믹서
   const [isModelLoaded, setIsModelLoaded] = useState(false); // 모델 로드 여부
 
@@ -219,8 +219,9 @@ const Main = () => {
         {/* 3D 모델 표시 영역 */}
         <div className="relative self-stretch w-[100%] h-[25vh] shrink-0 flex justify-center items-center" style={{ paddingTop: '0vh', paddingBottom: '0vh' }}>
           <Canvas className="w-full h-full" gl={{ alpha: true }}>
-            <ambientLight intensity={1} />
-            <directionalLight position={[1, 0.7, 0.7]} intensity={1}  />
+            
+            <ambientLight intensity={4.5} />
+            <directionalLight position={[0, 1, 3]} intensity={0.2}  color="white"/>
             <Suspense fallback={null}>
               <Model /> {/* 3D 모델 렌더링 */}
             </Suspense>

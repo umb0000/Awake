@@ -174,34 +174,35 @@ const Main = () => {
     }
   };
 
-   // 텍스트 변경 및 애니메이션 시작
-   useEffect(() => {
-    const interval = setInterval(() => {
-      // 랜덤 텍스트 선택 및 애니메이션 초기화
+   // 1분마다 텍스트 변경
+  useEffect(() => {
+    const changeText = () => {
       const randomText = texts[Math.floor(Math.random() * texts.length)];
-      setCurrentText(randomText);
-      setDisplayText('');
+      setDisplayText(randomText);
       setIsAnimating(true);
-    }, 60000); // 1분마다 텍스트 변경
-
-    return () => clearInterval(interval); 
+    };
+    
+    changeText(); // 초기 텍스트 설정
+    const interval = setInterval(changeText, 60000); // 1분마다 변경
+    
+    return () => clearInterval(interval);
   }, [texts]);
 
   // 텍스트 애니메이션 효과
   useEffect(() => {
-    if (isAnimating && currentText.length > 0) {
+    if (isAnimating && displayText.length > 0) {
       let currentIndex = 0;
-      setDisplayText(''); // 애니메이션 시작 시 텍스트 초기화
+      setDisplayText('');
       const interval = setInterval(() => {
-        setDisplayText((prev) => prev + currentText[currentIndex]);
+        setDisplayText((prev) => prev + displayText[currentIndex]);
         currentIndex++;
-        if (currentIndex === currentText.length) { // 마지막 글자까지 표시 후 종료
+        if (currentIndex === displayText.length) {
           clearInterval(interval);
           setIsAnimating(false);
         }
-      }, 100); // 0.1초 간격으로 텍스트 표시
+      }, 100);
     }
-  }, [isAnimating, currentText]);
+  }, [isAnimating, displayText]);
 
   // 달성률 및 카드 개수 업데이트 함수
   const handleCompletionRateChange = (rate, total, completed) => {
@@ -253,11 +254,11 @@ const Main = () => {
       
       <div className="relative left-0 top-0 w-[100%] flex flex-col items-center justify-start ">
 
-      <div className="bg-blue-400 text-white px-4 py-2 rounded-lg relative shadow-lg max-w-xs">
-        <h2 className="text-lg font-bold">{displayText}</h2>
-        <div className="absolute -bottom-2 left-6 w-0 h-0 border-l-[10px] border-l-transparent border-t-[10px] border-t-blue-400 border-r-[10px] border-r-transparent"></div>
+      {/* 말풍선 */}
+      <div className="absolute top-6 left-6 bg-blue-400 text-white px-4 py-2 rounded-lg shadow-lg max-w-xs flex items-center">
+        <span className="text-lg font-bold">{displayText}</span>
+        <div className="absolute -bottom-2 left-10 w-0 h-0 border-l-[10px] border-l-transparent border-t-[10px] border-t-blue-400 border-r-[10px] border-r-transparent"></div>
       </div>
-        
         
         {/* 오른쪽 상단 작은 이미지 */}
         <a

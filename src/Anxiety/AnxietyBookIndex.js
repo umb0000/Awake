@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { FiSearch } from 'react-icons/fi';
+
 import '../output.css';
 
 const AnxietyBookIndex = () => {

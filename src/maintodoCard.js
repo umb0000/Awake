@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 
 const Card = ({ card, onCheck, onDelete }) => {
+  const [isDragged, setIsDragged] = useState(false); // 드래그 상태를 저장하는 상태 추가
+
   const handleDeleteClick = async (e) => {
     e.stopPropagation();
     try {
@@ -34,12 +36,12 @@ const Card = ({ card, onCheck, onDelete }) => {
       dragConstraints={{ left: 0, right: 0 }}
       onDragEnd={(event, info) => {
         if (info.offset.x < -100) {
-          onDelete(true);
+          setIsDragged(true); // 왼쪽으로 드래그되면 X 버튼 보이기
         } else {
-          onDelete(false);
+          setIsDragged(false); // 오른쪽으로 다시 드래그하면 X 버튼 숨기기
         }
       }}
-      animate={{ x: !onDelete ? -60 : 0 }}
+      animate={{ x: isDragged ? -60 : 0 }} // isDragged에 따라 위치 조정
       transition={{ type: "spring", stiffness: 300 }}
       layout
       style={{ height: '50px' }}
@@ -62,12 +64,12 @@ const Card = ({ card, onCheck, onDelete }) => {
           </div>
         </div>
 
-        {!onDelete && (
+        {isDragged && (
           <motion.button
             className="absolute right-[-70px] transform -translate-y-1/2 bg-red-500 text-white px-2 py-1 rounded"
             onClick={handleDeleteClick}
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1, x: -10 }}
+            animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
           >

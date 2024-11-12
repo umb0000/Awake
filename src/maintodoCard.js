@@ -8,6 +8,7 @@ const Card = ({ card, onCheck, onDelete }) => {
     e.stopPropagation();
     const updatedCard = { ...card, checked: !card.checked }; // 체크 상태 반전
     onCheck(updatedCard); // 업데이트된 카드 전달
+    consol.log(updatedCard);
 };
 
   const handleDeleteClick = async (e) => {
@@ -87,7 +88,7 @@ const Card = ({ card, onCheck, onDelete }) => {
     {/* Delete Button */}
     {isDragged && (
         <motion.button
-            className="absolute right-[-60px] transform -translate-y-1/2 bg-red-500 text-white px-2 py-1 rounded"
+            className="absolute right-[-60px] bg-red-500 text-white px-2 py-1 rounded"
             onClick={handleDeleteClick}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

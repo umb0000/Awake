@@ -8,7 +8,7 @@ const Card = ({ card, onCheck, onDelete }) => {
     e.stopPropagation();
     const updatedCard = { ...card, checked: !card.checked }; // 체크 상태 반전
     onCheck(updatedCard); // 업데이트된 카드 전달
-    consol.log(updatedCard);
+    console.log(updatedCard);
 };
 
   const handleDeleteClick = async (e) => {

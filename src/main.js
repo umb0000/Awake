@@ -197,7 +197,8 @@ const Main = () => {
     setPoints(prevPoints => prevPoints + newPoints); // 포인트 누적
   };
 
- 
+  const lightColor = new THREE.Color(151 / 255, 199 / 255, 201 / 255); // HSV 변환 RGB 값
+
 
   return (
     <div className="relative w-[100%] h-[800px] custom-gradient overflow-hidden">
@@ -225,7 +226,7 @@ const Main = () => {
         </a>
         {/* 오른쪽 상단 메일 아이콘 버튼 */}
       <button
-        className="absolute top-24 right-5 w-[49px] h-[50px] flex items-center justify-center z-10"
+        className="absolute top-24 right-4.5 w-[49px] h-[50px] flex items-center justify-center z-50"
         onClick={handleMailClick} // 클릭 시 다이어리 팝업 표시
       >
         <img
@@ -243,7 +244,7 @@ const Main = () => {
           <directionalLight 
             position={[Math.cos(153 * (Math.PI / 180)), 0, Math.sin(153 * (Math.PI / 180)) * 3]} // 153도 방향으로 조정
             intensity={1.11}  // 강도 111
-            color={new THREE.Color("hsv(182, 0.25, 0.79)").getHex()} // HSV 색상 #97C7C9
+            color={lightColor} // 변환된 RGB 값 적용
           />
             <Suspense fallback={null}>
               <Model /> {/* 3D 모델 렌더링 */}

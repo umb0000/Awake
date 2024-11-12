@@ -85,18 +85,50 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split("T")[0]);
   const [showAddDrawer, setShowAddDrawer] = useState(false); // 입력 서랍 표시 여부
 
+  const fetchTodos = () => {
+    const token = localStorage.getItem('token'); // 토큰을 가져옵니다.
+    
+    fetch(`http://112.152.14.116:10211/todo-get?time=${selectedDate}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`, // 토큰을 Authorization 헤더에 추가합니다.
+      },
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      if (data && Array.isArray(data.undones)) {
+        const processedCards = data.undones.map(card => ({
+          ...getCardProperties({
+            ...card,
+            checked: card.is_done,
+          }),
+        }));
+        setCards(processedCards);
+      } else {
+        console.error('Expected an array but received:', data);
+      }
+    })
+    .catch(error => console.error('Error fetching data:', error));
+  };
+
   useEffect(() => {
     fetchTodos();
-  }, []);
-
-   // 입력 서랍 열고 닫기
-   const toggleAddDrawer = () => {
-    setShowAddDrawer(!showAddDrawer);
-  };
+  }, [selectedDate]);
 
   const handleAddSuccess = () => {
     setShowAddDrawer(false); // 서랍 닫기
+    fetchTodos(); // 할 일 목록 새로고침
     console.log('추가 성공');
+  };
+   // 입력 서랍 열고 닫기
+   const toggleAddDrawer = () => {
+    setShowAddDrawer(!showAddDrawer);
   };
 
   useEffect(() => {
@@ -176,6 +208,7 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
   return (
     <div className="self-stretch h-[454px] shrink-0 flex flex-col items-start justify-start gap-[7px]">
       <MainAdd onAddSuccess={fetchTodos} />
+      <MainAdd onAddSuccess={handleAddSuccess} />
       <div className="w-[200px] h-7 flex-row gap-[5px] relative">
         <div className="w-[100px] left-0 top-0 absolute text-left text-[#49454f] font-bold text-[13px] font-['Pretendard'] leading-7">
           {formatDate(selectedDate)}

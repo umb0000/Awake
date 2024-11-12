@@ -4,6 +4,12 @@ import { motion } from 'framer-motion';
 const Card = ({ card, onCheck, onDelete }) => {
   const [isDragged, setIsDragged] = useState(false); // 드래그 상태를 저장하는 상태 추가
 
+  const handleCheckClick = (e) => {
+    e.stopPropagation();
+    const updatedCard = { ...card, checked: !card.checked }; // 체크 상태 반전
+    onCheck(updatedCard); // 업데이트된 카드 전달
+};
+
   const handleDeleteClick = async (e) => {
     e.stopPropagation();
     try {
@@ -73,10 +79,7 @@ const Card = ({ card, onCheck, onDelete }) => {
             height="26"
             src={`${process.env.PUBLIC_URL}/img/${card.checked ? 'checked.png' : 'unchecked.png'}`}
             alt={card.checked ? 'checked' : 'unchecked'}
-            onClick={(e) => {
-                e.stopPropagation();
-                onCheck(card);
-            }}
+            onClick={onClick={handleCheckClick}}
             className="ml-2"
         />
     </div>

@@ -251,7 +251,7 @@ const Main = () => {
         </a>
         {/* 오른쪽 상단 메일 아이콘 버튼 */}
         <button
-        className="absolute top-24 right-4 w-[49px] h-[50px] flex items-center justify-center z-50 cursor-pointer"
+        className="absolute top-24 right-4 w-[49px] h-[50px] flex items-center justify-center z-10 cursor-pointer"
         onClick={handleMailClick} // 클릭 시 다이어리 팝업 표시
         style={{
           zIndex: 100, // 버튼을 최상단에 표시

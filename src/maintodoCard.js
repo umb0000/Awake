@@ -83,6 +83,8 @@ const Card = ({ card, onCheck, onDelete }) => {
             onClick={handleCheckClick}
             className="ml-2"
         />
+
+        
     </div>
 
     {/* Delete Button */}

@@ -3,7 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import MainEdit from './mainEdit';
 import Card from './maintodoCard.js';
 import './output.css';
-import DatePicker from './datepicker';
+import MainAdd from './MainAdd'; // MainAdd 컴포넌트 import
+
 
 const getCardProperties = (card) => {
   let level, points, image;
@@ -143,8 +144,13 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
     return card.type === activeFilter;
   });
 
+  useEffect(() => {
+    fetchTodos();
+  }, []);
+
   return (
     <div className="self-stretch h-[454px] shrink-0 flex flex-col items-start justify-start gap-[7px]">
+      <MainAdd onAddSuccess={fetchTodos} />
       <div className="w-[200px] h-7 flex-row gap-[5px] relative">
         <div className="w-[100px] left-0 top-0 absolute text-left text-[#49454f] font-bold text-[13px] font-['Pretendard'] leading-7">
           {formatDate(selectedDate)}

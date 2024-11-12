@@ -3,11 +3,11 @@ import './output.css';
 
 const Explain2 = () => {
   return (
-    <div className="w-[360px] h-[86vh] bg-white relative">
+    <div className="w-[360px] h-screen bg-white relative pt-20">
       {/* 상단 점 세 개 */}
-      <div className="absolute top-4 left-6 flex gap-2">
-        <div className="w-[11px] h-[11px] bg-[#ff6d00] rounded-full" />
+      <div className="absolute top-20 left-6 flex gap-2">
         <div className="w-[11px] h-[11px] bg-[#d9d9d9] rounded-full" />
+        <div className="w-[11px] h-[11px] bg-[#ff6d00] rounded-full" />
         <div className="w-[11px] h-[11px] bg-[#d9d9d9] rounded-full" />
       </div>
 

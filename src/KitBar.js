@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Outlet, useLocation, Link } from 'react-router-dom';
 import Navigation from './Navigation'; // 하단 네비게이션 컴포넌트 가져오기
+import Diary from './calenderDiary.js';
 
 
 const Kit = () => {

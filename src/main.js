@@ -247,13 +247,7 @@ const Main = () => {
           </div>
         </div>  
 
-        {/* Add 버튼을 우측 하단에 고정 */}
-        <button
-          onClick={toggleAddDrawer}
-          className="fixed bottom-[100px] right-[20px] bg-[#ff9800] text-white p-[10px] rounded-full shadow-lg hover:bg-[#ff6d00] transition duration-200"
-        >
-          <img width="46" height="46" src={process.env.PUBLIC_URL + "/img/main_add_btn.png"} alt="Add" />
-        </button>      
+             
       </div>
 
             

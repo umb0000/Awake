@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../output.css';
+import Back from '../go_back.js'; // Back 컴포넌트 추가
+
 
 const TrashCan = () => {
   const [isButtonClicked, setIsButtonClicked] = useState(false);
@@ -76,7 +78,8 @@ const TrashCan = () => {
 
   if (isCleanScreen) {
     return (
-      <div className="relative w-full h-full flex flex-col items-center justify-center pt-20">
+      <div className="relative w-full h-full flex flex-col items-center justify-center">
+        <Back />
         <div className="relative h-[40px] w-full flex items-center justify-center mt-8">
           <div className="text-center text-black text-xl font-extrabold font-['Pretendard_Variable'] leading-tight tracking-tight">
             당신의 마음이 정리되었습니다!
@@ -99,8 +102,12 @@ const TrashCan = () => {
 
   if (isSecondScreen) {
     return (
-      <div className="relative w-full h-full bg-white flex flex-col items-center justify-center pt-20">
-        <div className="relative h-[40px] w-full flex items-center justify-center mt-8">
+      <div className="relative w-full h-full bg-white">
+        <Back />
+        <div className="relative w-full h-screen flex flex-col justify-center items-center">
+        
+        <div className='flex flex-col items-center justify-center'>
+        <div className="relative h-[40px] w-full flex items-center justify-center">
           <div className="text-center text-black text-xl font-extrabold font-['Pretendard_Variable'] leading-tight tracking-tight">
             종이 뭉치가 완성되었습니다!
           </div>
@@ -116,14 +123,21 @@ const TrashCan = () => {
         >
           버리기
         </button>
+        </div>
+        </div>
       </div>
     );
   }
 
   if (isButtonClicked) {
     return (
-      <div className="relative w-full h-full bg-white flex flex-col items-center justify-center pt-20">
-        <div className="relative h-[40px] w-full flex items-center justify-center mt-10 mb-8">
+      
+      <div className="relative w-full h-full bg-white">
+        <Back />
+        <div className="relative w-full h-screen flex flex-col justify-center items-center">
+        
+        <div className='flex flex-col items-center justify-center'>
+        <div className="relative h-[40px] w-full flex items-center justify-center mb-10">
           <div
             className={`absolute w-full text-center text-black text-xl font-extrabold font-['Pretendard'] leading-tight tracking-tight transition-opacity duration-500 ${
               isTextChanged ? 'opacity-0' : 'opacity-100'
@@ -159,15 +173,17 @@ const TrashCan = () => {
         >
           종이 뭉치로 만들기
         </button>
+        </div>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="relative w-full h-[800px] flex flex-col justify-center items-center pt-20">
+    <div className="relative w-full h-screen flex flex-col justify-center items-center">
       <Link to="/trashcan_i">
         <img
-          className="absolute top-0 right-0 w-[35px] h-auto mt-2 mr-10 cursor-pointer"
+          className="absolute top-20 right-0 w-[35px] h-auto mt-2 mr-10 cursor-pointer"
           src={process.env.PUBLIC_URL + "/img/sqmenu.png"}
           alt="icon"
         />

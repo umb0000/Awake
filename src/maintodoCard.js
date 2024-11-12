@@ -71,7 +71,7 @@ const Card = ({ card, onCheck, onDelete }) => {
         <img
             width="26"
             height="26"
-            src={`${process.env.PUBLIC_URL}/img/${card.checked ? 'checked.png' : 'unchecked.png'}`}
+            src={`${process.env.PUBLIC_URL}/img/${card.checked ? 'unchecked.png' : 'checked.png'}`}
             alt={card.checked ? 'checked' : 'unchecked'}
             onClick={(e) => {
                 e.stopPropagation();
@@ -84,14 +84,18 @@ const Card = ({ card, onCheck, onDelete }) => {
     {/* Delete Button */}
     {isDragged && (
         <motion.button
-            className="absolute right-[-70px] transform -translate-y-1/2 bg-red-500 text-white px-2 py-1 rounded"
+            className="absolute right-[-50px] transform -translate-y-1/2 bg-red-500 text-white px-2 py-1 rounded"
             onClick={handleDeleteClick}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
         >
-            X
+            <img
+            width="50"
+            height="45"
+            src={`${process.env.PUBLIC_URL}/img/main_del.png`}
+        />
         </motion.button>
     )}
 </motion.div>

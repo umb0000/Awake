@@ -7,7 +7,7 @@ import MainAdd from './mainAdd.js'; // MainAdd 컴포넌트 import
 
 
 const getCardProperties = (card) => {
-  let level, points, image;
+  let level, points, image, detail;
 
   if (card.is_routine) {
     switch (card.when_routine) {
@@ -15,21 +15,25 @@ const getCardProperties = (card) => {
         level = 7;
         points = 30;
         image = 'main_morning.png';
+        detail = '아침';
         break;
       case '점심':
         level = 6;
         points = 30;
         image = 'main_lunch.png';
+        detail = '점심';
         break;
       case '저녁':
         level = 5;
         points = 30;
         image = 'main_dinner.png';
+        detail = '저녁';
         break;
       case '종일':
         level = 4;
         points = 30;
         image = 'main_allday.png';
+        detail = '종일';
         break;
       default:
         level = 4;
@@ -42,10 +46,18 @@ const getCardProperties = (card) => {
       level = 3;
       points = 50;
       image = 'level3.png';
+      detail = '중요 🚩, 긴급 🚨';
     } else if (card.is_importance || card.is_emergency) {
       level = 2;
       points = 40;
       image = 'level2.png';
+      if (card.is_importance && !card.is_emergency) {
+        detail = '중요 🚩';
+      } 
+      //else if (card.is_emergency && !card.is_importance) {
+      else {
+        detail = '긴급 🚨';
+      }
     } else {
       level = 1;
       points = 20;

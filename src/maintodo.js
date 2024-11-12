@@ -144,11 +144,19 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
       const updatedCards = prevCards.map(item =>
         item.id === card.id ? { ...item, checked: !item.checked } : item
       );
-      updateCompletionRate(updatedCards); // Update completion rate with new state
-      return updatedCards;
+      
+      // Sort: Unchecked first, then by level descending
+      const sortedCards = updatedCards.sort((a, b) => {
+        if (!a.checked && b.checked) return -1;
+        if (a.checked && !b.checked) return 1;
+        if (!a.checked && !b.checked) return b.level - a.level;
+        return 0;
+      });
+  
+      updateCompletionRate(sortedCards);
+      return sortedCards;
     });
   
-    // Ensure you call onCheck with the full card object
     onCheck(card);
   };
 

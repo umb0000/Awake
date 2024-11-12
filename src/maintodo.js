@@ -80,6 +80,7 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
 
   const fetchTodos = () => {
     const token = localStorage.getItem('token');
+    
     fetch(`http://112.152.14.116:10211/todo-get?time=${selectedDate}`, {
       method: 'GET',
       headers: {
@@ -131,6 +132,7 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
   };
 
   const handleCheck = async (card) => {
+    const itemId = typeof card.id === "number" ? card.id : parseInt(card.id, 10);
     try {
       await fetch('http://112.152.14.116:10211/todo-check', {
         method: 'POST',

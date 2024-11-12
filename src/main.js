@@ -14,7 +14,7 @@ import LevelUpPopup from './LevelUpPopUp'; // LevelUpPopup 컴포넌트 추가
 const Model = () => {
   const modelRef = useRef(); // 모델의 참조
   const clockRef = useRef(0); // 애니메이션을 위한 시계
-  const fbx = useFBX(process.env.PUBLIC_URL + '/3d_models/Orange_eyeWhite_7_2017.fbx'); // FBX 모델 로드
+  const fbx = useFBX(process.env.PUBLIC_URL + '/3d_models/Orange_eyeWhite_Final_2017.fbx'); // FBX 모델 로드
   const mixer = useRef(null); // 애니메이션 믹서
   const [isModelLoaded, setIsModelLoaded] = useState(false); // 모델 로드 여부
 

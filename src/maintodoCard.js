@@ -2,6 +2,10 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const Card = ({ card, onCheck, onDelete }) => {
+    const handleDeleteClick = (e) => {
+        e.stopPropagation();
+        onDelete(card.id);
+      };
   return (
     <motion.div
       key={card.id}
@@ -56,7 +60,9 @@ const Card = ({ card, onCheck, onDelete }) => {
           height="26"
           src={`${process.env.PUBLIC_URL}/img/${card.checked ? 'checked.png' : 'unchecked.png'}`}
           alt={card.checked ? 'checked' : 'unchecked'}
-          onClick={() => onCheck(card)}
+          onClick={(e) => {
+            e.stopPropagation();
+            onCheck(card.id);}}
           className="shrink-0"
         />
       </div>

@@ -5,7 +5,6 @@ import Card from './maintodoCard.js';
 import './output.css';
 import MainAdd from './mainAdd.js'; // MainAdd 컴포넌트 import
 
-
 const getCardProperties = (card) => {
   let level, points, image, detail;
 
@@ -51,13 +50,7 @@ const getCardProperties = (card) => {
       level = 2;
       points = 40;
       image = 'level2.png';
-      if (card.is_importance && !card.is_emergency) {
-        detail = '중요 🚩';
-      } 
-      //else if (card.is_emergency && !card.is_importance) {
-      else {
-        detail = '긴급 🚨';
-      }
+      detail = card.is_importance ? '중요 🚩' : '긴급 🚨';
     } else {
       level = 1;
       points = 20;
@@ -65,7 +58,7 @@ const getCardProperties = (card) => {
     }
   }
 
-  return { ...card, level, points, image };
+  return { ...card, level, points, image, detail };
 };
 
 // 날짜 포맷 함수
@@ -73,26 +66,25 @@ const formatDate = (dateString) => {
   const date = new Date(dateString);
   const month = date.getMonth() + 1;
   const day = date.getDate();
-  const dayOfWeek = new Intl.DateTimeFormat('ko-KR', { weekday: 'long' }).format(date); // 요일 추가
+  const dayOfWeek = new Intl.DateTimeFormat('ko-KR', { weekday: 'long' }).format(date);
 
-    return `${month}월 ${day}일 (${dayOfWeek})`;
-  }
+  return `${month}월 ${day}일 (${dayOfWeek})`;
+}
 
 const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
   const [cards, setCards] = useState([]);
   const [activeFilter, setActiveFilter] = useState('all');
   const [editingCard, setEditingCard] = useState(null);
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split("T")[0]);
-  const [showAddDrawer, setShowAddDrawer] = useState(false); // 입력 서랍 표시 여부
+  const [showAddDrawer, setShowAddDrawer] = useState(false);
 
   const fetchTodos = () => {
-    const token = localStorage.getItem('token'); // 토큰을 가져옵니다.
-    
+    const token = localStorage.getItem('token');
     fetch(`http://112.152.14.116:10211/todo-get?time=${selectedDate}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`, // 토큰을 Authorization 헤더에 추가합니다.
+        'Authorization': `Bearer ${token}`,
       },
     })
     .then(response => {
@@ -110,6 +102,7 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
           }),
         }));
         setCards(processedCards);
+        updateCompletionRate(processedCards);
       } else {
         console.error('Expected an array but received:', data);
       }
@@ -122,76 +115,39 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
   }, [selectedDate]);
 
   const handleAddSuccess = () => {
-    setShowAddDrawer(false); // 서랍 닫기
-    fetchTodos(); // 할 일 목록 새로고침
-    console.log('추가 성공');
+    setShowAddDrawer(false);
+    fetchTodos();
   };
-   // 입력 서랍 열고 닫기
-   const toggleAddDrawer = () => {
+
+  const toggleAddDrawer = () => {
     setShowAddDrawer(!showAddDrawer);
   };
 
-  useEffect(() => {
-    const token = localStorage.getItem('token'); // 토큰을 가져옵니다.
-    
-    fetch(`http://112.152.14.116:10211/todo-get?time=${selectedDate}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}` // 토큰을 Authorization 헤더에 추가합니다.
-      }
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      return response.json();
-    })
-    .then(data => {
-      if (data && Array.isArray(data.undones)) {
-        const processedCards = data.undones.map(card => ({
-          ...getCardProperties({
-            ...card,
-            checked: card.is_done
-          })
-        }));
-        setCards(processedCards);
-      } else {
-        console.error('Expected an array but received:', data);
-      }
-    })
-    .catch(error => console.error('Error fetching data:', error));
-  }, [selectedDate]); // selectedDate 변경 시 요청을 새로 보냄
-  
+  const updateCompletionRate = (updatedCards) => {
+    const totalCount = updatedCards.length;
+    const completedCount = updatedCards.filter(item => item.checked).length;
+    const newCompletionRate = totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0;
 
-  const handleButtonClick = (type) => {
-    setActiveFilter(type);
+    onCompletionRateChange(newCompletionRate, totalCount, completedCount);
   };
 
-  const handleCheck = (card) => {
+  const handleCheck = (cardId) => {
     setCards(prevCards => {
       const updatedCards = prevCards.map(item =>
-        item.id === card.id ? { ...item, checked: !item.checked } : item
+        item.id === cardId ? { ...item, checked: !item.checked } : item
       );
-      const completedCount = updatedCards.filter(item => item.checked).length;
-      const totalCount = updatedCards.length;
-      const newCompletionRate = Math.round((completedCount / totalCount) * 100);
-
-      onCompletionRateChange(newCompletionRate, totalCount, completedCount);
-
-      const sortedCards = updatedCards.sort((a, b) => {
-        if (a.checked !== b.checked) return a.checked ? 1 : -1;
-        return b.level - a.level;
-      });
-
-      return sortedCards;
+      updateCompletionRate(updatedCards);
+      return updatedCards;
     });
-
-    onCheck(card);
+    onCheck(cardId);
   };
 
   const handleDeleteCard = (id) => {
-    setCards(prevCards => prevCards.filter(card => card.id !== id));
+    setCards(prevCards => {
+      const updatedCards = prevCards.filter(card => card.id !== id);
+      updateCompletionRate(updatedCards);
+      return updatedCards;
+    });
   };
 
   const handleCloseEdit = () => {
@@ -202,8 +158,6 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
     if (activeFilter === 'all') return true;
     return card.type === activeFilter;
   });
-
-  
 
   return (
     <div className="self-stretch h-[454px] shrink-0 flex flex-col items-start justify-start gap-[7px]">
@@ -229,21 +183,21 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
           width="51"
           height="23"
           src={`${process.env.PUBLIC_URL}/img/main_all_clicked.png`}
-          onClick={() => handleButtonClick('all')}
+          onClick={() => setActiveFilter('all')}
           alt="All"
         />
         <img
           width="51"
           height="23"
           src={`${process.env.PUBLIC_URL}/img/main_routine_unclicked.png`}
-          onClick={() => handleButtonClick('routine')}
+          onClick={() => setActiveFilter('routine')}
           alt="Routine"
         />
         <img
           width="51"
           height="23"
           src={`${process.env.PUBLIC_URL}/img/main_todo_unclicked.png`}
-          onClick={() => handleButtonClick('todo')}
+          onClick={() => setActiveFilter('todo')}
           alt="Todo"
         />
       </div>
@@ -253,7 +207,7 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
           <Card
             key={card.id}
             card={card}
-            onCheck={() => handleCheck(card)}
+            onCheck={() => handleCheck(card.id)}
             onDelete={handleDeleteCard}
           />
         ))}
@@ -286,7 +240,6 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
         )}
       </AnimatePresence>
 
-      {/* 입력 서랍 (MainAdd) */}          
       <AnimatePresence>
         {showAddDrawer && (
           <>
@@ -307,22 +260,19 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
               onClick={(e) => e.stopPropagation()}
             >
               <motion.div className="w-[360px] h-[336px] bg-white relative bg-opacity-0 overflow-visible">
-                <MainAdd onAddSuccess={handleAddSuccess}  />
+                <MainAdd onAddSuccess={handleAddSuccess} />
               </motion.div>
             </motion.div>
           </>
         )}
       </AnimatePresence>
-    {/* Add 버튼을 우측 하단에 고정 */}
-    <button
-          onClick={toggleAddDrawer}
-          className="fixed bottom-[100px] right-[20px] bg-[#ff9800] text-white p-[10px] rounded-full shadow-lg hover:bg-[#ff6d00] transition duration-200"
-        >
-          <img width="46" height="46" src={process.env.PUBLIC_URL + "/img/main_add_btn.png"} alt="Add" />
-        </button> 
-    
-    
-    
+
+      <button
+        onClick={toggleAddDrawer}
+        className="fixed bottom-[100px] right-[20px] bg-[#ff9800] text-white p-[10px] rounded-full shadow-lg hover:bg-[#ff6d00] transition duration-200"
+      >
+        <img width="46" height="46" src={`${process.env.PUBLIC_URL}/img/main_add_btn.png`} alt="Add" />
+      </button>
     </div>
   );
 };

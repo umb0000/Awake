@@ -34,7 +34,7 @@ const Diary = () => {
   return (
     <div className="w-[340px] relative h-[557px]">
       {/* 항상 표시되는 상단 "매일 냥냥 일기" 박스 */}
-      <div className="w-[340px] h-[63px] px-[19px] py-2.5 rounded-[10px] flex-col bg-white justify-center items-center gap-2.5 inline-flex">
+      <div className="w-[340px] h-[63px] px-[19px] rounded-[10px] flex-col bg-white justify-center items-center gap-2.5 inline-flex">
         <div className="w-[302.91px] flex justify-start items-center gap-[5px]">
           <div className="w-[23.25px] h-[23.25px] relative">
             <img className="w-[19.38px] h-[19.50px] absolute left-[1.94px]" src={`${process.env.PUBLIC_URL}/img/diary_icon.png`} alt="icon" />

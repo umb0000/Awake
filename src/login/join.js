@@ -227,7 +227,8 @@ function Join({ onRegisterSuccess, onSwitchToLogin }) {
             className={`w-full py-3 mt-6 absolute bottom-0 left-0 flex items-center justify-center py-[17px] px-[113px] ${
                 (currentStep === 1 && isNicknameValid) ||
                 (currentStep === 2 && isEmailValid && !isEmailDuplicate) ||
-                (currentStep === 3 && isPasswordValid)
+                (currentStep === 3 && isPasswordValid) ||
+                (currentStep === 4)
                     ? 'bg-[#ff6d00]'
                     : 'bg-gray-300'
             } text-white font-semibold z-20`}

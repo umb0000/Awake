@@ -77,10 +77,10 @@ const getBackgroundColor = (day, currentMonth, currentYear) => {
 
 
   return (
-    <div className='app-container bg-[#f8f8f8]'>
+    <div className='w-screen h-screen flex flex-col relative bg-[#f8f8f8] pt-10'>
     <div className='content'>
     {/*<div className="relative w-full h-[800px] bg-[#f8f8f8] flex justify-center items-start">*/}
-    <div className="w-full h-full flex flex-col items-center justify-start gap-[10px] py-[9px] px-[10px] z-10">
+    <div className="w-full h-full flex flex-col items-center justify-start gap-[10px] px-[10px] z-10">
         <div className="relative w-[95%] h-[40px] shrink-0 flex flex-col items-start justify-start  px-0">
           <div className="absolute left-0 top-[5px] w-[100%] h-[36px] shrink-0 flex flex-row items-center justify-start gap-[11px] overflow-hidden">
           <div className="w-[360px] h-[31px] justify-center items-center gap-[15px] inline-flex">

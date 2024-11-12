@@ -3,19 +3,19 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import './output.css';
 import TodoList from './maintodo';
-import MainAdd from './mainAdd';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AnimationMixer, LoopRepeat } from 'three';
 import { useFBX } from '@react-three/drei';
 import LevelSystem from './LevelSystem';
 import LevelUpPopup from './LevelUpPopUp'; // LevelUpPopup 컴포넌트 추가
+import { useNavigate } from 'react-router-dom';
 
 
 // 3D 모델 컴포넌트
 const Model = () => {
   const modelRef = useRef(); // 모델의 참조
   const clockRef = useRef(0); // 애니메이션을 위한 시계
-  const fbx = useFBX(process.env.PUBLIC_URL + '/3d_models/Orange_eyeWhite_7_2017.fbx'); // FBX 모델 로드
+  const fbx = useFBX(process.env.PUBLIC_URL + '/3d_models/j015.fbx'); // FBX 모델 로드
   const mixer = useRef(null); // 애니메이션 믹서
   const [isModelLoaded, setIsModelLoaded] = useState(false); // 모델 로드 여부
 
@@ -69,6 +69,15 @@ const Main = () => {
   const [currentScore, setCurrentScore] = useState(levelSystem.currentScore);
   const [scoreToNextLevel, setScoreToNextLevel] = useState(levelSystem.scoreToNextLevel);
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split("T")[0]); // 초기 상태를 오늘 날짜로 설정
+  const navigate = useNavigate();
+
+  useEffect(() => {
+      const token = localStorage.getItem('token'); 
+      if (!token) {
+          navigate('/unlogined');
+         return;
+      }
+  }, [navigate]);
 
    // LevelUpPopup 표시 상태 추가
   const [showLevelUpPopup, setShowLevelUpPopup] = useState(false);
@@ -179,15 +188,7 @@ const Main = () => {
     setPoints(prevPoints => prevPoints + newPoints); // 포인트 누적
   };
 
-  // 입력 서랍 열고 닫기
-  const toggleAddDrawer = () => {
-    setShowAddDrawer(!showAddDrawer);
-  };
-
-  const handleAddSuccess = () => {
-    setShowAddDrawer(false); // 서랍 닫기
-    console.log('추가 성공');
-  };
+ 
 
   return (
     <div className="relative w-[100%] h-[800px] custom-gradient overflow-hidden">
@@ -199,11 +200,39 @@ const Main = () => {
       
       <div className="relative left-0 top-0 w-[100%] flex flex-col items-center justify-start ">
 
+       
+        
+        
+        {/* 오른쪽 상단 작은 이미지 */}
+        <a
+          href="http://kwawake.duckdns.org/collect"
+          className="absolute top-12 right-4 w-[50px] h-[50px] flex items-center justify-center z-10" // z-index 추가
+        >
+          <img
+            src={process.env.PUBLIC_URL + "/img/dogam.png "}
+            alt="dogam"
+            className="w-[35px] h-[35px] transform rotate-[15deg]"
+          />
+        </a>
+        {/* 오른쪽 상단 작은 이미지 */}
+        <a
+          href="http://kwawake.duckdns.org/collect"
+          className="absolute top-24 right-4 w-[50px] h-[50px] flex items-center justify-center z-10" // z-index 추가
+        >
+          <img
+            src={process.env.PUBLIC_URL + "/img/mail.png"}
+            alt="Small Icon"
+            className="w-[30px] h-[25px] shadow-sm"
+          />
+        </a>
+
+
         {/* 3D 모델 표시 영역 */}
         <div className="relative self-stretch w-[100%] h-[25vh] shrink-0 flex justify-center items-center" style={{ paddingTop: '0vh', paddingBottom: '0vh' }}>
           <Canvas className="w-full h-full" gl={{ alpha: true }}>
-            <ambientLight intensity={1} />
-            <directionalLight position={[1, 0.7, 0.7]} intensity={1}  />
+            
+            <ambientLight intensity={2.5} />
+            <directionalLight position={[0, 1, 3]} intensity={0.2}  color="white"/>
             <Suspense fallback={null}>
               <Model /> {/* 3D 모델 렌더링 */}
             </Suspense>
@@ -256,42 +285,10 @@ const Main = () => {
           </div>
         </div>  
 
-        {/* Add 버튼을 우측 하단에 고정 */}
-        <button
-          onClick={toggleAddDrawer}
-          className="fixed bottom-[100px] right-[20px] bg-[#ff9800] text-white p-[10px] rounded-full shadow-lg hover:bg-[#ff6d00] transition duration-200"
-        >
-          <img width="46" height="46" src={process.env.PUBLIC_URL + "/img/main_add_btn.png"} alt="Add" />
-        </button>      
+             
       </div>
 
-            {/* 입력 서랍 (MainAdd) */}          
-            <AnimatePresence>
-        {showAddDrawer && (
-          <>
-            <motion.div
-              className="fixed inset-0 bg-black z-10"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0.1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              onClick={toggleAddDrawer}
-            />
-            <motion.div
-              className="fixed inset-x-0 bottom-0 z-20 flex items-end justify-center"
-              initial={{ y: "100%" }}
-              animate={{ y: 0 }}
-              exit={{ y: "100%" }}
-              transition={{ duration: 0.3 }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <motion.div className="w-[360px] h-[336px] bg-white relative bg-opacity-0 overflow-visible">
-                <MainAdd onAddSuccess={handleAddSuccess} />
-              </motion.div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+            
     </div>
   );
 };

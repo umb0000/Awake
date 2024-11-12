@@ -1,14 +1,24 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './output.css';
 
 const Navigation = () => {
-  const [activeButton, setActiveButton] = useState('home');
-  const navigate = useNavigate(); // 리액트 라우터의 useNavigate 훅 사용
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  // 초기 상태를 현재 경로에 따라 설정
+  const initialActiveButton = location.pathname.startsWith('/kit')
+    ? 'kit'
+    : location.pathname === '/calender'
+    ? 'calender'
+    : location.pathname === '/profile'
+    ? 'profile'
+    : 'home';
+  const [activeButton, setActiveButton] = useState(initialActiveButton);
 
   const handleButtonClick = (buttonName, path) => {
-    setActiveButton(buttonName); // 클릭된 버튼 상태 업데이트
-    navigate(path); // 해당 경로로 이동
+    setActiveButton(buttonName);
+    navigate(path);
   };
 
   return (

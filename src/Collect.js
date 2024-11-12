@@ -1,38 +1,121 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './output.css';
 
 const Collect = () => {
+    const [selectedItem, setSelectedItem] = useState(null); // 선택된 항목 상태
+
+    const items = [
+        { id: 1, bgImage: "/img/bg1.png", bg2Image: "/img/bg1-1.png", mainImage: "/img/orange.png", title: "핑냥이" },
+        { id: 2, bgImage: "/img/bg3.png", bg2Image: "/img/bg3-1.png", mainImage: "/img/babypink.png", title: "꼬냥이" },
+        { id: 3, bgImage: "/img/bg2.png", bg2Image: "/img/bg2-1.png", mainImage: "/img/bomb.png", title: "뽀냥이" },
+        { id: 4, bgImage: "/img/bg1.png", bg2Image: "/img/bg1-1.png", mainImage: "/img/babyblue.png", title: "파랑냥이" }
+    ];
+
+    const handleClick = (item) => {
+        setSelectedItem(item); // 아이템 선택 시 상세 화면으로 이동
+    };
+
+    const handleClose = () => {
+        setSelectedItem(null); // X 버튼 클릭 시 도감 화면으로 돌아감
+    };
+
+    if (selectedItem) {
+        // 두 번째 렌더 화면: 선택된 아이템의 상세 화면
+        return (
+            <div 
+                className="w-screen h-screen flex flex-col items-center justify-center relative bg-cover bg-center" 
+                style={{ backgroundImage: `url(${selectedItem.bg2Image})`, zIndex: -1 }}
+            >
+                
+                {/* 메인 캐릭터 이미지 */}
+                <div className="relative z-10">
+                    <img className="w-64 h-auto" src={selectedItem.mainImage} alt="Main Character" />
+                </div>
+
+                {/* 홈 탭 고양이로 바꾸기 버튼 */}
+                <div className="absolute bottom-10 w-[90%] flex justify-center z-10">
+                    <button 
+                        className="w-full max-w-xs py-3 bg-white rounded-[38px] border border-[#ff6d00] text-[#ff6d00] font-medium font-['Pretendard']  hover:bg-[#e67e22] transition-all"
+                    >
+                        홈 탭 고양이로 바꾸기
+                    </button>
+                </div>
+            </div>
+        );
+    }
+
     return (
-        <div className="w-[360px] h-[800px] relative bg-white">
-            <div className="w-[360px] h-[743px] px-0 left-0 top-0 absolute flex-col justify-center items-center inline-flex">
-                <div className="flex-col justify-start items-center flex pt-0 mt-0"> {/* pt-0, mt-0으로 상단 여백 제거 */}
-                    <div className="w-[340px] h-[70px] flex-col justify-center items-center flex gap-0"> {/* gap-0으로 여백 제거 */}
-                        <div className="w-[340px] h-[30px] flex justify-center items-center">
-                            <div className="w-30 h-[31px] text-black text-2xl font-bold font-['Pretendard'] leading-normal tracking-wide">고양이 도감</div>
-                        </div>
-                        <div className="w-[340px] h-4 flex justify-center items-center">
-                            <div className="w-[254px] h-4 text-center text-black text-[11px] font-light font-['Pretendard'] leading-normal tracking-wide">모은 고양이들을 확인하세요</div>
-                        </div>
+        // 첫 번째 렌더 화면: 고양이 도감 화면 (그리드 뷰)
+        <div className="w-full h-screen bg-[#fff6ea] flex-col justify-center items-start inline-flex pt-20">
+            <div className="self-stretch grow shrink basis-0 px-2.5 py-5 flex-col justify-start items-center gap-[15px] inline-flex">
+                <div className="w-[340px] h-[70px] px-5 flex-col justify-center items-center gap-[3px] flex">
+                    <div className="w-[340px] h-[30px] px-4 justify-center items-center inline-flex">
+                        <div className="text-[#8b7e6a] text-2xl font-bold font-['Pretendard']">고양이 도감</div>
                     </div>
-                    <div className="w-[332px] h-[203px] relative">
-                        <img className="w-40 h-[196px] left-0 top-[-0.50px] absolute rounded-lg" src="/img/배경1.png" />
-                        <img className="w-40 h-[196px] left-[172px] top-[-0.50px] absolute rounded-lg" src="/img/배경2.png" />
-                        <img className="w-[139px] h-[155px] left-[12px] top-[19.50px] absolute" src="/img/bomb.png" />
-                        <img className="w-[149px] h-[169px] left-[178px] top-[12.50px] absolute" src="/img/babypink.png" />
+                    <div className="w-[340px] h-4 px-4 justify-center items-center gap-px inline-flex">
+                        <div className="text-[#8b7f6b] text-[11px] font-light">모은 고양이들을 확인하세요</div>
                     </div>
-                    <div className="w-[332px] h-[203px] relative">
-                        <img className="w-40 h-[196px] left-0 top-[-0.50px] absolute rounded-lg" src="/img/배경3.png" />
-                        <div className="w-40 h-[196px] p-3 left-[172px] top-0 absolute bg-[#b1b1b1] rounded-lg" />
-                        <img className="w-[156px] h-[173.56px] left-[5px] top-[12px] absolute" src="/img/babyblue.png" />
-                        <img className="w-[153px] h-[173.56px] left-[172px] top-[5.94px] absolute" src="/img/orange.png" />
+                </div>
+
+                <div className="w-[360px] h-[661px] px-5 py-2.5 grid grid-cols-3 gap-3">
+                    {/* Row 1 */}
+                    <div className="w-24 h-[118px] relative cursor-pointer" onClick={() => handleClick(items[0])}>
+                        <img className="w-24 h-[118px] absolute rounded-lg" src={items[0].bgImage} alt="Background" />
+                        <img className="w-[84px] h-[94px] left-[7px] top-[12px] absolute" src={items[0].mainImage} alt={items[0].title} />
                     </div>
-                    <div className="w-[332px] h-[203px] relative">
-                        <div className="w-40 h-[196px] p-3 left-0 top-0 absolute bg-[#b1b1b1] rounded-lg" />
-                        <div className="w-40 h-[196px] p-3 left-[172px] top-0 absolute bg-[#b1b1b1] rounded-lg" />
-                        <img className="w-[150px] h-[175px] left-[8px] top-[13px] absolute" src="/img/black.png" />
-                        <img className="w-[143px] h-[150px] left-[181px] top-[22.50px] absolute" src="/img/hotpink.png" />
+                    <div className="w-[97px] h-[118px] relative bg-[#f8f1e7] rounded-lg flex items-center justify-center">
+                        <div className="text-[#e8e1d7] text-[70px] font-bold">?</div>
                     </div>
-                    <div className="w-[278px] h-[11px] relative" />
+                    <div className="w-24 h-[118px] relative bg-[#f8f1e7] rounded-lg flex items-center justify-center">
+                        <div className="text-[#e8e1d7] text-[70px] font-bold">?</div>
+                    </div>
+
+                    {/* Row 2 */}
+                    <div className="w-24 h-[118px] relative bg-[#f8f1e7] rounded-lg flex items-center justify-center">
+                        <div className="text-[#e8e1d7] text-[70px] font-bold">?</div>
+                    </div>
+                    <div className="w-[97px] h-[118px] relative bg-[#f8f1e7] rounded-lg flex items-center justify-center">
+                        <div className="text-[#e8e1d7] text-[70px] font-bold">?</div>
+                    </div>
+                    <div className="w-24 h-[118px] relative bg-[#f8f1e7] rounded-lg flex items-center justify-center">
+                        <div className="text-[#e8e1d7] text-[70px] font-bold">?</div>
+                    </div>
+
+                    {/* Row 3 */}
+                    <div className="w-24 h-[118px] relative bg-[#f8f1e7] rounded-lg flex items-center justify-center">
+                        <div className="text-[#e8e1d7] text-[70px] font-bold">?</div>
+                    </div>
+                    <div className="w-[97px] h-[118px] relative cursor-pointer" onClick={() => handleClick(items[1])}>
+                        <img className="w-24 h-[118px] absolute rounded-lg" src={items[1].bgImage} alt="Background" />
+                        <img className="w-[84px] h-[94px] left-[7px] top-[12px] absolute" src={items[1].mainImage} alt={items[1].title} />
+                    </div>
+                    <div className="w-24 h-[118px] relative bg-[#f8f1e7] rounded-lg flex items-center justify-center">
+                        <div className="text-[#e8e1d7] text-[70px] font-bold">?</div>
+                    </div>
+
+                    {/* Row 4 */}
+                    <div className="w-24 h-[118px] relative cursor-pointer" onClick={() => handleClick(items[2])}>
+                        <img className="w-24 h-[118px] absolute rounded-lg" src={items[2].bgImage} alt="Background" />
+                        <img className="w-[84px] h-[94px] left-[7px] top-[12px] absolute" src={items[2].mainImage} alt={items[2].title} />
+                    </div>
+                    <div className="w-[97px] h-[118px] relative bg-[#f8f1e7] rounded-lg flex items-center justify-center">
+                        <div className="text-[#e8e1d7] text-[70px] font-bold">?</div>
+                    </div>
+                    <div className="w-24 h-[118px] relative bg-[#f8f1e7] rounded-lg flex items-center justify-center">
+                        <div className="text-[#e8e1d7] text-[70px] font-bold">?</div>
+                    </div>
+
+                    {/* Row 5 */}
+                    <div className="w-24 h-[118px] relative bg-[#f8f1e7] rounded-lg flex items-center justify-center">
+                        <div className="text-[#e8e1d7] text-[70px] font-bold">?</div>
+                    </div>
+                    <div className="w-[97px] h-[118px] relative bg-[#f8f1e7] rounded-lg flex items-center justify-center">
+                        <div className="text-[#e8e1d7] text-[70px] font-bold">?</div>
+                    </div>
+                    <div className="w-24 h-[118px] relative cursor-pointer" onClick={() => handleClick(items[3])}>
+                        <img className="w-24 h-[118px] absolute rounded-lg" src={items[3].bgImage} alt="Background" />
+                        <img className="w-[88px] h-[92px] left-[7px] top-[12px] absolute" src={items[3].mainImage} alt={items[3].title} />
+                    </div>
                 </div>
             </div>
         </div>

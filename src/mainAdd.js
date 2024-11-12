@@ -17,7 +17,7 @@ const MainAdd = ({ onAddSuccess }) => { // onAddSuccess prop을 받아옵니다.
   useEffect(() => {
       const token = localStorage.getItem('token'); 
       if (!token) {
-          navigate('/login');
+          navigate('/unlogined');
          return;
       }
   }, [navigate]);
@@ -68,11 +68,11 @@ const MainAdd = ({ onAddSuccess }) => { // onAddSuccess prop을 받아옵니다.
     const todoData = {
       title: taskName,
       is_routine: !isTaskSelected,
-      when_routine: selectedDate,
+      do_when: selectedDate,
       is_importance: isImportance,
       is_emergency: isEmergency,
       repeatance: selectedOption,
-      do_when: isTaskSelected ? null : selectedTime,
+      when_routine: isTaskSelected ? null : selectedTime,
       is_done: false
     };
 

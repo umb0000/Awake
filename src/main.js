@@ -207,12 +207,22 @@ const Main = () => {
           className="absolute top-12 right-4 w-[50px] h-[50px] flex items-center justify-center z-10" // z-index 추가
         >
           <img
+            src={process.env.PUBLIC_URL + "/img/mail.png"}
+            alt="Small Icon"
+            className="w-[35px] h-[35px] transform rotate-[15deg]"
+          />
+        </a>
+        {/* 오른쪽 상단 작은 이미지 */}
+        <a
+          href="http://kwawake.duckdns.org/collect"
+          className="absolute top-24 right-4 w-[50px] h-[50px] flex items-center justify-center z-10" // z-index 추가
+        >
+          <img
             src={process.env.PUBLIC_URL + "/img/dogam.png"}
             alt="Small Icon"
             className="w-[35px] h-[35px] transform rotate-[15deg]"
           />
         </a>
-
 
 
 

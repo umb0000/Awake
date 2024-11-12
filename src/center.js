@@ -4,7 +4,7 @@ import './output.css';
 const Center = () => {
   return (
 
-    <div className="w-[360px] h-[800px] bg-white flex-col justify-start items-center inline-flex">
+    <div className="w-full h-screen bg-white flex-col justify-start items-center inline-flex pt-20">
     <div className="self-stretch h-[800px] px-[5px] py-[30px] flex-col justify-start items-center gap-[50px] flex">
         <div className="w-[328px] h-[51px] py-[7px] flex-col justify-start items-start flex">
             <div className="w-64 h-[41px] justify-start items-center gap-0.5 inline-flex">

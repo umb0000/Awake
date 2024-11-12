@@ -5,22 +5,22 @@ const Card = ({ card, onCheck, onDelete }) => {
   return (
     <motion.div
       key={card.id}
-      className="relative w-full h-[50px] flex"
+      className="relative w-full h-[50px] flex" // 세로 높이 고정
       drag="x"
       dragConstraints={{ left: 0, right: 0 }}
       onDragEnd={(event, info) => {
         if (info.offset.x < -100) {
-          // 스와이프된 거리가 -100px을 넘으면 삭제 버튼을 보여줌
           onDelete(true);
-    } else {
-        onDelete(false);
-    }
-  }   }
-      animate={{ x: onDelete ? -60 : 0 }} // 삭제 버튼을 보일 만큼만 이동
+        } else {
+          onDelete(false);
+        }
+      }}
+      animate={{ x: onDelete ? -60 : 0 }}
       transition={{ type: "spring", stiffness: 300 }}
       layout
+      style={{ height: '50px' }} // 카드의 고정 높이
     >
-      <div className="absolute left-0 top-0 w-full h-[50px] bg-[#f4f7f8] rounded-[10px]"></div>
+      <div className="absolute left-0 top-0 w-full h-full bg-[#f4f7f8] rounded-[10px]"></div>
       <div className="absolute -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 w-[294px] flex flex-row items-center gap-[10px]">
         <img
           width="30"
@@ -28,7 +28,7 @@ const Card = ({ card, onCheck, onDelete }) => {
           src={`${process.env.PUBLIC_URL}/img/${card.image}`}
           alt={`level${card.level}`}
         />
-        
+
         <div className="h-[30px] flex-grow flex flex-col items-start justify-center" style={{ minWidth: '73%', maxWidth: '180px' }}>
           <div className="w-full text-[13px] leading-[20px] tracking-[.01em] font-['Pretendard'] font-semibold text-[#79747e] flex flex-col justify-center">
             {card.title}
@@ -43,7 +43,7 @@ const Card = ({ card, onCheck, onDelete }) => {
             className="absolute right-[-70px] transform -translate-y-1/2 bg-red-500 text-white px-2 py-1 rounded"
             onClick={handleDeleteClick}
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1, x: -10 }} // 카드가 밀린 만큼 삭제 버튼 위치 조정
+            animate={{ opacity: 1, x: -10 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
           >

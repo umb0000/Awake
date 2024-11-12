@@ -97,7 +97,7 @@ const Angry = () => {
           </div>
         </div>
 
-        <a href="/Center" target="_blank" rel="noopener noreferrer" className="relative w-[95%] h-[68px] flex-shrink-0">
+        <a href="http://kwawake.duckdns.org/center" target="_blank" rel="noopener noreferrer" className="relative w-[95%] h-[68px] flex-shrink-0">
           <div className="absolute left-0 top-0 w-full h-full flex flex-col items-start justify-center py-3 px-5 bg-[#ffcd63] rounded-[16px]">
             <div className="self-stretch text-[16px] leading-[24px] font-black text-[#fff]">AWAKE 분노 상담 센터</div>
             <div className="self-stretch text-[11px] leading-[10px] font-semibold text-[#fff]">화를 참기 힘들 때가 많나요? AWAKE 분노 상담센터</div>

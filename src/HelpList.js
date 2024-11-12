@@ -17,10 +17,20 @@ const HelpList = () => {
   }, []);
 
   return (
-    <div className="w-full h-screen max-w-md mx-auto bg-white relative">
+    <div className="w-full h-full flex justify-center items-center min-h-screen bg-white pt-20">
+    <div className="w-[360px] h-[800px] relative bg-white">
+      
+      {/* Buttons for 문의하기 and 문의내역확인 */}
+      <a href="http://kwawake.duckdns.org/Help" className="w-[54px] h-[27px] left-[73px] top-[71px] absolute text-center text-black text-[15px] font-normal font-['Pretendard'] leading-tight tracking-wide">
+        문의하기
+      </a>
+      <a href="http://kwawake.duckdns.org/HelpList" className="w-[83px] h-[27px] left-[223px] top-[71px] absolute text-center text-black text-[15px] font-extrabold font-['Pretendard'] leading-tight tracking-wide">
+        문의내역확인
+      </a>
+
       {/* Header */}
-      <div className="w-full h-16 flex items-center justify-center bg-white shadow-md absolute top-0 left-0">
-        <div className="text-[#1d1b20] text-lg font-bold font-['Pretendard']">문의내역확인</div>
+      <div className="w-[360px] h-16 px-1 py-2 left-0 top-0 absolute bg-white justify-start items-center gap-1 inline-flex">
+        <div className="grow shrink basis-0 text-center text-[#1d1b20] text-lg font-bold font-['Pretendard'] leading-7">문의 내역 확인</div>
       </div>
 
       {/* Inquiry List */}
@@ -34,6 +44,7 @@ const HelpList = () => {
           </div>
         ))}
       </div>
+    </div>
     </div>
   );
 };

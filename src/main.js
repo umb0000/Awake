@@ -273,11 +273,18 @@ const Main = () => {
         <div className="relative self-stretch w-[100%] h-[25vh] shrink-0 flex justify-center items-center" style={{ paddingTop: '0vh', paddingBottom: '0vh' }}>
           <Canvas className="w-full h-full" gl={{ alpha: true }}>
             
-          
-          <directionalLight 
-            position={[Math.cos(153 * (Math.PI / 180)), 0, Math.sin(153 * (Math.PI / 180)) * 3]} // 153도 방향으로 조정
-            intensity={1.11}  // 강도 111
-            color={lightColor} // 변환된 RGB 값 적용
+          <ambientLight intensity={1} />  // 주변 조명
+
+          <directionalLight
+            position={[2, 5, 5]}  // 방향 조명의 위치를 조정하여 대상에 비치는 각도 설정
+            intensity={1.2}  // 강도 조정 (기본값보다 약간 밝게 설정)
+            color={new THREE.Color(1, 1, 0.8)}  // 약간 따뜻한 색상을 위한 RGB 조정 (희미한 황색 느낌)
+          />
+
+          <pointLight
+            position={[0, 10, 0]}  // 상단에서 직접 내려오는 위치
+            intensity={0.5}  // 낮은 강도로 보조 조명처럼 활용
+            color={new THREE.Color(0.5, 0.5, 1)}  // 푸른색을 조금 섞어 대비감 추가
           />
             <Suspense fallback={null}>
               <Model /> {/* 3D 모델 렌더링 */}

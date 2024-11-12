@@ -253,7 +253,7 @@ const Main = () => {
         </a>
         {/* 오른쪽 상단 메일 아이콘 버튼 */}
         <button
-        className="absolute top-24 right-4 w-[49px] h-[50px] shadow-md flex items-center justify-center z-10"
+        className="absolute top-24 right-4 w-[49px] h-[50px] flex items-center justify-center z-10"
         onClick={handleMailClick} // 클릭 시 다이어리 팝업 표시
         style={{
 
@@ -265,7 +265,7 @@ const Main = () => {
         <img
           src={process.env.PUBLIC_URL + "/img/mail.png"}
           alt="Mail Icon"
-          className="w-[30px] h-[25px] shadow-sm transform rotate-[15deg]"
+          className="w-[30px] h-[25px] shadow-md transform rotate-[15deg]"
         />
       </button>
 

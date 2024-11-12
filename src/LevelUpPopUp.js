@@ -25,7 +25,6 @@ const LevelUpPopup = ({ onClose }) => {
   const [randomCatImage, setRandomCatImage] = useState(null);
 
   const handleRevealCat = () => {
-    // 고양이 얻기 버튼을 누르면 랜덤한 고양이 이미지를 선택하고 showCat을 true로 설정
     const randomIndex = Math.floor(Math.random() * catImages.length);
     setRandomCatImage(catImages[randomIndex]);
     setShowCat(true);
@@ -45,15 +44,13 @@ const LevelUpPopup = ({ onClose }) => {
           animate={{ scale: 1 }}
           exit={{ scale: 0.8 }}
         >
-          {/* 닫기 버튼 - 고양이 얻기 화면에서만 표시 */}
-          {showCat && (
-            <button onClick={onClose} className="absolute top-3 right-3 text-gray-500">
-              <VscClose size={24} />
-            </button>
-          )}
+          {/* 닫기 버튼 - 모든 화면에서 표시 */}
+          <button onClick={onClose} className="absolute top-3 right-3 text-gray-500">
+            <VscClose size={24} />
+          </button>
 
           <h2 className="text-2xl font-bold text-orange-500 mt-2 mb-4">
-            {showCat ? "Level Up!" : "Level Up!"}
+            Level Up!
           </h2>
           <p className="text-lg text-gray-700">
             {showCat ? "고양이를 얻었습니다!" : "어떤 고양이가 나올까요?"}
@@ -81,7 +78,6 @@ const LevelUpPopup = ({ onClose }) => {
             )}
           </div>
 
-          {/* 고양이 얻기 버튼 */}
           {!showCat ? (
             <button
               onClick={handleRevealCat}

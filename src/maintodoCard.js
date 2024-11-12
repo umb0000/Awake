@@ -31,7 +31,7 @@ const Card = ({ card, onCheck, onDelete }) => {
   return (
     <motion.div
       key={card.id}
-      className="relative w-full h-[50px] flex"
+      className="relative w-full h-[10vh] flex"
       drag="x"
       dragConstraints={{ left: 0, right: 0 }}
       onDragEnd={(event, info) => {
@@ -44,7 +44,7 @@ const Card = ({ card, onCheck, onDelete }) => {
       animate={{ x: isDragged ? -60 : 0 }} // isDragged에 따라 위치 조정
       transition={{ type: "spring", stiffness: 300 }}
       layout
-      style={{ height: '50px' }}
+      style={{ height: '10vh' }}
     >
       <div className="absolute left-0 top-0 w-full h-full bg-[#f4f7f8] rounded-[10px]"></div>
       <div className="absolute -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 w-[294px] flex flex-row items-center gap-[10px]">

@@ -8,6 +8,7 @@ import { AnimationMixer, LoopRepeat } from 'three';
 import { useFBX } from '@react-three/drei';
 import LevelSystem from './LevelSystem';
 import LevelUpPopup from './LevelUpPopUp'; // LevelUpPopup 컴포넌트 추가
+import { useNavigate } from 'react-router-dom';
 
 
 // 3D 모델 컴포넌트
@@ -68,6 +69,15 @@ const Main = () => {
   const [currentScore, setCurrentScore] = useState(levelSystem.currentScore);
   const [scoreToNextLevel, setScoreToNextLevel] = useState(levelSystem.scoreToNextLevel);
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split("T")[0]); // 초기 상태를 오늘 날짜로 설정
+  const navigate = useNavigate();
+
+  useEffect(() => {
+      const token = localStorage.getItem('token'); 
+      if (!token) {
+          navigate('/unlogined');
+         return;
+      }
+  }, [navigate]);
 
    // LevelUpPopup 표시 상태 추가
   const [showLevelUpPopup, setShowLevelUpPopup] = useState(false);

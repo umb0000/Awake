@@ -32,7 +32,7 @@ const Diary = () => {
   }, [isDiaryVisible]);
 
   return (
-    <div className="w-[340px] relative h-[557px]">
+    <div className="w-[340px] relative h-[557px] pt-10">
       {/* 항상 표시되는 상단 "매일 냥냥 일기" 박스 */}
       <div className="w-[340px] h-[63px] px-[19px] py-2.5 rounded-[10px] flex-col bg-white justify-center items-center gap-2.5 inline-flex">
         <div className="w-[302.91px] flex justify-start items-center gap-[5px]">
@@ -40,7 +40,6 @@ const Diary = () => {
             <img className="w-[19.38px] h-[19.50px] absolute left-[1.94px]" src={`${process.env.PUBLIC_URL}/img/diary_icon.png`} alt="icon" />
           </div>
           <div className="w-[253px] text-black text-sm font-bold font-['Pretendard'] leading-normal tracking-wide">매일 냥냥 일기</div>
-          <img className="w-2.5 h-[16.15px] origin-top-left rotate-90 mt-2" src={`${process.env.PUBLIC_URL}/img/right.png`} alt="right arrow" />
         </div>
       </div>
 

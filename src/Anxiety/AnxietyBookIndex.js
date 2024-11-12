@@ -70,20 +70,11 @@ const AnxietyBookIndex = () => {
         </span>
       </div>
 
-      <div className="w-[90%] h-14 mt-4 flex items-center bg-white border border-[#FFD8B1] shadow-sm px-4 mx-auto">
-        <FiSearch className="text-[#FFA76B] mr-3 text-lg" />
-        <input
-          type="text"
-          placeholder="검색어를 입력해보세요 (예: '성장', '도전')"
-          className="w-full bg-transparent text-sm text-[#4B4B4B] placeholder-[#A0A0A0] outline-none font-['Pretendard_Variable']"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-      </div>
+     
 
       <div className="w-full flex flex-col gap-4 p-4 mt-4 overflow-y-auto h-[620px] font-['Pretendard_Variable']">
-        {filteredBookmarks.length > 0 ? (
-          filteredBookmarks.map((bookmark, index) => (
+       
+          
             <div
               key={index}
               className="w-full p-5 bg-white border border-[#FFD8B1] rounded-lg shadow-sm font-['Pretendard_Variable']"
@@ -101,12 +92,10 @@ const AnxietyBookIndex = () => {
                 삭제
               </button>
             </div>
-          ))
-        ) : (
-          <p className="text-sm text-[#A0A0A0] text-center bg-[#FFF4E5] p-4 rounded-lg shadow-sm">
-            검색어에 맞는 책갈피가 없습니다. 다른 검색어를 입력해보세요!
-          </p>
-        )}
+          
+        
+          
+      
       </div>
     </div>
   );

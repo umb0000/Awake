@@ -238,7 +238,7 @@ const Main = () => {
       <div className="relative left-0 top-0 w-[100%] flex flex-col items-center justify-start ">
 
      {/* 말풍선 */}
-      <div className="absolute top-12 left-6 bg-white text-white px-4 py-2 rounded-lg shadow-lg max-w-[50px] h-[50px] flex items-center justify-center text-center break-words z-10">
+      <div className="absolute top-12 left-6 bg-white text-white px-4 py-2 rounded-lg shadow-lg max-w-[50px] h-[80px] flex items-center justify-center text-center break-words z-10">
           <span className="text-[10px] text-[#4B4B4B] font-['Pretendard_Variable'] font-bold">{displayText}</span>
       </div>
 

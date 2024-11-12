@@ -2,14 +2,34 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const Card = ({ card, onCheck, onDelete }) => {
-    const handleDeleteClick = (e) => {
-        e.stopPropagation();
+  const handleDeleteClick = async (e) => {
+    e.stopPropagation();
+    try {
+      // 서버에 DELETE 요청을 보냅니다.
+      const response = await fetch(`http://112.152.14.116:10211/todo-delete/${card.id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`, // 토큰 추가
+        },
+      });
+
+      if (response.ok) {
+        // 성공적으로 삭제되면 onDelete 함수 호출
         onDelete(card.id);
-      };
+        console.log(`Todo with ID ${card.id} has been deleted.`);
+      } else {
+        console.error(`Failed to delete todo with ID ${card.id}. Status: ${response.status}`);
+      }
+    } catch (error) {
+      console.error('Error deleting todo:', error);
+    }
+  };
+
   return (
     <motion.div
       key={card.id}
-      className="relative w-full h-[50px] flex" // 세로 높이 고정
+      className="relative w-full h-[50px] flex"
       drag="x"
       dragConstraints={{ left: 0, right: 0 }}
       onDragEnd={(event, info) => {
@@ -22,7 +42,7 @@ const Card = ({ card, onCheck, onDelete }) => {
       animate={{ x: !onDelete ? -60 : 0 }}
       transition={{ type: "spring", stiffness: 300 }}
       layout
-      style={{ height: '50px' }} // 카드의 고정 높이
+      style={{ height: '50px' }}
     >
       <div className="absolute left-0 top-0 w-full h-full bg-[#f4f7f8] rounded-[10px]"></div>
       <div className="absolute -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 w-[294px] flex flex-row items-center gap-[10px]">
@@ -62,7 +82,8 @@ const Card = ({ card, onCheck, onDelete }) => {
           alt={card.checked ? 'checked' : 'unchecked'}
           onClick={(e) => {
             e.stopPropagation();
-            onCheck(card.id);}}
+            onCheck(card.id);
+          }}
           className="shrink-0"
         />
       </div>

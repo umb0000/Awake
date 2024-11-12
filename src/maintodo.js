@@ -207,8 +207,6 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
 
   return (
     <div className="self-stretch h-[454px] shrink-0 flex flex-col items-start justify-start gap-[7px]">
-      <MainAdd onAddSuccess={fetchTodos} />
-      <MainAdd onAddSuccess={handleAddSuccess} />
       <div className="w-[200px] h-7 flex-row gap-[5px] relative">
         <div className="w-[100px] left-0 top-0 absolute text-left text-[#49454f] font-bold text-[13px] font-['Pretendard'] leading-7">
           {formatDate(selectedDate)}
@@ -309,7 +307,7 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
               onClick={(e) => e.stopPropagation()}
             >
               <motion.div className="w-[360px] h-[336px] bg-white relative bg-opacity-0 overflow-visible">
-                <MainAdd onAddSuccess={handleAddSuccess} />
+                <MainAdd onAddSuccess={handleAddSuccess}  />
               </motion.div>
             </motion.div>
           </>

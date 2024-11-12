@@ -199,6 +199,22 @@ const Main = () => {
       
       <div className="relative left-0 top-0 w-[100%] flex flex-col items-center justify-start ">
 
+       
+        {/* 오른쪽 상단 작은 이미지 */}
+        <a
+          href="http://kwawake.duckdns.org/collect"
+          className="absolute top-12 right-4 w-[50px] h-[50px] flex items-center justify-center z-10" // z-index 추가
+        >
+          <img
+            src={process.env.PUBLIC_URL + "/img/dogam.png"}
+            alt="Small Icon"
+            className="w-[35px] h-[35px] transform rotate-[15deg]"
+          />
+        </a>
+
+
+
+
         {/* 3D 모델 표시 영역 */}
         <div className="relative self-stretch w-[100%] h-[25vh] shrink-0 flex justify-center items-center" style={{ paddingTop: '0vh', paddingBottom: '0vh' }}>
           <Canvas className="w-full h-full" gl={{ alpha: true }}>

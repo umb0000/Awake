@@ -8,12 +8,13 @@ const Card = ({ card, onCheck, onDelete }) => {
     e.stopPropagation();
     try {
       // 서버에 DELETE 요청을 보냅니다.
-      const response = await fetch(`http://112.152.14.116:10211/todo-delete/${card.id}`, {
+      const response = await fetch(`http://112.152.14.116:10211/todo-delete/`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('token')}`, // 토큰 추가
         },
+        body: JSON.stringify(card.id),
       });
 
       if (response.ok) {

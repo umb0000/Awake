@@ -38,7 +38,7 @@ import Collect from './Collect.js'
 import Explain1 from './Explain1.js'
 import Explain2 from './Explain2.js'
 import Explain3 from './Explain3.js'
-import { Center } from '@react-three/drei';
+import Center from './Center.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

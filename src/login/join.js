@@ -73,7 +73,7 @@ function Join({ onRegisterSuccess, onSwitchToLogin }) {
             (currentStep === 1 && isNicknameValid) ||
             (currentStep === 2 && isEmailValid && !isEmailDuplicate) ||
             (currentStep === 3 && isPasswordValid) ||
-            (currentStep >= 4)
+            (currentStep === 4) || (currentStep === 5) || (currentStep === 6)
         ) {
             setAnimateOut(true);
             setTimeout(() => {

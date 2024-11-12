@@ -14,9 +14,9 @@ const Card = ({ card, onCheck, onDelete }) => {
       dragConstraints={{ left: 0, right: 0 }}
       onDragEnd={(event, info) => {
         if (info.offset.x < -100) {
-          onDelete(true);
-        } else {
           onDelete(false);
+        } else {
+          onDelete(true);
         }
       }}
       animate={{ x: onDelete ? -60 : 0 }}

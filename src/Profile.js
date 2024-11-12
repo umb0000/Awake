@@ -2,6 +2,14 @@ import React from 'react';
 import './output.css';
 
 const Profile = () => {
+  const handleLogout = () => {
+    if (window.ReactNativeWebView) {
+      window.ReactNativeWebView.postMessage('logout'); // React Native로 로그아웃 요청 전송
+    } else {
+      console.log("This is not running within a WebView");
+    }
+  };
+
   return (
     <div className="relative w-screen min-h-screen bg-[#f8f8f8] overflow-hidden font-['Pretendard_Variable']">
       <div className="w-full h-[15px]"></div> {/* 상단 상태 표시와 여백을 위한 공간 */}
@@ -57,20 +65,21 @@ const Profile = () => {
         </div>
       </div>
 
-
       {/* Options List */}
-      <div className="w-full px-4 flex flex-col gap-3">
-    <a href="http://kwawake.duckdns.org/collect" className="w-full h-16 bg-white rounded-lg flex items-center px-4 text-[#79747e] text-base font-bold">
-        고양이 도감 보기
-    </a>
-    <a href="http://kwawake.duckdns.org/record" className="w-full h-16 bg-white rounded-lg flex items-center px-4 text-[#79747e] text-base font-bold">
-        내 기록 확인
-    </a>
-    <a href="http://kwawake.duckdns.org/help" className="w-full h-16 bg-white rounded-lg flex items-center px-4 text-[#79747e] text-base font-bold">
-        문의하기
-    </a>
-</div>
-
+      <div className="w-full px-4 flex flex-col px-5 gap-3">
+        <a href="http://kwawake.duckdns.org/collect" className="w-full h-14 bg-white rounded-lg flex items-center px-4 text-[#79747e] text-base font-medium">
+          고양이 도감 보기
+        </a>
+        <a href="http://kwawake.duckdns.org/record" className="w-full h-14 bg-white rounded-lg flex items-center px-4 text-[#79747e] text-base font-medium">
+          내 기록 확인
+        </a>
+        <a href="http://kwawake.duckdns.org/help" className="w-full h-14 bg-white rounded-lg flex items-center px-4 text-[#79747e] text-base font-medium">
+          문의하기
+        </a>
+        <div onClick={handleLogout} className="w-full h-14 bg-white rounded-lg flex items-center px-4 text-[#79747e] text-base font-medium">
+          로그아웃
+        </div>
+      </div>
     </div>
   );
 };

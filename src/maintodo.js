@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import MainEdit from './mainEdit';
 import Card from './maintodoCard.js';
@@ -118,6 +118,10 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
     .catch(error => console.error('Error fetching data:', error));
 };
 
+  useEffect(() => {
+    fetchTodos();
+  }, [selectedDate]);
+
   const handleAddSuccess = () => {
     setShowAddDrawer(false);
     fetchTodos();
@@ -135,29 +139,43 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
     onCompletionRateChange(newCompletionRate, totalCount, completedCount);
   };
 
-  const handleCheck = (card) => {
-    setCards(prevCards => {
-      const updatedCards = prevCards.map(item =>
-        item.id === card.id ? { ...item, checked: !item.checked } : item
-      );
-      
-      // Sort: Unchecked first, then by level descending
-      const sortedCards = updatedCards.sort((a, b) => {
-        if (!a.checked && b.checked) return -1;
-        if (a.checked && !b.checked) return 1;
-        if (!a.checked && !b.checked) return b.level - a.level;
-        return 0;
+  const handleCheck = async (card) => {
+    try {
+      // 서버에 체크 상태 변경 요청 전송
+      await fetch('http://112.152.14.116:10211/todo-check', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        },
+        body: JSON.stringify({ item: card.id }),
       });
   
-      updateCompletionRate(sortedCards);
-      return sortedCards;
-    });
-
-    onCheck(card);
-
-    // 체크 여부 변경 시 데이터 갱신
-    fetchTodos();
-};
+      setCards(prevCards => {
+        const updatedCards = prevCards.map(item =>
+          item.id === card.id ? { ...item, checked: !item.checked } : item
+        );
+  
+        // Sort: Unchecked first, then by level descending
+        const sortedCards = updatedCards.sort((a, b) => {
+          if (!a.checked && b.checked) return -1;
+          if (a.checked && !b.checked) return 1;
+          if (!a.checked && !b.checked) return b.level - a.level;
+          return 0;
+        });
+  
+        updateCompletionRate(sortedCards);
+        return sortedCards;
+      });
+  
+      onCheck(card);
+  
+      // 체크 여부 변경 후 데이터 갱신
+      fetchTodos();
+    } catch (error) {
+      console.error('Error updating todo status:', error);
+    }
+  };
 
   const handleDeleteCard = (id) => {
     setCards(prevCards => {

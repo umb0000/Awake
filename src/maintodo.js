@@ -148,6 +148,16 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
     fetchTodos();
   }, []);
 
+   // 입력 서랍 열고 닫기
+   const toggleAddDrawer = () => {
+    setShowAddDrawer(!showAddDrawer);
+  };
+
+  const handleAddSuccess = () => {
+    setShowAddDrawer(false); // 서랍 닫기
+    console.log('추가 성공');
+  };
+
   return (
     <div className="self-stretch h-[454px] shrink-0 flex flex-col items-start justify-start gap-[7px]">
       <MainAdd onAddSuccess={fetchTodos} />
@@ -225,6 +235,34 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
               <div className="w-[360px] h-[336px] bg-white relative bg-opacity-0 overflow-visible">
                 <MainEdit card={editingCard} onClose={handleCloseEdit} />
               </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
+      {/* 입력 서랍 (MainAdd) */}          
+      <AnimatePresence>
+        {showAddDrawer && (
+          <>
+            <motion.div
+              className="fixed inset-0 bg-black z-10"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              onClick={toggleAddDrawer}
+            />
+            <motion.div
+              className="fixed inset-x-0 bottom-0 z-20 flex items-end justify-center"
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              exit={{ y: "100%" }}
+              transition={{ duration: 0.3 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <motion.div className="w-[360px] h-[336px] bg-white relative bg-opacity-0 overflow-visible">
+                <MainAdd onAddSuccess={handleAddSuccess} />
+              </motion.div>
             </motion.div>
           </>
         )}

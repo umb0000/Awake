@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import MainEdit from './mainEdit';
 import Card from './maintodoCard.js';
 import './output.css';
-import MainAdd from './MainAdd'; // MainAdd 컴포넌트 import
+import MainAdd from './mainAdd.js'; // MainAdd 컴포넌트 import
 
 
 const getCardProperties = (card) => {

@@ -25,10 +25,10 @@ const Card = ({ card, onCheck, onDelete }) => {
         />
         
         <div className="h-[30px] flex-grow flex flex-col items-start justify-center" style={{ minWidth: '73%', maxWidth: '180px' }}>
-          <div className="w-full text-[13px] font-semibold text-[#79747e] flex justify-center">
+          <div className="w-full text-[13px] leading-[20px] tracking-[.01em] font-['Pretendard'] font-semibold text-[#79747e] flex flex-col justify-center">
             {card.title}
           </div>
-          <div className="w-full text-[10px] text-[#79747e] flex justify-center">
+          <div className="w-full text-[10px] leading-[10px] tracking-[.01em] font-['Pretendard'] text-[#79747e] flex flex-col justify-center">
             {card.detail}
           </div>
         </div>

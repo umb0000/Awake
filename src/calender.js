@@ -182,7 +182,7 @@ const getBackgroundColor = (day, currentMonth, currentYear) => {
   </div>
 </div>
 
-<Diary/>
+
         
       </div>
 

@@ -1,15 +1,19 @@
 import { useState, useEffect } from 'react';
 import { Outlet, useLocation, Link } from 'react-router-dom';
+import Navigation from './Navigation'; // 하단 네비게이션 컴포넌트 가져오기
+
 
 const Kit = () => {
   const location = useLocation();
-  const [activeTab, setActiveTab] = useState(location.pathname);
+  const [activeButton, setActiveButton] = useState('kit');
 
   // 경로가 변경될 때마다 활성화된 탭 업데이트
   useEffect(() => {
-    handleTabClick(location.pathname);
+    // Kit 관련 경로일 때만 activeButton을 'kit'으로 설정
+    if (location.pathname.startsWith('/kit')) {
+      setActiveButton('kit');
+    }
   }, [location]);
-
   return (
     <div className="relative w-full h-[100%] bg-[#fff] overflow-hidden">
       {/* 네비게이션 바 */}
@@ -62,6 +66,9 @@ const Kit = () => {
           <Outlet />
         </div>
       </div>
+
+
+      <Navigation activeButton={activeButton} />
     </div>
   );
 };

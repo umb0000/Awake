@@ -71,7 +71,7 @@ const Card = ({ card, onCheck, onDelete }) => {
         <img
             width="26"
             height="26"
-            src={`${process.env.PUBLIC_URL}/img/${card.checked ? 'unchecked.png' : 'checked.png'}`}
+            src={`${process.env.PUBLIC_URL}/img/${card.checked ? 'checked.png' : 'unchecked.png'}`}
             alt={card.checked ? 'checked' : 'unchecked'}
             onClick={(e) => {
                 e.stopPropagation();

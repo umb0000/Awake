@@ -35,7 +35,7 @@ const Collect = () => {
                 {/* 홈 탭 고양이로 바꾸기 버튼 */}
                 <div className="absolute bottom-10 w-[90%] flex justify-center z-10">
                     <button 
-                        className="w-full max-w-xs py-3 bg-[#ff9800] text-white text-lg font-bold rounded-lg hover:bg-[#e67e22] transition-all"
+                        className="w-full max-w-xs py-3 bg-white rounded-[38px] border border-[#ff6d00] text-[#ff6d00] font-medium font-['Pretendard']  hover:bg-[#e67e22] transition-all"
                     >
                         홈 탭 고양이로 바꾸기
                     </button>

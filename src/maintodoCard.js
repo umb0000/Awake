@@ -14,12 +14,12 @@ const Card = ({ card, onCheck, onDelete }) => {
       dragConstraints={{ left: 0, right: 0 }}
       onDragEnd={(event, info) => {
         if (info.offset.x < -100) {
-          onDelete(false);
-        } else {
           onDelete(true);
+        } else {
+          onDelete(false);
         }
       }}
-      animate={{ x: onDelete ? -60 : 0 }}
+      animate={{ x: !onDelete ? -60 : 0 }}
       transition={{ type: "spring", stiffness: 300 }}
       layout
       style={{ height: '50px' }} // 카드의 고정 높이
@@ -42,7 +42,7 @@ const Card = ({ card, onCheck, onDelete }) => {
           </div>
         </div>
 
-        {onDelete && (
+        {!onDelete && (
           <motion.button
             className="absolute right-[-70px] transform -translate-y-1/2 bg-red-500 text-white px-2 py-1 rounded"
             onClick={handleDeleteClick}

@@ -210,10 +210,10 @@ const ConflictBoard = () => {
   );
 
   const renderChat = () => (
-    <div className="w-full h-[690px] bg-white flex flex-col font-['Pretendard_Variable']">
-      <div className="sticky top-0 z-10 p-4 bg-[#f7f2fa] flex items-center justify-between px-6 shadow-sm border-b fixed top-16">
-        <span className="text-lg font-bold">웨이의 분노 상담소</span>
-        <button onClick={() => setIsChatOpen(false)} className="text-gray-500 text-xl font-bold">×</button>
+    <div className="w-full h-[690px] bg-white flex flex-col font-['Pretendard_Variable'] pt-10">
+      <div className="sticky top-10 z-10 p-4 bg-[#f7f2fa] flex items-center justify-center shadow-sm border-b fixed px-6">
+        <span className="text-[20px] font-bold text-[#4B4B4B]">웨이의 분노 상담소</span>
+        <button onClick={() => setIsChatOpen(false)} className="absolute right-6 text-gray-500 text-xl font-bold">×</button>
       </div>
 
       <div className="flex-1 overflow-y-auto p-6 space-y-4 pt-5 bg-gray-50">
@@ -287,7 +287,7 @@ const ConflictBoard = () => {
   );
 
   const renderTimeline = () => (
-    <div className="relative w-full h-screen bg-[#F9F8F6] overflow-y-scroll font-['Pretendard_Variable']">
+    <div className="relative w-full h-screen bg-[#F9F8F6] overflow-y-scroll font-['Pretendard_Variable'] pt-10">
       <div className="sticky top-0 z-10 p-4 bg-white shadow-md">
         <h1 className="text-center text-[20px] font-bold text-[#4B4B4B]">웨이의 상담 기록</h1>
       </div>

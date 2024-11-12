@@ -154,12 +154,15 @@ const Main = () => {
   };
 
   const texts = [
-    "오늘은 기분이 어때? ",
-    "할일을 잊지 마! ",
-    "운동을 해볼까? ",
-    "건강한 하루! ",
-    "물 많이 마시자! "
+    "냐옹~ 오늘도 좋은 하루!", 
+    "할 거 까먹으면 안 돼!", 
+    "냥냥, 운동 어때?", 
+    "건강한 하루 보내!", 
+    "물 많이 마시라냥~", 
+    "잘하고 있다냥!", 
+    "냥냥, 힘내라옹!"
   ];
+
 
   // 텍스트 변경 함수
   const changeText = () => {
@@ -171,21 +174,35 @@ const Main = () => {
     }
   };
 
+   // 1분마다 텍스트 변경
+  useEffect(() => {
+    const changeText = () => {
+      const randomText = texts[Math.floor(Math.random() * texts.length)];
+      setDisplayText(randomText);
+      setIsAnimating(true);
+    };
+    
+    changeText(); // 초기 텍스트 설정
+    const interval = setInterval(changeText, 60000); // 1분마다 변경
+    
+    return () => clearInterval(interval);
+  }, [texts]);
+
   // 텍스트 애니메이션 효과
   useEffect(() => {
-    if (isAnimating && currentText.length > 0) {
+    if (isAnimating && displayText.length > 0) {
       let currentIndex = 0;
       setDisplayText('');
       const interval = setInterval(() => {
-        setDisplayText((prev) => prev + currentText[currentIndex]);
+        setDisplayText((prev) => prev + displayText[currentIndex]);
         currentIndex++;
-        if (currentIndex === currentText.length - 1) { // 마지막 글자까지 표시 후 종료
+        if (currentIndex === displayText.length) {
           clearInterval(interval);
           setIsAnimating(false);
         }
-      }, 100); // 0.1초 간격으로 텍스트 표시
+      }, 100);
     }
-  }, [isAnimating, currentText]);
+  }, [isAnimating, displayText]);
 
   // 달성률 및 카드 개수 업데이트 함수
   const handleCompletionRateChange = (rate, total, completed) => {
@@ -237,8 +254,11 @@ const Main = () => {
       
       <div className="relative left-0 top-0 w-[100%] flex flex-col items-center justify-start ">
 
-       
-        
+      {/* 말풍선 */}
+      <div className="absolute top-6 left-6 bg-blue-400 text-white px-4 py-2 rounded-lg shadow-lg max-w-xs flex items-center z-10">
+        <span className="text-lg font-bold">{displayText}</span>
+        <div className="absolute -bottom-2 left-10 w-0 h-0 border-l-[10px] border-l-transparent border-t-[10px] border-t-blue-400 border-r-[10px] border-r-transparent"></div>
+      </div>
         
         {/* 오른쪽 상단 작은 이미지 */}
         <a
@@ -265,7 +285,7 @@ const Main = () => {
         <img
           src={process.env.PUBLIC_URL + "/img/mail.png"}
           alt="Mail Icon"
-          className="w-[30px] h-[25px] shadow-md transform rotate-[15deg]"
+          className="w-[30px] h-[25px] shadow-lg transform rotate-[15deg]"
         />
       </button>
 

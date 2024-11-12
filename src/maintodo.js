@@ -80,13 +80,13 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
 
   const fetchTodos = () => {
     const token = localStorage.getItem('token');
-    fetch(`http://112.152.14.116:10211/todo-get?time=${selectedDate}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
-      },
-    })
+  fetch(`http://112.152.14.116:10211/todo-get?time=${selectedDate}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+  })
     .then(response => {
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
@@ -101,14 +101,22 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
             checked: card.is_done,
           }),
         }));
-        setCards(processedCards);
-        updateCompletionRate(processedCards);
+
+        // 정렬 로직 추가
+        const sortedCards = processedCards.sort((a, b) => {
+          if (!a.checked && b.checked) return -1; // unchecked가 위로 오도록 정렬
+          if (a.checked && !b.checked) return 1;
+          if (!a.checked && !b.checked) return b.level - a.level; // unchecked 카드들 level 기준 정렬
+          return 0; // checked인 카드들은 그대로 유지
+        });
+        setCards(sortedCards);
+        updateCompletionRate(sortedCards);
       } else {
         console.error('Expected an array but received:', data);
       }
     })
     .catch(error => console.error('Error fetching data:', error));
-  };
+};
 
   useEffect(() => {
     fetchTodos();

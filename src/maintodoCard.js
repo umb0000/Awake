@@ -75,7 +75,7 @@ const Card = ({ card, onCheck, onDelete }) => {
             alt={card.checked ? 'checked' : 'unchecked'}
             onClick={(e) => {
                 e.stopPropagation();
-                onCheck(card.id);
+                onCheck(card);
             }}
             className="ml-2"
         />

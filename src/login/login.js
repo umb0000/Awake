@@ -58,9 +58,14 @@ const Login = () => {
                     localStorage.setItem('token', data.access_token);
                     localStorage.setItem('email', data.email);
                     
-                    // 여기에서 `data.access_token`을 사용하여 token 값을 전달
-                    window.ReactNativeWebView.postMessage(JSON.stringify({ token: data.access_token, email: data.email }));
-                    
+                    try{
+                        // 여기에서 `data.access_token`을 사용하여 token 값을 전달
+                        window.ReactNativeWebView.postMessage(JSON.stringify({ token: data.access_token, email: data.email }));
+                    }
+                    catch{
+                        
+                    }
+
                     navigate('/main');
                 } else if (response.status === 401) {
                     setLoginErrorMessage('아이디 혹은 비밀번호가 맞지 않습니다.');
@@ -74,7 +79,7 @@ const Login = () => {
         },
         [email, password, navigate]
     );
-    
+
     return (
         <div className="w-[360px] h-[800px] mx-auto relative bg-white">
             <form onSubmit={handleLogin} className="flex flex-col items-center justify-center gap-4">

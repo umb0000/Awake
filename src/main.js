@@ -11,6 +11,7 @@ import LevelUpPopup from './LevelUpPopUp'; // LevelUpPopup 컴포넌트 추가
 import { useNavigate } from 'react-router-dom';
 import * as THREE from 'three';
 import Diary from './calenderDiary.js';
+import { VscClose } from "react-icons/vsc";
 
 // 3D 모델 컴포넌트
 const Model = () => {
@@ -211,27 +212,27 @@ const Main = () => {
 
       {/* Diary 팝업 */}
       <AnimatePresence>
-  {showDiary && (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-    >
-      <div 
-        className="relative bg-gradient-to-t from-[#e8f2ff] to-white w-[340px] h-[557px] rounded-md shadow-lg p-4 flex items-center justify-center"
-      >
-        <button
-          onClick={closeDiary}
-          className="absolute top-3 right-3 text-xl text-gray-500 z-50" // z-index 수정
+      {showDiary && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
         >
-          ✕
-        </button>
-        <Diary />
-      </div>
-    </motion.div>
-  )}
-</AnimatePresence>
+          <div 
+            className="relative bg-gradient-to-t from-[#e8f2ff] to-white w-[340px] h-[557px] rounded-md shadow-lg p-4 flex items-center justify-center"
+          >
+            <button
+              onClick={closeDiary}
+              className="absolute top-3 right-3 text-gray-500 z-50">
+
+            <VscClose size={24} />
+            </button>
+            <Diary />
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
 
       
       <div className="relative left-0 top-0 w-[100%] flex flex-col items-center justify-start ">

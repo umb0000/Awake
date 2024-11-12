@@ -20,7 +20,7 @@ function Join({ onRegisterSuccess, onSwitchToLogin }) {
     const navigate = useNavigate();
 
     const handleNextClick = () => {
-        if (currentStep === 4) {
+        if (currentStep === 7) {
             navigate('/unlogined');
         } else {
             handleNext();
@@ -215,10 +215,33 @@ function Join({ onRegisterSuccess, onSwitchToLogin }) {
             
           )}
           {currentStep === 5 && (
-            <div className="w-[360px] h-[800px] relative bg-white">
-            <div className="w-full h-[60px]  flex-col justify-center items-center gap-5 inline-flex">
-            <div className="text-center mt-[600px] text-black text-xl font-medium font-['Pretendard'] font-bold leading-[30px] tracking-tight">어웨이크! <br/>깨어날 준비가 되었습니다.</div>
-          </div>
+            <div className="w-[360px] h-screen bg-white relative pt-20">
+            <div className="absolute top-20 left-6 flex gap-2">
+        <div className="w-[11px] h-[11px] bg-[#ff6d00] rounded-full" />
+        <div className="w-[11px] h-[11px] bg-[#d9d9d9] rounded-full" />
+        <div className="w-[11px] h-[11px] bg-[#d9d9d9] rounded-full" />
+      </div>
+
+      <div className="flex flex-col justify-start items-start gap-5 px-6 pt-16">
+        <div>
+          <span className="text-[#ff6d00] text-[23px] font-bold font-['Pretendard'] leading-[30px] tracking-tight">먼저</span>
+          <span className="text-black text-[23px] font-bold font-['Pretendard'] leading-[30px] tracking-tight"> 해야 할 일을 <br/></span>
+          <span className="text-[#ff6d00] text-[23px] font-bold font-['Pretendard'] leading-[30px] tracking-tight">먼저</span>
+          <span className="text-black text-[23px] font-bold font-['Pretendard'] leading-[30px] tracking-tight"> 하도록 도와줄게요</span>
+        </div>
+
+        <img className="w-[143px] h-[46px]" src="/img/levelexplain.png" alt="Eisenhower Matrix Example" />
+
+        <div>
+          <span className="text-black text-xs font-medium font-['Pretendard'] leading-[18px] tracking-tight">아이젠하워 매트릭스 (The Eisenhower Matrix) 를 아세요?<br/></span>
+          <span className="text-[#ff6d00] text-xs font-bold font-['Pretendard'] leading-[18px] tracking-tight">긴급성</span>
+          <span className="text-black text-xs font-medium font-['Pretendard'] leading-[18px] tracking-tight">과 </span>
+          <span className="text-[#ff6d00] text-xs font-bold font-['Pretendard'] leading-[18px] tracking-tight">중요도</span>
+          <span className="text-black text-xs font-medium font-['Pretendard'] leading-[18px] tracking-tight">에 따라 업무를 체계적으로 정리하는 방법으로, <br/>가장 중요한 업무의 우선순위를 효과적으로 지정할 수 있습니다.</span>
+        </div>
+
+        <img className="self-stretch h-[311px]" src="/img/matrix.png" alt="Matrix Diagram" />
+      </div>
           </div>
             
           )}
@@ -236,7 +259,7 @@ function Join({ onRegisterSuccess, onSwitchToLogin }) {
                 (currentStep === 1 && isNicknameValid) ||
                 (currentStep === 2 && isEmailValid && !isEmailDuplicate) ||
                 (currentStep === 3 && isPasswordValid) ||
-                (currentStep === 4)
+                (currentStep >= 4)
                     ? 'bg-[#ff6d00]'
                     : 'bg-gray-300'
             } text-white font-semibold z-20`}

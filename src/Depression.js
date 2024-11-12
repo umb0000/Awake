@@ -47,7 +47,7 @@ const Depression = () => {
           </a>
 
 
-        <a href="http://kwawake.duckdns.org/center" target="_blank" rel="noopener noreferrer" className="relative w-[95%] h-[68px] flex">
+        <a href="http://kwawake.duckdns.org/Center" target="_blank" rel="noopener noreferrer" className="relative w-[95%] h-[68px] flex">
           <div className="absolute left-0 top-0 w-full h-full flex flex-col items-start justify-center py-3 px-5 bg-[#ffcd63] rounded-[16px]">
             <div className="self-stretch text-[16px] leading-[24px] font-black text-[#fff]">AWAKE 우울 상담 센터</div>
             <div className="self-stretch text-[10px] leading-[10px] font-semibold text-[#fff]">자주 무기력하고 우울하신가요? AWAKE 우울 상담센터</div>

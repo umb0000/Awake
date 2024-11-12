@@ -57,7 +57,9 @@ const Login = () => {
               if (response.ok) {
                   localStorage.setItem('token', data.access_token);
                   localStorage.setItem('email', data.email);
+                  window.ReactNativeWebView.postMessage(JSON.stringify({ token, email }));
                   navigate('/main');
+                  
               } else if (response.status === 401) {
                   setLoginErrorMessage('아이디 혹은 비밀번호가 맞지 않습니다.');
               } else {

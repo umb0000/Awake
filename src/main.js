@@ -70,6 +70,7 @@ const Main = () => {
   const [scoreToNextLevel, setScoreToNextLevel] = useState(levelSystem.scoreToNextLevel);
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split("T")[0]); // 초기 상태를 오늘 날짜로 설정
   const navigate = useNavigate();
+  const [showDiary, setShowDiary] = useState(false); // 다이어리 팝업 표시 여부 추가
 
   useEffect(() => {
       const token = localStorage.getItem('token'); 

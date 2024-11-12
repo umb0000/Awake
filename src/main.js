@@ -10,6 +10,7 @@ import LevelSystem from './LevelSystem';
 import LevelUpPopup from './LevelUpPopUp'; // LevelUpPopup 컴포넌트 추가
 import { useNavigate } from 'react-router-dom';
 import * as THREE from 'three';
+import Diary from './calenderDiary.js';
 
 // 3D 모델 컴포넌트
 const Model = () => {

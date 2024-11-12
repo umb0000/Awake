@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './output.css';
-import Diary from './calenderDiary.js';
+
 
 // 주황색 채도를 다르게 정할 수 있는 함수
 const getBackgroundColor = (day) => {

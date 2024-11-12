@@ -223,18 +223,17 @@ const Main = () => {
             className="w-[35px] h-[35px] transform rotate-[15deg]"
           />
         </a>
-        {/* 오른쪽 상단 작은 이미지 */}
-        <a
-        className="absolute top-24 right-6 w-[50px] h-[50px] flex items-center justify-center z-10"
+        {/* 오른쪽 상단 메일 아이콘 버튼 */}
+      <button
+        className="absolute top-24 right-5 w-[50px] h-[50px] flex items-center justify-center z-10 cursor-pointer"
         onClick={handleMailClick} // 클릭 시 다이어리 팝업 표시
-        >
+      >
         <img
           src={process.env.PUBLIC_URL + "/img/mail.png"}
           alt="Mail Icon"
-          className="w-[30px] h-[25px] shadow-sm transform rotate-[15deg] cursor-pointer"
+          className="w-[30px] h-[25px] shadow-sm transform rotate-[15deg]"
         />
-        </a>
-
+      </button>
 
         {/* 3D 모델 표시 영역 */}
         <div className="relative self-stretch w-[100%] h-[25vh] shrink-0 flex justify-center items-center" style={{ paddingTop: '0vh', paddingBottom: '0vh' }}>

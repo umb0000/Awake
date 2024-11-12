@@ -9,7 +9,7 @@ import { useFBX } from '@react-three/drei';
 import LevelSystem from './LevelSystem';
 import LevelUpPopup from './LevelUpPopUp'; // LevelUpPopup 컴포넌트 추가
 import { useNavigate } from 'react-router-dom';
-
+import * as THREE from 'three';
 
 // 3D 모델 컴포넌트
 const Model = () => {
@@ -222,7 +222,7 @@ const Main = () => {
           <img
             src={process.env.PUBLIC_URL + "/img/mail.png"}
             alt="Small Icon"
-            className="w-[30px] h-[25px] shadow-sm"
+            className="w-[30px] h-[25px] shadow-sm transform rotate-[15deg]"
           />
         </a>
 
@@ -231,8 +231,12 @@ const Main = () => {
         <div className="relative self-stretch w-[100%] h-[25vh] shrink-0 flex justify-center items-center" style={{ paddingTop: '0vh', paddingBottom: '0vh' }}>
           <Canvas className="w-full h-full" gl={{ alpha: true }}>
             
-            <ambientLight intensity={2.5} />
-            <directionalLight position={[0, 1, 3]} intensity={0.2}  color="white"/>
+          <ambientLight intensity={2.5} />
+          <directionalLight 
+            position={[Math.cos(153 * (Math.PI / 180)), 0, Math.sin(153 * (Math.PI / 180)) * 3]} // 153도 방향으로 조정
+            intensity={1.11}  // 강도 111
+            color={new THREE.Color("hsv(182, 0.25, 0.79)").getHex()} // HSV 색상 #97C7C9
+          />
             <Suspense fallback={null}>
               <Model /> {/* 3D 모델 렌더링 */}
             </Suspense>

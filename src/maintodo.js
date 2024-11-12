@@ -3,10 +3,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import MainEdit from './mainEdit';
 import Card from './maintodoCard.js';
 import './output.css';
-import DatePicker from './datepicker';
+import MainAdd from './mainAdd.js'; // MainAdd 컴포넌트 import
+
 
 const getCardProperties = (card) => {
-  let level, points, image;
+  let level, points, image, detail;
 
   if (card.is_routine) {
     switch (card.when_routine) {
@@ -14,21 +15,25 @@ const getCardProperties = (card) => {
         level = 7;
         points = 30;
         image = 'main_morning.png';
+        detail = '아침';
         break;
       case '점심':
         level = 6;
         points = 30;
         image = 'main_lunch.png';
+        detail = '점심';
         break;
       case '저녁':
         level = 5;
         points = 30;
         image = 'main_dinner.png';
+        detail = '저녁';
         break;
       case '종일':
         level = 4;
         points = 30;
         image = 'main_allday.png';
+        detail = '종일';
         break;
       default:
         level = 4;
@@ -41,10 +46,18 @@ const getCardProperties = (card) => {
       level = 3;
       points = 50;
       image = 'level3.png';
+      detail = '중요 🚩, 긴급 🚨';
     } else if (card.is_importance || card.is_emergency) {
       level = 2;
       points = 40;
       image = 'level2.png';
+      if (card.is_importance && !card.is_emergency) {
+        detail = '중요 🚩';
+      } 
+      //else if (card.is_emergency && !card.is_importance) {
+      else {
+        detail = '긴급 🚨';
+      }
     } else {
       level = 1;
       points = 20;
@@ -70,6 +83,53 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
   const [activeFilter, setActiveFilter] = useState('all');
   const [editingCard, setEditingCard] = useState(null);
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split("T")[0]);
+  const [showAddDrawer, setShowAddDrawer] = useState(false); // 입력 서랍 표시 여부
+
+  const fetchTodos = () => {
+    const token = localStorage.getItem('token'); // 토큰을 가져옵니다.
+    
+    fetch(`http://112.152.14.116:10211/todo-get?time=${selectedDate}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`, // 토큰을 Authorization 헤더에 추가합니다.
+      },
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      if (data && Array.isArray(data.undones)) {
+        const processedCards = data.undones.map(card => ({
+          ...getCardProperties({
+            ...card,
+            checked: card.is_done,
+          }),
+        }));
+        setCards(processedCards);
+      } else {
+        console.error('Expected an array but received:', data);
+      }
+    })
+    .catch(error => console.error('Error fetching data:', error));
+  };
+
+  useEffect(() => {
+    fetchTodos();
+  }, [selectedDate]);
+
+  const handleAddSuccess = () => {
+    setShowAddDrawer(false); // 서랍 닫기
+    fetchTodos(); // 할 일 목록 새로고침
+    console.log('추가 성공');
+  };
+   // 입력 서랍 열고 닫기
+   const toggleAddDrawer = () => {
+    setShowAddDrawer(!showAddDrawer);
+  };
 
   useEffect(() => {
     const token = localStorage.getItem('token'); // 토큰을 가져옵니다.
@@ -143,8 +203,12 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
     return card.type === activeFilter;
   });
 
+  
+
   return (
     <div className="self-stretch h-[454px] shrink-0 flex flex-col items-start justify-start gap-[7px]">
+      <MainAdd onAddSuccess={fetchTodos} />
+      <MainAdd onAddSuccess={handleAddSuccess} />
       <div className="w-[200px] h-7 flex-row gap-[5px] relative">
         <div className="w-[100px] left-0 top-0 absolute text-left text-[#49454f] font-bold text-[13px] font-['Pretendard'] leading-7">
           {formatDate(selectedDate)}
@@ -223,6 +287,44 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
           </>
         )}
       </AnimatePresence>
+
+      {/* 입력 서랍 (MainAdd) */}          
+      <AnimatePresence>
+        {showAddDrawer && (
+          <>
+            <motion.div
+              className="fixed inset-0 bg-black z-10"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              onClick={toggleAddDrawer}
+            />
+            <motion.div
+              className="fixed inset-x-0 bottom-0 z-20 flex items-end justify-center"
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              exit={{ y: "100%" }}
+              transition={{ duration: 0.3 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <motion.div className="w-[360px] h-[336px] bg-white relative bg-opacity-0 overflow-visible">
+                <MainAdd onAddSuccess={handleAddSuccess} />
+              </motion.div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+    {/* Add 버튼을 우측 하단에 고정 */}
+    <button
+          onClick={toggleAddDrawer}
+          className="fixed bottom-[100px] right-[20px] bg-[#ff9800] text-white p-[10px] rounded-full shadow-lg hover:bg-[#ff6d00] transition duration-200"
+        >
+          <img width="46" height="46" src={process.env.PUBLIC_URL + "/img/main_add_btn.png"} alt="Add" />
+        </button> 
+    
+    
+    
     </div>
   );
 };

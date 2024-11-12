@@ -39,38 +39,42 @@ const Login = () => {
     };
 
     const handleLogin = useCallback(
-      async (e) => {
-          e.preventDefault();
-          setLoading(true);
-          setLoginErrorMessage('');
-  
-          try {
-              const response = await fetch('http://112.152.14.116:10211/token', {
-                  method: 'POST',
-                  headers: {
-                      'Content-Type': 'application/x-www-form-urlencoded',
-                  },
-                  body: new URLSearchParams({ email: email, password: password }),
-              });
-  
-              const data = await response.json();
-              if (response.ok) {
-                  localStorage.setItem('token', data.access_token);
-                  localStorage.setItem('email', data.email);
-                  navigate('/main');
-              } else if (response.status === 401) {
-                  setLoginErrorMessage('아이디 혹은 비밀번호가 맞지 않습니다.');
-              } else {
-                  setLoginErrorMessage('로그인에 실패했습니다.');
-              }
-          } catch (error) {
-              setLoginErrorMessage('로그인 오류: ' + error.message);
-          }
-          setLoading(false);
-      },
-      [email, password, navigate]
-  );
-
+        async (e) => {
+            e.preventDefault();
+            setLoading(true);
+            setLoginErrorMessage('');
+    
+            try {
+                const response = await fetch('http://112.152.14.116:10211/token', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: new URLSearchParams({ email: email, password: password }),
+                });
+    
+                const data = await response.json();
+                if (response.ok) {
+                    localStorage.setItem('token', data.access_token);
+                    localStorage.setItem('email', data.email);
+                    
+                    // 여기에서 `data.access_token`을 사용하여 token 값을 전달
+                    window.ReactNativeWebView.postMessage(JSON.stringify({ token: data.access_token, email: data.email }));
+                    
+                    navigate('/main');
+                } else if (response.status === 401) {
+                    setLoginErrorMessage('아이디 혹은 비밀번호가 맞지 않습니다.');
+                } else {
+                    setLoginErrorMessage('로그인에 실패했습니다.');
+                }
+            } catch (error) {
+                setLoginErrorMessage('로그인 오류: ' + error.message);
+            }
+            setLoading(false);
+        },
+        [email, password, navigate]
+    );
+    
     return (
         <div className="w-[360px] h-[800px] mx-auto relative bg-white">
             <form onSubmit={handleLogin} className="flex flex-col items-center justify-center gap-4">

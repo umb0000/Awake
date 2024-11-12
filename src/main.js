@@ -3,7 +3,6 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import './output.css';
 import TodoList from './maintodo';
-import MainAdd from './mainAdd';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AnimationMixer, LoopRepeat } from 'three';
 import { useFBX } from '@react-three/drei';
@@ -179,15 +178,7 @@ const Main = () => {
     setPoints(prevPoints => prevPoints + newPoints); // 포인트 누적
   };
 
-  // 입력 서랍 열고 닫기
-  const toggleAddDrawer = () => {
-    setShowAddDrawer(!showAddDrawer);
-  };
-
-  const handleAddSuccess = () => {
-    setShowAddDrawer(false); // 서랍 닫기
-    console.log('추가 성공');
-  };
+ 
 
   return (
     <div className="relative w-[100%] h-[800px] custom-gradient overflow-hidden">
@@ -272,42 +263,10 @@ const Main = () => {
           </div>
         </div>  
 
-        {/* Add 버튼을 우측 하단에 고정 */}
-        <button
-          onClick={toggleAddDrawer}
-          className="fixed bottom-[100px] right-[20px] bg-[#ff9800] text-white p-[10px] rounded-full shadow-lg hover:bg-[#ff6d00] transition duration-200"
-        >
-          <img width="46" height="46" src={process.env.PUBLIC_URL + "/img/main_add_btn.png"} alt="Add" />
-        </button>      
+             
       </div>
 
-            {/* 입력 서랍 (MainAdd) */}          
-            <AnimatePresence>
-        {showAddDrawer && (
-          <>
-            <motion.div
-              className="fixed inset-0 bg-black z-10"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0.1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              onClick={toggleAddDrawer}
-            />
-            <motion.div
-              className="fixed inset-x-0 bottom-0 z-20 flex items-end justify-center"
-              initial={{ y: "100%" }}
-              animate={{ y: 0 }}
-              exit={{ y: "100%" }}
-              transition={{ duration: 0.3 }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <motion.div className="w-[360px] h-[336px] bg-white relative bg-opacity-0 overflow-visible">
-                <MainAdd onAddSuccess={handleAddSuccess} />
-              </motion.div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+            
     </div>
   );
 };

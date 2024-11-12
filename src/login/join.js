@@ -214,6 +214,14 @@ function Join({ onRegisterSuccess, onSwitchToLogin }) {
           </div>
             
           )}
+          {currentStep === 5 && (
+            <div className="w-[360px] h-[800px] relative bg-white">
+            <div className="w-full h-[60px]  flex-col justify-center items-center gap-5 inline-flex">
+            <div className="text-center mt-[600px] text-black text-xl font-medium font-['Pretendard'] font-bold leading-[30px] tracking-tight">어웨이크! <br/>깨어날 준비가 되었습니다.</div>
+          </div>
+          </div>
+            
+          )}
                 </div>
 
                 <button
@@ -233,7 +241,7 @@ function Join({ onRegisterSuccess, onSwitchToLogin }) {
                     : 'bg-gray-300'
             } text-white font-semibold z-20`}
         >
-            {currentStep === 4 ? "로그인 하러 가기" : "다음"}
+            {currentStep === 4 ? "어웨이크 시작하기" : "다음"}
         </button>
             </form>
         </div>

@@ -80,7 +80,7 @@ const Card = ({ card, onCheck, onDelete }) => {
             height="26"
             src={`${process.env.PUBLIC_URL}/img/${card.checked ? 'checked.png' : 'unchecked.png'}`}
             alt={card.checked ? 'checked' : 'unchecked'}
-            onClick={onClick={handleCheckClick}}
+            onClick={handleCheckClick}
             className="ml-2"
         />
     </div>

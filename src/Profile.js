@@ -70,9 +70,6 @@ const Profile = () => {
         <a href="http://kwawake.duckdns.org/collect" className="w-full h-14 bg-white rounded-lg flex items-center px-4 text-[#79747e] text-base font-medium">
           고양이 도감 보기
         </a>
-        <a href="http://kwawake.duckdns.org/record" className="w-full h-14 bg-white rounded-lg flex items-center px-4 text-[#79747e] text-base font-medium">
-          내 기록 확인
-        </a>
         <a href="http://kwawake.duckdns.org/help" className="w-full h-14 bg-white rounded-lg flex items-center px-4 text-[#79747e] text-base font-medium">
           문의하기
         </a>

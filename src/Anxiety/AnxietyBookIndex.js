@@ -23,24 +23,12 @@ const AnxietyBookIndex = () => {
   );
 
   return (
-    <div className="flex flex-col items-center px-4 py-2">
+    <div className="w-full h-full bg-white flex-col justify-start items-start gap-3 inline-flex pt-10">
       {/* 상단바 */}
       <div className="w-full flex justify-center items-center px-4 py-2 border-b">
        <span className="text-[20px] font-bold text-black font-['Pretendard_Variable']">
         불안의 책갈피
        </span>
-      </div>
-
-      {/* 검색창 */}
-      <div className="w-[90%] h-14 mt-4 flex items-center bg-white border border-[#FFD8B1] shadow-sm px-4 mx-auto">
-        <FiSearch className="text-[#FFA76B] mr-3 text-lg" />
-        <input
-          type="text"
-          placeholder="검색어를 입력해보세요 (예: '성장', '도전')"
-          className="w-full bg-transparent text-sm text-[#4B4B4B] placeholder-[#A0A0A0] outline-none font-['Pretendard_Variable']"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
       </div>
 
 

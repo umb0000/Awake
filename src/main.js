@@ -219,7 +219,7 @@ const Main = () => {
             className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50"
           >
             <div className="relative bg-white p-4 rounded-md shadow-lg z-60">
-              <button onClick={closeDiary} className="absolute top-2 right-2 text-xl font-bold">✖</button>
+              <button onClick={closeDiary} className="absolute top-5 right-5 text-2xl text-gray-500 z-20">✕</button>
               <Diary />
             </div>
           </motion.div>

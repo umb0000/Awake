@@ -72,7 +72,7 @@ const formatDate = (dateString) => {
 }
 
 const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
-  const [cards, setCards] = useState([]);
+    const [cards, setCards] = useState([]);
   const [activeFilter, setActiveFilter] = useState('all');
   const [editingCard, setEditingCard] = useState(null);
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split("T")[0]);
@@ -80,13 +80,13 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
 
   const fetchTodos = () => {
     const token = localStorage.getItem('token');
-  fetch(`http://112.152.14.116:10211/todo-get?time=${selectedDate}`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
-    },
-  })
+    fetch(`http://112.152.14.116:10211/todo-get?time=${selectedDate}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+    })
     .then(response => {
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
@@ -102,12 +102,11 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
           }),
         }));
 
-        // 정렬 로직 추가
         const sortedCards = processedCards.sort((a, b) => {
-          if (!a.checked && b.checked) return -1; // unchecked가 위로 오도록 정렬
+          if (!a.checked && b.checked) return -1;
           if (a.checked && !b.checked) return 1;
-          if (!a.checked && !b.checked) return b.level - a.level; // unchecked 카드들 level 기준 정렬
-          return 0; // checked인 카드들은 그대로 유지
+          if (!a.checked && !b.checked) return b.level - a.level;
+          return 0;
         });
         setCards(sortedCards);
         updateCompletionRate(sortedCards);
@@ -116,32 +115,23 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
       }
     })
     .catch(error => console.error('Error fetching data:', error));
-};
+  };
 
   useEffect(() => {
     fetchTodos();
   }, [selectedDate]);
 
-  const handleAddSuccess = () => {
-    setShowAddDrawer(false);
-    fetchTodos();
-  };
 
-  const toggleAddDrawer = () => {
-    setShowAddDrawer(!showAddDrawer);
-  };
-
-  const updateCompletionRate = (updatedCards) => {
+   // updateCompletionRate 함수 정의
+   const updateCompletionRate = (updatedCards) => {
     const totalCount = updatedCards.length;
     const completedCount = updatedCards.filter(item => item.checked).length;
     const newCompletionRate = totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0;
-
     onCompletionRateChange(newCompletionRate, totalCount, completedCount);
   };
 
   const handleCheck = async (card) => {
     try {
-      // 서버에 체크 상태 변경 요청 전송
       await fetch('http://112.152.14.116:10211/todo-check', {
         method: 'POST',
         headers: {
@@ -150,31 +140,37 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
         },
         body: JSON.stringify({ item: card.id }),
       });
-  
+
       setCards(prevCards => {
         const updatedCards = prevCards.map(item =>
           item.id === card.id ? { ...item, checked: !item.checked } : item
         );
-  
-        // Sort: Unchecked first, then by level descending
+
         const sortedCards = updatedCards.sort((a, b) => {
           if (!a.checked && b.checked) return -1;
           if (a.checked && !b.checked) return 1;
           if (!a.checked && !b.checked) return b.level - a.level;
           return 0;
         });
-  
+
         updateCompletionRate(sortedCards);
         return sortedCards;
       });
-  
+
       onCheck(card);
-  
-      // 체크 여부 변경 후 데이터 갱신
       fetchTodos();
     } catch (error) {
       console.error('Error updating todo status:', error);
     }
+  };
+
+    const handleAddSuccess = () => {
+    setShowAddDrawer(false);
+    fetchTodos();
+  };
+
+  const toggleAddDrawer = () => {
+    setShowAddDrawer(!showAddDrawer);
   };
 
   const handleDeleteCard = (id) => {

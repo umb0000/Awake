@@ -209,7 +209,7 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
           <Card
             key={card.id}
             card={card}
-            onCheck={() => handleCheck(card.id)}
+            onCheck={() => handleCheck(card)}
             onDelete={handleDeleteCard}
           />
         ))}

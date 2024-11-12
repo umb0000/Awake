@@ -87,7 +87,7 @@ const Card = ({ card, onCheck, onDelete }) => {
     {/* Delete Button */}
     {isDragged && (
         <motion.button
-            className="absolute right-[-50px] transform -translate-y-1/2 bg-red-500 text-white px-2 py-1 rounded"
+            className="absolute right-[-60px] transform -translate-y-1/2 bg-red-500 text-white px-2 py-1 rounded"
             onClick={handleDeleteClick}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -95,7 +95,7 @@ const Card = ({ card, onCheck, onDelete }) => {
             transition={{ duration: 0.3 }}
         >
             <img
-            width="50"
+            width="40"
             height="45"
             src={`${process.env.PUBLIC_URL}/img/main_del.png`}
         />

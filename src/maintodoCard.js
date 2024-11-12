@@ -45,6 +45,7 @@ const Card = ({ card, onCheck, onDelete }) => {
     animate={{ x: isDragged ? -60 : 0 }}
     transition={{ type: "spring", stiffness: 300 }}
     layout
+    style={{ height: '60px' }} // Ensures fixed height for each card
 >
     <div className="absolute left-0 top-0 w-full h-full bg-[#f4f7f8] rounded-[10px] flex items-center px-4">
         {/* Icon */}
@@ -96,5 +97,6 @@ const Card = ({ card, onCheck, onDelete }) => {
 </motion.div>
 );
 };
+
 
 export default Card;

@@ -131,15 +131,17 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
     onCompletionRateChange(newCompletionRate, totalCount, completedCount);
   };
 
-  const handleCheck = (cardId) => {
+  const handleCheck = (card) => {
     setCards(prevCards => {
       const updatedCards = prevCards.map(item =>
-        item.id === cardId ? { ...item, checked: !item.checked } : item
+        item.id === card.id ? { ...item, checked: !item.checked } : item
       );
-      updateCompletionRate(updatedCards);
+      updateCompletionRate(updatedCards); // Update completion rate with new state
       return updatedCards;
     });
-    onCheck(cardId);
+  
+    // Ensure you call onCheck with the full card object
+    onCheck(card);
   };
 
   const handleDeleteCard = (id) => {

@@ -140,7 +140,7 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('token')}`,
         },
-        body: JSON.stringify({ item: card.id }),
+        body: JSON.stringify({ item: itemId }),
       });
 
       setCards(prevCards => {

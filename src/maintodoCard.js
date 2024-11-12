@@ -47,8 +47,8 @@ const Card = ({ card, onCheck, onDelete }) => {
       layout
       style={{ height: '10vh' }}
     >
-      {/*<div className="absolute left-0 top-0 w-full h-full bg-[#f4f7f8] rounded-[10px]"></div>*/}
-      <div className="absolute w-full h-full -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 w-[294px] flex flex-row items-center gap-[10px] bg-[#f4f7f8] rounded-[10px]">
+      <div className="absolute left-0 top-0 w-full h-full bg-[#f4f7f8] rounded-[10px] item-center">
+      <div className="relative w-full h-full -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 w-[294px] flex flex-row items-center gap-[10px] ">
         <img
           width="30"
           height="31"
@@ -63,6 +63,7 @@ const Card = ({ card, onCheck, onDelete }) => {
           <div className="w-full h-[2vh] text-[10px] leading-[10px] tracking-[.01em] font-['Pretendard'] text-[#79747e] flex flex-col justify-center">
             {card.detail}
           </div>
+        </div>
         </div>
 
         {isDragged && (

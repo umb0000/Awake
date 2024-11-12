@@ -70,32 +70,26 @@ const AnxietyBookIndex = () => {
         </span>
       </div>
 
-     
-
       <div className="w-full flex flex-col gap-4 p-4 mt-4 overflow-y-auto h-[620px] font-['Pretendard_Variable']">
-       
-          
-            <div
-              key={index}
-              className="w-full p-5 bg-white border border-[#FFD8B1] rounded-lg shadow-sm font-['Pretendard_Variable']"
+        {filteredBookmarks.map((bookmark, index) => (
+          <div
+            key={index}
+            className="w-full p-5 bg-white border border-[#FFD8B1] rounded-lg shadow-sm font-['Pretendard_Variable']"
+          >
+            <p className="text-base font-semibold text-[#4B4B4B] mb-2 whitespace-pre-wrap leading-relaxed" style={{ wordBreak: 'keep-all', overflowWrap: 'break-word' }}>
+              {bookmark.worry}
+            </p>
+            <p className="text-xs text-[#4B4B4B] bg-[#FFF7EB] p-2 rounded leading-relaxed whitespace-pre-wrap mt-1" style={{ wordBreak: 'keep-all', overflowWrap: 'break-word' }}>
+              {bookmark.reply}
+            </p>
+            <button
+              onClick={() => deleteBookmark(bookmark.worry, bookmark.reply)}
+              className="text-red-500 text-sm mt-2 underline"
             >
-              <p className="text-base font-semibold text-[#4B4B4B] mb-2 whitespace-pre-wrap leading-relaxed" style={{ wordBreak: 'keep-all', overflowWrap: 'break-word' }}>
-                {bookmark.worry}
-              </p>
-              <p className="text-xs text-[#4B4B4B] bg-[#FFF7EB] p-2 rounded leading-relaxed whitespace-pre-wrap mt-1" style={{ wordBreak: 'keep-all', overflowWrap: 'break-word' }}>
-                {bookmark.reply}
-              </p>
-              <button
-                onClick={() => deleteBookmark(bookmark.worry, bookmark.reply)}
-                className="text-red-500 text-sm mt-2 underline"
-              >
-                삭제
-              </button>
-            </div>
-          
-        
-          
-      
+              삭제
+            </button>
+          </div>
+        ))}
       </div>
     </div>
   );

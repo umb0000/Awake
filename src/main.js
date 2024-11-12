@@ -239,7 +239,7 @@ const Main = () => {
 
      {/* 말풍선 */}
      <div className="absolute top-12 left-6 bg-white text-white px-4 py-2 rounded-lg shadow-lg max-w-xs h-[50px] flex items-center z-10">
-        <span className="text-md font-bold">{displayText}</span>
+        <span className="text-md text-[#4B4B4B] font-bold">{displayText}</span>
         <div className="absolute -bottom-2 left-10 w-0 h-0 border-l-[10px] border-l-transparent border-t-[10px] border-r-[10px] border-r-transparent"></div>
       </div>
 

@@ -157,8 +157,8 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
         return sortedCards;
       });
 
-      onCheck(card);
-      fetchTodos();
+     // onCheck(card);
+      //fetchTodos();
     } catch (error) {
       console.error('Error updating todo status:', error);
     }

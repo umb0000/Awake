@@ -154,12 +154,15 @@ const Main = () => {
   };
 
   const texts = [
-    "오늘은 기분이 어때? ",
-    "할일을 잊지 마! ",
-    "운동을 해볼까? ",
-    "건강한 하루! ",
-    "물 많이 마시자! "
+    "냐옹~ 오늘도 좋은 하루!", 
+    "할 거 까먹으면 안 돼!", 
+    "냥냥, 운동 어때?", 
+    "건강한 하루 보내!", 
+    "물 많이 마시라냥~", 
+    "잘하고 있다냥!", 
+    "냥냥, 힘내라옹!"
   ];
+
 
   // 텍스트 변경 함수
   const changeText = () => {
@@ -171,15 +174,28 @@ const Main = () => {
     }
   };
 
+   // 텍스트 변경 및 애니메이션 시작
+   useEffect(() => {
+    const interval = setInterval(() => {
+      // 랜덤 텍스트 선택 및 애니메이션 초기화
+      const randomText = texts[Math.floor(Math.random() * texts.length)];
+      setCurrentText(randomText);
+      setDisplayText('');
+      setIsAnimating(true);
+    }, 60000); // 1분마다 텍스트 변경
+
+    return () => clearInterval(interval); 
+  }, [texts]);
+
   // 텍스트 애니메이션 효과
   useEffect(() => {
     if (isAnimating && currentText.length > 0) {
       let currentIndex = 0;
-      setDisplayText('');
+      setDisplayText(''); // 애니메이션 시작 시 텍스트 초기화
       const interval = setInterval(() => {
         setDisplayText((prev) => prev + currentText[currentIndex]);
         currentIndex++;
-        if (currentIndex === currentText.length - 1) { // 마지막 글자까지 표시 후 종료
+        if (currentIndex === currentText.length) { // 마지막 글자까지 표시 후 종료
           clearInterval(interval);
           setIsAnimating(false);
         }
@@ -237,7 +253,10 @@ const Main = () => {
       
       <div className="relative left-0 top-0 w-[100%] flex flex-col items-center justify-start ">
 
-       
+      <div className="bg-blue-400 text-white px-4 py-2 rounded-lg relative shadow-lg max-w-xs">
+        <h2 className="text-lg font-bold">{displayText}</h2>
+        <div className="absolute -bottom-2 left-6 w-0 h-0 border-l-[10px] border-l-transparent border-t-[10px] border-t-blue-400 border-r-[10px] border-r-transparent"></div>
+      </div>
         
         
         {/* 오른쪽 상단 작은 이미지 */}

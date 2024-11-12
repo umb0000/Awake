@@ -17,7 +17,7 @@ const MainAdd = ({ onAddSuccess }) => { // onAddSuccess prop을 받아옵니다.
   useEffect(() => {
       const token = localStorage.getItem('token'); 
       if (!token) {
-          navigate('/login');
+          navigate('/unlogined');
          return;
       }
   }, [navigate]);

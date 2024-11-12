@@ -22,7 +22,7 @@ const Explain3 = () => {
           당신의 러닝메이트,<br />어웨이크 웨이냥들이 당신을 기다리고 있어요!
         </div>
 
-        <img className="w-[359px] h-[363px]" src="/img/catcatcat.png" alt="Level up rewards image" />
+        <img className="w-[359px] h-[350px]" src="/img/catcatcat.png" alt="Level up rewards image" />
       </div>
 
       <a href="/main" className="w-full h-[55px] bg-[#ff6d00] absolute bottom-0 flex items-center justify-center">

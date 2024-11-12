@@ -211,7 +211,7 @@ const Main = () => {
           <img
             src={process.env.PUBLIC_URL + "/img/dogam.png "}
             alt="dogam"
-            className="w-[30px] h-[25px] transform rotate-[15deg]"
+            className="w-[35px] h-[35px] transform rotate-[15deg]"
           />
         </a>
         {/* 오른쪽 상단 작은 이미지 */}
@@ -222,7 +222,7 @@ const Main = () => {
           <img
             src={process.env.PUBLIC_URL + "/img/mail.png"}
             alt="Small Icon"
-            className="w-[35px] h-[35px] shadow-sm"
+            className="w-[30px] h-[25px] shadow-sm"
           />
         </a>
 

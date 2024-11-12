@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import MainEdit from './mainEdit';
 import Card from './maintodoCard.js';
@@ -117,10 +117,6 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
     })
     .catch(error => console.error('Error fetching data:', error));
 };
-
-  useEffect(() => {
-    fetchTodos();
-  }, [selectedDate]);
 
   const handleAddSuccess = () => {
     setShowAddDrawer(false);

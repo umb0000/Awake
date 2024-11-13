@@ -297,7 +297,7 @@ const Main = () => {
                   }}
                 />
               </div>
-              <div className="text-[#ff6d00] text-sm font-medium font-['Pretendard_Variable'] leading-tight tracking-tight">{((currentScore / scoreToNextLevel) * 100).toFixed(1)}%</div>
+              <div className="text-[#ff6d00] text-sm font-medium font-['Pretendard_Variable'] leading-tight tracking-tight">{(catData.cat_percent)}%</div>
             </div>
           </div>
         </div>

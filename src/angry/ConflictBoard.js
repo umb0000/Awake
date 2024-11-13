@@ -286,7 +286,7 @@ const ConflictBoard = () => {
   );
 
   const renderTimeline = () => (
-    <div className="relative w-full h-screen bg-[#F9F8F6] overflow-y-scroll font-['Pretendard_Variable'] pt-10">
+    <div className="relative w-full h-screen bg-[#F9F8F6] overflow-y-scroll font-['Pretendard_Variable'] pt-0">
       <div className="sticky top-0 z-10 p-4 bg-white shadow-md">
         <h1 className="text-center text-[20px] font-bold text-[#4B4B4B]">웨이의 상담 기록</h1>
       </div>

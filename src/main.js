@@ -75,6 +75,11 @@ const Main = () => {
   const [showDiary, setShowDiary] = useState(false); // 다이어리 팝업 표시 여부 추가
   const [catData, setCatData] = useState({ total_done: 0, cat_percent: 0, cat_level: 0 });
 
+  const handleUpdateCatData = (data) => {
+    console.log("Updated cat data:", data);
+    setCatData(data);
+  };
+
   // catData 상태 업데이트 함수
   const updateCatData = (data) => {
     setCatData(data);
@@ -318,6 +323,7 @@ const Main = () => {
       </div>
 
       {/* TodoList 컴포넌트에 updateCatData 함수를 전달 */}
+      <TodoList onUpdateCatData={handleUpdateCatData} />
       <TodoList onUpdateCatData={updateCatData} />
     </div>
 

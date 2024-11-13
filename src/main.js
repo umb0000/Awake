@@ -206,8 +206,7 @@ const Main = () => {
 
   return (
     <div className="relative w-[100%] h-screen custom-gradient overflow-hidden">
-      {/* 전체 컨테이너 */}
-      <div className="relative w-full h-full flex flex-col items-center justify-start">
+      
       {/* LevelUpPopup */}
       <AnimatePresence>
         {showLevelUpPopup && <LevelUpPopup onClose={closeLevelUpPopup} />}
@@ -239,7 +238,7 @@ const Main = () => {
     </AnimatePresence>
 
       
-      <div className="relative left-0 top-0 w-[100%] flex flex-col items-center justify-start ">
+      <div className="relative left-0 top-0 w-[100%] flex flex-col items-center justify-start gap-[5px]">
 
       
         
@@ -353,7 +352,7 @@ const Main = () => {
 
              
       </div>
-      </div>
+
             
     </div>
   );

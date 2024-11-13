@@ -54,10 +54,11 @@ const Profile = () => {
               >
                 {index <= new Date().getDay() - 1 && (
                   <img
-                    src="/img/star_filled.png"
-                    alt="Star Icon"
-                    className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-                  />
+                  src="/img/star_filled.png"
+                  alt="Star Icon"
+                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[23px] h-[22px]"
+                />
+                
                 )}
               </div>
             </div>

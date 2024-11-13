@@ -252,6 +252,12 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
         />
       </div>
 
+      {noTasksMessage && (
+    <div className="text-center text-gray-500 mt-4">
+        {noTasksMessage}
+    </div>
+)}
+
       <AnimatePresence>
         {filteredCards.map(card => (
           <Card

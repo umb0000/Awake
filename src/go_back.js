@@ -25,7 +25,7 @@ const Back = () => {
       
 
       {/* 상단 뒤로가기 버튼 */}
-      <div className="fixed top-[45px] w-screen h-[45px] flex items-center justify-start py-[5px] px-[23px] bg-transparent z-50">
+      <div className="fixed top-[20px] w-screen h-[30px] flex items-center justify-start py-[5px] px-[23px] bg-transparent z-50">
         <button onClick={handleBack}>
           <img width="12" height="24" src={process.env.PUBLIC_URL + "/img/back.png"} alt="back" />
         </button>

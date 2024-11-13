@@ -139,7 +139,7 @@ function Join({ onRegisterSuccess, onSwitchToLogin }) {
     return (
         <div className="w-[360px] h-[800px] mx-auto relative bg-white">
             <form onSubmit={handleRegister}>
-                {currentStep > 1 && (
+                {currentStep > 1 && currentStep < 5 && (
                     <div className="w-[360px] flex flex-col items-center justify-start">
                         <div className="self-stretch h-[45px] flex items-end justify-between py-[10px] px-[24px]">
                             <div className="text-[14px] font-['Roboto'] font-medium text-[#1d1b20]">9:30</div>

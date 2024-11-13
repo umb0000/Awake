@@ -4,6 +4,7 @@ import MainEdit from './mainEdit';
 import Card from './maintodoCard.js';
 import './output.css';
 import MainAdd from './mainAdd.js'; // MainAdd 컴포넌트 import
+import { useNavigate } from 'react-router-dom';
 
 const getCardProperties = (card) => {
   let level, points, image, detail;
@@ -77,46 +78,54 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
   const [editingCard, setEditingCard] = useState(null);
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split("T")[0]);
   const [showAddDrawer, setShowAddDrawer] = useState(false);
+  const navigate = useNavigate();
 
   const fetchTodos = () => {
-    const token = localStorage.getItem('token');
     
+    const token = localStorage.getItem('token');
+
+    // Navigate to 'unlogined' if token is missing
+    if (!token) {
+        navigate('/unlogined');
+        return;
+    }
+
     fetch(`http://112.152.14.116:10211/todo-get?time=${selectedDate}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
-      },
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+        },
     })
     .then(response => {
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      return response.json();
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
     })
     .then(data => {
-      if (data && Array.isArray(data.undones)) {
-        const processedCards = data.undones.map(card => ({
-          ...getCardProperties({
-            ...card,
-            checked: card.is_done,
-          }),
-        }));
+        if (data && Array.isArray(data.undones)) {
+            const processedCards = data.undones.map(card => ({
+                ...getCardProperties({
+                    ...card,
+                    checked: card.is_done,
+                }),
+            }));
 
-        const sortedCards = processedCards.sort((a, b) => {
-          if (!a.checked && b.checked) return -1;
-          if (a.checked && !b.checked) return 1;
-          if (!a.checked && !b.checked) return b.level - a.level;
-          return 0;
-        });
-        setCards(sortedCards);
-        updateCompletionRate(sortedCards);
-      } else {
-        console.error('Expected an array but received:', data);
-      }
+            const sortedCards = processedCards.sort((a, b) => {
+                if (!a.checked && b.checked) return -1;
+                if (a.checked && !b.checked) return 1;
+                if (!a.checked && !b.checked) return b.level - a.level;
+                return 0;
+            });
+            setCards(sortedCards);
+            updateCompletionRate(sortedCards);
+        } else {
+            console.error('Expected an array but received:', data);
+        }
     })
     .catch(error => console.error('Error fetching data:', error));
-  };
+};
 
   useEffect(() => {
     fetchTodos();

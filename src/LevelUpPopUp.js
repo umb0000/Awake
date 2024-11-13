@@ -97,9 +97,10 @@ const LevelUpPopup = ({ onClose }) => {
               />
               <button
                 className="bg-orange-500 text-white py-2 px-4 rounded-full shadow-md hover:bg-orange-600 duration-200"
-              >
+                onClick={() => window.location.href = "http://kwawake.duckdns.org/collect"}>
                 도감 바로가기
               </button>
+
             </>
           )}
         </motion.div>

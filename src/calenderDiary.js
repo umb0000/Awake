@@ -72,7 +72,7 @@ const Diary = () => {
       const typingInterval = setInterval(() => {
         setDisplayedDiaryText((prevText) => prevText + displayedDiaryText[currentIndex]);
         currentIndex++;
-        if (currentIndex === displayedDiaryText.length) {
+        if (currentIndex +1 === displayedDiaryText.length) {
           clearInterval(typingInterval); // 모든 텍스트 출력 완료 후 타이머 정리
         }
       }, 50);

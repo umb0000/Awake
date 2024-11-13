@@ -13,7 +13,7 @@ const Diary = () => {
 
     try {
       // 서버에 일기 생성 요청 보내기
-      const response = await fetch("http://112.152.14.116:10211//diary-create", {
+      const response = await fetch("http://112.152.14.116:10211/diary-create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -41,7 +41,7 @@ const Diary = () => {
       // 일기 텍스트 타이핑 효과
       let currentIndex = 0;
       const typingInterval = setInterval(() => {
-        setDisplayedDiaryText((prevText) => prevText + diaryText[currentIndex]);
+        setDisplayedDiaryText((prevText) => prevText + displayedDiaryText[currentIndex]);
         currentIndex++;
         if (currentIndex === diaryText.length) {
           clearInterval(typingInterval); // 모든 텍스트 출력 완료 후 타이머 정리

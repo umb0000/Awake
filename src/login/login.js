@@ -82,7 +82,7 @@ const Login = () => {
     );
 
     return (
-        <div className="w-[360px] h-[800px] mx-auto flex flex-col justify-between bg-white relative">
+        <div className="w-[360px] h-screen mx-auto flex flex-col justify-between bg-white relative">
         <form onSubmit={handleLogin} className="flex flex-col items-center justify-center gap-4 h-full">
             {currentStep > 2 && (
                 <div className="w-full flex flex-col items-center justify-start fixed top-0 bg-white">
@@ -140,7 +140,7 @@ const Login = () => {
                     (currentStep === 2 && !isEmailValid) ||
                     (currentStep === 3 && !isPasswordValid)
                 }
-                className={`w-full py-3 absolute bottom-0 left-0 flex items-center justify-center ${
+                className={` w-full py-3 h-[50px] absolute bottom-[0] left-0 flex items-center justify-center fixed ${
                     currentStep === 2 && isEmailValid || currentStep === 3 && isPasswordValid ? 'bg-[#ff6d00]' : 'bg-gray-300'
                 } text-white font-semibold`}
             >

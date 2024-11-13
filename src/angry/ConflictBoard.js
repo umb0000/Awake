@@ -217,8 +217,8 @@ const ConflictBoard = () => {
   );
 
   const renderChat = () => (
-    <div className="relative w-full h-[800px] flex flex-col justify-start items-center bg-white  font-['Pretendard_Variable'] pt-0">
-      <div className="sticky top-10 z-10 p-4 bg-[#f7f2fa] flex items-center justify-center shadow-sm border-b fixed px-6">
+    <div className="relative w-full h-screen flex flex-col justify-start items-center bg-white  font-['Pretendard_Variable'] pt-0">
+      <div className="sticky w-full z-10 p-4 bg-[#f7f2fa] flex items-center justify-center shadow-sm border-b fixed px-6">
         <span className="text-[20px] font-bold text-[#4B4B4B]">웨이의 분노 상담소</span>
       </div>
 
@@ -263,6 +263,7 @@ const ConflictBoard = () => {
         <textarea
           ref={textareaRef}
           rows={1}
+          
           className="flex-1 p-3 bg-gray-100 border rounded-lg resize-none overflow-hidden"
           placeholder="메시지를 입력해 주세요"
           value={userMessage}
@@ -290,8 +291,8 @@ const ConflictBoard = () => {
 
   const renderTimeline = () => (
     
-    <div className="relative w-full h-[800px] flex flex-col justify-start items-center bg-[#F9F8F6]  font-['Pretendard_Variable'] pt-0">
-      <div className="sticky top-0 z-10 p-4 bg-white shadow-md">
+    <div className="relative w-screen h-screen flex flex-col justify-start items-center bg-[#F9F8F6]  font-['Pretendard_Variable'] pt-0">
+      <div className="sticky w-full top-0 z-10 p-4 px-6 bg-white shadow-md">
         <h1 className="text-center text-[20px] font-bold text-[#4B4B4B]">웨이의 상담 기록</h1>
       </div>
   

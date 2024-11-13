@@ -20,7 +20,7 @@ const Forest = () => {
         </div>
 
         {/* 가로 스크롤 영역 */}
-        <div className="w-full h-[45vh] mt-[3vh] bg-white rounded-tl-[3vw] rounded-tr-[3vw] overflow-x-auto lg:overflow-visible scroll-smooth no-scrollbar flex" ref={containerRef}>
+        <div className="w-full h-[48vh] mt-[3vh] bg-white rounded-tl-[3vw] rounded-tr-[3vw] overflow-x-auto lg:overflow-visible scroll-smooth no-scrollbar flex" ref={containerRef}>
         <div className="flex gap-[2vw] px-[3vw] py-[3vh] w-full lg:justify-between">
         <a href="http://kwawake.duckdns.org/kit/anxiety" className="flex-shrink-0 w-[30vw] lg:flex-1 max-h-[40vh]">
               <img className="w-full h-full rounded-tl-[2vw] rounded-tr-[2vw] object-contain" src="/img/kit_main_card1.png" alt="kit_main_card1" style={{ boxShadow: "0 0 20px rgba(29, 27, 32, 0.35)" }} />

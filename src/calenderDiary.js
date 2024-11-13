@@ -51,7 +51,7 @@ const Diary = () => {
 
       return () => clearInterval(typingInterval);
     }
-  }, [isDiaryVisible]);
+  }, [isDiaryVisible, displayedDiaryText]);
 
   return (
     <div className="w-[340px] relative h-[557px]">

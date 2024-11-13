@@ -72,7 +72,7 @@ const formatDate = (dateString) => {
   return `${month}월 ${day}일 (${dayOfWeek})`;
 }
 
-const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
+const TodoList = ({ onCompletionRateChange, onPointChange, onCheck, onUpdateCatData  }) => {
     const [cards, setCards] = useState([]);
   const [activeFilter, setActiveFilter] = useState('all');
   const [editingCard, setEditingCard] = useState(null);
@@ -133,7 +133,25 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
         }
     })
     .catch(error => console.error('Error fetching data:', error));
+    // 추가된 부분: 고양이 데이터 가져오기
+    fetch("http://112.152.14.116:10211/todo-get-cat-percentage", {
+      method: "GET",
+      headers: {
+          "Authorization": `Bearer ${token}`,
+      },
+  })
+  .then(response => {
+      if (!response.ok) {
+          throw new Error("Failed to fetch cat data");
+      }
+      return response.json();
+  })
+  .then(data => {
+      onUpdateCatData(data); // 부모 컴포넌트의 catData 업데이트
+  })
+  .catch(error => console.error("Error fetching cat data:", error));
 };
+
 
   useEffect(() => {
     fetchTodos();

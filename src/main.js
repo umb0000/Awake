@@ -73,6 +73,12 @@ const Main = () => {
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split("T")[0]); // 초기 상태를 오늘 날짜로 설정
   const navigate = useNavigate();
   const [showDiary, setShowDiary] = useState(false); // 다이어리 팝업 표시 여부 추가
+  const [catData, setCatData] = useState({ total_done: 0, cat_percent: 0, cat_level: 0 });
+
+  // catData 상태 업데이트 함수
+  const updateCatData = (data) => {
+    setCatData(data);
+  };
 
   useEffect(() => {
       const token = localStorage.getItem('token'); 
@@ -305,6 +311,17 @@ const Main = () => {
             <TodoList  onCheck={handleCheck} completeTask={(type, priority) => levelSystem.completeTask(type, priority)}
             uncompleteTask={(type, priority) => levelSystem.uncompleteTask(type, priority)} onCompletionRateChange={handleCompletionRateChange} onPointChange={handlePointChange} />
           </div>
+          <div className="main-container">
+      {/* 고양이 관련 데이터 표시 */}
+      <div className="cat-data">
+        고양이 레벨: {catData.cat_level} | 달성률: {catData.cat_percent}% | 완료 포인트: {catData.total_done}
+      </div>
+
+      {/* TodoList 컴포넌트에 updateCatData 함수를 전달 */}
+      <TodoList onUpdateCatData={updateCatData} />
+    </div>
+
+
         </div>  
              
       </div>

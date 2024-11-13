@@ -105,6 +105,12 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
     .then(data => {
         if (data && Array.isArray(data.undones) && Array.isArray(data.dones)) {
             const allCards = [...data.undones, ...data.dones];
+            if (allCards.length === 0) {
+              setNoTasksMessage("오늘 할 일 / 루틴이 없어요! 추가해주세요");
+          } else {
+              setNoTasksMessage("");
+          }
+
             const processedCards = allCards.map(card => ({
                 ...getCardProperties({
                     ...card,
@@ -244,6 +250,12 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
           alt="Todo"
         />
       </div>
+
+      {noTasksMessage && (
+    <div className="text-center text-gray-500 mt-4">
+        {noTasksMessage}
+    </div>
+)}
 
       <AnimatePresence>
         {filteredCards.map(card => (

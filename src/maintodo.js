@@ -137,19 +137,25 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck, onUpdateCatD
     fetch("http://112.152.14.116:10211/todo-get-cat-percentage", {
       method: "GET",
       headers: {
-          "Authorization": `Bearer ${token}`,
+        "Authorization": `Bearer ${token}`,
       },
-  })
-  .then(response => {
-      if (!response.ok) {
+    })
+      .then(response => {
+        if (!response.ok) {
           throw new Error("Failed to fetch cat data");
-      }
-      return response.json();
-  })
-  .then(data => {
-      onUpdateCatData(data); // 부모 컴포넌트의 catData 업데이트
-  })
-  .catch(error => console.error("Error fetching cat data:", error));
+        }
+        return response.json();
+      })
+      .then(data => {
+        // data 확인
+        console.log("Fetched cat data:", data);
+        if (onUpdateCatData && typeof onUpdateCatData === 'function') {
+          onUpdateCatData(data); // 부모 컴포넌트의 catData 업데이트
+        } else {
+          console.error("onUpdateCatData is not a function");
+        }
+      })
+      .catch(error => console.error("Error fetching cat data:", error));
 };
 
 

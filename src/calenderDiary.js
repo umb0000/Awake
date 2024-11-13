@@ -5,37 +5,9 @@ const Diary = () => {
   const [isLoading, setIsLoading] = useState(false); // 로딩 상태
   const [isDiaryVisible, setIsDiaryVisible] = useState(false); // 일기 화면 표시 상태
   const [displayedDiaryText, setDisplayedDiaryText] = useState(''); // 일기 텍스트 출력 상태
-  const [nickname, setNickname] = useState(''); // 닉네임 상태 추가
 
   // 오늘 날짜 자동 생성
   const today = new Date().toISOString().split("T")[0];
-
-  // 닉네임 가져오기 함수
-  const fetchNickname = async () => {
-    try {
-      const response = await fetch("http://112.152.14.116:10211/my-get", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${localStorage.getItem('token')}`
-        }
-      });
-
-      if (!response.ok) {
-        throw new Error("닉네임 불러오기 실패");
-      }
-
-      const data = await response.json();
-      setNickname(data.user_name); // 닉네임 설정
-    } catch (error) {
-      console.error("닉네임 가져오기 오류:", error);
-    }
-  };
-
-  // 컴포넌트가 마운트될 때 닉네임을 가져옵니다.
-  useEffect(() => {
-    fetchNickname();
-  }, []);
 
   const handleButtonClick = async () => {
     setIsLoading(true);
@@ -56,6 +28,8 @@ const Diary = () => {
       }
 
       const data = await response.json();
+      console.log(data.diary_text);
+      console.log(data.diary_id);
       setDisplayedDiaryText(data.diary_text); // 서버로부터 받은 일기 텍스트 설정
       setIsDiaryVisible(true); // 일기 화면 표시
     } catch (error) {
@@ -70,9 +44,9 @@ const Diary = () => {
       // 일기 텍스트 타이핑 효과
       let currentIndex = 0;
       const typingInterval = setInterval(() => {
-        setDisplayedDiaryText((prevText) => prevText + displayedDiaryText[currentIndex]);
+        setDisplayedDiaryText((prevText) => prevText + setDisplayedDiaryText[currentIndex]);
         currentIndex++;
-        if (currentIndex +1 === displayedDiaryText.length) {
+        if (currentIndex === setDisplayedDiaryText.length -1 ) {
           clearInterval(typingInterval); // 모든 텍스트 출력 완료 후 타이머 정리
         }
       }, 50);
@@ -106,7 +80,7 @@ const Diary = () => {
               </div>
             </div>
             <div className="left-[65px] top-[224px] absolute text-center text-[#1d1b20] text-xs font-light font-['Pretendard'] leading-3 tracking-wide">
-              고양이 웨이는 {nickname} 님의 하루를 함께했어요.<br/>웨이가 쓴 일기를 지금 확인해보세요.
+              고양이 웨이는 리나 님의 하루를 함께했어요.<br/>웨이가 쓴 일기를 지금 확인해보세요.
             </div>
             <div className="left-[66px] top-[195px] absolute text-black text-xl font-bold font-['Pretendard'] leading-normal tracking-wide">오늘의 일기를 써 드릴게요</div>
             <img className="w-[100px] h-[100px] left-[119px] top-[94px] absolute" src={process.env.PUBLIC_URL + "/img/blue_cat.png"} alt="cat" />

@@ -80,7 +80,7 @@ const Diary = () => {
               </div>
             </div>
             <div className="left-[65px] top-[224px] absolute text-center text-[#1d1b20] text-xs font-light font-['Pretendard'] leading-3 tracking-wide">
-              고양이 웨이는 리나 님의 하루를 함께했어요.<br/>웨이가 쓴 일기를 지금 확인해보세요.
+              고양이 웨이는 하루를 함께했어요.<br/>웨이가 쓴 일기를 지금 확인해보세요.
             </div>
             <div className="left-[66px] top-[195px] absolute text-black text-xl font-bold font-['Pretendard'] leading-normal tracking-wide">오늘의 일기를 써 드릴게요</div>
             <img className="w-[100px] h-[100px] left-[119px] top-[94px] absolute" src={process.env.PUBLIC_URL + "/img/blue_cat.png"} alt="cat" />
@@ -106,8 +106,8 @@ const Diary = () => {
            </div>
            <img className="w-[100px] h-[100px] mt-3" src={process.env.PUBLIC_URL + "/img/blue_cat.png"} />
            <div className="w-[202px] h-[70px] relative">
-             <div className="left-0 top-0 absolute text-[#3b60ad] text-xl font-normal font-['Pretendard'] leading-tight tracking-wide">오늘 할 일 / 루틴 달성률</div>
-             <div className="w-[115px] h-[38px] left-[46px] top-[22px] absolute text-[#3b60ad] text-[50px] font-black font-['Pretendard'] leading-tight tracking-wide">72%</div>
+             <div className="left-0 top-0 absolute text-[#3b60ad] text-xl font-normal font-['Pretendard'] leading-tight tracking-wide">오늘도!</div>
+             <div className="w-[115px] h-[38px] left-[46px] top-[15px] absolute text-[#3b60ad] text-[50px] font-black font-['Pretendard'] leading-tight tracking-wide">수고했다냥!</div>
            </div>
          </div>
        </div>

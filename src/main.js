@@ -308,17 +308,18 @@ const Main = () => {
             </div></div>
           {/* TodoList 컴포넌트에서 달성률을 받아옴 */}
           <div className="self-stretch h-[600px] shrink-0 flex flex-col items-start justify-start gap-[7px]">
-            <TodoList  onCheck={handleCheck} completeTask={(type, priority) => levelSystem.completeTask(type, priority)}
+            <TodoList  onUpdateCatData={updateCatData} onCheck={handleCheck} completeTask={(type, priority) => levelSystem.completeTask(type, priority)}
             uncompleteTask={(type, priority) => levelSystem.uncompleteTask(type, priority)} onCompletionRateChange={handleCompletionRateChange} onPointChange={handlePointChange} />
           </div>
-          <div className="main-container">
-      {/* 고양이 관련 데이터 표시 */}
+
+           {/* 고양이 관련 데이터 표시 */}
       <div className="cat-data">
         고양이 레벨: {catData.cat_level} | 달성률: {catData.cat_percent}% | 완료 포인트: {catData.total_done}
       </div>
+          <div className="main-container">
+     
 
       {/* TodoList 컴포넌트에 updateCatData 함수를 전달 */}
-      <TodoList onUpdateCatData={updateCatData} />
     </div>
 
 

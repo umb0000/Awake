@@ -18,7 +18,7 @@ const Anxiety = () => {
 
         {/* 불안의 책 링크 */}
         <div className="w-[95%] h-[166px] flex flex-row items-center justify-center gap-[10px]">
-          <a href="http://kwawake.duckdns.org/AnxietyBook" className="relative w-[166px] h-[166px] flex">
+          <a href="http://kwawake.duckdns.org/AnxietyBook" className="relative w-[168px] h-[166px] flex">
             <div className="absolute left-0 top-0 w-[166px] h-[166px] flex flex-col items-start justify-end p-[20px] bg-[#ff9800] rounded-[16px]">
               <div className="self-stretch text-[16px] leading-[24px] font-bold text-[#fff]">불안의 책</div>
               <div className="self-stretch text-[12px] leading-[10px] font-semibold text-[#fff]">불안할 때 보세요</div>
@@ -28,7 +28,7 @@ const Anxiety = () => {
           </a>
 
           {/* 책갈피 링크 */}
-          <a href="http://kwawake.duckdns.org/AnxietyBookIndex" className="relative w-[166px] h-[166px] flex">
+          <a href="http://kwawake.duckdns.org/AnxietyBookIndex" className="relative w-[168px] h-[166px] flex">
             <div className="absolute left-0 top-0 w-[166px] h-[166px] flex flex-col items-start justify-end p-[20px] bg-[#f8f8f8] rounded-[16px]">
               <div className="self-stretch text-[16px] leading-[24px] font-bold text-[#000]">책갈피</div>
               <div className="self-stretch text-[12px] leading-[10px] font-semibold text-[#000]">불안의 책 스크랩 모음</div>

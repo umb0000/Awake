@@ -28,6 +28,8 @@ const Diary = () => {
       }
 
       const data = await response.json();
+      console.log(data.diary_text);
+      console.log(data.diary_id);
       setDisplayedDiaryText(data.diary_text); // 서버로부터 받은 일기 텍스트 설정
       setIsDiaryVisible(true); // 일기 화면 표시
     } catch (error) {
@@ -44,7 +46,7 @@ const Diary = () => {
       const typingInterval = setInterval(() => {
         setDisplayedDiaryText((prevText) => prevText + setDisplayedDiaryText[currentIndex]);
         currentIndex++;
-        if (currentIndex === setDisplayedDiaryText.length) {
+        if (currentIndex === setDisplayedDiaryText.length -1) {
           clearInterval(typingInterval); // 모든 텍스트 출력 완료 후 타이머 정리
         }
       }, 50);

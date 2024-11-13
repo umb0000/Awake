@@ -1,15 +1,26 @@
 import React, { useState } from 'react';
 import './output.css';
 
-const Collect = () => {
-    const [selectedItem, setSelectedItem] = useState(null); // 선택된 항목 상태
+const Collect = ({ onSelectModel  }) => {
 
     const items = [
-        { id: 1, bgImage: "/img/bg1.png", bg2Image: "/img/bg1-1.png", mainImage: "/img/orange.png", title: "핑냥이" },
-        { id: 2, bgImage: "/img/bg3.png", bg2Image: "/img/bg3-1.png", mainImage: "/img/babypink.png", title: "꼬냥이" },
-        { id: 3, bgImage: "/img/bg2.png", bg2Image: "/img/bg2-1.png", mainImage: "/img/bomb.png", title: "뽀냥이" },
-        { id: 4, bgImage: "/img/bg1.png", bg2Image: "/img/bg1-1.png", mainImage: "/img/babyblue.png", title: "파랑냥이" }
+        { id: 0, bgImage: "/img/bg1.png", bg2Image: "/img/bg1-1.png", mainImage: "/img/hotpink.png", title: "비키", model: "/3d_models/Biki.fbx" },
+        { id: 1, bgImage: "/img/bg3.png", bg2Image: "/img/bg3-1.png", mainImage: "/img/babypink.png", title: "네로", model: "/3d_models/Nero.fbx" },
+        { id: 2, bgImage: "/img/bg2.png", bg2Image: "/img/bg2-1.png", mainImage: "/img/bomb.png", title: "루루", model: "/3d_models/Ruru.fbx" },
+        { id: 3, bgImage: "/img/bg1.png", bg2Image: "/img/bg1-1.png", mainImage: "/img/babyblue.png", title: "라벤더", model: "/3d_models/lavender.fbx" },
+        { id: 4, bgImage: "/img/bg1.png", bg2Image: "/img/bg1-1.png", mainImage: "/img/Gray.png", title: "코코", model: "/3d_models/CoCo.fbx" },
+        { id: 5, bgImage: "/img/bg3.png", bg2Image: "/img/bg3-1.png", mainImage: "/img/Black_orangeCheeck.png", title: "키키", model: "/3d_models/Kiki.fbx" },
+        { id: 6, bgImage: "/img/bg2.png", bg2Image: "/img/bg2-1.png", mainImage: "/img/DarkGray.png", title: "애쉬", model: "/3d_models/Ash.fbx" },
+        { id: 7, bgImage: "/img/bg1.png", bg2Image: "/img/bg1-1.png", mainImage: "/img/Pink.png", title: "로지", model: "/3d_models/roji.fbx" },
+        { id: 8, bgImage: "/img/bg1.png", bg2Image: "/img/bg1-1.png", mainImage: "/img/babyblue.png", title: "하늘이", model: "/3d_models/HanuelE.fbx" },
+        { id: 9, bgImage: "/img/bg3.png", bg2Image: "/img/bg3-1.png", mainImage: "/img/babypink.png", title: "유키", model: "/3d_models/yuki.fbx" },
+        { id: 10, bgImage: "/img/bg2.png", bg2Image: "/img/bg2-1.png", mainImage: "/img/bomb.png", title: "군밤", model: "/3d_models/gnbam.fbx" },
+        { id: 11, bgImage: "/img/bg1.png", bg2Image: "/img/bg1-1.png", mainImage: "/img/orange.png", title: "치즈", model: "/3d_models/j015.fbx" },
+        { id: 12, bgImage: "/img/bg3.png", bg2Image: "/img/bg3-1.png", mainImage: "/img/GreenWhite.png", title: "멜롱방", model: "/3d_models/MellonBang.fbx" },
+        { id: 13, bgImage: "/img/bg2.png", bg2Image: "/img/bg2-1.png", mainImage: "/img/Green_redCheeck.png", title: "이티", model: "/3d_models/ET.fbx" },
+        { id: 14, bgImage: "/img/bg1.png", bg2Image: "/img/bg1-1.png", mainImage: "/img/kamangsu.png", title: "까망슈", model: "/3d_models/kamangsu.fbx" }
     ];
+
 
     const handleClick = (item) => {
         setSelectedItem(item); // 아이템 선택 시 상세 화면으로 이동
@@ -19,6 +30,13 @@ const Collect = () => {
         setSelectedItem(null); // X 버튼 클릭 시 도감 화면으로 돌아감
     };
 
+    const handleModelChange = () => {
+        if (selectedItem) {
+            onModelChange(selectedItem.model);  // 선택한 모델 경로를 부모로 전달
+            setSelectedItem(null);
+        }
+    };
+
     if (selectedItem) {
         // 두 번째 렌더 화면: 선택된 아이템의 상세 화면
         return (
@@ -26,7 +44,7 @@ const Collect = () => {
                 className="w-screen h-screen flex flex-col items-center justify-center relative bg-cover bg-center" 
                 style={{ backgroundImage: `url(${selectedItem.bg2Image})`, zIndex: -1 }}
             >
-                
+                {item.title}
                 {/* 메인 캐릭터 이미지 */}
                 <div className="relative z-10">
                     <img className="w-64 h-auto" src={selectedItem.mainImage} alt="Main Character" />
@@ -34,9 +52,7 @@ const Collect = () => {
 
                 {/* 홈 탭 고양이로 바꾸기 버튼 */}
                 <div className="absolute bottom-10 w-[90%] flex justify-center z-10">
-                    <button 
-                        className="w-full max-w-xs py-3 bg-white rounded-[38px] border border-[#ff6d00] text-[#ff6d00] font-medium font-['Pretendard']  hover:bg-[#e67e22] transition-all"
-                    >
+                    <button key={item.id} onClick={() => onSelectModel(item.model)}>
                         홈 탭 고양이로 바꾸기
                     </button>
                 </div>

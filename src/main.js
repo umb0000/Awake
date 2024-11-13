@@ -8,21 +8,35 @@ import { AnimationMixer, LoopRepeat } from 'three';
 import { useFBX } from '@react-three/drei';
 import LevelSystem from './LevelSystem';
 import LevelUpPopup from './LevelUpPopUp'; // LevelUpPopup 컴포넌트 추가
+import LevelUpPopup from './LevelUpPopUp'; // LevelUpPopup 컴포넌트 추가
 import { useNavigate } from 'react-router-dom';
 import * as THREE from 'three';
 import Diary from './calenderDiary.js';
 import { VscClose } from "react-icons/vsc";
+import Collect from './Collect';
 
 // 3D 모델 컴포넌트
 const Model = () => {
-  const modelRef = useRef(); // 모델의 참조
-  const clockRef = useRef(0); // 애니메이션을 위한 시계
-  const fbx = useFBX(process.env.PUBLIC_URL + '/3d_models/j015.fbx'); // FBX 모델 로드
-  const mixer = useRef(null); // 애니메이션 믹서
-  const [isModelLoaded, setIsModelLoaded] = useState(false); // 모델 로드 여부
+  const modelRef = useRef(); // 모델의 참조 // 모델의 참조
+  const clockRef = useRef(0); // 애니메이션을 위한 시계 // 애니메이션을 위한 시계
+  const [selectedModel, setSelectedModel] = useState('/3d_models/j015.fbx'); // 기본 모델 설정
+
+  const fbx = useFBX(selectedModel); // 선택된 모델 로드
+  //const fbx = useFBX(process.env.PUBLIC_URL + '/3d_models/j015.fbx'); // FBX 모델 로드 // FBX 모델 로드
+  const mixer = useRef(null); // 애니메이션 믹서 // 애니메이션 믹서
+  const [isModelLoaded, setIsModelLoaded] = useState(false); // 모델 로드 여부 // 모델 로드 여부
+
+
+   // Collect에서 모델을 선택할 때 호출될 함수
+   const handleModelSelect = (modelPath) => {
+    setSelectedModel(modelPath); // 선택된 모델로 업데이트
+  };
+
+
 
   useEffect(() => {
     // 모델이 로드된 후 애니메이션 믹서 및 애니메이션 초기화
+
     if (fbx && fbx.animations.length > 0) {
       mixer.current = new AnimationMixer(fbx);
       const action = mixer.current.clipAction(fbx.animations[0]); // 첫 번째 애니메이션 액션
@@ -206,7 +220,9 @@ const Main = () => {
 
   return (
     <div className="relative w-[100%] h-screen custom-gradient overflow-hidden">
-      
+      {/* Collect 컴포넌트에 handleModelSelect를 전달 */}
+      <Collect onSelectModel={handleModelSelect} />
+
       {/* LevelUpPopup */}
       <AnimatePresence>
         {showLevelUpPopup && <LevelUpPopup onClose={closeLevelUpPopup} />}

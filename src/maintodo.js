@@ -202,7 +202,7 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck, onUpdateCatD
       });
 
      // onCheck(card);
-      fetchTodos();
+      //fetchTodos();
     } catch (error) {
       console.error('Error updating todo status:', error);
     }

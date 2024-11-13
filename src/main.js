@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { AnimationMixer, LoopRepeat } from 'three';
 import { useFBX } from '@react-three/drei';
 import LevelSystem from './LevelSystem';
-import LevelUpPopup from './LevelUpPopUp'; // LevelUpPopup 컴포넌트 추가
+
 import LevelUpPopup from './LevelUpPopUp'; // LevelUpPopup 컴포넌트 추가
 import { useNavigate } from 'react-router-dom';
 import * as THREE from 'three';
@@ -115,7 +115,7 @@ const Main = () => {
   const handleModelSelect = (modelPath) => {
     setSelectedModel(modelPath);
   };
-  
+
   // 점수 및 레벨 업데이트 핸들러
   const updateLevelSystemState = (updatedState) => {
     if (updatedState) {

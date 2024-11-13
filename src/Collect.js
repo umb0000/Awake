@@ -33,7 +33,7 @@ const Collect = ({ onSelectModel  }) => {
 
     const handleModelChange = () => {
         if (selectedItem) {
-            onModelChange(selectedItem.model);  // 선택한 모델 경로를 부모로 전달
+            onSelectModel(selectedItem.model);  // 선택한 모델 경로를 부모로 전달
             setSelectedItem(null);
         }
     };

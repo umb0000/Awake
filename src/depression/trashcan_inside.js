@@ -9,7 +9,7 @@ const TrashCan_i = () => {
     const fetchTrashItems = async () => {
       const token = localStorage.getItem('token'); // Get token from localStorage
       try {
-        const response = await fetch('http://your-backend-url/emobin-get', {
+        const response = await fetch('http://112.152.14.116:10211/emobin-get', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

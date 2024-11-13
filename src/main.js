@@ -254,7 +254,7 @@ const Main = () => {
         {/* 오른쪽 상단 작은 이미지 */}
         <a
           href="http://kwawake.duckdns.org/collect"
-          className="absolute top-12 right-4 w-[40px] h-[40px] flex items-center justify-center z-10" // z-index 추가
+          className="absolute top-8 right-4 w-[40px] h-[40px] flex items-center justify-center z-10" // z-index 추가
         >
           <img
             src={process.env.PUBLIC_URL + "/img/dogam.png "}
@@ -264,7 +264,7 @@ const Main = () => {
         </a>
         {/* 오른쪽 상단 메일 아이콘 버튼 */}
         <button
-        className="absolute top-24 right-4 w-[49px] h-[50px] flex items-center justify-center z-10"
+        className="absolute top-12 right-4 w-[49px] h-[50px] flex items-center justify-center z-10"
         onClick={handleMailClick} // 클릭 시 다이어리 팝업 표시
         style={{
 

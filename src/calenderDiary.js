@@ -41,19 +41,27 @@ const Diary = () => {
 
   useEffect(() => {
     if (isDiaryVisible) {
-      // 일기 텍스트 타이핑 효과
-      let currentIndex = 0;
-      const typingInterval = setInterval(() => {
-        setDisplayedDiaryText((prevText) => prevText + setDisplayedDiaryText[currentIndex]);
-        currentIndex++;
-        if (currentIndex === setDisplayedDiaryText.length -1 ) {
-          clearInterval(typingInterval); // 모든 텍스트 출력 완료 후 타이머 정리
+      let currentCharIndex = 0;
+      const typingText = fetchedDiaryText; // 타이핑할 텍스트
+      setTypedDiaryText(""); // 타이핑된 텍스트 초기화
+  
+      // 타이핑 효과 함수
+      const typeText = () => {
+        setTypedDiaryText((prevText) => prevText + typingText[currentCharIndex]);
+        currentCharIndex++;
+  
+        if (currentCharIndex < typingText.length) {
+          requestAnimationFrame(typeText); // 다음 타이핑 호출
         }
-      }, 50);
-
-      return () => clearInterval(typingInterval);
+      };
+  
+      requestAnimationFrame(typeText); // 초기 타이핑 호출
+  
+      return () => {
+        currentCharIndex = typingText.length; // 타이핑 종료
+      };
     }
-  }, [isDiaryVisible, displayedDiaryText]);
+  }, [isDiaryVisible, fetchedDiaryText]); // fetchedDiaryText를 의존성에 추가
 
   return (
     <div className="w-[340px] relative h-[557px]">
@@ -107,7 +115,7 @@ const Diary = () => {
            <img className="w-[100px] h-[100px] mt-3" src={process.env.PUBLIC_URL + "/img/blue_cat.png"} />
            <div className="w-[202px] h-[70px] relative">
              <div className="left-0 top-0 absolute text-[#3b60ad] text-xl font-normal font-['Pretendard'] leading-tight tracking-wide">오늘도!</div>
-             <div className="w-[115px] h-[38px] left-[46px] top-[15px] absolute text-[#3b60ad] text-[50px] font-black font-['Pretendard'] leading-tight tracking-wide">수고했다냥!</div>
+             <div className="w-[115px] h-[38px] left-[46px] top-[15px] absolute text-[#3b60ad] text-[30px] font-black font-['Pretendard'] leading-tight tracking-wide">수고했다냥!</div>
            </div>
          </div>
        </div>

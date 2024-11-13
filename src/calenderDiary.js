@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import "./output.css";
 
 const Diary = () => {
   const [isLoading, setIsLoading] = useState(false); // 로딩 상태
@@ -43,7 +44,7 @@ const Diary = () => {
       const typingInterval = setInterval(() => {
         setDisplayedDiaryText((prevText) => prevText + displayedDiaryText[currentIndex]);
         currentIndex++;
-        if (currentIndex === diaryText.length) {
+        if (currentIndex === displayedDiaryText.length) {
           clearInterval(typingInterval); // 모든 텍스트 출력 완료 후 타이머 정리
         }
       }, 50);

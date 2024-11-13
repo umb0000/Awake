@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './output.css';
 
 const Collect = ({ onSelectModel  }) => {
+    const [selectedItem, setSelectedItem] = useState(null);
 
     const items = [
         { id: 0, bgImage: "/img/bg1.png", bg2Image: "/img/bg1-1.png", mainImage: "/img/hotpink.png", title: "비키", model: "/3d_models/Biki.fbx" },
@@ -44,18 +45,16 @@ const Collect = ({ onSelectModel  }) => {
                 className="w-screen h-screen flex flex-col items-center justify-center relative bg-cover bg-center" 
                 style={{ backgroundImage: `url(${selectedItem.bg2Image})`, zIndex: -1 }}
             >
-                {item.title}
-                {/* 메인 캐릭터 이미지 */}
+                <div>{selectedItem.title}</div>
                 <div className="relative z-10">
                     <img className="w-64 h-auto" src={selectedItem.mainImage} alt="Main Character" />
                 </div>
-
-                {/* 홈 탭 고양이로 바꾸기 버튼 */}
                 <div className="absolute bottom-10 w-[90%] flex justify-center z-10">
-                    <button key={item.id} onClick={() => onSelectModel(item.model)}>
+                    <button onClick={() => onSelectModel(selectedItem.model)}>
                         홈 탭 고양이로 바꾸기
                     </button>
                 </div>
+                <button onClick={handleClose} className="absolute top-5 right-5 text-white">X</button>
             </div>
         );
     }

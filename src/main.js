@@ -7,29 +7,22 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { AnimationMixer, LoopRepeat } from 'three';
 import { useFBX } from '@react-three/drei';
 import LevelSystem from './LevelSystem';
-
 import LevelUpPopup from './LevelUpPopUp'; // LevelUpPopup 컴포넌트 추가
 import { useNavigate } from 'react-router-dom';
 import * as THREE from 'three';
 import Diary from './calenderDiary.js';
 import { VscClose } from "react-icons/vsc";
-import Collect from './Collect';
 
 // 3D 모델 컴포넌트
-const Model = ({ selectedModel }) => {
-  const modelRef = useRef(); // 모델의 참조 // 모델의 참조
-  const clockRef = useRef(0); // 애니메이션을 위한 시계 // 애니메이션을 위한 시계
-
-  const fbx = useFBX(selectedModel); // 선택된 모델 로드
-  //const fbx = useFBX(process.env.PUBLIC_URL + '/3d_models/j015.fbx'); // FBX 모델 로드 // FBX 모델 로드
-  const mixer = useRef(null); // 애니메이션 믹서 // 애니메이션 믹서
-  const [isModelLoaded, setIsModelLoaded] = useState(false); // 모델 로드 여부 // 모델 로드 여부
-
-
+const Model = () => {
+  const modelRef = useRef(); // 모델의 참조
+  const clockRef = useRef(0); // 애니메이션을 위한 시계
+  const fbx = useFBX(process.env.PUBLIC_URL + '/3d_models/j015.fbx'); // FBX 모델 로드
+  const mixer = useRef(null); // 애니메이션 믹서
+  const [isModelLoaded, setIsModelLoaded] = useState(false); // 모델 로드 여부
 
   useEffect(() => {
     // 모델이 로드된 후 애니메이션 믹서 및 애니메이션 초기화
-
     if (fbx && fbx.animations.length > 0) {
       mixer.current = new AnimationMixer(fbx);
       const action = mixer.current.clipAction(fbx.animations[0]); // 첫 번째 애니메이션 액션
@@ -80,12 +73,6 @@ const Main = () => {
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split("T")[0]); // 초기 상태를 오늘 날짜로 설정
   const navigate = useNavigate();
   const [showDiary, setShowDiary] = useState(false); // 다이어리 팝업 표시 여부 추가
-  const [selectedModel, setSelectedModel] = useState('/3d_models/j015.fbx'); // 기본 모델 설정
-
-  // handleModelSelect 함수 정의
-  const handleModelSelect = (modelPath) => {
-    setSelectedModel(modelPath); // 선택한 모델을 설정
-  };
 
   useEffect(() => {
       const token = localStorage.getItem('token'); 
@@ -98,21 +85,14 @@ const Main = () => {
   const handleMailClick = () => {
     setShowDiary(true); // mail.png 클릭 시 다이어리 팝업 열기
   };
-
   const closeDiary = () => {
     setShowDiary(false); // 다이어리 팝업 닫기
   };
-
    // LevelUpPopup 표시 상태 추가
   const [showLevelUpPopup, setShowLevelUpPopup] = useState(false);
-
-
   const handleTabChange = (tab) => {
     setSelectedTab(tab); // 탭 변경
   };
-
-
-
   // 점수 및 레벨 업데이트 핸들러
   const updateLevelSystemState = (updatedState) => {
     if (updatedState) {
@@ -120,11 +100,9 @@ const Main = () => {
       if (updatedState.level > level) {
         setShowLevelUpPopup(true);
       }
-
       setLevel(updatedState.level);
       setCurrentScore(updatedState.currentScore);
       setScoreToNextLevel(updatedState.scoreToNextLevel);
-
       const progressPercentage = ((updatedState.currentScore / updatedState.scoreToNextLevel) * 100).toFixed(1);
       setCompletionRate(progressPercentage);
     } else {
@@ -132,30 +110,22 @@ const Main = () => {
     }
   };
 
-
   // LevelUpPopup 닫기 함수
   const closeLevelUpPopup = () => {
     setShowLevelUpPopup(false);
   };
-
-
   // 체크박스 클릭 시 실행되는 함수
   const handleCheck = (card) => {
     const priority = card.type === "todo" 
       ? (card.image === "level3.png" ? "상" : card.image === "level2.png" ? "중" : "하") 
       : "routine";
-
     const isHighPriorityCompleted = priority === "상"; // 우선순위가 "상"인 경우
-
     // 레벨 시스템 업데이트를 완료/취소에 따라 다르게 호출
     const updatedState = card.checked
       ? levelSystem.uncompleteTask(priority, isHighPriorityCompleted)
       : levelSystem.completeTask(priority, isHighPriorityCompleted);
-
-
     card.checked = !card.checked; // 체크 상태 반전
     updateLevelSystemState(updatedState); // 레벨 시스템 상태 업데이트
-
   };
 
   const formatDate = (dateString) => {
@@ -166,7 +136,6 @@ const Main = () => {
     
     return `${month}월 ${day}일 (${dayOfWeek})`;
   };
-
   const texts = [
     "냐옹~ 오늘도\n 좋은 하루!", 
     "우선순위\n 높은 거 먼저!", 
@@ -176,8 +145,6 @@ const Main = () => {
     "잘하고 있다냥!", 
     "냥냥, 힘내라옹!"
   ];
-
-
   // 텍스트 변경 함수
   const changeText = () => {
     if (!isAnimating) {
@@ -194,35 +161,25 @@ const Main = () => {
       const randomText = texts[Math.floor(Math.random() * texts.length)];
       setDisplayText(randomText);
     };
-
     // 초기 텍스트 설정
     changeText();
-
     // 1분 간격으로 텍스트 변경
     const interval = setInterval(changeText, 60000);
-
     return () => clearInterval(interval);
   }, [texts]);
-
   // 달성률 및 카드 개수 업데이트 함수
   const handleCompletionRateChange = (rate, total, completed) => {
     setCompletionRate(rate);
     setTotalCards(total);
     setCompletedCards(completed);
   };
-
   // 포인트 변경 함수
   const handlePointChange = (newPoints) => {
     setPoints(prevPoints => prevPoints + newPoints); // 포인트 누적
   };
-
-
-
   return (
     <div className="relative w-[100%] h-screen custom-gradient overflow-hidden">
-      {/* Collect 컴포넌트에 handleModelSelect를 전달 */}
-      <Collect onSelectModel={handleModelSelect} />
-
+      
       {/* LevelUpPopup */}
       <AnimatePresence>
         {showLevelUpPopup && <LevelUpPopup onClose={closeLevelUpPopup} />}
@@ -252,10 +209,8 @@ const Main = () => {
         </motion.div>
       )}
     </AnimatePresence>
-
       
       <div className="relative left-0 top-0 w-[100%] flex flex-col items-center justify-start gap-[5px]">
-
       
         
         {/* 말풍선 */}
@@ -264,9 +219,6 @@ const Main = () => {
             {displayText}
           </span>
         </div>
-
-
-
         {/* 오른쪽 상단 작은 이미지 */}
         <a
           href="http://kwawake.duckdns.org/collect"
@@ -280,10 +232,9 @@ const Main = () => {
         </a>
         {/* 오른쪽 상단 메일 아이콘 버튼 */}
         <button
-        className="absolute top-1 right-4 w-[49px] h-[50px] flex items-center justify-center z-10"
+        className="absolute top-19 right-4 w-[49px] h-[50px] flex items-center justify-center z-10"
         onClick={handleMailClick} // 클릭 시 다이어리 팝업 표시
         style={{
-
           background: 'transparent', // 배경 투명
           border: 'none', // 테두리 없음
           padding: 0, // 기본 여백 제거
@@ -294,25 +245,19 @@ const Main = () => {
           alt="Mail Icon"
           className="w-[30px] h-[25px] transform rotate-[15deg] drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]"
         />
-
       </button>
-
         {/* 3D 모델 표시 영역 */}
         <div className="relative self-stretch w-[100%] h-[25vh] shrink-0 flex justify-center items-center" style={{ paddingTop: '0vh', paddingBottom: '0vh' }}>
           <Canvas className="w-full h-full" gl={{ alpha: true }}>
             
           <ambientLight intensity={2} />  // 주변 조명
-
           <directionalLight
             position={[2, 5, 5]}  // 방향 조명의 위치를 조정하여 대상에 비치는 각도 설정
             intensity={1.2}  // 강도 조정 (기본값보다 약간 밝게 설정)
-
           />
-
           <pointLight
             position={[0, 10, 0]}  // 상단에서 직접 내려오는 위치
             intensity={0.5}  // 낮은 강도로 보조 조명처럼 활용
-
           />
             <Suspense fallback={null}>
               <Model /> {/* 3D 모델 렌더링 */}
@@ -320,7 +265,6 @@ const Main = () => {
             <OrbitControls enableZoom={false} />
           </Canvas>
         </div>
-
         {/* 텍스트 게이지 바 */}
         <div className='flex-row items-center' style={{
           position: 'absolute',
@@ -349,7 +293,6 @@ const Main = () => {
             </div>
           </div>
         </div>
-
         {/* 달성률, 날짜 표시 */}
         <div className="rounded-t-[30px] w-full h-full items-center justify-center gap-[5px] py-[20px] bg-[#fff]" style={{ paddingLeft: '2vh', paddingRight: '2vh', paddingBottom: '2vh' }}>
         <div className="relative flex-col items-start">
@@ -357,15 +300,12 @@ const Main = () => {
               <span className="w-full h-[40px] text-[24px] leading-[24px] tracking-[.01em] font-bold font-[Pretendard] text-[#000] items-start justify-center"> {totalCards === 0 ? "0.0" : ((completedCards / totalCards) * 100).toFixed(1)}% </span>
               <span className='font-[Pretendard] font-bold text-[13px] text-[#79747e]'>{completedCards}/{totalCards}</span>
             </div></div>
-
-
           {/* TodoList 컴포넌트에서 달성률을 받아옴 */}
           <div className="self-stretch h-[600px] shrink-0 flex flex-col items-start justify-start gap-[7px]">
             <TodoList  onCheck={handleCheck} completeTask={(type, priority) => levelSystem.completeTask(type, priority)}
             uncompleteTask={(type, priority) => levelSystem.uncompleteTask(type, priority)} onCompletionRateChange={handleCompletionRateChange} onPointChange={handlePointChange} />
           </div>
         </div>  
-
              
       </div>
 

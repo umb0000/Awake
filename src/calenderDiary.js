@@ -5,14 +5,35 @@ const Diary = () => {
   const [isDiaryVisible, setIsDiaryVisible] = useState(false); // 일기 화면 표시 상태
   const [displayedDiaryText, setDisplayedDiaryText] = useState(''); // 일기 텍스트 출력 상태
 
-  const diaryText = "오늘 아침에는 하늘이 흐렸지만 점심 이후에는 맑아졌다냥. ☀️ 리나는 평소보다 일찍 일어나서 아침 수영을 갔다. 🏊‍♀️ 리나는 정말 부지런한 것 같아! 🥹..."; // 일기 내용
+  // 오늘 날짜 자동 생성
+  const today = new Date().toISOString().split("T")[0];
 
-  const handleButtonClick = () => {
+  const handleButtonClick = async () => {
     setIsLoading(true);
-    setTimeout(() => {
+
+    try {
+      // 서버에 일기 생성 요청 보내기
+      const response = await fetch("http://112.152.14.116:10211//diary-create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify({ time: today })
+      });
+
+      if (!response.ok) {
+        throw new Error("일기 생성 실패");
+      }
+
+      const data = await response.json();
+      setDisplayedDiaryText(data.diary_text); // 서버로부터 받은 일기 텍스트 설정
+      setIsDiaryVisible(true); // 일기 화면 표시
+    } catch (error) {
+      console.error("일기 생성 오류:", error);
+    } finally {
       setIsLoading(false);
-      setIsDiaryVisible(true); // 로딩 후 일기 화면 표시
-    }, 2000); // 로딩 시간 (2초)
+    }
   };
 
   useEffect(() => {
@@ -25,7 +46,7 @@ const Diary = () => {
         if (currentIndex === diaryText.length) {
           clearInterval(typingInterval); // 모든 텍스트 출력 완료 후 타이머 정리
         }
-      }, 50); // 각 글자가 0.05초마다 출력
+      }, 50);
 
       return () => clearInterval(typingInterval);
     }
@@ -76,9 +97,9 @@ const Diary = () => {
          <div className="h-[463px] flex-col justify-start items-center gap-px flex">
            <div className="self-stretch h-[291px] px-4 py-[11px] bg-white rounded-[10px] border border-[#d9d9d9] flex-col justify-start items-start gap-1.5 flex">
              <div className="w-[119px] h-[21px] px-[15px] py-[7px] bg-[#6093fd] rounded-[50px] justify-center items-center gap-2.5 inline-flex">
-               <div className="text-center text-white text-xs font-bold font-['Pretendard'] leading-3 tracking-wide">10월 16일 수요일</div>
+               <div className="text-center text-white text-xs font-bold font-['Pretendard'] leading-3 tracking-wide">{today}</div>
              </div>
-             <div className="w-[264px] text-[#49454f] text-[13px] font-normal font-['Pretendard'] leading-tight tracking-wide">오늘 아침에는 하늘이 흐렸지만 점심 이후에는 맑아졌다냥. ☀️ 리나는 평소보다 일찍 일어나서 아침 수영을 갔다. 🏊‍♀️ 리나는 정말 부지런한 것 같아! 🥹<br/>아침부터 교수님의 메일을 확인했고 영화의 이해 과제 제출도 잊지 않았다냥! 🖥️ 점심에 비타민도 챙겼다. 💊 날씨가 점점 쌀쌀해지고 있지만, 리나는 몸을 잘 챙기고 있어 다행이야! ❤️‍🩹 <br/>저녁에는 토익 문제풀이 1회를 해냈다! 🤓 웨이는 리나가 최선을 다하고 있는 것 같아냥 🥰 자기 전 스트레칭까지 완료했다. 🧘‍♀️ 오늘은 정말 알찬 하루였어 😸</div>
+             <div className="w-[264px] text-[#49454f] text-[13px] font-normal font-['Pretendard'] leading-tight tracking-wide">{displayedDiaryText}</div>
            </div>
            <img className="w-[100px] h-[100px] mt-3" src={process.env.PUBLIC_URL + "/img/blue_cat.png"} />
            <div className="w-[202px] h-[70px] relative">

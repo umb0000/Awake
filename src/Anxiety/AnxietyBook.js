@@ -3,8 +3,8 @@ import '../output.css';
 
 const AnxietyBook = () => {
   return (
-    <div className="w-full h-full flex justify-center items-center min-h-screen bg-white"> {/* 좌우 여백과 상단 여백 조정 */}
-      <div className="w-[90%] h-[800px] flex flex-col items-center justify-center gap-[15px]">
+    <div className="w-full h-600 flex justify-center items-center min-h-screen bg-white"> {/* 좌우 여백과 상단 여백 조정 */}
+      <div className="w-[90%] h-[600px] flex flex-col items-center justify-center gap-[15px]">
         
         <div className="w-full max-w-md h-[61px] flex items-center justify-center p-4 bg-[#fff] rounded-[15px]">
           <div className="leading-[20px] tracking-[.01em] text-[#000] text-center whitespace-nowrap">

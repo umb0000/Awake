@@ -42,9 +42,9 @@ const Diary = () => {
       // 일기 텍스트 타이핑 효과
       let currentIndex = 0;
       const typingInterval = setInterval(() => {
-        setDisplayedDiaryText((prevText) => prevText + displayedDiaryText[currentIndex]);
+        setDisplayedDiaryText((prevText) => prevText + data.diary_text[currentIndex]);
         currentIndex++;
-        if (currentIndex === displayedDiaryText.length) {
+        if (currentIndex === data.diary_text.length) {
           clearInterval(typingInterval); // 모든 텍스트 출력 완료 후 타이머 정리
         }
       }, 50);

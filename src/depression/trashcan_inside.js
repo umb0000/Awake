@@ -35,7 +35,7 @@ const TrashCan_i = () => {
   const handleDeleteAll = async () => {
     const token = localStorage.getItem('token');
     try {
-      const response = await fetch('http://your-backend-url/emobin-dump', {
+      const response = await fetch('http://112.152.14.116:10211/emobin-dump', {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

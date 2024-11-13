@@ -570,8 +570,8 @@ video {
 }
 
 .app-container {
-  margin-top: 20px; /* 상태바 높이에 맞게 조정 */
-  height: calc(100% - 20px); /* 전체 화면 높이에서 상태바 높이만큼 제외 */
+  /*margin-top: 20px; /* 상태바 높이에 맞게 조정 */
+ /* height: calc(100% - 20px); /* 전체 화면 높이에서 상태바 높이만큼 제외 */
   box-sizing: border-box;
 }
 

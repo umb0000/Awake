@@ -164,28 +164,22 @@ const Main = () => {
   ];
 
 
-  // 텍스트 변경 함수
-  const changeText = () => {
-    if (!isAnimating) {
-      const randomText = texts[Math.floor(Math.random() * texts.length)];
-      setCurrentText(randomText);
-      setDisplayText('');
-      setIsAnimating(true);
-    }
-  };
-
-     // 1분마다 텍스트 변경
-  useEffect(() => {
+   // 1분마다 텍스트 변경 함수
+   useEffect(() => {
     const changeText = () => {
       const randomText = texts[Math.floor(Math.random() * texts.length)];
       setDisplayText(randomText);
     };
 
-    changeText(); // 초기 텍스트 설정
-    const interval = setInterval(changeText, 60000); // 1분마다 변경
-    
+    // 초기 텍스트 설정
+    changeText();
+
+    // 1분 간격으로 텍스트 변경
+    const interval = setInterval(changeText, 60000);
+
     return () => clearInterval(interval);
   }, [texts]);
+
 
   // 달성률 및 카드 개수 업데이트 함수
   const handleCompletionRateChange = (rate, total, completed) => {
@@ -205,19 +199,19 @@ const Main = () => {
     <div className="relative w-full h-full custom-gradient overflow-hidden">
     {/* 전체 컨테이너 */}
     <div className="relative w-full h-full flex flex-col items-center justify-start">
-
-      {/* 말풍선 */}
-    <div className="absolute top-[5vh] left-[3vw] bg-white text-[#4B4B4B] px-3 py-2 rounded-lg shadow-lg max-w-[10vw] max-h-[6vh] flex items-center justify-center text-center break-words z-10">
-      <span className="text-[1.5vh] font-['Pretendard_Variable'] font-bold">
-        {displayText}
-      </span>
-    </div>
+        
+        {/* 말풍선 */}
+        <div className="absolute top-[5vh] left-[3vw] bg-white text-[#4B4B4B] px-3 py-2 rounded-lg shadow-lg max-w-[40vw] flex items-center justify-center text-center z-10">
+          <span className="text-[1.5vh] font-['Pretendard_Variable'] font-bold">
+            {displayText}
+          </span>
+        </div>
 
 
       {/* 오른쪽 상단 이미지 */}
       <a
         href="http://kwawake.duckdns.org/collect"
-        className="absolute top-[5vh] right-[3vw] w-[5vw] h-[5vw] flex items-center justify-center z-10"
+        className="absolute top-[2vh] right-[3vw] w-[5vw] h-[5vw] flex items-center justify-center z-10"
       >
         <img
           src={process.env.PUBLIC_URL + "/img/dogam.png"}

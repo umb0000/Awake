@@ -269,8 +269,9 @@ const Main = () => {
         <img
           src={process.env.PUBLIC_URL + "/img/mail.png"}
           alt="Mail Icon"
-          className="w-[30px] h-[25px] shadow-lg transform rotate-[15deg]"
+          className="w-[30px] h-[25px] transform rotate-[15deg] drop-shadow-[0_8px_12px_rgba(0,0,0,0.6)]"
         />
+
       </button>
 
         {/* 3D 모델 표시 영역 */}

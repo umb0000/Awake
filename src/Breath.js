@@ -120,7 +120,7 @@ const Breath = () => {
   }, [remainingTime, isCountingDown]);
 
   return (
-    <div className="relative w-[100%] h-[800px] bg-[#fff] overflow-hidden">
+    <div className="relative w-[100%] h-screen bg-[#fff] overflow-hidden">
       <audio ref={audioRef} src="/audio/breath.mp3" loop />
 
       {!isCountingDown && !isPaused ? (
@@ -149,7 +149,7 @@ const Breath = () => {
 
 const FirstScreen = ({ selectedTime, onTimeSelect, onStart, currentText }) => (
   <div className="relative w-full h-[800px] flex flex-col justify-center items-center">
-    <div className="h-[642px] flex flex-col items-center justify-start gap-[10px] pt-10">
+    <div className="h-[642px] flex flex-col items-center justify-start gap-[10px] pt-0">
       <div className="w-[95%] flex flex-col items-center justify-center gap-[1px] p-[1px]">
         <div className="text-[28px] font-bold font-['Pretendard_Variable'] text-[#000]">숨 고르기</div>
         <div className="text-[12px] font-['Pretendard_Variable'] font-medium">호흡으로 몸과 마음을 이완해요</div>
@@ -171,14 +171,18 @@ const FirstScreen = ({ selectedTime, onTimeSelect, onStart, currentText }) => (
           </button>
         ))}
       </div>
+      <div className="w-[80%] flex justify-center p-[10px] gap-[10px] mb-1">
+
       <button
         onClick={onStart}
         style={{ backgroundColor: selectedTime ? '#8090FF' : '#d3d3d3', color: '#FFFFFF' }}
-        className="absolute bottom-5 w-[266px] h-[40px] flex items-center justify-center rounded-full bg-[#8090FF] text-white font-['Pretendard_Variable'] font-medium hover:bg-[#ff6b6b] transition-colors"
+        className=" bottom-5 w-[266px] h-[40px] flex items-center justify-center rounded-full bg-[#8090FF] text-white font-['Pretendard_Variable'] font-medium hover:bg-[#ff6b6b] transition-colors"
         disabled={!selectedTime}
       >
         <div className="h-[40px] mt-4 text-[15px]">시작하기</div>
       </button>
+      </div>
+      
     </div>
   </div>
 );
@@ -199,10 +203,10 @@ const SecondScreen = ({ remainingTime, breathPhase, onPauseResume, onExit, curre
     <div className="absolute top-5 right-[60px] text-[19px] text-[#8090FF]  font-['Pretendard_Variable'] font-bold z-10">
       {Math.floor(remainingTime / 60).toString().padStart(2, '0')} : {(remainingTime % 60).toString().padStart(2, '0')}
     </div>
-    <div className="relative flex flex-col items-center justify-center mb-10 z-0">
+    <div className="relative flex flex-col items-center justify-center mt-[30vh] z-0">
       <div
         className="circle-container"
-        style={{ animation: isPaused ? 'none' : 'pulse 5s ease-in-out infinite' }}
+        style={{ animation: isPaused ? 'none' : 'pulse 10s ease-in-out infinite' }}
       >
         <div className="circle circle-1"></div>
         <div className="circle circle-2"></div>
@@ -214,7 +218,7 @@ const SecondScreen = ({ remainingTime, breathPhase, onPauseResume, onExit, curre
     </div>
     <button
       onClick={onPauseResume}
-      className={`absolute bottom-20 w-[266px] h-[40px] flex items-center justify-center rounded-full ${
+      className={`relative bottom-20px w-[266px] h-[40px] flex items-center justify-center rounded-full mt-[30vh] fixed ${
         isPaused ? 'bg-[#8090FF]' : 'bg-[#243642]'
       } text-white font-['Pretendard_Variable'] font-medium transition-colors z-10`}
     >

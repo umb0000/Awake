@@ -63,7 +63,7 @@ const TrashCan = () => {
 
   // 뒤로가기 버튼 컴포넌트
   const BackButton = () => (
-   <div className="fixed top-[45px] w-full h-[45px] flex items-center justify-start py-[5px] px-[23px] bg-transparent z-50" onClick={handleBack}>
+   <div className="absolute fixed top-[35px] w-full h-[45px] flex items-center justify-start py-[5px] px-[23px] bg-transparent z-60" onClick={handleBack}>
       <img width="12" height="24" src={process.env.PUBLIC_URL + "/img/back.png"} alt="back" />
     </div>
   );

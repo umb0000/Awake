@@ -16,21 +16,14 @@ import { VscClose } from "react-icons/vsc";
 import Collect from './Collect';
 
 // 3D 모델 컴포넌트
-const Model = () => {
+const Model = ({ selectedModel }) => {
   const modelRef = useRef(); // 모델의 참조 // 모델의 참조
   const clockRef = useRef(0); // 애니메이션을 위한 시계 // 애니메이션을 위한 시계
-  const [selectedModel, setSelectedModel] = useState('/3d_models/j015.fbx'); // 기본 모델 설정
 
   const fbx = useFBX(selectedModel); // 선택된 모델 로드
   //const fbx = useFBX(process.env.PUBLIC_URL + '/3d_models/j015.fbx'); // FBX 모델 로드 // FBX 모델 로드
   const mixer = useRef(null); // 애니메이션 믹서 // 애니메이션 믹서
   const [isModelLoaded, setIsModelLoaded] = useState(false); // 모델 로드 여부 // 모델 로드 여부
-
-
-   // Collect에서 모델을 선택할 때 호출될 함수
-   const handleModelSelect = (modelPath) => {
-    setSelectedModel(modelPath); // 선택된 모델로 업데이트
-  };
 
 
 
@@ -87,6 +80,12 @@ const Main = () => {
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split("T")[0]); // 초기 상태를 오늘 날짜로 설정
   const navigate = useNavigate();
   const [showDiary, setShowDiary] = useState(false); // 다이어리 팝업 표시 여부 추가
+  const [selectedModel, setSelectedModel] = useState('/3d_models/j015.fbx'); // 기본 모델 설정
+
+  // handleModelSelect 함수 정의
+  const handleModelSelect = (modelPath) => {
+    setSelectedModel(modelPath); // 선택한 모델을 설정
+  };
 
   useEffect(() => {
       const token = localStorage.getItem('token'); 
@@ -112,9 +111,7 @@ const Main = () => {
     setSelectedTab(tab); // 탭 변경
   };
 
-  const handleModelSelect = (modelPath) => {
-    setSelectedModel(modelPath);
-  };
+
 
   // 점수 및 레벨 업데이트 핸들러
   const updateLevelSystemState = (updatedState) => {

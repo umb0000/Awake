@@ -41,27 +41,19 @@ const Diary = () => {
 
   useEffect(() => {
     if (isDiaryVisible) {
-      let currentCharIndex = 0;
-      const typingText = fetchedDiaryText; // 타이핑할 텍스트
-      setTypedDiaryText(""); // 타이핑된 텍스트 초기화
-  
-      // 타이핑 효과 함수
-      const typeText = () => {
-        setTypedDiaryText((prevText) => prevText + typingText[currentCharIndex]);
-        currentCharIndex++;
-  
-        if (currentCharIndex < typingText.length) {
-          requestAnimationFrame(typeText); // 다음 타이핑 호출
+      // 일기 텍스트 타이핑 효과
+      let currentIndex = 0;
+      const typingInterval = setInterval(() => {
+        setDisplayedDiaryText((prevText) => prevText + setDisplayedDiaryText[currentIndex]);
+        currentIndex++;
+        if (currentIndex === setDisplayedDiaryText.length -1 ) {
+          clearInterval(typingInterval); // 모든 텍스트 출력 완료 후 타이머 정리
         }
-      };
-  
-      requestAnimationFrame(typeText); // 초기 타이핑 호출
-  
-      return () => {
-        currentCharIndex = typingText.length; // 타이핑 종료
-      };
+      }, 50);
+
+      return () => clearInterval(typingInterval);
     }
-  }, [isDiaryVisible, fetchedDiaryText]); // fetchedDiaryText를 의존성에 추가
+  }, [isDiaryVisible, displayedDiaryText]);
 
   return (
     <div className="w-[340px] relative h-[557px]">

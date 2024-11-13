@@ -213,7 +213,6 @@ const ConflictBoard = () => {
     <div className="w-full h-[690px] bg-white flex flex-col font-['Pretendard_Variable'] pt-10">
       <div className="sticky top-10 z-10 p-4 bg-[#f7f2fa] flex items-center justify-center shadow-sm border-b fixed px-6">
         <span className="text-[20px] font-bold text-[#4B4B4B]">웨이의 분노 상담소</span>
-        <button onClick={() => setIsChatOpen(false)} className="absolute right-6 text-gray-500 text-xl font-bold">×</button>
       </div>
 
       <div className="flex-1 overflow-y-auto p-6 space-y-4 pt-5 bg-gray-50">

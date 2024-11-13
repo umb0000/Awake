@@ -23,7 +23,7 @@ const Back = () => {
   return (
     <div className="relative">
       {/* 상단 상태 표시 */}
-      <div className="fixed left-0 top-0 w-full h-[45px] flex flex-row items-end justify-between py-[10px] px-[24px] bg-white z-50">
+      <div className="fixed left-0 top-0 w-full h-[45px] flex flex-row items-end justify-between py-[10px] px-[24px] bg-white z-50 opacity-0">
         <div className="text-[14px] leading-[20px] tracking-[.01em] font-['Pretendard_Variable'] font-medium text-[#1d1b20] whitespace-nowrap">
           9:30
         </div>

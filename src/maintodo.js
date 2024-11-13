@@ -150,7 +150,7 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck, onUpdateCatD
       .then(data => {
         // data 확인
         console.log("Fetched cat data:", data);
-        if (onUpdateCatData && typeof onUpdateCatData === 'function') { // if (typeof onUpdateCatData === 'function') { 로 바꿔보기
+        if (typeof onUpdateCatData === 'function') { // if (typeof onUpdateCatData === 'function') { 로 바꿔보기
           onUpdateCatData(data); // 부모 컴포넌트의 catData 업데이트
         } else {
           console.error("onUpdateCatData is not a function");
@@ -202,7 +202,7 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck, onUpdateCatD
       });
 
      // onCheck(card);
-      fetchTodos();
+      //fetchTodos();
     } catch (error) {
       console.error('Error updating todo status:', error);
     }

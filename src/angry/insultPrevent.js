@@ -5,7 +5,7 @@ const InsultFeedbackExample = () => {
   const [showExample, setShowExample] = useState(null); // null = 기본 화면, 'feedback' = 피드백 예시, 'insult' = 모욕 예시
 
   const renderGuide = () => (
-    <div className={`relative w-[360px] h-[800px] mx-auto bg-white font-['Pretendard_Variable'] p-4 shadow-lg rounded-lg z-10 ${showExample && 'opacity-50'}`}>
+    <div className={`w-full h-screen bg-white flex flex-col font-['Pretendard_Variable'] pt-11 rounded-lg z-10 ${showExample && 'opacity-50'}`}>
       {/* Header */}
       <div className="flex justify-center items-center px-4 py-2 border-b">
       <span className="text-[20px] font-bold text-black">
@@ -15,7 +15,7 @@ const InsultFeedbackExample = () => {
       </div>
 
       {/* Guide Content */}
-      <div className="flex flex-col items-center gap-4 mt-6">
+      <div className="flex flex-col items-center gap-4 pt-10">
         <div className="w-[271px] p-4 bg-white rounded-[15px] border border-[#d9d9d9] shadow-sm">
           <div className="text-base font-bold text-center text-black mb-2">
             <img src="/img/hit.png" alt="target" className="inline w-5 h-5 mb-2" /> 상황 이해하기
@@ -36,7 +36,7 @@ const InsultFeedbackExample = () => {
         </div>
         <div className="flex gap-4">
           <button
-            className="w-[150px] p-4 bg-white rounded-[15px] border border-[#d9d9d9] shadow-sm flex flex-col items-center"
+            className="w-[160px] p-4 bg-white rounded-[15px] border border-[#d9d9d9] shadow-sm flex flex-col items-center"
             onClick={() => setShowExample('feedback')}
           >
             <div className="text-sm font-bold text-center text-black mb-1">
@@ -47,13 +47,13 @@ const InsultFeedbackExample = () => {
               <li>필요 시 사과합니다.</li>
               <li>개선 방안을 논의합니다.</li>
             </ul>
-            <div className="flex items-center text-[10px] text-gray-500 text-center mt-1 gap-1">
+            <div className="flex items-center text-[10px] text-[#6A89A5] text-center mt-1 gap-1">
               <img src="/img/info.png" alt="info" className="w-3 h-3 inline" /> 누르면 예시가 나옵니다
             </div>
           </button>
 
           <button
-            className="w-[150px] p-4 bg-white rounded-[15px] border border-[#d9d9d9] shadow-sm flex flex-col items-center"
+            className="w-[160px] p-4 bg-white rounded-[15px] border border-[#d9d9d9] shadow-sm flex flex-col items-center"
             onClick={() => setShowExample('insult')}
           >
             <div className="text-sm font-bold text-center text-black mb-1">
@@ -64,7 +64,7 @@ const InsultFeedbackExample = () => {
               <li>침착하게 의견을 밝힙니다.</li>
               <li>맞대응은 피합니다.</li>
             </ul>
-            <div className="flex items-center text-[10px] text-gray-500 text-center mt-1 gap-1">
+            <div className="flex items-center text-[10px] text-[#6A89A5] text-center mt-1 gap-1">
               <img src="/img/info.png" alt="info" className="w-3 h-3 inline" /> 누르면 예시가 나옵니다
             </div>
           </button>

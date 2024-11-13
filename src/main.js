@@ -154,8 +154,8 @@ const Main = () => {
   };
 
   const texts = [
-    "냐옹~ 오늘도 좋은 하루!", 
-    "할 거 까먹으면 안 돼!", 
+    "냐옹~ 오늘도\n 좋은 하루!", 
+    "우선순위\n 높은 거 먼저!", 
     "냥냥, 운동 어때?", 
     "건강한 하루 보내!", 
     "물 많이 마시라냥~", 
@@ -174,13 +174,13 @@ const Main = () => {
     }
   };
 
-   // 1분마다 텍스트 변경
+     // 1분마다 텍스트 변경
   useEffect(() => {
     const changeText = () => {
       const randomText = texts[Math.floor(Math.random() * texts.length)];
       setDisplayText(randomText);
     };
-    
+
     changeText(); // 초기 텍스트 설정
     const interval = setInterval(changeText, 60000); // 1분마다 변경
     
@@ -199,7 +199,6 @@ const Main = () => {
     setPoints(prevPoints => prevPoints + newPoints); // 포인트 누적
   };
 
-  const lightColor = new THREE.Color(151 / 255, 199 / 255, 201 / 255); // HSV 변환 RGB 값
 
 
   return (
@@ -209,7 +208,7 @@ const Main = () => {
         {showLevelUpPopup && <LevelUpPopup onClose={closeLevelUpPopup} />}
       </AnimatePresence>
       
-
+      
       {/* Diary 팝업 */}
       <AnimatePresence>
       {showDiary && (
@@ -237,10 +236,21 @@ const Main = () => {
       
       <div className="relative left-0 top-0 w-[100%] flex flex-col items-center justify-start ">
 
-     {/* 말풍선 */}
-      <div className="absolute top-12 left-4 bg-white text-white px-4 py-2 rounded-lg shadow-lg max-w-[100px] h-[50px] flex items-center justify-center text-center break-normal whitespace-normal z-10">
-          <span className="text-[10px] text-[#4B4B4B] font-['Pretendard_Variable'] font-bold">{displayText}</span>
-      </div>
+      {/* 말풍선 */}
+      <div className="absolute top-12 left-5 bg-white text-white px-2 py-1 rounded-lg shadow-lg max-w-[120px] h-[40px] flex items-center justify-center text-center break-all whitespace-pre-line z-10">
+          <AnimatePresence>
+            <motion.span
+              key={displayText}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+              className="text-[10px] text-[#4B4B4B] font-['Pretendard_Variable'] font-bold"
+            >
+              {displayText}
+            </motion.span>
+          </AnimatePresence>
+        </div>
 
 
 
@@ -269,26 +279,27 @@ const Main = () => {
         <img
           src={process.env.PUBLIC_URL + "/img/mail.png"}
           alt="Mail Icon"
-          className="w-[30px] h-[25px] shadow-lg transform rotate-[15deg]"
+          className="w-[30px] h-[25px] transform rotate-[15deg] drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]"
         />
+
       </button>
 
         {/* 3D 모델 표시 영역 */}
         <div className="relative self-stretch w-[100%] h-[25vh] shrink-0 flex justify-center items-center" style={{ paddingTop: '0vh', paddingBottom: '0vh' }}>
           <Canvas className="w-full h-full" gl={{ alpha: true }}>
             
-          <ambientLight intensity={1} />  // 주변 조명
+          <ambientLight intensity={2} />  // 주변 조명
 
           <directionalLight
             position={[2, 5, 5]}  // 방향 조명의 위치를 조정하여 대상에 비치는 각도 설정
             intensity={1.2}  // 강도 조정 (기본값보다 약간 밝게 설정)
-            color={new THREE.Color(1, 1, 0.8)}  // 약간 따뜻한 색상을 위한 RGB 조정 (희미한 황색 느낌)
+
           />
 
           <pointLight
             position={[0, 10, 0]}  // 상단에서 직접 내려오는 위치
             intensity={0.5}  // 낮은 강도로 보조 조명처럼 활용
-            color={new THREE.Color(0.5, 0.5, 1)}  // 푸른색을 조금 섞어 대비감 추가
+
           />
             <Suspense fallback={null}>
               <Model /> {/* 3D 모델 렌더링 */}

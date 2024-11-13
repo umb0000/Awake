@@ -68,17 +68,17 @@ const Move = () => {
     navigate('/kit/forest'); // 클릭 시 '/kit/forest' 경로로 이동
   };
   return (
-    <div className="w-full h-full bg-white flex-col justify-start items-start gap-3 inline-flex">
-      <div className="self-stretch h-[646px] px-2.5 flex-col justify-center items-center inline-flex">
-        <div className="p-2.5 flex-col justify-start items-center gap-2 flex">
-          <div className="w-[340px] h-[53px] px-5 flex-col justify-center items-center gap-[10px] mb-10 flex">
-            <div className="w-[340px] h-[30px] px-4 justify-center items-center gap-[26px] inline-flex">
-              <div className="w-[148px] text-black text-[28px] font-bold font-['Pretendard'] leading-normal tracking-wide">
-                몸 움직이기
-              </div>
-            </div>
+    <div className="relative w-full h-[800px] flex flex-col justify-center items-center pt-10">
+      <div className="self-stretch h-[646px] flex-col justify-center items-center inline-flex">
+        <div className="flex-col justify-start items-center gap-2 flex">
+        <div className="w-[95%] h-[53px] flex-col justify-center items-center mb-5 flex text-center">
+          <div className="text-black text-[28px] font-bold font-['Pretendard'] leading-normal tracking-wide">
+            몸 움직이기
+          </div>
+          
+
             <div className="w-[340px] h-4 px-4 justify-center items-center gap-px inline-flex">
-              <div className="w-[254px] h-4 text-center text-black text-[13px] font-medium font-['Pretendard'] leading-normal tracking-wide">
+              <div className="w-[254px] h-4 text-center text-black text-[12px] font-medium font-['Pretendard'] leading-normal tracking-wide">
                 무기력 탈출, 지금 시작하세요!<br />랜덤 행동으로 활력을 찾아봐요
               </div>
             </div>

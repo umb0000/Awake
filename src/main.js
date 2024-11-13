@@ -280,7 +280,7 @@ const Main = () => {
         <img
           src={process.env.PUBLIC_URL + "/img/mail.png"}
           alt="Mail Icon"
-          className="w-[30px] h-[25px] transform rotate-[15deg] drop-shadow-[0_1px_2px_rgba(0,0,0,0.7)]"
+          className="w-[30px] h-[25px] transform rotate-[15deg] drop-shadow-[0_1px_1px_rgba(0,0,0,0.2)]"
         />
 
       </button>

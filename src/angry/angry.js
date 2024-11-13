@@ -77,7 +77,7 @@ const Angry = () => {
           onMouseUp={handleMouseUp}
           onMouseMove={handleMouseMove}
         >
-          <div className="relative w-[170px] h-[166px] flex-shrink-0 flex">
+          <div className="relative w-[166px] h-[166px] flex-shrink-0 flex">
             <a href="http://kwawake.duckdns.org/ConflictResolution" className="relative block w-full h-full rounded-[16px] overflow-hidden">
               <div className="absolute left-0 top-0 w-full h-full flex flex-col items-start justify-end p-5 bg-[#fe776d] rounded-lg">
                 <div className="text-[20px] font-bold text-white">갈등 대처법</div>
@@ -87,7 +87,7 @@ const Angry = () => {
             </a>
           </div>
 
-          <div className="relative w-[170px] h-[166px] flex-shrink-0 flex">
+          <div className="relative w-[166px] h-[166px] flex-shrink-0 flex">
             <a
               href="http://kwawake.duckdns.org/insult"
               className="relative block w-full h-full rounded-[16px] overflow-hidden"

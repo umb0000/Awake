@@ -133,6 +133,7 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck, onUpdateCatD
         }
     })
     .catch(error => console.error('Error fetching data:', error));
+
     // 추가된 부분: 고양이 데이터 가져오기
     fetch("http://112.152.14.116:10211/todo-get-cat-percentage", {
       method: "GET",
@@ -149,7 +150,7 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck, onUpdateCatD
       .then(data => {
         // data 확인
         console.log("Fetched cat data:", data);
-        if (onUpdateCatData && typeof onUpdateCatData === 'function') {
+        if (onUpdateCatData && typeof onUpdateCatData === 'function') { //
           onUpdateCatData(data); // 부모 컴포넌트의 catData 업데이트
         } else {
           console.error("onUpdateCatData is not a function");
@@ -201,7 +202,7 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck, onUpdateCatD
       });
 
      // onCheck(card);
-      //fetchTodos();
+      fetchTodos();
     } catch (error) {
       console.error('Error updating todo status:', error);
     }

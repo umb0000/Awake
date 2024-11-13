@@ -111,7 +111,7 @@ const Angry = () => {
         {/* 상담 센터 버튼을 별도의 줄로 배치 */}
         <a
           href="http://kwawake.duckdns.org/Center"
-          className="relative w-[95%] h-[68px] flex-shrink-0 mt-4"
+          className="relative w-[95%] h-[68px] flex-shrink-0 mt-0"
         >
           <div className="absolute left-0 top-0 w-full h-full flex flex-col items-start justify-center py-3 px-5 bg-[#ffcd63] rounded-[16px]">
             <div className="self-stretch text-[16px] leading-[24px] font-black text-[#fff]">AWAKE 분노 상담 센터</div>

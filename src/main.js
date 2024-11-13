@@ -203,104 +203,96 @@ const Main = () => {
 
   return (
     <div className="relative w-full h-full custom-gradient overflow-hidden">
-      {/* 전체 컨테이너 */}
-      <div className="relative w-full h-full flex flex-col items-center justify-start">
-  
-        {/* 말풍선 */}
-        <div className="absolute top-[5vh] left-[3vw] bg-white text-[#4B4B4B] px-3 py-2 rounded-lg shadow-lg max-w-[10vw] max-h-[6vh] flex items-center justify-center text-center break-words z-10">
-          <AnimatePresence>
-            <motion.span
-              key={displayText}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.5 }}
-              className="text-[1.5vh] font-['Pretendard_Variable'] font-bold"
-            >
-              {displayText}
-            </motion.span>
-          </AnimatePresence>
-        </div>
-  
-        {/* 오른쪽 상단 이미지 */}
-        <a
-          href="http://kwawake.duckdns.org/collect"
-          className="absolute top-[5vh] right-[3vw] w-[5vw] h-[5vw] flex items-center justify-center z-10"
-        >
-          <img
-            src={process.env.PUBLIC_URL + "/img/dogam.png"}
-            alt="dogam"
-            className="w-[4vw] h-[4vw] transform rotate-[15deg]"
-          />
-        </a>
-  
-        {/* 오른쪽 상단 메일 아이콘 버튼 */}
-        <button
-          className="absolute top-[12vh] right-[3vw] w-[6vw] h-[6vw] flex items-center justify-center z-10"
-          onClick={handleMailClick}
-          style={{
-            background: 'transparent',
-            border: 'none',
-            padding: 0,
-          }}
-        >
-          <img
-            src={process.env.PUBLIC_URL + "/img/mail.png"}
-            alt="Mail Icon"
-            className="w-[4vw] h-[3vw] transform rotate-[15deg] drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]"
-          />
-        </button>
-  
-        {/* 3D 모델 표시 영역 */}
-        <div className="relative self-stretch w-full h-[40vh] flex justify-center items-center">
-          <Canvas className="w-full h-full" gl={{ alpha: true }}>
-            <ambientLight intensity={2} />
-            <directionalLight position={[2, 5, 5]} intensity={1.2} />
-            <Suspense fallback={null}>
-              <Model />
-            </Suspense>
-            <OrbitControls enableZoom={false} />
-          </Canvas>
-        </div>
-  
-        {/* 텍스트 게이지 바 */}
-        <div className='flex-row items-center absolute top-[55vh] left-[10vw] w-[30vw]'>
-          <div className="w-full h-[5vh] px-[2vw] py-[1vh] bg-white rounded-[30px] flex items-center gap-2.5">
-            <div className="justify-start items-center gap-[11px] inline-flex">
-              {/* 게이지 바 컨텐츠 */}
-              <div className="w-[21px] h-[21px] relative">
-                <div className="w-[21px] h-[21px] bg-[#ff9800] rounded-full" />
-                <div className="absolute text-white text-sm font-medium">{level}</div>
-              </div>
-              <div className="w-[60%] h-[0.8vh] bg-[#EEEFEF] relative rounded-2xl overflow-hidden">
-                <div
-                  className="absolute h-full bg-gradient-to-r from-[#ff8300] via-[#ff9800] to-[#ffdb8f]"
-                  style={{ width: `${((currentScore / scoreToNextLevel) * 100).toFixed(1)}%` }}
-                />
-              </div>
-              <div className="text-[#ff6d00] text-sm font-medium">
-                {((currentScore / scoreToNextLevel) * 100).toFixed(1)}%
-              </div>
+    {/* 전체 컨테이너 */}
+    <div className="relative w-full h-full flex flex-col items-center justify-start">
+
+      {/* 말풍선 */}
+    <div className="absolute top-[5vh] left-[3vw] bg-white text-[#4B4B4B] px-3 py-2 rounded-lg shadow-lg max-w-[10vw] max-h-[6vh] flex items-center justify-center text-center break-words z-10">
+      <span className="text-[1.5vh] font-['Pretendard_Variable'] font-bold">
+        {displayText}
+      </span>
+    </div>
+
+
+      {/* 오른쪽 상단 이미지 */}
+      <a
+        href="http://kwawake.duckdns.org/collect"
+        className="absolute top-[5vh] right-[3vw] w-[5vw] h-[5vw] flex items-center justify-center z-10"
+      >
+        <img
+          src={process.env.PUBLIC_URL + "/img/dogam.png"}
+          alt="dogam"
+          className="w-[4vw] h-[4vw] transform rotate-[15deg]"
+        />
+      </a>
+
+      {/* 오른쪽 상단 메일 아이콘 버튼 */}
+      <button
+        className="absolute top-[12vh] right-[3vw] w-[6vw] h-[6vw] flex items-center justify-center z-10"
+        onClick={handleMailClick}
+        style={{
+          background: 'transparent',
+          border: 'none',
+          padding: 0,
+        }}
+      >
+        <img
+          src={process.env.PUBLIC_URL + "/img/mail.png"}
+          alt="Mail Icon"
+          className="w-[4vw] h-[3vw] transform rotate-[15deg] drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]"
+        />
+      </button>
+
+      {/* 3D 모델 표시 영역 */}
+      <div className="relative self-stretch w-full h-[40vh] flex justify-center items-center">
+        <Canvas className="w-full h-full" gl={{ alpha: true }}>
+          <ambientLight intensity={2} />
+          <directionalLight position={[2, 5, 5]} intensity={1.2} />
+          <Suspense fallback={null}>
+            <Model />
+          </Suspense>
+          <OrbitControls enableZoom={false} />
+        </Canvas>
+      </div>
+
+      {/* 텍스트 게이지 바 */}
+      <div className='flex-row items-center absolute top-[55vh] left-[10vw] w-[30vw]'>
+        <div className="w-full h-[5vh] px-[2vw] py-[1vh] bg-white rounded-[30px] flex items-center gap-2.5">
+          <div className="justify-start items-center gap-[11px] inline-flex">
+            {/* 게이지 바 컨텐츠 */}
+            <div className="w-[21px] h-[21px] relative">
+              <div className="w-[21px] h-[21px] bg-[#ff9800] rounded-full" />
+              <div className="absolute text-white text-sm font-medium">{level}</div>
+            </div>
+            <div className="w-[60%] h-[0.8vh] bg-[#EEEFEF] relative rounded-2xl overflow-hidden">
+              <div
+                className="absolute h-full bg-gradient-to-r from-[#ff8300] via-[#ff9800] to-[#ffdb8f]"
+                style={{ width: `${((currentScore / scoreToNextLevel) * 100).toFixed(1)}%` }}
+              />
+            </div>
+            <div className="text-[#ff6d00] text-sm font-medium">
+              {((currentScore / scoreToNextLevel) * 100).toFixed(1)}%
             </div>
           </div>
         </div>
-  
-        {/* 달성률, 날짜 표시 */}
-        <div className="rounded-t-[30px] w-full h-full items-center justify-center gap-[5px] py-[20px] bg-[#fff]">
-          <div className="relative flex-col items-start">
-            <span className="w-full text-[3vh] font-bold">{((completedCards / totalCards) * 100)}%</span>
-            <span className="font-bold text-[1.5vh] text-[#79747e]">{completedCards}/{totalCards}</span>
-          </div>
-  
-          {/* TodoList 컴포넌트에서 달성률을 받아옴 */}
-          <div className="w-full h-[50vh] flex items-start justify-start gap-[1vh]">
-            <TodoList onCheck={handleCheck} completeTask={levelSystem.completeTask} uncompleteTask={levelSystem.uncompleteTask} onCompletionRateChange={handleCompletionRateChange} onPointChange={handlePointChange} />
-          </div>
+      </div>
+
+      {/* 달성률, 날짜 표시 */}
+      <div className="rounded-t-[30px] w-full h-full items-center justify-center gap-[5px] py-[20px] bg-[#fff]">
+        <div className="relative flex-col items-start">
+          <span className="w-full text-[3vh] font-bold">{((completedCards / totalCards) * 100)}%</span>
+          <span className="font-bold text-[1.5vh] text-[#79747e]">{completedCards}/{totalCards}</span>
+        </div>
+
+        {/* TodoList 컴포넌트에서 달성률을 받아옴 */}
+        <div className="w-full h-[50vh] flex items-start justify-start gap-[1vh]">
+          <TodoList onCheck={handleCheck} completeTask={levelSystem.completeTask} uncompleteTask={levelSystem.uncompleteTask} onCompletionRateChange={handleCompletionRateChange} onPointChange={handlePointChange} />
         </div>
       </div>
     </div>
-  );
-  
+  </div>
+);
+
 };
 
 export default Main;

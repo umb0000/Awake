@@ -209,20 +209,7 @@ const Main = () => {
         {showLevelUpPopup && <LevelUpPopup onClose={closeLevelUpPopup} />}
       </AnimatePresence>
       
-      {/*메세지 */}
-      <AnimatePresence>
-      <motion.div
-        key={displayText} // displayText가 바뀔 때마다 키가 변경되어 애니메이션이 작동
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: 10 }}
-        transition={{ duration: 0.5 }}
-        className="absolute top-12 left-6 bg-white text-[#4B4B4B] px-4 py-2 rounded-lg shadow-lg max-w-[100px] h-[50px] flex items-center justify-center text-center text-[10px] font-['Pretendard_Variable'] font-bold break-words z-10"
-      >
-        {displayText}
-      </motion.div>
-    </AnimatePresence>
-
+      
       {/* Diary 팝업 */}
       <AnimatePresence>
       {showDiary && (

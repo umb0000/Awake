@@ -65,7 +65,7 @@ const AnxietyBook2 = () => {
   const handleSaveBookmark = async () => {
     const token = localStorage.getItem('token'); // Get the token from local storage
     try {
-      const response = await fetch('http://your-backend-url/angerbook-post-bookmark', {
+      const response = await fetch('http://112.152.14.116:10211/angerbook-post-bookmark', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

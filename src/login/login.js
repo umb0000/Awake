@@ -113,21 +113,28 @@ const Login = () => {
                         </div>
                     )}
 
-                    {currentStep === 3 && (
-                        <div className="absolute left-[27px] top-[209px] w-[307px] flex flex-col items-start justify-start gap-[20px]">
-                            <div className="text-[20px] leading-[30px] tracking-[.01em] whitespace-nowrap">
-                                <span className="font-['Pretendard'] font-bold text-[#ff6b00]">비밀번호</span>
-                                <span className="font-['Pretendard'] font-medium text-[#000]">를 입력해주세요.</span>
-                            </div>
-                            <input
-                                type="password"
-                                placeholder="6자리 이상 비밀번호"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                className="self-stretch h-[55px] shrink-0 flex flex-row items-center justify-start py-[17px] px-[20px] bg-[#fff] border-[1px] border-solid border-[#b2b2b2] rounded-[10px] text-[14px] leading-[20px] tracking-[.01em] font-['Pretendard'] font-semibold whitespace-nowrap"
-                            />
-                        </div>
-                    )}
+{currentStep === 3 && (
+    <div className="absolute left-[27px] top-[209px] w-[307px] flex flex-col items-start justify-start gap-[20px]">
+        <div className="text-[20px] leading-[30px] tracking-[.01em] whitespace-nowrap">
+            <span className="font-['Pretendard'] font-bold text-[#ff6b00]">비밀번호</span>
+            <span className="font-['Pretendard'] font-medium text-[#000]">를 입력해주세요.</span>
+        </div>
+        <input
+            type="password"
+            placeholder="6자리 이상 비밀번호"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="self-stretch h-[55px] shrink-0 flex flex-row items-center justify-start py-[17px] px-[20px] bg-[#fff] border-[1px] border-solid border-[#b2b2b2] rounded-[10px] text-[14px] leading-[20px] tracking-[.01em] font-['Pretendard'] font-semibold whitespace-nowrap"
+        />
+        
+        {/* Error message display */}
+        {loginErrorMessage && (
+            <div className="text-red-500 text-[14px] font-medium mt-2">
+                {loginErrorMessage}
+            </div>
+        )}
+    </div>
+)}
                 </div>
 
                 <button

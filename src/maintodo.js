@@ -78,6 +78,7 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
   const [editingCard, setEditingCard] = useState(null);
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split("T")[0]);
   const [showAddDrawer, setShowAddDrawer] = useState(false);
+  const [noTasksMessage, setNoTasksMessage] = useState(''); // 추가된 상태
   const navigate = useNavigate();
 
   const fetchTodos = () => {

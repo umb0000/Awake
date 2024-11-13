@@ -82,77 +82,72 @@ const Login = () => {
     );
 
     return (
-        <div className="w-[360px] h-[800px] mx-auto relative bg-white">
-            <form onSubmit={handleLogin} className="flex flex-col items-center justify-center gap-4">
+        <div className="w-[360px] h-[800px] mx-auto flex flex-col justify-between bg-white relative">
+        <form onSubmit={handleLogin} className="flex flex-col items-center justify-center gap-4 h-full">
             {currentStep > 2 && (
-                    <div className="w-[360px] flex flex-col items-center justify-start">
-                        <div className="self-stretch h-[45px] flex items-end justify-between py-[10px] px-[24px]">
-                            <div className="text-[14px] font-['Roboto'] font-medium text-[#1d1b20]">9:30</div>
-                            <img width="46" height="17" src="right iconsI257_737;50758_11372.png" alt="icon" />
+                <div className="w-full flex flex-col items-center justify-start fixed top-0 bg-white">
+                    <div className="self-stretch h-[64px] flex items-center justify-start py-[8px] px-[23px]">
+                        <button onClick={handleBack}>
+                            <img width="12" height="24" src={process.env.PUBLIC_URL + "/img/back.png"} alt="back" />
+                        </button>
+                    </div>
+                </div>
+            )}
+
+            <div className={`transition-container ${animateOut ? 'slide-out-left' : 'slide-in-right'} flex-1 flex flex-col items-center justify-center`}>
+                {currentStep === 2 && (
+                    <div className="absolute left-[27px] top-[209px] w-[307px] flex flex-col items-start gap-[20px]">
+                        <div className="text-[20px] leading-[30px] tracking-[.01em] whitespace-nowrap">
+                            <span className="font-['Pretendard'] font-bold text-[#ff6b00]">이메일</span>
+                            <span className="font-['Pretendard'] font-medium text-[#000]">을 입력해주세요.</span>
                         </div>
-                        <div className="self-stretch h-[64px] flex items-center justify-start py-[8px] px-[23px] bg-[#fff]">
-                            <button onClick={handleBack}>
-                                <img width="12" height="24" src={process.env.PUBLIC_URL + "/img/back.png"} alt="back" />
-                            </button>
-                        </div>
+                        <input
+                            type="email"
+                            placeholder="email1234@example.com"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            className="self-stretch h-[55px] py-[17px] px-[20px] bg-[#fff] border-[1px] border-[#b2b2b2] rounded-[10px] text-[14px]"
+                        />
                     </div>
                 )}
-                <div className={`transition-container ${animateOut ? 'slide-out-left' : 'slide-in-right'}`}>
-                    {currentStep === 2 && (
-                        <div className="absolute left-[27px] top-[209px] w-[307px] flex flex-col items-start justify-start gap-[20px]">
-                            <div className="text-[20px] leading-[30px] tracking-[.01em] whitespace-nowrap">
-                                <span className="font-['Pretendard'] font-bold text-[#ff6b00]">이메일</span>
-                                <span className="font-['Pretendard'] font-medium text-[#000]">을 입력해주세요.</span>
-                            </div>
-                            <input
-                                type="email"
-                                placeholder="email1234@example.com"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                className="self-stretch h-[55px] shrink-0 flex flex-row items-center justify-start py-[17px] px-[20px] bg-[#fff] border-[1px] border-solid border-[#b2b2b2] rounded-[10px] text-[14px] leading-[20px] tracking-[.01em] font-['Pretendard'] font-semibold whitespace-nowrap"
-                            />
+
+                {currentStep === 3 && (
+                    <div className="absolute left-[27px] top-[209px] w-[307px] flex flex-col items-start gap-[20px]">
+                        <div className="text-[20px] leading-[30px] tracking-[.01em] whitespace-nowrap">
+                            <span className="font-['Pretendard'] font-bold text-[#ff6b00]">비밀번호</span>
+                            <span className="font-['Pretendard'] font-medium text-[#000]">를 입력해주세요.</span>
                         </div>
-                    )}
-
-{currentStep === 3 && (
-    <div className="absolute left-[27px] top-[209px] w-[307px] flex flex-col items-start justify-start gap-[20px]">
-        <div className="text-[20px] leading-[30px] tracking-[.01em] whitespace-nowrap">
-            <span className="font-['Pretendard'] font-bold text-[#ff6b00]">비밀번호</span>
-            <span className="font-['Pretendard'] font-medium text-[#000]">를 입력해주세요.</span>
-        </div>
-        <input
-            type="password"
-            placeholder="6자리 이상 비밀번호"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="self-stretch h-[55px] shrink-0 flex flex-row items-center justify-start py-[17px] px-[20px] bg-[#fff] border-[1px] border-solid border-[#b2b2b2] rounded-[10px] text-[14px] leading-[20px] tracking-[.01em] font-['Pretendard'] font-semibold whitespace-nowrap"
-        />
-        
-        {/* Error message display */}
-        {loginErrorMessage && (
-            <div className="text-red-500 text-[14px] font-medium mt-2">
-                {loginErrorMessage}
+                        <input
+                            type="password"
+                            placeholder="6자리 이상 비밀번호"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            className="self-stretch h-[55px] py-[17px] px-[20px] bg-[#fff] border-[1px] border-[#b2b2b2] rounded-[10px] text-[14px]"
+                        />
+                        {loginErrorMessage && (
+                            <div className="text-red-500 text-[14px] font-medium mt-2">
+                                {loginErrorMessage}
+                            </div>
+                        )}
+                    </div>
+                )}
             </div>
-        )}
-    </div>
-)}
-                </div>
 
-                <button
-                    type={currentStep === 3 ? 'submit' : 'button'}
-                    onClick={handleNext}
-                    disabled={
-                        (currentStep === 2 && !isEmailValid) ||
-                        (currentStep === 3 && !isPasswordValid)
-                    }
-                    className={`w-full py-3 mt-6 absolute bottom-0 left-0 flex items-center justify-center py-[17px] px-[113px] ${
-                        currentStep === 2 && isEmailValid || currentStep === 3 && isPasswordValid ? 'bg-[#ff6d00]' : 'bg-gray-300'
-                    } text-white font-semibold z-20`}
-                >
-                    {currentStep === 3 ? '로그인' : '다음'}
-                </button>
-            </form>
-        </div>
+            <button
+                type={currentStep === 3 ? 'submit' : 'button'}
+                onClick={handleNext}
+                disabled={
+                    (currentStep === 2 && !isEmailValid) ||
+                    (currentStep === 3 && !isPasswordValid)
+                }
+                className={`w-full py-3 absolute bottom-0 left-0 flex items-center justify-center ${
+                    currentStep === 2 && isEmailValid || currentStep === 3 && isPasswordValid ? 'bg-[#ff6d00]' : 'bg-gray-300'
+                } text-white font-semibold`}
+            >
+                {currentStep === 3 ? '로그인' : '다음'}
+            </button>
+        </form>
+    </div>
     );
 };
 

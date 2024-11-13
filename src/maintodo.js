@@ -341,7 +341,7 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck, onUpdateCatD
               onClick={(e) => e.stopPropagation()}
             >
               <motion.div className="w-[360px] h-[336px] bg-white relative bg-opacity-0 overflow-visible">
-                <MainAdd onAddSuccess={handleAddSuccess} />
+               
               </motion.div>
             </motion.div>
           </>
@@ -354,6 +354,9 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck, onUpdateCatD
       >
         <img width="46" height="46" src={`${process.env.PUBLIC_URL}/img/main_add_btn.png`} alt="Add" />
       </button>
+
+ <MainAdd onAddSuccess={handleAddSuccess} />
+
     </div>
   );
 };

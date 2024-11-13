@@ -22,7 +22,7 @@ const Kit = () => {
 
     <div className="relative w-full h-[100%] bg-[#fff] overflow-hidden font-['Pretendard_Variable']">
       {/* 네비게이션 바 */}
-      <div className="w-full h-[15px]"></div> {/* 상단 상태 표시와 여백을 위한 공간 */}
+     {/* <div className="w-full h-[15px]"></div> {/* 상단 상태 표시와 여백을 위한 공간 */}
   
       <div className='app-container'>
         <div className='content'>

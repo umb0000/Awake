@@ -22,8 +22,7 @@ const Back = () => {
 
   return (
     <div className="relative">
-      
-
+    
       {/* 상단 뒤로가기 버튼 */}
       <div className="fixed top-[20px] w-screen h-[30px] flex items-center justify-start py-[5px] px-[23px] bg-transparent z-50">
         <button onClick={handleBack}>

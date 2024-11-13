@@ -12,6 +12,8 @@ const ConflictBoard = () => {
   const [showSavePopup, setShowSavePopup] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedMood, setSelectedMood] = useState(null);
+  const [isInitialMessagesSent, setIsInitialMessagesSent] = useState(false); // 추가
+
   const [showMoodOptions, setShowMoodOptions] = useState(false);
   const [allResponses, setAllResponses] = useState([
     {
@@ -60,15 +62,20 @@ const ConflictBoard = () => {
       setCurrentQuestionIndex(0);
       setFinalMessage('');
       setShowMoodOptions(false);
-
+      setIsInitialMessagesSent(false); // 초기화
+  
       initialMessages.forEach((message, index) => {
         setTimeout(() => {
           setMessages((prev) => [...prev, message]);
+          if (index === initialMessages.length - 1) {
+            setIsInitialMessagesSent(true); // 모든 초기 메시지 전송 완료
+          }
         }, index * 3000);
       });
     }
   }, [isChatOpen]);
-
+  
+  
   useEffect(() => {
     if (currentQuestionIndex === questions.length + 1) {
       const summaryMessage = {
@@ -210,8 +217,8 @@ const ConflictBoard = () => {
   );
 
   const renderChat = () => (
-    <div className="relative w-full h-[800px] flex flex-col justify-start items-center bg-white  font-['Pretendard_Variable'] pt-0">
-      <div className="sticky top-10 z-10 p-4 bg-[#f7f2fa] flex items-center justify-center shadow-sm border-b fixed px-6">
+    <div className="relative w-full h-screen flex flex-col justify-start items-center bg-white  font-['Pretendard_Variable'] pt-0">
+      <div className="sticky w-full z-10 p-4 bg-[#f7f2fa] flex items-center justify-center shadow-sm border-b fixed px-6">
         <span className="text-[20px] font-bold text-[#4B4B4B]">웨이의 분노 상담소</span>
       </div>
 
@@ -251,24 +258,21 @@ const ConflictBoard = () => {
         )}
       </div>
 
-      <div className="flex items-center px-4 py-3 bg-white border-t border-gray-200">
+      {/* 메시지 입력창과 버튼을 전송 완료 후에 표시 */}
+      <div className="flex items-center px-4 py-3 bg-white border-t border-gray-200" style={{ display: isInitialMessagesSent ? 'flex' : 'none' }}>
         <textarea
           ref={textareaRef}
           rows={1}
-          onInput={(e) => {
-            e.target.style.height = 'auto';
-            e.target.style.height = `${e.target.scrollHeight}px`;
-          }}
+          
           className="flex-1 p-3 bg-gray-100 border rounded-lg resize-none overflow-hidden"
           placeholder="메시지를 입력해 주세요"
           value={userMessage}
           onChange={(e) => setUserMessage(e.target.value)}
           style={{ maxHeight: '80px' }}
         />
-
         <button
-          onClick={currentQuestionIndex === 3 ? handleFinalMessage : handleSendMessage}
-          className="ml-2 px-4 py-2 bg-[#FFAD7A] text-white font-semibold rounded-[11px] hover:bg-[#E5946D] transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FFAD7A]"
+          className="ml-2 px-4 py-2 bg-[#FFAD7A] text-white font-semibold rounded-[11px]"
+          disabled={!isInitialMessagesSent} // 비활성화 조건 추가
         >
           보내기
         </button>
@@ -287,8 +291,8 @@ const ConflictBoard = () => {
 
   const renderTimeline = () => (
     
-    <div className="relative w-full h-[800px] flex flex-col justify-start items-center bg-[#F9F8F6]  font-['Pretendard_Variable'] pt-0">
-      <div className="sticky top-0 z-10 p-4 bg-white shadow-md">
+    <div className="relative w-screen h-screen flex flex-col justify-start items-center bg-[#F9F8F6]  font-['Pretendard_Variable'] pt-0">
+      <div className="sticky w-full top-0 z-10 p-4 px-6 bg-white shadow-md">
         <h1 className="text-center text-[20px] font-bold text-[#4B4B4B]">웨이의 상담 기록</h1>
       </div>
   

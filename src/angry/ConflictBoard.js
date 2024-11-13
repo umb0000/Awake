@@ -210,7 +210,7 @@ const ConflictBoard = () => {
   );
 
   const renderChat = () => (
-    <div className="w-full h-[690px] bg-white flex flex-col font-['Pretendard_Variable'] pt-10">
+    <div className="relative w-full h-[800px] flex flex-col justify-start items-center bg-white  font-['Pretendard_Variable'] pt-0">
       <div className="sticky top-10 z-10 p-4 bg-[#f7f2fa] flex items-center justify-center shadow-sm border-b fixed px-6">
         <span className="text-[20px] font-bold text-[#4B4B4B]">웨이의 분노 상담소</span>
       </div>
@@ -286,12 +286,13 @@ const ConflictBoard = () => {
   );
 
   const renderTimeline = () => (
-    <div className="relative w-full h-screen bg-[#F9F8F6] overflow-y-scroll font-['Pretendard_Variable'] pt-0">
+    
+    <div className="relative w-full h-[800px] flex flex-col justify-start items-center bg-[#F9F8F6]  font-['Pretendard_Variable'] pt-0">
       <div className="sticky top-0 z-10 p-4 bg-white shadow-md">
         <h1 className="text-center text-[20px] font-bold text-[#4B4B4B]">웨이의 상담 기록</h1>
       </div>
   
-      <div className="space-y-6 p-4 mt-10">
+      <div className="space-y-6 p-4 mt-10 overflow-y-scroll">
         {allResponses.map((response, index) => (
           <div
             key={index}

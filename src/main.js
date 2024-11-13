@@ -238,7 +238,7 @@ const Main = () => {
     </AnimatePresence>
 
       
-      <div className="relative left-0 top-0 w-[100%] flex flex-col items-center justify-start ">
+      <div className="relative left-0 top-0 w-[100%] flex flex-col items-center justify-start gap-[5px]">
 
       
         

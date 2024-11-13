@@ -22,18 +22,7 @@ const Back = () => {
 
   return (
     <div className="relative">
-      {/* 상단 상태 표시 */}
-      <div className="fixed left-0 top-0 w-full h-[45px] flex flex-row items-end justify-between py-[10px] px-[24px] bg-white z-50 opacity-0">
-        <div className="text-[14px] leading-[20px] tracking-[.01em] font-['Pretendard_Variable'] font-medium text-[#1d1b20] whitespace-nowrap">
-          9:30
-        </div>
-        <img
-          width="46"
-          height="17"
-          src={process.env.PUBLIC_URL + "/img/right_iconsI1_276.png"}
-          alt="status icons"
-        />
-      </div>
+      
 
       {/* 상단 뒤로가기 버튼 */}
       <div className="fixed top-[45px] w-screen h-[45px] flex items-center justify-start py-[5px] px-[23px] bg-transparent z-50">

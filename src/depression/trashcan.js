@@ -95,7 +95,7 @@ const TrashCan = () => {
   if (currentScreen === 'second') {
     return (
       <div className="relative w-full h-full bg-white">
-        <BackButton />
+        
         <div className="relative w-full h-screen flex flex-col justify-center items-center">
           <div className='flex flex-col items-center justify-center'>
             <div className="relative h-[40px] w-full flex items-center justify-center">
@@ -123,7 +123,7 @@ const TrashCan = () => {
   if (currentScreen === 'buttonClicked') {
     return (
       <div className="relative w-full h-full bg-white">
-        <BackButton />
+        
         <div className="relative w-full h-screen flex flex-col justify-center items-center">
           <div className='flex flex-col items-center justify-center'>
             <div className="relative h-[40px] w-full flex items-center justify-center mb-10">

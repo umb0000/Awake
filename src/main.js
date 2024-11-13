@@ -77,8 +77,10 @@ const Main = () => {
 
   // catData 상태 업데이트 함수
   const updateCatData = (data) => {
+    console.log("Updated cat data:", data);
     setCatData(data);
   };
+
 
   useEffect(() => {
       const token = localStorage.getItem('token'); 

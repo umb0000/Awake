@@ -237,10 +237,21 @@ const Main = () => {
       
       <div className="relative left-0 top-0 w-[100%] flex flex-col items-center justify-start ">
 
-     {/* 말풍선 */}
-      <div className="absolute top-12 left-4 bg-white text-white px-2 py-1 rounded-lg shadow-lg max-w-[100px] h-[40px] flex items-center justify-center text-center  break-all whitespace-pre-line z-10">
-          <span className="text-[10px] text-[#4B4B4B] font-['Pretendard_Variable'] font-bold">{displayText}</span>
-      </div>
+      {/* 말풍선 */}
+      <div className="absolute top-12 left-4 bg-white text-white px-2 py-1 rounded-lg shadow-lg max-w-[100px] h-[40px] flex items-center justify-center text-center break-all whitespace-pre-line z-10">
+          <AnimatePresence>
+            <motion.span
+              key={displayText}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+              className="text-[10px] text-[#4B4B4B] font-['Pretendard_Variable'] font-bold"
+            >
+              {displayText}
+            </motion.span>
+          </AnimatePresence>
+        </div>
 
 
 

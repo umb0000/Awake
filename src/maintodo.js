@@ -81,7 +81,6 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
   const navigate = useNavigate();
 
   const fetchTodos = () => {
-    
     const token = localStorage.getItem('token');
 
     // Navigate to 'unlogined' if token is missing
@@ -104,8 +103,9 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
         return response.json();
     })
     .then(data => {
-        if (data && Array.isArray(data.undones)) {
-            const processedCards = data.undones.map(card => ({
+        if (data && Array.isArray(data.undones) && Array.isArray(data.dones)) {
+            const allCards = [...data.undones, ...data.dones];
+            const processedCards = allCards.map(card => ({
                 ...getCardProperties({
                     ...card,
                     checked: card.is_done,
@@ -118,10 +118,11 @@ const TodoList = ({ onCompletionRateChange, onPointChange, onCheck }) => {
                 if (!a.checked && !b.checked) return b.level - a.level;
                 return 0;
             });
+
             setCards(sortedCards);
             updateCompletionRate(sortedCards);
         } else {
-            console.error('Expected an array but received:', data);
+            console.error('Expected arrays but received:', data);
         }
     })
     .catch(error => console.error('Error fetching data:', error));

@@ -75,11 +75,7 @@ const Main = () => {
   const [showDiary, setShowDiary] = useState(false); // 다이어리 팝업 표시 여부 추가
   const [catData, setCatData] = useState({ total_done: 0, cat_percent: 0, cat_level: 0 });
 
-  // catData 상태 업데이트 함수
-  const updateCatData = (data) => {
-    console.log("Updated cat data:", data);
-    setCatData(data);
-  };
+  
 
 
   useEffect(() => {
@@ -180,6 +176,15 @@ const Main = () => {
     setCompletionRate(rate);
     setTotalCards(total);
     setCompletedCards(completed);
+  };
+
+  // catData 상태 업데이트 함수
+  const updateCatData = (data) => {
+    console.log("Updated cat data:", data);
+    setCatData((prevCatData) => ({
+      ...prevCatData,
+      ...data,
+    }));
   };
   // 포인트 변경 함수
   const handlePointChange = (newPoints) => {
@@ -292,7 +297,7 @@ const Main = () => {
                 <div
                   className="absolute bg-gradient-to-r from-[#ff8300] via-[#ff9800] to-[#ffdb8f] rounded-2xl"
                   style={{
-                    width: `${((catData.cat_percent))}%`,
+                    width: `${(catData.cat_percent)}%`,
                     height: '100%',
                   }}
                 />
@@ -310,7 +315,7 @@ const Main = () => {
             </div></div>
           {/* TodoList 컴포넌트에서 달성률을 받아옴 */}
           <div className="self-stretch h-[600px] shrink-0 flex flex-col items-start justify-start gap-[7px]">
-            <TodoList  onUpdateCatData={updateCatData} onCheck={handleCheck} completeTask={(type, priority) => levelSystem.completeTask(type, priority)}
+            <TodoList   onCheck={handleCheck} onUpdateCatData={updateCatData} completeTask={(type, priority) => levelSystem.completeTask(type, priority)}
             uncompleteTask={(type, priority) => levelSystem.uncompleteTask(type, priority)} onCompletionRateChange={handleCompletionRateChange} onPointChange={handlePointChange} />
           </div>
 

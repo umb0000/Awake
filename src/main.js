@@ -112,7 +112,10 @@ const Main = () => {
     setSelectedTab(tab); // 탭 변경
   };
 
-
+  const handleModelSelect = (modelPath) => {
+    setSelectedModel(modelPath);
+  };
+  
   // 점수 및 레벨 업데이트 핸들러
   const updateLevelSystemState = (updatedState) => {
     if (updatedState) {
@@ -280,7 +283,7 @@ const Main = () => {
         </a>
         {/* 오른쪽 상단 메일 아이콘 버튼 */}
         <button
-        className="absolute top-25 right-4 w-[49px] h-[50px] flex items-center justify-center z-10"
+        className="absolute top-1 right-4 w-[49px] h-[50px] flex items-center justify-center z-10"
         onClick={handleMailClick} // 클릭 시 다이어리 팝업 표시
         style={{
 

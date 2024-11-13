@@ -69,6 +69,7 @@ const Login = () => {
                     navigate('/main');
                 } else if (response.status === 401) {
                     setLoginErrorMessage('아이디 혹은 비밀번호가 맞지 않습니다.');
+                    handleBack();
                 } else {
                     setLoginErrorMessage('로그인에 실패했습니다.');
                 }

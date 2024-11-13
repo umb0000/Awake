@@ -202,42 +202,12 @@ const Main = () => {
 
 
   return (
-    <div className="relative w-[100%] h-[800px] custom-gradient overflow-hidden">
-      {/* LevelUpPopup */}
-      <AnimatePresence>
-        {showLevelUpPopup && <LevelUpPopup onClose={closeLevelUpPopup} />}
-      </AnimatePresence>
-      
-      
-      {/* Diary 팝업 */}
-      <AnimatePresence>
-      {showDiary && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-        >
-          <div 
-            className="relative bg-gradient-to-t from-[#e8f2ff] to-white w-[340px] h-[557px] rounded-md shadow-lg p-4 flex items-center justify-center"
-          >
-            <button
-              onClick={closeDiary}
-              className="absolute top-3 right-3 text-gray-500 z-50">
-
-            <VscClose size={24} />
-            </button>
-            <Diary />
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
-
-      
-      <div className="relative left-0 top-0 w-[100%] flex flex-col items-center justify-start ">
-
-      {/* 말풍선 */}
-      <div className="absolute top-12 left-5 bg-white text-white px-2 py-1 rounded-lg shadow-lg max-w-[120px] h-[40px] flex items-center justify-center text-center break-all whitespace-pre-line z-10">
+    <div className="relative w-full h-full custom-gradient overflow-hidden">
+      {/* 전체 컨테이너 */}
+      <div className="relative w-full h-full flex flex-col items-center justify-start">
+  
+        {/* 말풍선 */}
+        <div className="absolute top-[5vh] left-[3vw] bg-white text-[#4B4B4B] px-3 py-2 rounded-lg shadow-lg max-w-[10vw] max-h-[6vh] flex items-center justify-center text-center break-words z-10">
           <AnimatePresence>
             <motion.span
               key={displayText}
@@ -245,120 +215,92 @@ const Main = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.5 }}
-              className="text-[10px] text-[#4B4B4B] font-['Pretendard_Variable'] font-bold"
+              className="text-[1.5vh] font-['Pretendard_Variable'] font-bold"
             >
               {displayText}
             </motion.span>
           </AnimatePresence>
         </div>
-
-
-
-        {/* 오른쪽 상단 작은 이미지 */}
+  
+        {/* 오른쪽 상단 이미지 */}
         <a
           href="http://kwawake.duckdns.org/collect"
-          className="absolute top-12 right-4 w-[40px] h-[40px] flex items-center justify-center z-10" // z-index 추가
+          className="absolute top-[5vh] right-[3vw] w-[5vw] h-[5vw] flex items-center justify-center z-10"
         >
           <img
-            src={process.env.PUBLIC_URL + "/img/dogam.png "}
+            src={process.env.PUBLIC_URL + "/img/dogam.png"}
             alt="dogam"
-            className="w-[35px] h-[35px] transform rotate-[15deg]"
+            className="w-[4vw] h-[4vw] transform rotate-[15deg]"
           />
         </a>
+  
         {/* 오른쪽 상단 메일 아이콘 버튼 */}
         <button
-        className="absolute top-24 right-4 w-[49px] h-[50px] flex items-center justify-center z-10"
-        onClick={handleMailClick} // 클릭 시 다이어리 팝업 표시
-        style={{
-
-          background: 'transparent', // 배경 투명
-          border: 'none', // 테두리 없음
-          padding: 0, // 기본 여백 제거
-        }}
+          className="absolute top-[12vh] right-[3vw] w-[6vw] h-[6vw] flex items-center justify-center z-10"
+          onClick={handleMailClick}
+          style={{
+            background: 'transparent',
+            border: 'none',
+            padding: 0,
+          }}
         >
-        <img
-          src={process.env.PUBLIC_URL + "/img/mail.png"}
-          alt="Mail Icon"
-          className="w-[30px] h-[25px] transform rotate-[15deg] drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]"
-        />
-
-      </button>
-
+          <img
+            src={process.env.PUBLIC_URL + "/img/mail.png"}
+            alt="Mail Icon"
+            className="w-[4vw] h-[3vw] transform rotate-[15deg] drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]"
+          />
+        </button>
+  
         {/* 3D 모델 표시 영역 */}
-        <div className="relative self-stretch w-[100%] h-[25vh] shrink-0 flex justify-center items-center" style={{ paddingTop: '0vh', paddingBottom: '0vh' }}>
+        <div className="relative self-stretch w-full h-[40vh] flex justify-center items-center">
           <Canvas className="w-full h-full" gl={{ alpha: true }}>
-            
-          <ambientLight intensity={2} />  // 주변 조명
-
-          <directionalLight
-            position={[2, 5, 5]}  // 방향 조명의 위치를 조정하여 대상에 비치는 각도 설정
-            intensity={1.2}  // 강도 조정 (기본값보다 약간 밝게 설정)
-
-          />
-
-          <pointLight
-            position={[0, 10, 0]}  // 상단에서 직접 내려오는 위치
-            intensity={0.5}  // 낮은 강도로 보조 조명처럼 활용
-
-          />
+            <ambientLight intensity={2} />
+            <directionalLight position={[2, 5, 5]} intensity={1.2} />
             <Suspense fallback={null}>
-              <Model /> {/* 3D 모델 렌더링 */}
+              <Model />
             </Suspense>
             <OrbitControls enableZoom={false} />
           </Canvas>
         </div>
-
+  
         {/* 텍스트 게이지 바 */}
-        <div className='flex-row items-center' style={{
-          position: 'absolute',
-          top: '20vh',
-          left:'67px',
-          width: 'auto',
-          whiteSpace: 'nowrap',
-        }}>
-          <div className="w-[229px] h-[31px] px-[18px] py-[5px] bg-white rounded-[30px] flex-col justify-center items-center gap-2.5 inline-flex">
+        <div className='flex-row items-center absolute top-[55vh] left-[10vw] w-[30vw]'>
+          <div className="w-full h-[5vh] px-[2vw] py-[1vh] bg-white rounded-[30px] flex items-center gap-2.5">
             <div className="justify-start items-center gap-[11px] inline-flex">
+              {/* 게이지 바 컨텐츠 */}
               <div className="w-[21px] h-[21px] relative">
-                <div className="w-[21px] h-[21px] left-0 top-0 absolute bg-[#ff9800] rounded-full" />
-                <div className="w-[7.30px] h-[18.26px] left-[6.39px] top-[0.91px] absolute text-white text-sm font-medium font-['Pretendard_Variable'] leading-tight tracking-tight">{level}</div>
+                <div className="w-[21px] h-[21px] bg-[#ff9800] rounded-full" />
+                <div className="absolute text-white text-sm font-medium">{level}</div>
               </div>
-              <div className="w-[123px] h-[5px] relative bg-[#EEEFEF]">
-                {/* 게이지 바 */}
+              <div className="w-[60%] h-[0.8vh] bg-[#EEEFEF] relative rounded-2xl overflow-hidden">
                 <div
-                  className="absolute bg-gradient-to-r from-[#ff8300] via-[#ff9800] to-[#ffdb8f] rounded-2xl"
-                  style={{
-                    width: `${((currentScore / scoreToNextLevel) * 100).toFixed(1)}%`,
-                    height: '100%',
-                  }}
+                  className="absolute h-full bg-gradient-to-r from-[#ff8300] via-[#ff9800] to-[#ffdb8f]"
+                  style={{ width: `${((currentScore / scoreToNextLevel) * 100).toFixed(1)}%` }}
                 />
               </div>
-              <div className="text-[#ff6d00] text-sm font-medium font-['Pretendard_Variable'] leading-tight tracking-tight">{((currentScore / scoreToNextLevel) * 100).toFixed(1)}%</div>
+              <div className="text-[#ff6d00] text-sm font-medium">
+                {((currentScore / scoreToNextLevel) * 100).toFixed(1)}%
+              </div>
             </div>
           </div>
         </div>
-
+  
         {/* 달성률, 날짜 표시 */}
-        <div className="rounded-t-[30px] w-full h-full items-center justify-center gap-[5px] py-[20px] bg-[#fff]" style={{ paddingLeft: '2vh', paddingRight: '2vh', paddingBottom: '2vh' }}>
-        <div className="relative flex-col items-start">
-            <div>
-              <span className="w-full h-[40px] text-[24px] leading-[24px] tracking-[.01em] font-bold font-[Pretendard] text-[#000] items-start justify-center">{((completedCards / totalCards) * 100)}% </span>
-              <span className='font-[Pretendard] font-bold text-[13px] text-[#79747e]'>{completedCards}/{totalCards}</span>
-            </div></div>
-
-
-          {/* TodoList 컴포넌트에서 달성률을 받아옴 */}
-          <div className="self-stretch h-[600px] shrink-0 flex flex-col items-start justify-start gap-[7px]">
-            <TodoList  onCheck={handleCheck} completeTask={(type, priority) => levelSystem.completeTask(type, priority)}
-            uncompleteTask={(type, priority) => levelSystem.uncompleteTask(type, priority)} onCompletionRateChange={handleCompletionRateChange} onPointChange={handlePointChange} />
+        <div className="rounded-t-[30px] w-full h-full items-center justify-center gap-[5px] py-[20px] bg-[#fff]">
+          <div className="relative flex-col items-start">
+            <span className="w-full text-[3vh] font-bold">{((completedCards / totalCards) * 100)}%</span>
+            <span className="font-bold text-[1.5vh] text-[#79747e]">{completedCards}/{totalCards}</span>
           </div>
-        </div>  
-
-             
+  
+          {/* TodoList 컴포넌트에서 달성률을 받아옴 */}
+          <div className="w-full h-[50vh] flex items-start justify-start gap-[1vh]">
+            <TodoList onCheck={handleCheck} completeTask={levelSystem.completeTask} uncompleteTask={levelSystem.uncompleteTask} onCompletionRateChange={handleCompletionRateChange} onPointChange={handlePointChange} />
+          </div>
+        </div>
       </div>
-
-            
     </div>
   );
+  
 };
 
 export default Main;

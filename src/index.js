@@ -39,6 +39,8 @@ import Explain1 from './Explain1.js'
 import Explain2 from './Explain2.js'
 import Explain3 from './Explain3.js'
 import Center from './center';
+import ActivityTable from './test';
+import GenerateImage from './ai.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -50,6 +52,9 @@ root.render(
         <Route path='/LoginLoading' element={<LoginLoading/>} />
         <Route path='/Unlogined' element={<Unlogined/>} />
         <Route path='/Login' element={<Login/>} />
+        <Route path='/test' element={<ActivityTable/>} />
+        <Route path='/ai' element={<GenerateImage/>} />
+
 
         {/* 뒤로가기 버튼이 필요한 페이지 */}
         <Route path="/AnxietyBook" element={<><Back /><AnxietyBook /></>} />
